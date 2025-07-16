@@ -221,22 +221,10 @@
 			<isee:payoff name="Land Use and Agriculture Payoff" action="min" inactive="true"/>
 		</isee:optimizer_specs>
 		<isee:optimizer_specs name="Concrete Calibration" method="Powell" use_additional_starts_file="false" additional_starts="0" report_interval="1" confidence_range="0" maxiter="0">
-			<isee:parameter name="Concrete.TIME_TO_ADJUST_DESIRED_FLOOR_AREA[1]" scaling="10"/>
 			<isee:parameter name="Concrete.TIME_TO_ADJUST_DESIRED_INFRASTRUCTURE_AREA[1]" scaling="10"/>
-			<isee:parameter name="Concrete.UFA_alpha[1]" scaling="10"/>
-			<isee:parameter name="Concrete.UFA_intercept[1]"/>
 			<isee:parameter name="Concrete.INIT_CONCRETE_IN_NEW_BUILDINGS[1]" scaling="0.01"/>
 			<isee:parameter name="Concrete.INIT_CONCRETE_IN_NEW_INFRASTRUCTURE[1]" scaling="0.01"/>
-			<isee:parameter name="Concrete.INIT_CONCRETE_IN_OLD_BUILDINGS[1]" scaling="0.01"/>
-			<isee:parameter name="Concrete.INIT_CONCRETE_IN_OLD_INFRASTRUCTURE[1]" scaling="0.01"/>
-			<isee:parameter name="Concrete.BASE_AVERAGE_LIFETIME_OF_BUILDINGS[1]" scaling="0.1"/>
-			<isee:parameter name="Concrete.BASE_AVERAGE_LIFETIME_OF_INFRASTRUCTURE[1]" scaling="0.1"/>
 			<isee:parameter name="Concrete.GAP_ADJUSTMENT_TIME_FOR_BUILDINGS[1]" scaling="10"/>
-			<isee:parameter name="Concrete.GAP_ADJUSTMENT_TIME_FOR_INFRASTRUCTURE[1]" scaling="10"/>
-			<isee:parameter name="Concrete.NORMAL_CONCRETE_DETERIORATION_RATE[1]" scaling="100"/>
-			<isee:parameter name="Concrete.INFRA_ALPHA[1]" scaling="0.01"/>
-			<isee:parameter name="Concrete.INFRA_BETA[1]" scaling="10"/>
-			<isee:parameter name="Concrete.INFRA_GAMMA[1]" scaling="10"/>
 			<isee:parameter name="Concrete.CO2_INTENSITY_OF_RS_BUILDINGS_CONCRETE[1]" scaling="10"/>
 			<isee:parameter name="Concrete.CO2_INTENSITY_OF_INFRASTRUCTURE_CONCRETE[1]" scaling="10"/>
 			<isee:payoff name="Concrete Payoff" action="min"/>
@@ -306,105 +294,12 @@
 			<isee:payoff name="Land Use and Agriculture Payoff" action="min"/>
 		</isee:optimizer_specs>
 		<isee:optimizer_specs name="Economy Calibration" method="Powell" use_additional_starts_file="false" additional_starts="0" report_interval="1" confidence_range="0" tolerance="0.000001" maxiter="0">
-			<isee:parameter name="Circular_Flow.desired_savings_as_multiple_of_profits[1]" scaling="10"/>
-			<isee:parameter name="Circular_Flow.time_to_consider_desired_savings[1]" scaling="10"/>
-			<isee:parameter name="Circular_Flow.time_to_reach_savings_goal[1]" scaling="10"/>
-			<isee:parameter name="Circular_Flow.desired_savings_as_multiple_of_wages[1]" scaling="10"/>
-			<isee:parameter name="Circular_Flow.time_to_pay_out_profits[1]" scaling="10"/>
-			<isee:parameter name="Finance.initial_risk_premium[1]" scaling="100"/>
-			<isee:parameter name="Finance.loan_maturation_time[1]"/>
-			<isee:parameter name="Finance.elasticity_of_desired_bank_growth_rate_to_changes_in_lending_standards[1]" scaling="10"/>
-			<isee:parameter name="Finance.time_to_change_lending_standards[1]" scaling="10"/>
-			<isee:parameter name="Finance.max_change_in_lending_standards[1]" scaling="100"/>
-			<isee:parameter name="Finance.reporting_delay[1]" scaling="100"/>
-			<isee:parameter name="Finance.normal_failure_rate[1]" scaling="100"/>
-			<isee:parameter name="Finance.max_change_in_failure_rate[1]" scaling="100"/>
-			<isee:parameter name="Finance.elasticity_of_bankruptcy_rate_on_risk_premium[1]" scaling="10"/>
-			<isee:parameter name="Circular_Flow.wage_tax_rate[1]" scaling="100"/>
-			<isee:parameter name="Circular_Flow.profit_tax_rate[1]" scaling="100"/>
-			<isee:parameter name="Finance.sensitivity_of_failure_rate_to_investment_to_gdp_ratio[1]" scaling="100"/>
-			<isee:parameter name="Employment.max_change_in_fractional_wage_growth[1]" scaling="1000"/>
-			<isee:parameter name="Employment.hiring_to_investment_ratio[1]" scaling="1000"/>
-			<isee:parameter name="Employment.labour_force_participation_fixed[1]" scaling="100"/>
-			<isee:parameter name="Inflation.initial_inflation_index[1]" scaling="100"/>
-			<isee:parameter name="Employment.initial_unemployment_rate[1]" scaling="100"/>
-			<isee:parameter name="Inflation.initial_inflation_rate[1]" scaling="1000"/>
-			<isee:parameter name="Government.initial_safe_interest[1]" scaling="1000"/>
-			<isee:parameter name="Finance.time_for_safe_loans_that_will_fail_to_actually_fail[1]"/>
-			<isee:parameter name="Employment.threshold_unemployment_rate[1]" scaling="100"/>
-			<isee:parameter name="Employment.Initial_Wage_Rate[1]" scaling="0.001"/>
-			<isee:parameter name="Employment.time_seeking_employees[1]" scaling="1000"/>
-			<isee:parameter name="Inflation.Agriculture_share_of_GDP_intercept[1]" scaling="10"/>
-			<isee:parameter name="Inflation.agriculture_share_of_GDP_starting_point_determinant[1]" scaling="10"/>
-			<isee:parameter name="Inflation.agriculture_share_of_GDP_slope[1]" scaling="10"/>
-			<isee:parameter name="Employment.sensitivity_of_hiring_to_unemployment_rate[1]"/>
-			<isee:parameter name="Inflation.deflation_adjustment_time[1]"/>
-			<isee:parameter name="Finance.initial_bank_investment_growth_rate[1]" scaling="100"/>
-			<isee:parameter name="Government.averaging_time_to_adjust_tax_based_on_income[1]" scaling="100"/>
-			<isee:parameter name="Government.maximum_effect_of_debt_to_GDP_ratio_on_government_spending[1]" scaling="100"/>
-			<isee:parameter name="Government.sensitivity_of_STA_on_public_consumption[1]" scaling="100"/>
-			<isee:parameter name="Finance.sensitivity_of_effect_of_sta_on_failure_rate[1]" scaling="100"/>
-			<isee:parameter name="GDP.initial_real_GDP_growth_rate[1]" scaling="100"/>
-			<isee:parameter name="Finance.reporting_delay[1]" scaling="100"/>
-			<isee:parameter name="Circular_Flow.yfrom[1]" scaling="100"/>
-			<isee:parameter name="Circular_Flow.yto[1]" scaling="100"/>
-			<isee:parameter name="Circular_Flow.xstart[1]" scaling="100"/>
-			<isee:parameter name="Circular_Flow.xmiddle[1]" scaling="100"/>
-			<isee:parameter name="Circular_Flow.xfinish[1]" scaling="100"/>
-			<isee:parameter name="Circular_Flow.xspeed[1]" scaling="10"/>
-			<isee:parameter name="Circular_Flow.normal_bottom_40_wages[1]" scaling="1000"/>
-			<isee:parameter name="Circular_Flow.time_for_bottom_40_to_be_affected[1]"/>
-			<isee:parameter name="Employment.initial_productivity_growth[1]" scaling="100"/>
-			<isee:parameter name="Finance.equity_ratio_gap_effect_below_exponent[1]" scaling="10"/>
-			<isee:parameter name="Finance.equity_gap_below_max_effect[1]" scaling="10"/>
-			<isee:parameter name="Finance.equity_gap_effect_max_x_magnitude[1]" scaling="1000"/>
-			<isee:parameter name="Finance.equity_ratio_gap_effect_above_exponent[1]" scaling="10"/>
-			<isee:parameter name="Finance.equity_gap_above_min_effect[1]" scaling="10"/>
-			<isee:parameter name="Finance.effect_of_lending_standards_on_failure_rate_curvature[1]" scaling="10"/>
-			<isee:parameter name="Finance.effect_of_lending_standards_on_failure_rate_range[1]" scaling="10"/>
-			<isee:parameter name="Finance.effect_of_default_rate_on_lending_standards_curvature[1]" scaling="10"/>
-			<isee:parameter name="Finance.effect_of_default_rate_on_lending_standards_range[1]" scaling="10"/>
-			<isee:parameter name="Inflation.inflation_adjustment_time[1]" scaling="10"/>
-			<isee:parameter name="Inflation.weight_of_marginal_energy_cost_inflation[1]" scaling="10"/>
-			<isee:parameter name="Finance.normal_exploration_rate[1]" scaling="100"/>
-			<isee:parameter name="Finance.exploration_effect_midpoint[1]" scaling="100"/>
-			<isee:parameter name="Finance.sensitivity_of_exploratory_loan_failure_to_GDP_growth[1]" scaling="100"/>
-			<isee:parameter name="Finance.scale_of_exploratory_loan_failure[1]" scaling="100"/>
-			<isee:parameter name="Inflation.weight_of_irrigation_water_used_per_unit_of_crop_production_inflation_contribution[1]" scaling="100"/>
-			<isee:parameter name="Inflation.weight_of_fertilizer_used_per_unit_of_crop_production[1]" scaling="100"/>
-			<isee:parameter name="Inflation.weight_of_cropland_inflation_contribution[1]" scaling="100"/>
-			<isee:parameter name="Inflation.weight_of_grazing_land_inflation_contribution[1]" scaling="100"/>
-			<isee:parameter name="Finance.sensitivity_of_effect_of_safe_default_rate_on_lending_standards[1]" scaling="100"/>
-			<isee:parameter name="Finance.safe_asset_default_rate_threshold[1]" scaling="1000"/>
-			<isee:parameter name="Finance.sensitivity_of_effect_of_stranded_energy_capital_on_other_assets[1]" scaling="100"/>
-			<isee:parameter name="Innovation.sensitivity_of_effect_of_cash_reserve_growth_rate_on_firms_innovation_orientation[1]" scaling="100"/>
-			<isee:parameter name="Innovation.firms_reference_formation_time[1]"/>
-			<isee:parameter name="Innovation.time_for_firms_to_adjust_innovation_orientation[1]" scaling="100"/>
-			<isee:parameter name="Innovation.reference_cash_reserve_growth_rate[1]" scaling="1000"/>
-			<isee:parameter name="Finance.bank_reference_formation_time[1]"/>
-			<isee:parameter name="Government.baseline_interest[1]" scaling="100"/>
-			<isee:parameter name="Government.inflation_weight[1]" scaling="1000"/>
-			<isee:parameter name="Government.unemployment_weight[1]" scaling="1000"/>
 			<isee:payoff name="Economic Payoff" action="min"/>
 		</isee:optimizer_specs>
 		<isee:optimizer_specs name="Employment Sector Shares" method="Powell" use_additional_starts_file="false" additional_starts="0" report_interval="1" confidence_range="0">
-			<isee:parameter name="Employment.share_of_employment_in_agriculture_intercept[1]"/>
-			<isee:parameter name="Employment.share_of_employment_in_agriculture_slope[1]"/>
-			<isee:parameter name="Employment.share_of_employment_in_industry_intercept[1]"/>
-			<isee:parameter name="Employment.share_of_employment_in_industry_slope[1]"/>
-			<isee:parameter name="Employment.share_of_employment_in_services_intercept[1]"/>
-			<isee:parameter name="Employment.share_of_employment_in_services_slope[1]"/>
 			<isee:payoff name="Employment Sector Shares" action="min"/>
 		</isee:optimizer_specs>
 		<isee:optimizer_specs name="Inflation Calibration" method="Powell" use_additional_starts_file="false" additional_starts="0" report_interval="1" confidence_range="0">
-			<isee:parameter name="Inflation.weight_of_cropland_inflation_contribution[1]" scaling="100"/>
-			<isee:parameter name="Inflation.weight_of_fertilizer_used_per_unit_of_crop_production[1]" scaling="100"/>
-			<isee:parameter name="Inflation.weight_of_grazing_land_inflation_contribution[1]" scaling="100"/>
-			<isee:parameter name="Inflation.weight_of_irrigation_water_used_per_unit_of_crop_production_inflation_contribution[1]" scaling="100"/>
-			<isee:parameter name="Inflation.weight_of_marginal_energy_cost_inflation[1]" scaling="100"/>
-			<isee:parameter name="Inflation.deflation_adjustment_time[1]"/>
-			<isee:parameter name="Inflation.initial_inflation_index[1]" scaling="100"/>
-			<isee:parameter name="Inflation.initial_inflation_rate[1]" scaling="100"/>
 			<isee:payoff name="Real GDP" action="min"/>
 		</isee:optimizer_specs>
 		<isee:optimizer_specs name="Energy Calibration" method="Powell" use_additional_starts_file="false" additional_starts="0" report_interval="1" confidence_range="0" tolerance="0.000001" maxiter="0">
@@ -471,85 +366,6 @@
 			<isee:payoff name="Energy Payoff" action="min"/>
 		</isee:optimizer_specs>
 		<isee:optimizer_specs name="Econ &amp; Energy Calibration" method="Powell" use_additional_starts_file="false" additional_starts="0" report_interval="1" confidence_range="0" maxiter="0">
-			<isee:parameter name="Circular_Flow.desired_savings_as_multiple_of_profits[1]" scaling="10"/>
-			<isee:parameter name="Circular_Flow.time_to_consider_desired_savings[1]" scaling="10"/>
-			<isee:parameter name="Circular_Flow.time_to_reach_savings_goal[1]" scaling="10"/>
-			<isee:parameter name="Circular_Flow.desired_savings_as_multiple_of_wages[1]" scaling="10"/>
-			<isee:parameter name="Circular_Flow.time_to_pay_out_profits[1]" scaling="10"/>
-			<isee:parameter name="Finance.initial_risk_premium[1]" scaling="100"/>
-			<isee:parameter name="Finance.loan_maturation_time[1]"/>
-			<isee:parameter name="Finance.elasticity_of_desired_bank_growth_rate_to_changes_in_lending_standards[1]" scaling="10"/>
-			<isee:parameter name="Finance.time_to_change_lending_standards[1]" scaling="10"/>
-			<isee:parameter name="Finance.max_change_in_lending_standards[1]" scaling="100"/>
-			<isee:parameter name="Finance.reporting_delay[1]" scaling="100"/>
-			<isee:parameter name="Finance.normal_failure_rate[1]" scaling="100"/>
-			<isee:parameter name="Finance.max_change_in_failure_rate[1]" scaling="100"/>
-			<isee:parameter name="Finance.elasticity_of_bankruptcy_rate_on_risk_premium[1]" scaling="10"/>
-			<isee:parameter name="Circular_Flow.wage_tax_rate[1]" scaling="100"/>
-			<isee:parameter name="Circular_Flow.profit_tax_rate[1]" scaling="100"/>
-			<isee:parameter name="Finance.sensitivity_of_failure_rate_to_investment_to_gdp_ratio[1]" scaling="100"/>
-			<isee:parameter name="Employment.max_change_in_fractional_wage_growth[1]" scaling="1000"/>
-			<isee:parameter name="Employment.hiring_to_investment_ratio[1]" scaling="1000"/>
-			<isee:parameter name="Employment.labour_force_participation_fixed[1]" scaling="100"/>
-			<isee:parameter name="Inflation.initial_inflation_index[1]" scaling="100"/>
-			<isee:parameter name="Employment.initial_unemployment_rate[1]" scaling="100"/>
-			<isee:parameter name="Inflation.initial_inflation_rate[1]" scaling="1000"/>
-			<isee:parameter name="Government.initial_safe_interest[1]" scaling="1000"/>
-			<isee:parameter name="Finance.time_for_safe_loans_that_will_fail_to_actually_fail[1]"/>
-			<isee:parameter name="Employment.threshold_unemployment_rate[1]" scaling="100"/>
-			<isee:parameter name="Employment.Initial_Wage_Rate[1]" scaling="0.001"/>
-			<isee:parameter name="Employment.time_seeking_employees[1]" scaling="1000"/>
-			<isee:parameter name="Inflation.Agriculture_share_of_GDP_intercept[1]" scaling="10"/>
-			<isee:parameter name="Inflation.agriculture_share_of_GDP_starting_point_determinant[1]" scaling="10"/>
-			<isee:parameter name="Inflation.agriculture_share_of_GDP_slope[1]" scaling="10"/>
-			<isee:parameter name="Employment.sensitivity_of_hiring_to_unemployment_rate[1]"/>
-			<isee:parameter name="Inflation.deflation_adjustment_time[1]"/>
-			<isee:parameter name="Finance.initial_bank_investment_growth_rate[1]" scaling="100"/>
-			<isee:parameter name="Government.averaging_time_to_adjust_tax_based_on_income[1]" scaling="100"/>
-			<isee:parameter name="Government.maximum_effect_of_debt_to_GDP_ratio_on_government_spending[1]" scaling="100"/>
-			<isee:parameter name="Government.sensitivity_of_STA_on_public_consumption[1]" scaling="100"/>
-			<isee:parameter name="Finance.sensitivity_of_effect_of_sta_on_failure_rate[1]" scaling="100"/>
-			<isee:parameter name="GDP.initial_real_GDP_growth_rate[1]" scaling="100"/>
-			<isee:parameter name="Finance.reporting_delay[1]" scaling="100"/>
-			<isee:parameter name="Circular_Flow.yfrom[1]" scaling="100"/>
-			<isee:parameter name="Circular_Flow.yto[1]" scaling="100"/>
-			<isee:parameter name="Circular_Flow.xstart[1]" scaling="100"/>
-			<isee:parameter name="Circular_Flow.xmiddle[1]" scaling="100"/>
-			<isee:parameter name="Circular_Flow.xfinish[1]" scaling="100"/>
-			<isee:parameter name="Circular_Flow.xspeed[1]" scaling="10"/>
-			<isee:parameter name="Circular_Flow.normal_bottom_40_wages[1]" scaling="1000"/>
-			<isee:parameter name="Circular_Flow.time_for_bottom_40_to_be_affected[1]"/>
-			<isee:parameter name="Employment.initial_productivity_growth[1]" scaling="100"/>
-			<isee:parameter name="Finance.equity_ratio_gap_effect_below_exponent[1]" scaling="10"/>
-			<isee:parameter name="Finance.equity_gap_below_max_effect[1]" scaling="10"/>
-			<isee:parameter name="Finance.equity_gap_effect_max_x_magnitude[1]" scaling="1000"/>
-			<isee:parameter name="Finance.equity_ratio_gap_effect_above_exponent[1]" scaling="10"/>
-			<isee:parameter name="Finance.equity_gap_above_min_effect[1]" scaling="10"/>
-			<isee:parameter name="Finance.effect_of_lending_standards_on_failure_rate_curvature[1]" scaling="10"/>
-			<isee:parameter name="Finance.effect_of_lending_standards_on_failure_rate_range[1]" scaling="10"/>
-			<isee:parameter name="Finance.effect_of_default_rate_on_lending_standards_curvature[1]" scaling="10"/>
-			<isee:parameter name="Finance.effect_of_default_rate_on_lending_standards_range[1]" scaling="10"/>
-			<isee:parameter name="Inflation.inflation_adjustment_time[1]" scaling="10"/>
-			<isee:parameter name="Inflation.weight_of_marginal_energy_cost_inflation[1]" scaling="10"/>
-			<isee:parameter name="Finance.normal_exploration_rate[1]" scaling="100"/>
-			<isee:parameter name="Finance.exploration_effect_midpoint[1]" scaling="100"/>
-			<isee:parameter name="Finance.sensitivity_of_exploratory_loan_failure_to_GDP_growth[1]" scaling="100"/>
-			<isee:parameter name="Finance.scale_of_exploratory_loan_failure[1]" scaling="100"/>
-			<isee:parameter name="Inflation.weight_of_irrigation_water_used_per_unit_of_crop_production_inflation_contribution[1]" scaling="100"/>
-			<isee:parameter name="Inflation.weight_of_fertilizer_used_per_unit_of_crop_production[1]" scaling="100"/>
-			<isee:parameter name="Inflation.weight_of_cropland_inflation_contribution[1]" scaling="100"/>
-			<isee:parameter name="Inflation.weight_of_grazing_land_inflation_contribution[1]" scaling="100"/>
-			<isee:parameter name="Finance.sensitivity_of_effect_of_safe_default_rate_on_lending_standards[1]" scaling="100"/>
-			<isee:parameter name="Finance.safe_asset_default_rate_threshold[1]" scaling="1000"/>
-			<isee:parameter name="Finance.sensitivity_of_effect_of_stranded_energy_capital_on_other_assets[1]" scaling="100"/>
-			<isee:parameter name="Innovation.sensitivity_of_effect_of_cash_reserve_growth_rate_on_firms_innovation_orientation[1]" scaling="100"/>
-			<isee:parameter name="Innovation.firms_reference_formation_time[1]"/>
-			<isee:parameter name="Innovation.time_for_firms_to_adjust_innovation_orientation[1]" scaling="100"/>
-			<isee:parameter name="Innovation.reference_cash_reserve_growth_rate[1]" scaling="1000"/>
-			<isee:parameter name="Finance.bank_reference_formation_time[1]"/>
-			<isee:parameter name="Government.baseline_interest[1]" scaling="100"/>
-			<isee:parameter name="Government.inflation_weight[1]" scaling="1000"/>
-			<isee:parameter name="Government.unemployment_weight[1]" scaling="1000"/>
 			<isee:parameter name="bio_fuel_energy.stepping_on_toes_parameter[1]" scaling="100"/>
 			<isee:parameter name="bio_fuel_energy.Learning_Rate[1]" scaling="100"/>
 			<isee:parameter name="bio_fuel_energy.Floor_Costs[1]" scaling="1e-7"/>
@@ -613,14 +429,6 @@
 			<isee:payoff name="Econ &amp; Energy Payoff" action="min"/>
 		</isee:optimizer_specs>
 		<isee:optimizer_specs name="SDG10.1.1" method="Powell" use_additional_starts_file="false" additional_starts="0" report_interval="1" confidence_range="0">
-			<isee:parameter name="Circular_Flow.yfrom[1]" scaling="100"/>
-			<isee:parameter name="Circular_Flow.yto[1]" scaling="100"/>
-			<isee:parameter name="Circular_Flow.xstart[1]" scaling="100"/>
-			<isee:parameter name="Circular_Flow.xmiddle[1]" scaling="100"/>
-			<isee:parameter name="Circular_Flow.xfinish[1]" scaling="100"/>
-			<isee:parameter name="Circular_Flow.xspeed[1]"/>
-			<isee:parameter name="Circular_Flow.normal_bottom_40_wages[1]" scaling="1000"/>
-			<isee:parameter name="Circular_Flow.time_for_bottom_40_to_be_affected[1]"/>
 			<isee:payoff name="SDG 10.1.1" action="min"/>
 		</isee:optimizer_specs>
 	</isee:optimizer_specs_list>
@@ -855,47 +663,12 @@
 			<isee:payoff_element name="Government.government_consumption[1]" weight="2.55800666437005e-7">
 				<isee:time_range type="terminal_value"/>
 			</isee:payoff_element>
-			<isee:payoff_element name="Inflation.agriculture_percentage_of_GDP[1]" weight="1.02407437659456">
-				<isee:time_range type="terminal_value"/>
-			</isee:payoff_element>
-			<isee:payoff_element name="Government.debt_to_GDP_ratio[1]" weight="398.500907314794">
-				<isee:time_range type="terminal_value"/>
-			</isee:payoff_element>
-			<isee:payoff_element name="Inflation.gdp_difference[1]" weight="2.91856544377838e-7">
-				<isee:time_range type="terminal_value"/>
-			</isee:payoff_element>
-			<isee:payoff_element name="GDP.nominal_gdp_growth_rate_deviation_from_average_in_calibration_period_summed[1]" weight="243.116130708947">
-				<isee:time_range type="terminal_value"/>
-			</isee:payoff_element>
-			<isee:payoff_element name="GDP.real_gdp_growth_rate_deviation_from_average_in_calibration_period_summed[1]" weight="108.084497666367">
-				<isee:time_range type="terminal_value"/>
-			</isee:payoff_element>
 			<isee:payoff_element name="Employment.annual_aggregate_wages[1]" weight="3.93461209633714e-8">
 				<isee:time_range type="terminal_value"/>
 			</isee:payoff_element>
-			<isee:payoff_element name="Circular_Flow.Labour_share_of_GDP[1]" weight="3492.16927539809">
-				<isee:time_range type="terminal_value"/>
-			</isee:payoff_element>
-			<isee:payoff_element name="Circular_Flow.bottom_40_share_of_real_income[1]" weight="3475.28747532695">
-				<isee:time_range type="terminal_value"/>
-			</isee:payoff_element>
 		</isee:payoff_specs>
-		<isee:payoff_specs name="Employment Sector Shares" calibration="true" recompute_weights="true" compare_tolerance="0" compare_type="ls" compare_run="Calibration Data">
-			<isee:payoff_element name="Employment.share_of_employment_in_agriculture[1]" weight="13483.6">
-				<isee:time_range type="terminal_value"/>
-			</isee:payoff_element>
-			<isee:payoff_element name="Employment.share_of_employment_in_industry[1]" weight="28466.9">
-				<isee:time_range type="terminal_value"/>
-			</isee:payoff_element>
-			<isee:payoff_element name="Employment.share_of_employment_in_services[1]" weight="35986.7">
-				<isee:time_range type="terminal_value"/>
-			</isee:payoff_element>
-		</isee:payoff_specs>
-		<isee:payoff_specs name="Real GDP" calibration="true" recompute_weights="true" compare_tolerance="0" compare_type="ls" compare_run="Calibration Data">
-			<isee:payoff_element name="Inflation.gdp_difference[1]" weight="2.63825e-7">
-				<isee:time_range type="terminal_value"/>
-			</isee:payoff_element>
-		</isee:payoff_specs>
+		<isee:payoff_specs name="Employment Sector Shares" calibration="true" recompute_weights="true" compare_tolerance="0" compare_type="ls" compare_run="Calibration Data"/>
+		<isee:payoff_specs name="Real GDP" calibration="true" recompute_weights="true" compare_tolerance="0" compare_type="ls" compare_run="Calibration Data"/>
 		<isee:payoff_specs name="Energy Payoff" calibration="true" recompute_weights="true" compare_tolerance="0" compare_type="ls" compare_run="Calibration Data">
 			<isee:payoff_element name="fossil_energy.Secondary_Fossil_Energy_Output[1]" weight="5.93123783953822e-7">
 				<isee:time_range type="terminal_value"/>
@@ -1064,28 +837,7 @@
 			<isee:payoff_element name="Government.government_consumption[1]" weight="0.00000482055">
 				<isee:time_range type="terminal_value"/>
 			</isee:payoff_element>
-			<isee:payoff_element name="Inflation.agriculture_percentage_of_GDP[1]" weight="1.56671">
-				<isee:time_range type="terminal_value"/>
-			</isee:payoff_element>
-			<isee:payoff_element name="Government.debt_to_GDP_ratio[1]" weight="209.016">
-				<isee:time_range type="terminal_value"/>
-			</isee:payoff_element>
-			<isee:payoff_element name="Inflation.gdp_difference[1]" weight="0.00000294295">
-				<isee:time_range type="terminal_value"/>
-			</isee:payoff_element>
-			<isee:payoff_element name="GDP.nominal_gdp_growth_rate_deviation_from_average_in_calibration_period_summed[1]" weight="82.2383">
-				<isee:time_range type="terminal_value"/>
-			</isee:payoff_element>
-			<isee:payoff_element name="GDP.real_gdp_growth_rate_deviation_from_average_in_calibration_period_summed[1]" weight="516.921">
-				<isee:time_range type="terminal_value"/>
-			</isee:payoff_element>
 			<isee:payoff_element name="Employment.annual_aggregate_wages[1]" weight="2.02847e-7">
-				<isee:time_range type="terminal_value"/>
-			</isee:payoff_element>
-			<isee:payoff_element name="Circular_Flow.Labour_share_of_GDP[1]" weight="11092.3">
-				<isee:time_range type="terminal_value"/>
-			</isee:payoff_element>
-			<isee:payoff_element name="Circular_Flow.bottom_40_share_of_real_income[1]" weight="328359">
 				<isee:time_range type="terminal_value"/>
 			</isee:payoff_element>
 			<isee:payoff_element name="fossil_energy.Secondary_Fossil_Energy_Output[1]" weight="3.68595e-7">
@@ -1236,11 +988,7 @@
 				<isee:time_range type="terminal_value"/>
 			</isee:payoff_element>
 		</isee:payoff_specs>
-		<isee:payoff_specs name="SDG 10.1.1" calibration="true" recompute_weights="true" compare_tolerance="0" compare_type="ls" compare_run="Calibration Data">
-			<isee:payoff_element name="Circular_Flow.bottom_40_share_of_real_income[1]" weight="558203.1452268">
-				<isee:time_range type="terminal_value"/>
-			</isee:payoff_element>
-		</isee:payoff_specs>
+		<isee:payoff_specs name="SDG 10.1.1" calibration="true" recompute_weights="true" compare_tolerance="0" compare_type="ls" compare_run="Calibration Data"/>
 	</isee:payoff_specs_list>
 	<model_units>
 		<unit name="Gh">
@@ -3262,7 +3010,7 @@ This is what determines when the model stops calculating</doc>
 				<isee:iframe color="black" background="white" text_align="left" vertical_text_align="top" font_size="12pt" border_width="thin" border_style="solid"/>
 				<isee:financial_table color="black" background="#E0E0E0" text_align="right" font_size="12pt" hide_border="false" auto_fit="true" first_column_width="250" other_column_width="100" header_font_style="normal" header_font_weight="bold" header_text_decoration="none" header_text_align="center" header_vertical_text_align="center" header_font_color="black" header_font_family="Arial" header_font_size="14pt" header_text_padding="2" header_text_border_color="black" header_text_border_width="thin" header_text_border_style="none"/>
 			</style>
-			<view isee:show_pages="false" background="white" page_width="1027" page_height="787" isee:page_cols="5" isee:page_rows="8" isee:scroll_x="20" zoom="60" isee:popup_graphs_are_comparative="true" isee:enable_non_negative_highlights="false" type="stock_flow">
+			<view isee:show_pages="false" background="white" page_width="1122" page_height="793" isee:page_cols="5" isee:page_rows="8" isee:scroll_x="20" zoom="60" isee:popup_graphs_are_comparative="true" isee:enable_non_negative_highlights="false" type="stock_flow">
 				<style color="black" background="white" font_style="normal" font_weight="normal" text_decoration="none" text_align="center" vertical_text_align="center" font_color="black" font_family="Arial" font_size="10pt" padding="2" border_color="black" border_width="thin" border_style="none">
 					<stock color="blue" background="white" font_color="blue" font_size="11pt" label_side="top">
 						<shape type="rectangle" width="45" height="35"/>
@@ -3706,22 +3454,16 @@ This is what determines when the model stops calculating</doc>
 					<graph width="570" height="470" comparative="true" type="time_series" show_grid="true" isee:tick_type="none" include_units_in_legend="false" plot_numbers="false" isee:label_pie_slices="false" isee:show_pie_borders="true" num_x_grid_lines="13" num_y_grid_lines="7" num_x_labels="13" num_y_labels="7" title="Inflation Rate" isee:fill_intensity="0.1" to="2100" isee:allow_zero_axis="true" left_axis_title="% per Year" left_axis_multi_scale="false" left_axis_auto_scale="true" left_include_units="true" right_axis_multi_scale="false" right_axis_auto_scale="true" right_include_units="true">
 						<plot color="blue" isee:keep_zero_visible="true" pen_width="1" index="0" show_y_axis="true">
 							<format scale_by="1" display_as="percent"/>
-							<entity name="Inflation.Inflation_Rate_as_Percent[1]"/>
 						</plot>
 					</graph>
 					<graph width="570" height="470" comparative="true" type="time_series" show_grid="true" isee:tick_type="none" include_units_in_legend="false" plot_numbers="false" isee:label_pie_slices="false" isee:show_pie_borders="true" num_x_grid_lines="13" num_y_grid_lines="9" num_x_labels="13" num_y_labels="9" title="Unemployment Rate" isee:fill_intensity="0.1" to="2100" isee:allow_zero_axis="true" left_axis_multi_scale="false" left_axis_auto_scale="true" left_include_units="true" right_axis_multi_scale="false" right_axis_auto_scale="true" right_include_units="true">
 						<plot color="blue" isee:keep_zero_visible="true" pen_width="1" index="0" show_y_axis="true">
 							<format scale_by="1" display_as="percent"/>
-							<entity name="Employment.unemployment_percentage[1]"/>
 						</plot>
 					</graph>
 					<graph width="570" height="470" type="area" isee:sum_stacked_legend="true" isee:stacked_show_hover_values="true" show_grid="true" isee:tick_type="none" include_units_in_legend="false" plot_numbers="false" isee:label_pie_slices="false" isee:show_pie_borders="true" num_x_grid_lines="13" num_y_grid_lines="9" num_x_labels="13" num_y_labels="9" title="Income" isee:fill_intensity="0.1" to="2100" isee:allow_zero_axis="true" left_axis_multi_scale="false" left_axis_auto_scale="true" left_include_units="true" right_axis_multi_scale="false" right_axis_auto_scale="true" right_include_units="true">
-						<plot color="blue" isee:keep_zero_visible="true" pen_width="1" index="0" show_y_axis="true">
-							<entity name="Circular_Flow.net_worker_income[1]"/>
-						</plot>
-						<plot color="red" isee:keep_zero_visible="true" pen_width="1" index="1" show_y_axis="true">
-							<entity name="Circular_Flow.net_owner_income[1]"/>
-						</plot>
+						<plot color="blue" isee:keep_zero_visible="true" pen_width="1" index="0" show_y_axis="true"/>
+						<plot color="red" isee:keep_zero_visible="true" pen_width="1" index="1" show_y_axis="true"/>
 						<plot color="fuchsia" isee:keep_zero_visible="true" pen_width="1" index="2" show_y_axis="true">
 							<entity name="Government.total_public_tax_income[1]"/>
 						</plot>
@@ -3729,47 +3471,34 @@ This is what determines when the model stops calculating</doc>
 					<graph width="570" height="470" type="area" isee:sum_stacked_legend="true" isee:stacked_show_hover_values="false" show_grid="true" isee:tick_type="none" include_units_in_legend="false" plot_numbers="false" isee:label_pie_slices="false" isee:show_pie_borders="true" num_x_grid_lines="13" num_y_grid_lines="8" num_x_labels="13" num_y_labels="8" title="Real GDP" isee:fill_intensity="1" to="2100" isee:allow_zero_axis="true" left_axis_title="Giga$(2021) per Year" left_axis_multi_scale="false" left_axis_auto_scale="true" left_include_units="true" right_axis_multi_scale="false" right_axis_auto_scale="true" right_include_units="true">
 						<plot color="#00008F" title="Owner Consumption" isee:keep_zero_visible="true" pen_width="1" index="0" show_y_axis="true">
 							<format scale_by="1" delimit_000s="true" display_as="currency"/>
-							<entity name='GDP."owner_consumption_in_2021c$"[1]'/>
 						</plot>
 						<plot color="#0C2DFF" title="Worker Consumption Excluding Govt. Transfers" isee:keep_zero_visible="true" pen_width="1" index="1" show_y_axis="true">
 							<format scale_by="1" delimit_000s="true" display_as="currency"/>
-							<entity name='GDP."worker_consumption_excluding_transfers_in_2021c$"[1]'/>
 						</plot>
-						<plot color="#2D994A" title="Government Consumption Excluding Climate Repairs" isee:keep_zero_visible="true" pen_width="1" index="2" show_y_axis="true">
-							<entity name='Government."government_spending_without_climate_impact_in_2021c$"[1]'/>
-						</plot>
-						<plot color="#5CD86B" title="Government Consumption on Climate Repairs" isee:keep_zero_visible="true" pen_width="1" index="3" show_y_axis="true">
-							<entity name='Government."government_spending_because_of_climate_in_2021c$"[1]'/>
-						</plot>
+						<plot color="#2D994A" title="Government Consumption Excluding Climate Repairs" isee:keep_zero_visible="true" pen_width="1" index="2" show_y_axis="true"/>
+						<plot color="#5CD86B" title="Government Consumption on Climate Repairs" isee:keep_zero_visible="true" pen_width="1" index="3" show_y_axis="true"/>
 						<plot color="#0BF7EC" title="Government Transfers" isee:keep_zero_visible="true" pen_width="1" index="4" show_y_axis="true">
 							<format scale_by="1" delimit_000s="true" display_as="currency"/>
-							<entity name='GDP."government_transfers_in_2021c$"[1]'/>
 						</plot>
 						<plot color="#FEFF00" title="Government Investment" isee:keep_zero_visible="true" pen_width="1" index="5" show_y_axis="true">
 							<format scale_by="1" delimit_000s="true" display_as="currency"/>
-							<entity name='GDP."public_investment_in_2021c$"[1]'/>
 						</plot>
 						<plot color="#F6950E" title="Private Investment" isee:keep_zero_visible="true" pen_width="1" index="6" show_y_axis="true">
 							<format scale_by="1" delimit_000s="true" display_as="currency"/>
-							<entity name='GDP."private_investment_in_in_2021c$"[1]'/>
 						</plot>
 					</graph>
 					<graph width="570" height="470" comparative="true" type="time_series" show_grid="true" isee:tick_type="none" include_units_in_legend="false" plot_numbers="false" isee:label_pie_slices="false" isee:show_pie_borders="true" num_x_grid_lines="13" num_y_grid_lines="11" num_x_labels="13" num_y_labels="11" title="Productivity (All Production Factors)" isee:fill_intensity="0.1" to="2100" isee:allow_zero_axis="true" left_axis_multi_scale="false" left_axis_auto_scale="true" left_include_units="true" right_axis_multi_scale="false" right_axis_auto_scale="true" right_include_units="true">
-						<plot color="blue" isee:keep_zero_visible="true" pen_width="1" index="0" show_y_axis="true">
-							<entity name="Employment.realised_productivity[1]"/>
-						</plot>
+						<plot color="blue" isee:keep_zero_visible="true" pen_width="1" index="0" show_y_axis="true"/>
 					</graph>
 					<graph width="570" height="470" comparative="true" type="time_series" show_grid="true" isee:tick_type="none" include_units_in_legend="false" plot_numbers="false" isee:label_pie_slices="false" isee:show_pie_borders="true" num_x_grid_lines="13" num_y_grid_lines="11" num_x_labels="13" num_y_labels="11" title="Worker Share of Net Income" isee:fill_intensity="0.1" to="2100" isee:allow_zero_axis="true" left_axis_multi_scale="false" left_axis_auto_scale="true" left_include_units="true" right_axis_multi_scale="false" right_axis_auto_scale="true" right_include_units="true">
 						<plot color="blue" isee:keep_zero_visible="true" pen_width="1" index="0" show_y_axis="true">
 							<format scale_by="1" display_as="percent"/>
-							<entity name="Circular_Flow.worker_share_of_net_income[1]"/>
 							<scale max="100"/>
 						</plot>
 					</graph>
 					<graph width="570" height="470" comparative="true" type="time_series" show_grid="true" isee:tick_type="none" include_units_in_legend="false" plot_numbers="false" isee:label_pie_slices="false" isee:show_pie_borders="true" num_x_grid_lines="13" num_y_grid_lines="8" num_x_labels="13" num_y_labels="8" title="Transfer Payments per Recipient" isee:fill_intensity="0.1" to="2100" isee:allow_zero_axis="true" left_axis_multi_scale="false" left_axis_auto_scale="true" left_include_units="true" right_axis_multi_scale="false" right_axis_auto_scale="true" right_include_units="true">
 						<plot color="blue" isee:keep_zero_visible="true" pen_width="1" index="0" show_y_axis="true">
 							<format scale_by="1" delimit_000s="true" display_as="currency"/>
-							<entity name="Government.transfer_payments_per_recipient[1]"/>
 						</plot>
 					</graph>
 					<graph width="570" height="470" type="area" isee:sum_stacked_legend="true" isee:stacked_show_hover_values="true" show_grid="true" isee:tick_type="none" include_units_in_legend="false" plot_numbers="false" isee:label_pie_slices="false" isee:show_pie_borders="true" num_x_grid_lines="13" num_y_grid_lines="7" num_x_labels="13" num_y_labels="7" title="Net Primary Production" isee:fill_intensity="1" isee:stacked_area_max="150" to="2100" isee:allow_zero_axis="true" left_axis_multi_scale="false" left_axis_auto_scale="true" left_include_units="true" right_axis_multi_scale="false" right_axis_auto_scale="true" right_include_units="true">
@@ -3999,61 +3728,27 @@ This is what determines when the model stops calculating</doc>
 				<text_box uid="159" x="1873" y="1649" width="260" height="58">We want to separate the oil conversion to energy capital from the biofuel conversion to energy capital so there is a second green section</text_box>
 				<stacked_container uid="160" x="2163.96" y="-140.512" width="567" height="473.666">
 					<graph width="567" height="473.666" type="area" isee:sum_stacked_legend="true" isee:stacked_show_hover_values="true" show_grid="false" isee:tick_type="none" include_units_in_legend="false" plot_numbers="false" isee:label_pie_slices="false" isee:show_pie_borders="true" num_x_grid_lines="0" num_y_grid_lines="0" num_x_labels="5" num_y_labels="3" title="Share of Gross Income" isee:fill_intensity="1" isee:stacked_area_max="1" isee:allow_zero_axis="true" left_axis_multi_scale="false" left_axis_auto_scale="true" left_include_units="true" right_axis_multi_scale="false" right_axis_auto_scale="true" right_include_units="true">
-						<plot color="blue" title="Non-Bank Profits" isee:keep_zero_visible="true" pen_width="1" index="0" show_y_axis="true">
-							<entity name="Circular_Flow.share_of_gross_income_from_non_bank_profits[1]"/>
-						</plot>
-						<plot color="red" title="Rent" isee:keep_zero_visible="true" pen_width="1" index="1" show_y_axis="true">
-							<entity name="Circular_Flow.share_of_gross_income_from_rent[1]"/>
-						</plot>
-						<plot color="fuchsia" title="Bank Profits" isee:keep_zero_visible="true" pen_width="1" index="2" show_y_axis="true">
-							<entity name="Circular_Flow.share_of_gross_income_from_bank_profits[1]"/>
-						</plot>
-						<plot color="#008F44" title="Owners Interest" isee:keep_zero_visible="true" pen_width="1" index="3" show_y_axis="true">
-							<entity name="Circular_Flow.share_of_gross_income_from_owner_savings_interest[1]"/>
-						</plot>
-						<plot color="#FF7F00" title="Transfers" isee:keep_zero_visible="true" pen_width="1" index="4" show_y_axis="true">
-							<entity name="Circular_Flow.share_of_gross_income_from_transfers[1]"/>
-						</plot>
-						<plot color="#7F00FF" title="Workers Interest" isee:keep_zero_visible="true" pen_width="1" index="5" show_y_axis="true">
-							<entity name="Circular_Flow.share_of_gross_income_from_worker_savings_interest[1]"/>
-						</plot>
-						<plot color="#0CA0FF" title="Wages" isee:keep_zero_visible="true" pen_width="1" index="6" show_y_axis="true">
-							<entity name="Circular_Flow.share_of_gross_income_from_wages[1]"/>
-						</plot>
+						<plot color="blue" title="Non-Bank Profits" isee:keep_zero_visible="true" pen_width="1" index="0" show_y_axis="true"/>
+						<plot color="red" title="Rent" isee:keep_zero_visible="true" pen_width="1" index="1" show_y_axis="true"/>
+						<plot color="fuchsia" title="Bank Profits" isee:keep_zero_visible="true" pen_width="1" index="2" show_y_axis="true"/>
+						<plot color="#008F44" title="Owners Interest" isee:keep_zero_visible="true" pen_width="1" index="3" show_y_axis="true"/>
+						<plot color="#FF7F00" title="Transfers" isee:keep_zero_visible="true" pen_width="1" index="4" show_y_axis="true"/>
+						<plot color="#7F00FF" title="Workers Interest" isee:keep_zero_visible="true" pen_width="1" index="5" show_y_axis="true"/>
+						<plot color="#0CA0FF" title="Wages" isee:keep_zero_visible="true" pen_width="1" index="6" show_y_axis="true"/>
 					</graph>
 				</stacked_container>
 				<stacked_container uid="161" x="1763.83" y="372.167" width="570" height="796.916">
 					<graph width="570" height="796.916" type="area" isee:sum_stacked_legend="true" isee:stacked_show_hover_values="false" show_grid="true" isee:tick_type="none" include_units_in_legend="false" plot_numbers="false" isee:label_pie_slices="false" isee:show_pie_borders="true" num_x_grid_lines="13" num_y_grid_lines="8" num_x_labels="13" num_y_labels="8" title="Real Gross Income" isee:fill_intensity="1" to="2100" isee:allow_zero_axis="true" left_axis_title="Giga$(2021) per Year" left_axis_multi_scale="false" left_axis_auto_scale="true" left_include_units="true" right_axis_multi_scale="false" right_axis_auto_scale="true" right_include_units="true">
-						<plot color="#F7FF00" title="Owner Profits not from Bank (After Tax)" isee:keep_zero_visible="true" pen_width="1" index="0" show_y_axis="true">
-							<entity name='Circular_Flow."non_bank_profits_after_tax_in_2021c$"[1]'/>
-						</plot>
-						<plot color="#FEC301" title="Owner Profits from Banks (After Tax)" isee:keep_zero_visible="true" pen_width="1" index="1" show_y_axis="true">
-							<entity name='Circular_Flow."bank_profits_after_tax_in_2021c$"[1]'/>
-						</plot>
-						<plot color="#FD7800" title="Owner Rent Income (After Tax)" isee:keep_zero_visible="true" pen_width="1" index="2" show_y_axis="true">
-							<entity name='Circular_Flow."rent_after_tax_in_2021c$"[1]'/>
-						</plot>
-						<plot color="#804D07" title="Owner Income Savings Interest" isee:keep_zero_visible="true" pen_width="1" index="3" show_y_axis="true">
-							<entity name='Circular_Flow."owner_savings_interest_in_2021c$"[1]'/>
-						</plot>
-						<plot color="#0BF7EC" title="Worker Income Government Transfers" isee:keep_zero_visible="true" pen_width="1" index="4" show_y_axis="true">
-							<entity name='Circular_Flow."transfers_in_2021c$"[1]'/>
-						</plot>
-						<plot color="#005AFF" title="Worker Income Savings Interest" isee:keep_zero_visible="true" pen_width="1" index="5" show_y_axis="true">
-							<entity name='Circular_Flow."worker_savings_interest_in_2021c$"[1]'/>
-						</plot>
-						<plot color="#0094F6" title="Worker Income Wages (After Tax)" isee:keep_zero_visible="true" pen_width="1" index="6" show_y_axis="true">
-							<entity name='Circular_Flow."wages_after_tax_in_2021c$"[1]'/>
-						</plot>
-						<plot color="lime" title="Government Income Profit Taxes" isee:keep_zero_visible="true" pen_width="1" index="7" show_y_axis="true">
-							<entity name='Circular_Flow."profit_tax_in_2021c$"[1]'/>
-						</plot>
-						<plot color="#46A02F" title="Government Income Rent Taxes" isee:keep_zero_visible="true" pen_width="1" index="8" show_y_axis="true">
-							<entity name='Circular_Flow."rent_tax_in_2021c$"[1]'/>
-						</plot>
-						<plot color="#245618" title="Government Income Wage Taxes" isee:keep_zero_visible="true" pen_width="1" index="9" show_y_axis="true">
-							<entity name='Circular_Flow."wage_tax_in_2021c$"[1]'/>
-						</plot>
+						<plot color="#F7FF00" title="Owner Profits not from Bank (After Tax)" isee:keep_zero_visible="true" pen_width="1" index="0" show_y_axis="true"/>
+						<plot color="#FEC301" title="Owner Profits from Banks (After Tax)" isee:keep_zero_visible="true" pen_width="1" index="1" show_y_axis="true"/>
+						<plot color="#FD7800" title="Owner Rent Income (After Tax)" isee:keep_zero_visible="true" pen_width="1" index="2" show_y_axis="true"/>
+						<plot color="#804D07" title="Owner Income Savings Interest" isee:keep_zero_visible="true" pen_width="1" index="3" show_y_axis="true"/>
+						<plot color="#0BF7EC" title="Worker Income Government Transfers" isee:keep_zero_visible="true" pen_width="1" index="4" show_y_axis="true"/>
+						<plot color="#005AFF" title="Worker Income Savings Interest" isee:keep_zero_visible="true" pen_width="1" index="5" show_y_axis="true"/>
+						<plot color="#0094F6" title="Worker Income Wages (After Tax)" isee:keep_zero_visible="true" pen_width="1" index="6" show_y_axis="true"/>
+						<plot color="lime" title="Government Income Profit Taxes" isee:keep_zero_visible="true" pen_width="1" index="7" show_y_axis="true"/>
+						<plot color="#46A02F" title="Government Income Rent Taxes" isee:keep_zero_visible="true" pen_width="1" index="8" show_y_axis="true"/>
+						<plot color="#245618" title="Government Income Wage Taxes" isee:keep_zero_visible="true" pen_width="1" index="9" show_y_axis="true"/>
 					</graph>
 				</stacked_container>
 				<stacked_container uid="162" x="2341.14" y="370.857" width="465" height="498.5">

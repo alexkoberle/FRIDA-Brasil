@@ -18,6 +18,10 @@
 			<elem name="Oil"/>
 			<elem name="Coal"/>
 		</dim>
+		<dim name="Region">
+			<elem name="World"/>
+			<elem name="Brazil"/>
+		</dim>
 		<dim name="Run" size="1"/>
 	</dimensions>
 	<isee:prefs saved_runs="5" keep="false" show_module_prefix="true" live_update_on_drag="true" show_restore_buttons="false" layer="model" isee:design="Deluxe Prev-Next Blue Green Pastel" isee:design_custom="false" interface_secure_mode="true" interface_scale_ui="true" interface_max_page_width="10000" interface_max_page_height="10000" interface_min_page_width="0" interface_min_page_height="0" rifp="true">
@@ -263,7 +267,7 @@
 				<dimensions>
 					<dim name="Run"/>
 				</dimensions>
-				<eqn>Realized_CO2_emissions_from_Energy + CO2_emissions + CO2_Emissions_from_Food_and_Land_Use + Leakage</eqn>
+				<eqn>Realized_CO2_emissions_from_Energy + CO2_emissions + CO2_Emissions_from_Food_and_Land_Use + Leakage[Run,World]</eqn>
 				<units>MtCO2/Year</units>
 			</aux>
 			<aux name="CH4 Baseline Emissions" access="output">
@@ -496,7 +500,7 @@
 				<dimensions>
 					<dim name="Run"/>
 				</dimensions>
-				<eqn>baseline_non_fossil_CH4_per_person*(EXP(-sensitivity_of_non_fossil_CH4_per_person_to_GDP_per_capita*(real_GDP_per_person/baseline_GDP_per_person)))</eqn>
+				<eqn>baseline_non_fossil_CH4_per_person*(EXP(-sensitivity_of_non_fossil_CH4_per_person_to_GDP_per_capita*(real_GDP_per_person[Run,World]/baseline_GDP_per_person)))</eqn>
 				<units>tCH4/(p*year)</units>
 			</aux>
 			<aux name="baseline non fossil CH4\nper person">
@@ -524,7 +528,7 @@ Calibration Parameter: CO2 from energy and industry</doc>
 				<dimensions>
 					<dim name="Run"/>
 				</dimensions>
-				<eqn>baseline_N2O_per_person*(EXP(-sensitivity_of_Other_N2O_per_person_to_GDP_per_capita*(baseline_GDP_per_person/real_GDP_per_person)))</eqn>
+				<eqn>baseline_N2O_per_person*(EXP(-sensitivity_of_Other_N2O_per_person_to_GDP_per_capita*(baseline_GDP_per_person/real_GDP_per_person[Run,World])))</eqn>
 				<units>tN2O/(p*year)</units>
 			</aux>
 			<aux name="baseline N2O\nper person">
@@ -1129,6 +1133,7 @@ GtC_to_MtCO2</eqn>
 			<aux name="Leakage" access="input">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>{Enter equation for use when not hooked up to other models}</eqn>
 				<units>MtCO2/Year</units>
@@ -1140,6 +1145,7 @@ GtC_to_MtCO2</eqn>
 			<aux name="real GDP per person" access="input">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>{Enter equation for use when not hooked up to other models}</eqn>
 				<units>bc$/Mp/year</units>
@@ -1334,7 +1340,7 @@ ELSE
 				<isee:iframe color="black" background="white" text_align="left" vertical_text_align="top" font_size="12pt" border_width="thin" border_style="solid"/>
 				<isee:financial_table color="black" background="#E0E0E0" text_align="right" font_size="12pt" hide_border="false" auto_fit="true" first_column_width="250" other_column_width="100" header_font_style="normal" header_font_weight="bold" header_text_decoration="none" header_text_align="center" header_vertical_text_align="center" header_font_color="black" header_font_family="Arial" header_font_size="14pt" header_text_padding="2" header_text_border_color="black" header_text_border_width="thin" header_text_border_style="none"/>
 			</style>
-			<view isee:show_pages="false" background="white" page_width="768" page_height="588" isee:page_cols="4" isee:page_rows="4" isee:scroll_x="48" isee:scroll_y="552" isee:popup_graphs_are_comparative="true" isee:enable_non_negative_highlights="false" type="stock_flow">
+			<view isee:show_pages="false" background="white" page_width="1122" page_height="793" isee:page_cols="4" isee:page_rows="4" isee:popup_graphs_are_comparative="true" isee:enable_non_negative_highlights="false" type="stock_flow">
 				<style color="black" background="white" font_style="normal" font_weight="normal" text_decoration="none" text_align="center" vertical_text_align="center" font_color="black" font_family="Arial" font_size="10pt" padding="2" border_color="black" border_width="thin" border_style="none">
 					<stock color="blue" background="white" font_color="blue" font_size="11pt" label_side="top">
 						<shape type="rectangle" width="45" height="35"/>

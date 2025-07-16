@@ -17,6 +17,10 @@
 			<elem name="insufficient"/>
 			<elem name="well_protected"/>
 		</dim>
+		<dim name="Region">
+			<elem name="World"/>
+			<elem name="Brazil"/>
+		</dim>
 		<dim name="Run" size="1"/>
 	</dimensions>
 	<isee:prefs saved_runs="5" keep="false" show_module_prefix="true" live_update_on_drag="true" show_restore_buttons="false" layer="model" isee:design="Deluxe Prev-Next Blue Green Pastel" isee:design_custom="false" interface_secure_mode="true" interface_scale_ui="true" interface_max_page_width="10000" interface_max_page_height="10000" interface_min_page_width="0" interface_min_page_height="0" rifp="true">
@@ -337,7 +341,7 @@
 				<isee:iframe color="black" background="white" text_align="left" vertical_text_align="top" font_size="12pt" border_width="thin" border_style="solid"/>
 				<isee:financial_table color="black" background="#E0E0E0" text_align="right" font_size="12pt" hide_border="false" auto_fit="true" first_column_width="250" other_column_width="100" header_font_style="normal" header_font_weight="bold" header_text_decoration="none" header_text_align="center" header_vertical_text_align="center" header_font_color="black" header_font_family="Arial" header_font_size="14pt" header_text_padding="2" header_text_border_color="black" header_text_border_width="thin" header_text_border_style="none"/>
 			</style>
-			<view isee:show_pages="false" background="white" page_width="768" page_height="588" isee:page_cols="3" isee:page_rows="3" isee:scroll_x="314.167" isee:scroll_y="250" zoom="120" isee:popup_graphs_are_comparative="true" isee:enable_non_negative_highlights="false" type="stock_flow">
+			<view isee:show_pages="false" background="white" page_width="1122" page_height="793" isee:page_cols="3" isee:page_rows="3" isee:scroll_x="314.167" isee:scroll_y="250" zoom="120" isee:popup_graphs_are_comparative="true" isee:enable_non_negative_highlights="false" type="stock_flow">
 				<style color="black" background="white" font_style="normal" font_weight="normal" text_decoration="none" text_align="center" vertical_text_align="center" font_color="black" font_family="Arial" font_size="10pt" padding="2" border_color="black" border_width="thin" border_style="none">
 					<stock color="blue" background="white" font_color="blue" font_size="11pt" label_side="top">
 						<shape type="rectangle" width="45" height="35"/>
@@ -386,8 +390,14 @@
 			<stock name="stored CO2">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<eqn>0</eqn>
+				<element subscript="1, World">
+					<eqn>0</eqn>
+				</element>
+				<element subscript="1, Brazil">
+					<eqn>0</eqn>
+				</element>
 				<inflow>Storing_CO2</inflow>
 				<outflow>CO2_Emissions_from_Leakage</outflow>
 				<non_negative/>
@@ -396,8 +406,9 @@
 			<flow name="Storing CO2">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<eqn>storing_carbon_from_coal_emissions + storing_carbon_from_oil_emissions + storing_carbon_from_gas_emissions + storing_carbon_from_biofuel_emissions</eqn>
+				<eqn>storing_carbon_from_coal_emissions[Run,World] + storing_carbon_from_oil_emissions[Run,World] + storing_carbon_from_gas_emissions[Run,World] + storing_carbon_from_biofuel_emissions[Run,World]</eqn>
 				<non_negative/>
 				<units>MtCO2/Year</units>
 			</flow>
@@ -475,41 +486,54 @@ middle of power generation storing cost</doc>
 			<aux name="storing carbon from coal\nemissions">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<eqn>share_of_coal_emissions_stored*CO2_emissions_from_coal</eqn>
+				<eqn>share_of_coal_emissions_stored*CO2_emissions_from_coal[Run]</eqn>
 				<units>MtCO2/Year</units>
 			</aux>
 			<aux name="storing carbon from gas\nemissions">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<eqn>share_of_gas_emissions_stored*CO2_emissions_from_gas</eqn>
+				<eqn>share_of_gas_emissions_stored*CO2_emissions_from_gas[Run]</eqn>
 				<units>MtCO2/Year</units>
 			</aux>
 			<aux name="storing carbon from biofuel\nemissions">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<eqn>share_of_biofuel_emissions_stored*CO2_emissions_from_biofuels</eqn>
+				<eqn>share_of_biofuel_emissions_stored*CO2_emissions_from_biofuels[Run]</eqn>
 				<units>MtCO2/Year</units>
 			</aux>
 			<flow name="CO2 Emissions from Leakage" access="output" isee:autocreated="true">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<eqn>stored_CO2_leakage_rate*stored_CO2</eqn>
+				<eqn>stored_CO2_leakage_rate[Region]*stored_CO2</eqn>
 				<non_negative/>
 				<units>MtCO2/Year</units>
 			</flow>
 			<aux name="stored CO2 leakage rate">
 				<doc>${Internal Calibration Parameter,No Sensi}
 </doc>
-				<eqn>0</eqn>
+				<dimensions>
+					<dim name="Region"/>
+				</dimensions>
+				<element subscript="World">
+					<eqn>0</eqn>
+				</element>
+				<element subscript="Brazil">
+					<eqn>0</eqn>
+				</element>
 				<units>dmnl/year</units>
 			</aux>
 			<aux name="cost of storing CO2" access="output" isee:autocreated="true">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>Storing_CO2 * cost_of_storing_CO2_per_unit</eqn>
 				<units>c$</units>
@@ -517,14 +541,23 @@ middle of power generation storing cost</doc>
 			<aux name="UNIT GtC to tC">
 				<doc>${Unit}
 </doc>
-				<eqn>1000000000</eqn>
+				<dimensions>
+					<dim name="Region"/>
+				</dimensions>
+				<element subscript="World">
+					<eqn>1000000000</eqn>
+				</element>
+				<element subscript="Brazil">
+					<eqn>1000000000</eqn>
+				</element>
 				<units>tC/GtC</units>
 			</aux>
 			<aux name="storing carbon from oil\nemissions">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<eqn>share_of_oil_emissions_stored*CO2_emissions_from_oil</eqn>
+				<eqn>share_of_oil_emissions_stored*CO2_emissions_from_oil[Run]</eqn>
 				<units>MtCO2/Year</units>
 			</aux>
 			<aux name="GtC to MtCO2" access="input">
@@ -534,12 +567,13 @@ middle of power generation storing cost</doc>
 			<aux name="stored Carbon">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>stored_CO2 / GtC_to_MtCO2</eqn>
 				<units>GtC</units>
 			</aux>
 			<aux name="cost of storing CO2 per unit" access="output" isee:autocreated="true">
-				<eqn>UNIT_GtC_to_tC / GtC_to_MtCO2 * cost_of_storing_carbon_per_unit</eqn>
+				<eqn>UNIT_GtC_to_tC[World] / GtC_to_MtCO2 * cost_of_storing_carbon_per_unit</eqn>
 				<units>c$/(MtCO2/year)</units>
 			</aux>
 		</variables>
@@ -591,7 +625,7 @@ middle of power generation storing cost</doc>
 				<isee:iframe color="black" background="white" text_align="left" vertical_text_align="top" font_size="12pt" border_width="thin" border_style="solid"/>
 				<isee:financial_table color="black" background="#E0E0E0" text_align="right" font_size="12pt" hide_border="false" auto_fit="true" first_column_width="250" other_column_width="100" header_font_style="normal" header_font_weight="bold" header_text_decoration="none" header_text_align="center" header_vertical_text_align="center" header_font_color="black" header_font_family="Arial" header_font_size="14pt" header_text_padding="2" header_text_border_color="black" header_text_border_width="thin" header_text_border_style="none"/>
 			</style>
-			<view isee:show_pages="false" background="white" page_width="768" page_height="588" isee:page_cols="2" isee:scroll_x="510" isee:popup_graphs_are_comparative="true" isee:enable_non_negative_highlights="false" type="stock_flow">
+			<view isee:show_pages="false" background="white" page_width="1122" page_height="793" isee:page_cols="2" isee:scroll_x="214" isee:popup_graphs_are_comparative="true" isee:enable_non_negative_highlights="false" type="stock_flow">
 				<style color="black" background="white" font_style="normal" font_weight="normal" text_decoration="none" text_align="center" vertical_text_align="center" font_color="black" font_family="Arial" font_size="10pt" padding="2" border_color="black" border_width="thin" border_style="none">
 					<stock color="blue" background="white" font_color="blue" font_size="11pt" label_side="top">
 						<shape type="rectangle" width="45" height="35"/>
@@ -767,6 +801,7 @@ middle of power generation storing cost</doc>
 				<doc>This is the in-use stock of new residential and service buildings.</doc>
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>INIT_CONCRETE_IN_OLD_BUILDINGS</eqn>
 				<inflow>RS_aging</inflow>
@@ -791,6 +826,7 @@ middle of power generation storing cost</doc>
 				<doc>This is the in-use stock of old infrastructure.</doc>
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>INIT_CONCRETE_IN_OLD_INFRASTRUCTURE</eqn>
 				<inflow>infrastructure_aging</inflow>
@@ -816,8 +852,8 @@ It is computed as the gap between existing and desired infrastructure divided by
 					<dim name="Run"/>
 				</dimensions>
 				<eqn>MAX(0, 
-infrastructure_gap/
-GAP_ADJUSTMENT_TIME_FOR_INFRASTRUCTURE)</eqn>
+infrastructure_gap[Run,World]/
+GAP_ADJUSTMENT_TIME_FOR_INFRASTRUCTURE[Run,World])</eqn>
 				<units>Mtonne/year</units>
 			</flow>
 			<flow name="RS\naging">
@@ -825,8 +861,9 @@ GAP_ADJUSTMENT_TIME_FOR_INFRASTRUCTURE)</eqn>
 The flow is computed as the stock value of New RS buildings  divided by the average lifetime of new RS buildings.</doc>
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<eqn>Concrete_Stock_in_New_Residential_and_Service_Buildings/(AVERAGE_LIFETIME_OF_BUILDINGS)*AGE_CUTPOINT_FOR_CONCRETE_STRUCTURES</eqn>
+				<eqn>Concrete_Stock_in_New_Residential_and_Service_Buildings/(AVERAGE_LIFETIME_OF_BUILDINGS[Run,World])*AGE_CUTPOINT_FOR_CONCRETE_STRUCTURES[World]</eqn>
 				<units>Mtonne/year</units>
 			</flow>
 			<flow name="infrastructure\naging">
@@ -834,27 +871,30 @@ The flow is computed as the stock value of New RS buildings  divided by the aver
 The flow is computed as the stock value of New infrastructure divided by the average lifetime of new infrastructure.</doc>
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<eqn>Concrete_Stock_in_new_Infrastructure/(AVERAGE_LIFETIME_OF_INFRASTRUCTURE)*
-AGE_CUTPOINT_FOR_CONCRETE_STRUCTURES</eqn>
+				<eqn>Concrete_Stock_in_new_Infrastructure[/(AVERAGE_LIFETIME_OF_INFRASTRUCTURE[Run,World])*
+AGE_CUTPOINT_FOR_CONCRETE_STRUCTURES[World]</eqn>
 				<units>Mtonne/year</units>
 			</flow>
 			<flow name="decommissioning\nRS buildings">
 				<doc>Old residential and service buildings are decommissioned at a rate determined by their average lifetime.</doc>
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>Concrete_Stock_in_Old_Residential_and_Service_Buildings/
-(AVERAGE_LIFETIME_OF_BUILDINGS)*AGE_CUTPOINT_FOR_CONCRETE_STRUCTURES</eqn>
+(AVERAGE_LIFETIME_OF_BUILDINGS)*AGE_CUTPOINT_FOR_CONCRETE_STRUCTURES[World]</eqn>
 				<units>Mtonne/year</units>
 			</flow>
 			<flow name="decommissioning\ninfrastructure">
 				<doc>Old infrastructure is decommissioned at a rate determined by their average lifetime.</doc>
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>Concrete_Stock_in_old_Infrastructure/
-(AVERAGE_LIFETIME_OF_INFRASTRUCTURE)*AGE_CUTPOINT_FOR_CONCRETE_STRUCTURES</eqn>
+(AVERAGE_LIFETIME_OF_INFRASTRUCTURE[Run,World])*AGE_CUTPOINT_FOR_CONCRETE_STRUCTURES[World]</eqn>
 				<units>Mtonne/year</units>
 			</flow>
 			<aux name="desired useful\nfloor area">
@@ -862,8 +902,8 @@ AGE_CUTPOINT_FOR_CONCRETE_STRUCTURES</eqn>
 				<dimensions>
 					<dim name="Run"/>
 				</dimensions>
-				<eqn>SMTH3(indicated_desired_per_capita_floor_area[Run] * population[Run], 
-TIME_TO_ADJUST_DESIRED_FLOOR_AREA[Run])</eqn>
+				<eqn>SMTH3(indicated_desired_per_capita_floor_area[Run,World] * population[Run], 
+TIME_TO_ADJUST_DESIRED_FLOOR_AREA[Run,World])</eqn>
 				<isee:delay_aux/>
 				<units>Mm2</units>
 			</aux>
@@ -879,7 +919,7 @@ TIME_TO_ADJUST_DESIRED_FLOOR_AREA[Run])</eqn>
 				<dimensions>
 					<dim name="Run"/>
 				</dimensions>
-				<eqn>(Concrete_Stock_in_Old_Residential_and_Service_Buildings+Concrete_Stock_in_New_Residential_and_Service_Buildings)/CONCRETE_PER_m2_UFA</eqn>
+				<eqn>(Concrete_Stock_in_Old_Residential_and_Service_Buildings[Run,World]+Concrete_Stock_in_New_Residential_and_Service_Buildings)/CONCRETE_PER_m2_UFA</eqn>
 				<units>Mm2</units>
 			</aux>
 			<aux name="gap in useful\nfloor area">
@@ -899,9 +939,7 @@ Source: Assumption</doc>
 				<dimensions>
 					<dim name="Run"/>
 				</dimensions>
-				<element subscript="1">
-					<eqn>13.9260948345179</eqn>
-				</element>
+				<eqn>13.9260948345179</eqn>
 				<range min="0.5" max="20"/>
 				<units>year</units>
 			</aux>
@@ -912,8 +950,12 @@ Calibration range: 2 - 30 years
 Source: Assumption</doc>
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<element subscript="1">
+				<element subscript="1, World">
+					<eqn>6.33255854211754</eqn>
+				</element>
+				<element subscript="1, Brazil">
 					<eqn>6.33255854211754</eqn>
 				</element>
 				<range min="2" max="30"/>
@@ -933,9 +975,7 @@ Source: DOI: 10.1016/j.jclepro.2019.119146
 				<dimensions>
 					<dim name="Run"/>
 				</dimensions>
-				<element subscript="1">
-					<eqn>0.998</eqn>
-				</element>
+				<eqn>0.998</eqn>
 				<range min="0.452" max="1.43"/>
 				<units>Mtonne/Mm2</units>
 			</aux>
@@ -950,6 +990,7 @@ UFA per capita data: https://entranze.enerdata.net/average-floor-area-per-capita
 GDP per capita data:  https://ourworldindata.org/grapher/gdp-per-capita-maddison?time=2008&amp;region=Europe </doc>
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>MAX(
 0, 
@@ -961,9 +1002,10 @@ UFA_alpha*LN(real_GDP_per_person*1000) + UFA_intercept)</eqn>
 This is the average lifetime of residential and service buildings when accounting for longevity policies in place and the effect of climate change (STA) on concrete durability.</doc>
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>BASE_AVERAGE_LIFETIME_OF_BUILDINGS *
-actual_concrete_residential_longevity_policy *
+actual_concrete_residential_longevity_policy[World] *
 effect_of_STA_on_average_lifetime_of_concrete</eqn>
 				<units>Year</units>
 			</aux>
@@ -980,7 +1022,7 @@ DOI: 10.1016/j.jclepro.2019.119146
 				<dimensions>
 					<dim name="Run"/>
 				</dimensions>
-				<eqn>Concrete_Stock_in_New_Residential_and_Service_Buildings + Concrete_Stock_in_Old_Residential_and_Service_Buildings</eqn>
+				<eqn>Concrete_Stock_in_New_Residential_and_Service_Buildings + Concrete_Stock_in_Old_Residential_and_Service_Buildings[Run, World]</eqn>
 				<isee:summing/>
 				<units>Mtonne</units>
 			</aux>
@@ -993,9 +1035,7 @@ Source: Assumption</doc>
 				<dimensions>
 					<dim name="Run"/>
 				</dimensions>
-				<element subscript="1">
-					<eqn>12666.3005103963</eqn>
-				</element>
+				<eqn>12666.3005103963</eqn>
 				<range min="1000" max="70000"/>
 				<units>Mtonne</units>
 			</aux>
@@ -1008,8 +1048,12 @@ Calibration Range: 20000 - 80000
 Source: Assumption. Assumed to be significantly larger than the initial value for New Buildings</doc>
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<element subscript="1">
+				<element subscript="1, World">
+					<eqn>54769.4016691214</eqn>
+				</element>
+				<element subscript="1, Brazil">
 					<eqn>54769.4016691214</eqn>
 				</element>
 				<range min="20000" max="80000"/>
@@ -1027,7 +1071,7 @@ Assumption: Available data is in cement production. To estimate global concrete 
 				<dimensions>
 					<dim name="Run"/>
 				</dimensions>
-				<eqn>New_RS_maintenance + Old_RS_maintenance + new_infrastructure_maintenance + old_infrastructure_maintenance + new_infrastructure_construction + new_RS_construction</eqn>
+				<eqn>New_RS_maintenance + Old_RS_maintenance[Run, World] + new_infrastructure_maintenance + new_infrastructure_construction + new_RS_construction + old_infrastructure_maintenance[Run, World]</eqn>
 				<isee:summing/>
 				<units>Mtonne/year</units>
 			</aux>
@@ -1044,7 +1088,7 @@ https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5338421/pdf/pnas.201613773.pdf
 				<dimensions>
 					<dim name="Run"/>
 				</dimensions>
-				<eqn>Concrete_Stock_in_New_Residential_and_Service_Buildings + Concrete_Stock_in_Old_Residential_and_Service_Buildings + Concrete_Stock_in_new_Infrastructure + Concrete_Stock_in_old_Infrastructure</eqn>
+				<eqn>Concrete_Stock_in_New_Residential_and_Service_Buildings + Concrete_Stock_in_Old_Residential_and_Service_Buildings[Run, World] + Concrete_Stock_in_new_Infrastructure + Concrete_Stock_in_old_Infrastructure[Run, World]</eqn>
 				<isee:summing/>
 				<units>Mtonne</units>
 			</aux>
@@ -1054,7 +1098,7 @@ This is the sum of decommissioned and deteriorated concrete.</doc>
 				<dimensions>
 					<dim name="Run"/>
 				</dimensions>
-				<eqn>New_RS_deterioration + new_infrastructure_deterioration + Old_RS_deterioration + decommissioning_RS_buildings + decommissioning_infrastructure + old_infrastructure_deterioration</eqn>
+				<eqn>New_RS_deterioration + Old_RS_deterioration[Run, World] + decommissioning_RS_buildings[Run, World] + decommissioning_infrastructure[Run, World] + new_infrastructure_deterioration + old_infrastructure_deterioration[Run, World]</eqn>
 				<isee:summing/>
 				<units>Mtonne/year</units>
 			</aux>
@@ -1082,8 +1126,12 @@ Calibration Range: 1000 - 15000
 Source: Assumption. Assumed to be significantly larger than the initial value for New infrastructure.</doc>
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<element subscript="1">
+				<element subscript="1, World">
+					<eqn>14990.5225486193</eqn>
+				</element>
+				<element subscript="1, Brazil">
 					<eqn>14990.5225486193</eqn>
 				</element>
 				<range min="1000" max="15000"/>
@@ -1094,7 +1142,7 @@ Source: Assumption. Assumed to be significantly larger than the initial value fo
 				<dimensions>
 					<dim name="Run"/>
 				</dimensions>
-				<eqn>(Concrete_Stock_in_old_Infrastructure+Concrete_Stock_in_new_Infrastructure)</eqn>
+				<eqn>(Concrete_Stock_in_old_Infrastructure[Run,World]+Concrete_Stock_in_new_Infrastructure)</eqn>
 				<units>Mtonne</units>
 			</aux>
 			<aux name="TIME TO ADJUST DESIRED\nINFRASTRUCTURE AREA">
@@ -1106,9 +1154,7 @@ Source: Assumption</doc>
 				<dimensions>
 					<dim name="Run"/>
 				</dimensions>
-				<element subscript="1">
-					<eqn>1</eqn>
-				</element>
+				<eqn>1</eqn>
 				<range min="1" max="10"/>
 				<units>year</units>
 			</aux>
@@ -1120,8 +1166,12 @@ Calibration Range: 0.5-10 years
 Source: Assumption</doc>
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<element subscript="1">
+				<element subscript="1, World">
+					<eqn>9.96999123908307</eqn>
+				</element>
+				<element subscript="1, Brazil">
 					<eqn>9.96999123908307</eqn>
 				</element>
 				<range min="0.5" max="10"/>
@@ -1133,19 +1183,20 @@ Source: Assumption</doc>
 Link: https://cdn.gihub.org/outlook/live/methodology/Global+Infrastructure+Outlook+-+July+2017.pdf </doc>
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>BASE_AVERAGE_LIFETIME_OF_INFRASTRUCTURE *
 actual_concrete_infrastructure_longevity_policy *
 effect_of_STA_on_average_lifetime_of_concrete</eqn>
 				<units>year</units>
 			</aux>
-			<aux name="Infrastructure concrete stock in use">
+			<aux name="Infrastructure\nconcrete stock in use">
 				<doc>${Calibrated Output}
 Calibration data calculated as the difference between data on &apos;In use concrete stock&apos; (Krausmann et al, 2017) and &apos;residential concrete stock in use&apos; (Marinova et al, 2020).</doc>
 				<dimensions>
 					<dim name="Run"/>
 				</dimensions>
-				<eqn>Concrete_Stock_in_new_Infrastructure + Concrete_Stock_in_old_Infrastructure</eqn>
+				<eqn>Concrete_Stock_in_new_Infrastructure + Concrete_Stock_in_old_Infrastructure[Run, World]</eqn>
 				<isee:summing/>
 				<units>Mtonne</units>
 			</aux>
@@ -1156,8 +1207,12 @@ Calibration range: -300 - -50
 Source: Assumption</doc>
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<element subscript="1">
+				<element subscript="1, World">
+					<eqn>-237.396109005807{-189.79}</eqn>
+				</element>
+				<element subscript="1, Brazil">
 					<eqn>-237.396109005807{-189.79}</eqn>
 				</element>
 				<range min="-300" max="-50"/>
@@ -1170,8 +1225,14 @@ Calibration range: 1 - 45
 Source: Assumption</doc>
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<element subscript="1">
+				<element subscript="1, World">
+					<eqn>{22.823}
+
+29.3981092227848</eqn>
+				</element>
+				<element subscript="1, Brazil">
 					<eqn>{22.823}
 
 29.3981092227848</eqn>
@@ -1184,9 +1245,10 @@ Source: Assumption</doc>
 The flow is computed as the deterioration rate multiplied by the maintenance efficiency.</doc>
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>Old_RS_deterioration*
-RS_MAINTENANCE_EFFICIENCY</eqn>
+RS_MAINTENANCE_EFFICIENCY[World]</eqn>
 				<units>Mtonne/year</units>
 			</flow>
 			<flow name="old infrastructure\nmaintenance">
@@ -1194,6 +1256,7 @@ RS_MAINTENANCE_EFFICIENCY</eqn>
 The flow is computed as the deterioration rate multiplied by the maintenance efficiency.</doc>
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>old_infrastructure_deterioration*
 infrastructure_maintenance_efficiency</eqn>
@@ -1201,16 +1264,20 @@ infrastructure_maintenance_efficiency</eqn>
 			</flow>
 			<aux name="RS MAINTENANCE EFFICIENCY">
 				<doc>This variable computes the actual maintenance efficiency of residential and service buildings by multiplying the NORMAL RS MAINTENANCE EFFICIENCY by the concrete infrastructure maintenance policy variable for residential and service buildings. This allows model users to explore scenarios where maintenance is less ambitious.</doc>
+				<dimensions>
+					<dim name="Region"/>
+				</dimensions>
 				<eqn>NORMAL_RS_MAINTENANCE_EFFICIENCY *
 actual_maintenance_policy</eqn>
 				<units>dmnl</units>
 			</aux>
-			<aux name="infrastructure maintenance efficiency">
+			<aux name="infrastructure\nmaintenance efficiency">
 				<doc>This variable computes the actual infrastructure maintenance efficiency by multiplying the NORMAL INFRASTRUCTURE MAINTENANCE EFFICIENCY by the concrete infrastructure maintenance policy variable. This allows model users to explore scenarios where maintenance is less ambitious.</doc>
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<eqn>NORMAL_INFRASTRUCTURE_MAINTENANCE_EFFICIENCY *
+				<eqn>NORMAL_INFRASTRUCTURE_MAINTENANCE_EFFICIENCY[World] *
 infrastructure_maintenance_policy</eqn>
 				<units>dmnl</units>
 			</aux>
@@ -1220,6 +1287,7 @@ infrastructure_maintenance_policy</eqn>
 The flow is computed as the existing stock multiplied by the NORMAL CONCRETE DETERIORATION RATE parameter plus storm damages to service and residential buildings. The Storm damages are computed as the total storm damages to concrete buildings and infrastructure multiplied by the share of old concrete in the system that is used in residential and service buildings.</doc>
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>Concrete_Stock_in_Old_Residential_and_Service_Buildings*
 NORMAL_CONCRETE_DETERIORATION_RATE
@@ -1235,13 +1303,14 @@ storm_damages_to_concrete_buildings_and_infrastructure * (1-share_of_old_concret
 The flow is computed as the existing stock multiplied by the NORMAL CONCRETE DETERIORATION RATE parameter plus storm damages to infrastructure. The Storm damages to infrastructure is computed as the total storm damages to concrete buildings and infrastructure multiplied by the share of old concrete in the system that is used in infrastructure.</doc>
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>Concrete_Stock_in_old_Infrastructure*
 NORMAL_CONCRETE_DETERIORATION_RATE
 
 +
 
-storm_damages_to_concrete_buildings_and_infrastructure*share_of_old_concrete_in_infrastructure</eqn>
+storm_damages_to_concrete_buildings_and_infrastructure*share_of_old_concrete_in_infrastructure[</eqn>
 				<units>Mtonne/year</units>
 			</flow>
 			<flow name="New RS deterioration">
@@ -1251,7 +1320,7 @@ The flow is computed as the existing stock multiplied by the NORMAL CONCRETE DET
 					<dim name="Run"/>
 				</dimensions>
 				<eqn>Concrete_Stock_in_New_Residential_and_Service_Buildings*
-NORMAL_CONCRETE_DETERIORATION_RATE</eqn>
+NORMAL_CONCRETE_DETERIORATION_RATE[Run,World]</eqn>
 				<units>Mtonne/year</units>
 			</flow>
 			<flow name="new infrastructure\ndeterioration">
@@ -1261,7 +1330,7 @@ The flow is computed as the existing stock multiplied by the NORMAL CONCRETE DET
 					<dim name="Run"/>
 				</dimensions>
 				<eqn>Concrete_Stock_in_new_Infrastructure*
-NORMAL_CONCRETE_DETERIORATION_RATE</eqn>
+NORMAL_CONCRETE_DETERIORATION_RATE[Run,World]</eqn>
 				<units>Mtonne/year</units>
 			</flow>
 			<flow name="New RS maintenance">
@@ -1288,18 +1357,30 @@ Calibration Range: 0.001 - 0.1
 Source: Assumption qualitatively based on Krausmann et al (2017) (https://doi.org/10.1073/pnas.1613773114)</doc>
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<element subscript="1">
+				<element subscript="1, World">
+					<eqn>0.0142483549785972</eqn>
+				</element>
+				<element subscript="1, Brazil">
 					<eqn>0.0142483549785972</eqn>
 				</element>
 				<range min="0.001" max="0.1"/>
 				<units>dmnl/year</units>
 			</aux>
-			<aux name="NORMAL INFRASTRUCTURE MAINTENANCE EFFICIENCY">
+			<aux name="NORMAL INFRASTRUCTURE\nMAINTENANCE EFFICIENCY">
 				<doc>${Assumption}
 This parameter determines the efficiency of infrastructure maintenance.
 If set to 1.0, this means perfect maintenance.</doc>
-				<eqn>1</eqn>
+				<dimensions>
+					<dim name="Region"/>
+				</dimensions>
+				<element subscript="World">
+					<eqn>1</eqn>
+				</element>
+				<element subscript="Brazil">
+					<eqn>1</eqn>
+				</element>
 				<units>dmnl</units>
 			</aux>
 			<aux name="infrastructure\nmaintenance policy" access="input">
@@ -1324,7 +1405,15 @@ If set to 1.0, this means perfect maintenance.</doc>
 				<doc>${Assumption}
 This parameter determines the efficiency of residential and service buildings maintenance.
 If set to 1.0, this means perfect maintenance.</doc>
-				<eqn>1</eqn>
+				<dimensions>
+					<dim name="Region"/>
+				</dimensions>
+				<element subscript="World">
+					<eqn>1</eqn>
+				</element>
+				<element subscript="Brazil">
+					<eqn>1</eqn>
+				</element>
 				<units>dmnl</units>
 			</aux>
 			<aux name="CO2 emissions\nfrom concrete for HS">
@@ -1335,7 +1424,7 @@ If set to 1.0, this means perfect maintenance.</doc>
 				<eqn>CO2_INTENSITY_OF_RS_BUILDINGS_CONCRETE* 
 (new_RS_construction+
 New_RS_maintenance+
-Old_RS_maintenance)</eqn>
+Old_RS_maintenance[Run,World])</eqn>
 				<units>MtCO2/Year</units>
 			</aux>
 			<aux name="CO2 emissions from concrete for Infrastructure">
@@ -1346,7 +1435,7 @@ Old_RS_maintenance)</eqn>
 				<eqn>CO2_INTENSITY_OF_INFRASTRUCTURE_CONCRETE*
 (new_infrastructure_construction+
 new_infrastructure_maintenance+
-old_infrastructure_maintenance)</eqn>
+old_infrastructure_maintenance[Run,World])</eqn>
 				<units>MtCO2/Year</units>
 			</aux>
 			<aux name="CO2 INTENSITY OF\nRS BUILDINGS CONCRETE">
@@ -1361,9 +1450,7 @@ Billy: this range must be high based on new emissions data from Chris Wells</doc
 				<dimensions>
 					<dim name="Run"/>
 				</dimensions>
-				<element subscript="1">
-					<eqn>0.0585221156311479</eqn>
-				</element>
+				<eqn>0.0585221156311479</eqn>
 				<range min="0.05" max="0.163"/>
 				<units>MtCO2/Mtonne</units>
 			</aux>
@@ -1379,9 +1466,7 @@ Billy: this range must be high based on new emissions data from Chris Wells</doc
 				<dimensions>
 					<dim name="Run"/>
 				</dimensions>
-				<element subscript="1">
-					<eqn>0.07</eqn>
-				</element>
+				<eqn>0.07</eqn>
 				<range min="0.07" max="0.164"/>
 				<units>MtCO2/Mtonne</units>
 			</aux>
@@ -1400,7 +1485,7 @@ CO2_emissions_from_concrete_for_Infrastructure</eqn>
 				<dimensions>
 					<dim name="Run"/>
 				</dimensions>
-				<eqn>SMTH3(indicated_desired_infrastructure, 
+				<eqn>SMTH3(indicated_desired_infrastructure[Run,World], 
 TIME_TO_ADJUST_DESIRED_INFRASTRUCTURE_AREA)</eqn>
 				<isee:delay_aux/>
 				<units>Mtonne</units>
@@ -1409,8 +1494,9 @@ TIME_TO_ADJUST_DESIRED_INFRASTRUCTURE_AREA)</eqn>
 				<doc>This is the difference between the desired infrastructure and the existing infrastructure. The gap is bounded by zero as we assume there is never a demand to infrastructure.</doc>
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<eqn>MAX(0, desired_infrastructure - actual_useful_infrastructure)</eqn>
+				<eqn>MAX(0, desired_infrastructure[Run] - actual_useful_infrastructure[Run])</eqn>
 				<units>Mtonne</units>
 			</aux>
 			<aux name="indicated desired infrastructure">
@@ -1424,10 +1510,11 @@ The functional form of the relationship was derived by regressing Infrastructure
 </doc>
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>MAX(0, 
-INTERCEPT + INFRA_ALPHA*real_GDP_per_person +  INFRA_BETA*population + INFRA_GAMMA*
-real_GDP_per_person*population)</eqn>
+INTERCEPT + INFRA_ALPHA*real_GDP_per_person +  INFRA_BETA*population[Run] + INFRA_GAMMA*
+real_GDP_per_person*population[Run])</eqn>
 				<units>Mtonne</units>
 			</aux>
 			<aux name="INFRA ALPHA">
@@ -1438,8 +1525,12 @@ Calibration Range: -40000 - -5000
 Source: Assumption</doc>
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<element subscript="1">
+				<element subscript="1, World">
+					<eqn>-27235.0941605342{- 28801}</eqn>
+				</element>
+				<element subscript="1, Brazil">
 					<eqn>-27235.0941605342{- 28801}</eqn>
 				</element>
 				<range min="-40000" max="-5000"/>
@@ -1453,8 +1544,12 @@ Calibration Range: -40 - -5
 Source: Assumption</doc>
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<element subscript="1">
+				<element subscript="1, World">
+					<eqn> -37.3680135607164{-43.14}</eqn>
+				</element>
+				<element subscript="1, Brazil">
 					<eqn> -37.3680135607164{-43.14}</eqn>
 				</element>
 				<range min="-40" max="-5"/>
@@ -1468,8 +1563,13 @@ Calibration Range: 0.5 - 10
 Source: Assumption</doc>
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<element subscript="1">
+				<element subscript="1, World">
+					<eqn>6.61569213989495
+{+5.652}</eqn>
+				</element>
+				<element subscript="1, Brazil">
 					<eqn>6.61569213989495
 {+5.652}</eqn>
 				</element>
@@ -1493,8 +1593,12 @@ https://doi.org/10.1016/j.engstruct.2011.01.010
 Wang, X., Stewart, M.G., and Nguyen, M,: Impact of climate change on corrosion and damage to concrete infrastructure in Australia, Climatic Change, 110,3, 941-957, https://link.springer.com/article/10.1007/s10584-011-0124-7  </doc>
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<element subscript="1">
+				<element subscript="1, World">
+					<eqn>-0.075</eqn>
+				</element>
+				<element subscript="1, Brazil">
 					<eqn>-0.075</eqn>
 				</element>
 				<range min="-0.15" max="-0.05"/>
@@ -1508,14 +1612,18 @@ Calibration range: 25-150 years
 Based on: Common ranges from the literature. E.g., Wang et al. 2012 (https://doi.org/10.1007/s10584-011-0124-7) and UCSUSA (https://www.ucsusa.org/sites/default/files/attach/gw-smart-infrastructure-table-life-expectancy.pdf).</doc>
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<element subscript="1">
+				<element subscript="1, World">
+					<eqn>25</eqn>
+				</element>
+				<element subscript="1, Brazil">
 					<eqn>25</eqn>
 				</element>
 				<range min="25" max="150"/>
 				<units>year</units>
 			</aux>
-			<aux name="BASE AVERAGE LIFETIME OF BUILDINGS">
+			<aux name="BASE AVERAGE LIFETIME\nOF BUILDINGS">
 				<doc>${Internal Calibration Parameter}
 This is the average lifetime of concrete buildings without climate impacts,
 
@@ -1523,8 +1631,12 @@ Calibration range: 75-200 years
 Based on: Expert opinion. Katarina Malaga (https://www.ri.se/en/person/katarina-malaga) and cross checked with literature (Wang et al. 2012, https://doi.org/10.1007/s10584-011-0124-7). </doc>
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<element subscript="1">
+				<element subscript="1, World">
+					<eqn>115.309006352437</eqn>
+				</element>
+				<element subscript="1, Brazil">
 					<eqn>115.309006352437</eqn>
 				</element>
 				<range min="75" max="200"/>
@@ -1538,14 +1650,15 @@ Based on: Expert opinion. Katarina Malaga (https://www.ri.se/en/person/katarina-
 				<eqn>{Enter equation for use when not hooked up to other models}</eqn>
 				<units>bc$/year</units>
 			</aux>
-			<aux name="storm damages to concrete buildings and infrastructure">
+			<aux name="storm damages to concrete\nbuildings and infrastructure">
 				<doc>${Assumption}
 Storm damages to concrete structures are estimated taking the monetary damages to Coastal Assets computed in the Climate module (measured in billion $ per year) and dividing this value with the computed average value of concrete from the calibration period, 1980-2020, (measured in billion $ per million tonnes of concrete).</doc>
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>IF (switch_concrete_impact = 0) AND TIME &gt; today THEN PREVIOUS
-(SELF,0 )ELSE
+(SELF[Run,World],0 )ELSE
 SUM
 (All_storm_damage[Run,*])/&quot;UNIT_bc$/Mtonne_concrete&quot;</eqn>
 				<units>Mtonne/year</units>
@@ -1561,6 +1674,7 @@ Asset dollars = Bank Assets minus Government debt.</doc>
 			<aux name="real GDP per person" access="input">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>{Enter equation for use when not hooked up to other models}</eqn>
 				<units>bc$/Mp/year</units>
@@ -1586,12 +1700,13 @@ Asset dollars = Bank Assets minus Government debt.</doc>
 				<doc>This variable computes the effect of changes in global mean surface temperature (STA) on the longevity of concrete structures. </doc>
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>IF (switch_concrete_impact = 0) AND TIME &gt; today THEN PREVIOUS
-(SELF,1 )ELSE
+(SELF[Run,World],1 )ELSE
 1
 +CLIMATE_IMPACT_ON_CONCRETE_LIFETIME*(
-Absolute_Surface_Temperature- INIT (Absolute_Surface_Temperature))</eqn>
+Absolute_Surface_Temperature[Run]- INIT (Absolute_Surface_Temperature[Run]))</eqn>
 				<units>dmnl</units>
 			</aux>
 			<aux name="share of old concrete in infrastructure">
@@ -1600,7 +1715,7 @@ This is used to estimate the proportion of climate damages from extreme weather 
 				<dimensions>
 					<dim name="Run"/>
 				</dimensions>
-				<eqn>Concrete_Stock_in_old_Infrastructure/(Concrete_Stock_in_old_Infrastructure+Concrete_Stock_in_Old_Residential_and_Service_Buildings)</eqn>
+				<eqn>Concrete_Stock_in_old_Infrastructure[Run,World]/(Concrete_Stock_in_old_Infrastructure[Run,World]+Concrete_Stock_in_Old_Residential_and_Service_Buildings[Run,World])</eqn>
 				<units>dmnl</units>
 			</aux>
 			<aux name="Absolute Surface Temperature" access="input">
@@ -1623,6 +1738,9 @@ Infrastructure_and_Service_buildings_longevity_policy</eqn>
 			</aux>
 			<aux name="actual maintenance policy">
 				<doc>This is the policy in place for regulating building standards influencing longevity of concrete buildings. </doc>
+				<dimensions>
+					<dim name="Region"/>
+				</dimensions>
 				<eqn>IF TIME &lt; start_year THEN 1
 ELSE
 RS_maintenance_policy</eqn>
@@ -1639,6 +1757,9 @@ RS_maintenance_policy</eqn>
 			</aux>
 			<aux name="actual\nconcrete residential longevity\npolicy">
 				<doc>This is the policy in place for regulating building standards influencing longevity of concrete buildings. </doc>
+				<dimensions>
+					<dim name="Region"/>
+				</dimensions>
 				<eqn>IF TIME &lt; start_year THEN 1
 ELSE
 Residential_and_Service_buildings_longevity_policy</eqn>
@@ -1666,8 +1787,13 @@ Calibration Range: 5000 - 20000
 Source: Assumption</doc>
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<element subscript="1">
+				<element subscript="1, World">
+					<eqn>165310
+{+ 243696}</eqn>
+				</element>
+				<element subscript="1, Brazil">
 					<eqn>165310
 {+ 243696}</eqn>
 				</element>
@@ -1678,7 +1804,15 @@ Source: Assumption</doc>
 				<doc>${Assumption}
 This is parameter determines when a building is considered new vs. old.
 Structure are considered old when they have passed half of their estimated average lifetime.</doc>
-				<eqn>0.5</eqn>
+				<dimensions>
+					<dim name="Region"/>
+				</dimensions>
+				<element subscript="World">
+					<eqn>0.5</eqn>
+				</element>
+				<element subscript="Brazil">
+					<eqn>0.5</eqn>
+				</element>
 				<units>dmnl</units>
 			</aux>
 		</variables>
@@ -1730,7 +1864,7 @@ Structure are considered old when they have passed half of their estimated avera
 				<isee:iframe color="black" background="white" text_align="left" vertical_text_align="top" font_size="12pt" border_width="thin" border_style="solid"/>
 				<isee:financial_table color="black" background="#E0E0E0" text_align="right" font_size="12pt" hide_border="false" auto_fit="true" first_column_width="250" other_column_width="100" header_font_style="normal" header_font_weight="bold" header_text_decoration="none" header_text_align="center" header_vertical_text_align="center" header_font_color="black" header_font_family="Arial" header_font_size="14pt" header_text_padding="2" header_text_border_color="black" header_text_border_width="thin" header_text_border_style="none"/>
 			</style>
-			<view isee:show_pages="false" background="white" page_width="1027" page_height="787" isee:page_cols="4" isee:page_rows="4" isee:scroll_y="1167.5" zoom="80" isee:popup_graphs_are_comparative="true" isee:enable_non_negative_highlights="false" type="stock_flow">
+			<view isee:show_pages="false" background="white" page_width="1122" page_height="793" isee:page_cols="4" isee:page_rows="4" isee:scroll_y="300" zoom="80" isee:popup_graphs_are_comparative="true" isee:enable_non_negative_highlights="false" type="stock_flow">
 				<style color="black" background="white" font_style="normal" font_weight="normal" text_decoration="none" text_align="center" vertical_text_align="center" font_color="black" font_family="Arial" font_size="10pt" padding="2" border_color="black" border_width="thin" border_style="none">
 					<stock color="blue" background="white" font_color="blue" font_size="11pt" label_side="top">
 						<shape type="rectangle" width="45" height="35"/>
@@ -1779,10 +1913,10 @@ Structure are considered old when they have passed half of their estimated avera
 						<pt x="817.67" y="649.75"/>
 					</pts>
 				</flow>
-				<flow x="760.07" y="1078.38" name="new infrastructure\nconstruction">
+				<flow x="760.07" y="1079.96" name="new infrastructure\nconstruction">
 					<pts>
-						<pt x="690.94" y="1078.38"/>
-						<pt x="817.2" y="1078.38"/>
+						<pt x="690.94" y="1079.96"/>
+						<pt x="817.2" y="1079.96"/>
 					</pts>
 				</flow>
 				<flow x="1030.17" y="650.089" name="RS\naging">
@@ -1874,7 +2008,7 @@ Structure are considered old when they have passed half of their estimated avera
 					<from>AVERAGE_LIFETIME_OF_BUILDINGS</from>
 					<to>RS_aging</to>
 				</connector>
-				<connector uid="20" angle="8.01273">
+				<connector uid="20" angle="8.0135">
 					<from>AVERAGE_LIFETIME_OF_BUILDINGS</from>
 					<to>decommissioning_RS_buildings</to>
 				</connector>
@@ -1899,7 +2033,7 @@ Structure are considered old when they have passed half of their estimated avera
 				<aux x="447.571" y="145.035" name="In use concrete stock"/>
 				<aux x="447.571" y="670.25" name="concrete waste generation"/>
 				<aux background="yellow" x="899.7" y="1117.09" name="INIT CONCRETE IN\nNEW INFRASTRUCTURE"/>
-				<aux background="yellow" label_side="bottom" x="1206.71" y="1120.21" name="INIT CONCRETE IN\nOLD INFRASTRUCTURE"/>
+				<aux background="yellow" label_side="right" label_angle="315" x="1206.71" y="1120.21" name="INIT CONCRETE IN\nOLD INFRASTRUCTURE"/>
 				<aux x="931.83" y="952.17" width="17.1667" height="17.1667" name="actual useful\ninfrastructure"/>
 				<aux background="yellow" label_side="right" x="828.57" y="912.416" name="TIME TO ADJUST DESIRED\nINFRASTRUCTURE AREA"/>
 				<connector uid="25" angle="146.844">
@@ -1911,7 +2045,7 @@ Structure are considered old when they have passed half of their estimated avera
 					<to>actual_useful_infrastructure</to>
 				</connector>
 				<aux background="yellow" label_side="left" x="680.92" y="1030.08" name="GAP ADJUSTMENT TIME FOR INFRASTRUCTURE"/>
-				<connector uid="27" angle="350.61">
+				<connector uid="27" angle="349.781">
 					<from>GAP_ADJUSTMENT_TIME_FOR_INFRASTRUCTURE</from>
 					<to>new_infrastructure_construction</to>
 				</connector>
@@ -1924,7 +2058,7 @@ Structure are considered old when they have passed half of their estimated avera
 					<from>Concrete_Stock_in_old_Infrastructure</from>
 					<to>decommissioning_infrastructure</to>
 				</connector>
-				<connector uid="30" angle="168.089">
+				<connector uid="30" angle="168.088">
 					<from>AVERAGE_LIFETIME_OF_INFRASTRUCTURE</from>
 					<to>infrastructure_aging</to>
 				</connector>
@@ -1932,7 +2066,7 @@ Structure are considered old when they have passed half of their estimated avera
 					<from>AVERAGE_LIFETIME_OF_INFRASTRUCTURE</from>
 					<to>decommissioning_infrastructure</to>
 				</connector>
-				<aux x="1461.17" y="149.208" name="Infrastructure concrete stock in use"/>
+				<aux x="1461.17" y="149.208" name="Infrastructure\nconcrete stock in use"/>
 				<aux background="yellow" x="999.42" y="381.786" name="UFA intercept"/>
 				<aux background="yellow" x="992.42" y="428.821" width="16" height="16" name="UFA alpha"/>
 				<connector uid="34" angle="206.753">
@@ -1981,7 +2115,7 @@ Structure are considered old when they have passed half of their estimated avera
 					<from>RS_MAINTENANCE_EFFICIENCY</from>
 					<to>Old_RS_maintenance</to>
 				</connector>
-				<aux background="white" label_side="right" x="1322.25" y="930.416" name="infrastructure maintenance efficiency"/>
+				<aux background="white" label_side="right" x="1322.25" y="930.416" name="infrastructure\nmaintenance efficiency"/>
 				<connector uid="41" angle="229.425">
 					<from>infrastructure_maintenance_efficiency</from>
 					<to>old_infrastructure_maintenance</to>
@@ -2055,7 +2189,7 @@ Structure are considered old when they have passed half of their estimated avera
 					<to>new_infrastructure_maintenance</to>
 				</connector>
 				<aux background="yellow" label_side="top" x="1206.7" y="901.25" name="NORMAL CONCRETE\nDETERIORATION RATE"/>
-				<aux background="white" label_side="top" x="1352.54" y="888.25" name="NORMAL INFRASTRUCTURE MAINTENANCE EFFICIENCY"/>
+				<aux background="white" label_side="top" x="1352.54" y="888.25" name="NORMAL INFRASTRUCTURE\nMAINTENANCE EFFICIENCY"/>
 				<aux color="black" font_style="italic" font_weight="bold" font_color="black" label_side="right" x="1426" y="888.25" name="infrastructure\nmaintenance policy"/>
 				<connector uid="59" color="#757575" font_color="#757575" angle="203.499">
 					<from>infrastructure_maintenance_policy</from>
@@ -2138,7 +2272,7 @@ Structure are considered old when they have passed half of their estimated avera
 					<from>actual_useful_infrastructure</from>
 					<to>infrastructure_gap</to>
 				</connector>
-				<connector uid="86" angle="243.707">
+				<connector uid="86" angle="243.75">
 					<from>infrastructure_gap</from>
 					<to>new_infrastructure_construction</to>
 				</connector>
@@ -2182,13 +2316,13 @@ Structure are considered old when they have passed half of their estimated avera
 					<from>BASE_AVERAGE_LIFETIME_OF_INFRASTRUCTURE</from>
 					<to>AVERAGE_LIFETIME_OF_INFRASTRUCTURE</to>
 				</connector>
-				<aux background="yellow" label_side="right" x="1017.42" y="805" name="BASE AVERAGE LIFETIME OF BUILDINGS"/>
+				<aux background="yellow" label_side="right" x="1017.42" y="805" name="BASE AVERAGE LIFETIME\nOF BUILDINGS"/>
 				<connector uid="103" angle="38.644">
 					<from>BASE_AVERAGE_LIFETIME_OF_BUILDINGS</from>
 					<to>AVERAGE_LIFETIME_OF_BUILDINGS</to>
 				</connector>
 				<aux font_style="italic" font_weight="bold" x="254" y="1686" name="All storm damage"/>
-				<aux label_side="left" x="282.07" y="1554.57" name="storm damages to concrete buildings and infrastructure"/>
+				<aux label_side="left" x="282.07" y="1554.57" name="storm damages to concrete\nbuildings and infrastructure"/>
 				<connector uid="114" angle="77.9442">
 					<from>All_storm_damage</from>
 					<to>storm_damages_to_concrete_buildings_and_infrastructure</to>
@@ -2247,7 +2381,7 @@ Structure are considered old when they have passed half of their estimated avera
 					<to>New_RS_deterioration</to>
 				</connector>
 				<aux font_style="italic" font_weight="bold" x="1329.76" y="808.536" name="switch concrete impact"/>
-				<aux font_style="italic" font_weight="bold" x="1203.5" y="808.536" name="today"/>
+				<aux font_style="italic" font_weight="bold" label_side="right" x="1203.5" y="808.536" name="today"/>
 				<aux x="1268" y="754.75" name="effect of STA on average\nlifetime of concrete"/>
 				<connector uid="145" angle="173.961">
 					<from>CLIMATE_IMPACT_ON_CONCRETE_LIFETIME</from>
@@ -2389,8 +2523,8 @@ Correspondence: andreas.nicolaidis@ri.se </text_box>
 					<from>INTERCEPT</from>
 					<to>indicated_desired_infrastructure</to>
 				</connector>
-				<aux label_side="top" x="1038.08" y="1027.08" name="AGE CUTPOINT FOR\nCONCRETE STRUCTURES"/>
-				<connector uid="178" angle="256.604">
+				<aux label_side="bottom" x="1038.08" y="1027.08" name="AGE CUTPOINT FOR\nCONCRETE STRUCTURES"/>
+				<connector uid="178" angle="256.601">
 					<from>
 						<alias uid="179"/>
 					</from>
