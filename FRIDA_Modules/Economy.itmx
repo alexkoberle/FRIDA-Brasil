@@ -884,7 +884,7 @@
 				<connect to="Innovation.Firms_Checking_Accounts_1" from="Circular_Flow.Firms_Checking_Accounts"/>
 				<connect2 to="Innovation.Firms_Checking_Accounts_1" from="Circular_Flow.Firms_Checking_Accounts"/>
 			</module>
-			<module name="Sea level rise Impacts\nand Adaptation" isee:label="" url="C:/Users/barbara.zimbres/FRIDA-Brasil/FRIDA_Modules/Sea level rise Impacts and Adaptation.itmx">
+			<module name="Sea level rise Impacts\nand Adaptation" isee:label="" url="C:/Users/cy/OneDrive/Documents/GitHub/FRIDA-Brasil/FRIDA_Modules/Sea level rise Impacts and Adaptation.itmx">
 				<format scale_by="auto"/>
 				<connect to="Sea_level_rise_Impacts_and_Adaptation.No_SLR_adaptation_strategy" from="Government_Regulations.No_SLR_adaptation_strategy"/>
 				<connect2 to="Sea_level_rise_Impacts_and_Adaptation.No_SLR_adaptation_strategy" from="Government_Regulations.No_SLR_adaptation_strategy"/>
@@ -4819,7 +4819,7 @@ ELSE
 				</dimensions>
 				<eqn>MAX(0, 
 share_of_employment_in_agriculture_intercept[Run, World]+
-EXP(share_of_employment_in_agriculture_slope[Run,World]*real_GDP_per_person[Run,Region])
+EXP(share_of_employment_in_agriculture_slope[Run,World]*real_GDP_per_person[Run])
 )</eqn>
 				<units>dmnl</units>
 			</aux>
@@ -4829,7 +4829,7 @@ EXP(share_of_employment_in_agriculture_slope[Run,World]*real_GDP_per_person[Run,
 					<dim name="Region"/>
 				</dimensions>
 				<eqn>MAX(0, 
-share_of_employment_in_industry_intercept[Run,World]+share_of_employment_in_industry_slope[Run,World]*real_GDP_per_person[Run,Region]
+share_of_employment_in_industry_intercept[Run,World]+share_of_employment_in_industry_slope[Run,World]*real_GDP_per_person[Run]
 )</eqn>
 				<units>dmnl</units>
 			</aux>
@@ -4839,7 +4839,7 @@ share_of_employment_in_industry_intercept[Run,World]+share_of_employment_in_indu
 					<dim name="Region"/>
 				</dimensions>
 				<eqn>MAX(0, 
-share_of_employment_in_services_intercept[Run,World]+share_of_employment_in_services_slope[Run,World]*real_GDP_per_person[Run,Region]
+share_of_employment_in_services_intercept[Run,World]+share_of_employment_in_services_slope[Run,World]*real_GDP_per_person[Run]
 )</eqn>
 				<units>dmnl</units>
 			</aux>
@@ -5433,7 +5433,6 @@ Fractional exposure levels to temperature for service related labour. Assumption
 			<aux name="real GDP per person" access="input">
 				<dimensions>
 					<dim name="Run"/>
-					<dim name="Region"/>
 				</dimensions>
 				<eqn>{Enter equation for use when not hooked up to other models}</eqn>
 				<units>bc$/Mp/year</units>
@@ -5645,7 +5644,7 @@ Interface explosion stopper</doc>
 				<isee:iframe color="black" background="white" text_align="left" vertical_text_align="top" font_size="12pt" border_width="thin" border_style="solid"/>
 				<isee:financial_table color="black" background="#E0E0E0" text_align="right" font_size="12pt" hide_border="false" auto_fit="true" first_column_width="250" other_column_width="100" header_font_style="normal" header_font_weight="bold" header_text_decoration="none" header_text_align="center" header_vertical_text_align="center" header_font_color="black" header_font_family="Arial" header_font_size="14pt" header_text_padding="2" header_text_border_color="black" header_text_border_width="thin" header_text_border_style="none"/>
 			</style>
-			<view isee:show_pages="false" background="white" page_width="1026" page_height="786" isee:page_cols="6" isee:page_rows="6" isee:scroll_y="500" zoom="120" isee:popup_graphs_are_comparative="true" isee:enable_non_negative_highlights="false" type="stock_flow">
+			<view isee:show_pages="false" background="white" page_width="1027" page_height="787" isee:page_cols="6" isee:page_rows="6" isee:scroll_x="2225.83" isee:scroll_y="1615" zoom="120" isee:popup_graphs_are_comparative="true" isee:enable_non_negative_highlights="false" type="stock_flow">
 				<style color="black" background="white" font_style="normal" font_weight="normal" text_decoration="none" text_align="center" vertical_text_align="center" font_color="black" font_family="Arial" font_size="10pt" padding="2" border_color="black" border_width="thin" border_style="none">
 					<stock color="blue" background="white" font_color="blue" font_size="11pt" label_side="top">
 						<shape type="rectangle" width="45" height="35"/>
@@ -14311,7 +14310,7 @@ agriculture_share_of_GDP_starting_point_determinant[Run,World]*EXP(agriculture_s
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>real_GDP_per_person[Run,Region]/INIT(real_GDP_per_person[Run,Region])</eqn>
+				<eqn>real_GDP_per_person[Run]/INIT(real_GDP_per_person[Run])</eqn>
 				<units>dmnl</units>
 			</aux>
 			<aux name="agriculture\nshare of GDP">
@@ -14637,7 +14636,6 @@ agriculture_share_of_GDP_starting_point_determinant[Run,World]*EXP(agriculture_s
 			<aux name="real GDP per person" access="input">
 				<dimensions>
 					<dim name="Run"/>
-					<dim name="Region"/>
 				</dimensions>
 				<eqn>{Enter equation for use when not hooked up to other models}</eqn>
 				<units>bc$/Mp/year</units>
@@ -14659,7 +14657,6 @@ agriculture_share_of_GDP_starting_point_determinant[Run,World]*EXP(agriculture_s
 			<aux name="real GDP per person 1" access="input">
 				<dimensions>
 					<dim name="Run"/>
-					<dim name="Region"/>
 				</dimensions>
 				<eqn>{Enter equation for use when not hooked up to other models}</eqn>
 				<units>bc$/Mp/year</units>
@@ -14859,7 +14856,7 @@ ELSE
 				<isee:iframe color="black" background="white" text_align="left" vertical_text_align="top" font_size="12pt" border_width="thin" border_style="solid"/>
 				<isee:financial_table color="black" background="#E0E0E0" text_align="right" font_size="12pt" hide_border="false" auto_fit="true" first_column_width="250" other_column_width="100" header_font_style="normal" header_font_weight="bold" header_text_decoration="none" header_text_align="center" header_vertical_text_align="center" header_font_color="black" header_font_family="Arial" header_font_size="14pt" header_text_padding="2" header_text_border_color="black" header_text_border_width="thin" header_text_border_style="none"/>
 			</style>
-			<view isee:show_pages="false" background="white" page_width="1122" page_height="793" isee:page_cols="3" isee:page_rows="3" isee:scroll_y="463" isee:popup_graphs_are_comparative="true" isee:enable_non_negative_highlights="false" type="stock_flow">
+			<view isee:show_pages="false" background="white" page_width="1026" page_height="786" isee:page_cols="3" isee:page_rows="3" isee:scroll_x="980" isee:scroll_y="824" isee:popup_graphs_are_comparative="true" isee:enable_non_negative_highlights="false" type="stock_flow">
 				<style color="black" background="white" font_style="normal" font_weight="normal" text_decoration="none" text_align="center" vertical_text_align="center" font_color="black" font_family="Arial" font_size="10pt" padding="2" border_color="black" border_width="thin" border_style="none">
 					<stock color="blue" background="white" font_color="blue" font_size="11pt" label_side="top">
 						<shape type="rectangle" width="45" height="35"/>

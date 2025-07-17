@@ -299,9 +299,6 @@
 				<connect to="Total_Food_Demand.real_GDP_per_person_1" from="Food_Demand.real_GDP_per_person"/>
 				<connect2 to="Total_Food_Demand.real_GDP_per_person_1" from="Food_Demand.real_GDP_per_person"/>
 			</module>
-			<isee:placeholder name="behavior change\ncalibration data">
-				<eqn>Animal_Products.animal_products_production[1] + Animal_Products_Demand.average_daily_demand_per_capita[1] + Crop.crop_production[1] + Food_Demand.direct_food_demand_per_person_per_day[1,Region] + Food_Demand.crop_demand_for_food[1] + Food_Demand.animal_products_demand[1]</eqn>
-			</isee:placeholder>
 		</variables>
 		<views>
 			<style color="black" background="white" font_style="normal" font_weight="normal" text_decoration="none" text_align="center" vertical_text_align="center" font_color="black" font_family="Arial" font_size="10pt" padding="2" border_color="black" border_width="thin" border_style="none">
@@ -351,7 +348,7 @@
 				<isee:iframe color="black" background="white" text_align="left" vertical_text_align="top" font_size="12pt" border_width="thin" border_style="solid"/>
 				<isee:financial_table color="black" background="#E0E0E0" text_align="right" font_size="12pt" hide_border="false" auto_fit="true" first_column_width="250" other_column_width="100" header_font_style="normal" header_font_weight="bold" header_text_decoration="none" header_text_align="center" header_vertical_text_align="center" header_font_color="black" header_font_family="Arial" header_font_size="14pt" header_text_padding="2" header_text_border_color="black" header_text_border_width="thin" header_text_border_style="none"/>
 			</style>
-			<view isee:show_pages="false" background="white" page_width="1122" page_height="793" isee:page_cols="2" isee:page_rows="2" zoom="80" isee:popup_graphs_are_comparative="true" isee:enable_non_negative_highlights="false" type="stock_flow">
+			<view isee:show_pages="false" background="white" page_width="1026" page_height="786" isee:page_cols="2" isee:page_rows="2" isee:scroll_x="995" zoom="80" isee:popup_graphs_are_comparative="true" isee:enable_non_negative_highlights="false" type="stock_flow">
 				<style color="black" background="white" font_style="normal" font_weight="normal" text_decoration="none" text_align="center" vertical_text_align="center" font_color="black" font_family="Arial" font_size="10pt" padding="2" border_color="black" border_width="thin" border_style="none">
 					<stock color="blue" background="white" font_color="blue" font_size="11pt" label_side="top">
 						<shape type="rectangle" width="45" height="35"/>
@@ -397,19 +394,14 @@
 					<to>Animal_Products_Demand</to>
 				</connector>
 				<stacked_container uid="6" x="584.269" y="103.326" width="680.682" height="480.73">
-					<graph width="680.682" height="480.73" comparative="true" type="time_series" show_grid="false" isee:tick_type="none" include_units_in_legend="false" plot_numbers="false" isee:label_pie_slices="false" isee:show_pie_borders="true" num_x_grid_lines="0" num_y_grid_lines="0" num_x_labels="5" num_y_labels="3" isee:fill_intensity="0.1" isee:allow_zero_axis="true" left_axis_multi_scale="false" left_axis_auto_scale="false" left_include_units="true" right_axis_multi_scale="false" right_axis_auto_scale="true" right_include_units="true">
-						<plot color="blue" isee:keep_zero_visible="false" pen_width="1" index="0" show_y_axis="true">
-							<entity name="behavior_change_calibration_data"/>
-						</plot>
-					</graph>
+					<graph width="680.682" height="480.73" comparative="true" type="time_series" isee:points_only="true" show_grid="false" isee:tick_type="none" include_units_in_legend="false" plot_numbers="false" isee:label_pie_slices="false" isee:show_pie_borders="true" num_x_grid_lines="0" num_y_grid_lines="0" num_x_labels="5" num_y_labels="3" isee:fill_intensity="0.1" isee:allow_zero_axis="true" left_axis_multi_scale="false" left_axis_auto_scale="false" left_include_units="true" right_axis_multi_scale="false" right_axis_auto_scale="true" right_include_units="true"/>
 				</stacked_container>
 				<module label_side="center" x="276.262" y="436.389" width="91.1667" height="60.8333" name="Total Food\nDemand"/>
 				<connector uid="8" isee:thickness="2" angle="321.621" isee:autocreated="true">
 					<from>Climate_Risk_Perception</from>
 					<to>Total_Food_Demand</to>
 				</connector>
-				<isee:placeholder x="1345" y="72.6786" name="behavior change\ncalibration data"/>
-				<isee:selector x="950.714" y="54.0403" width="300" height="30" select_placeholder="true" placeholder="behavior_change_calibration_data"/>
+				<isee:selector x="950.714" y="54.0403" width="300" height="30" select_placeholder="true"/>
 			</view>
 		</views>
 	</model>
