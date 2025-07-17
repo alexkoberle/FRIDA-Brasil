@@ -129,23 +129,8 @@
 			<isee:payoff name="Literacy Payoff" action="min"/>
 		</isee:optimizer_specs>
 		<isee:optimizer_specs name="Behavioral Change Calibration" method="Powell" use_additional_starts_file="false" additional_starts="0" report_interval="1" confidence_range="0" maxiter="0">
-			<isee:parameter name="Animal_Products_Demand.sensitivity_of_demand_to_relative_scarcity[1]" scaling="10"/>
-			<isee:parameter name="Animal_Products_Demand.sensitivity_of_personal_norm_to_consumption_risk[1]" scaling="10"/>
-			<isee:parameter name="Animal_Products_Demand.sensitivity_of_personal_norm_to_social_value[1]" scaling="10"/>
-			<isee:parameter name="Animal_Products_Demand.time_horizon_for_long_term_perception[1]"/>
-			<isee:parameter name="Animal_Products_Demand.time_horizon_for_short_term_perception[1]"/>
 			<isee:parameter name="Animal_Products_Demand.time_to_adjust_consumption_pattern[1]" scaling="10"/>
-			<isee:parameter name="Animal_Products_Demand.time_to_adjust_value_perception[1]"/>
-			<isee:parameter name="Animal_Products_Demand.time_to_observe_consequences[1]" scaling="100"/>
-			<isee:parameter name="Animal_Products_Demand.time_to_perceive_average_consumption[1]" scaling="10"/>
 			<isee:parameter name="Animal_Products_Demand.average_daily_demand_per_capita_in_1980[1]"/>
-			<isee:parameter name="Animal_Products_Demand.initial_share_of_demand_from_consumption_domain[1]" scaling="10"/>
-			<isee:parameter name="Climate_Risk_Perception.time_to_report_and_perceive_climate_information[1]"/>
-			<isee:parameter name="Climate_Risk_Perception.time_to_perceive_climate_extremes_exposure[1]"/>
-			<isee:parameter name="Climate_Risk_Perception.additional_time_horizon_of_reference_climate_extremes_exposure[1]"/>
-			<isee:parameter name="Climate_Risk_Perception.time_to_perceive_SLR_flooding_exposure[1]"/>
-			<isee:parameter name="Climate_Risk_Perception.additional_time_horizon_of_reference_SLR_flooding_exposure[1]"/>
-			<isee:parameter name="Climate_Risk_Perception.sensitivity_to_climatic_events_exposure[1]" scaling="10"/>
 			<isee:parameter name="Total_Food_Demand.sensitivity_of_demand_to_scarcity[1]" scaling="10"/>
 			<isee:parameter name="Total_Food_Demand.sensitivity_of_personal_norm_to_climate_risk[1]" scaling="10"/>
 			<isee:parameter name="Total_Food_Demand.sensitivity_of_personal_norm_to_consumption_risk[1]" scaling="10"/>
@@ -156,17 +141,10 @@
 			<isee:parameter name="Total_Food_Demand.time_to_adjust_value_perception[1]"/>
 			<isee:parameter name="Total_Food_Demand.time_to_observe_consequences[1]"/>
 			<isee:parameter name="Total_Food_Demand.time_to_perceive_average_consumption[1]"/>
-			<isee:parameter name="Total_Food_Demand.time_to_adjust_desired_demand_from_accessibility[1]"/>
 			<isee:parameter name="Total_Food_Demand.average_daily_demand_per_capita_in_1980[1]" scaling="0.1"/>
 			<isee:parameter name="Total_Food_Demand.elasticity_of_demand_to_GDP[1]" scaling="10"/>
-			<isee:parameter name="Animal_Products_Demand.elasticity_of_demand_to_GDP[1]" scaling="10"/>
 			<isee:parameter name="Total_Food_Demand.sensitivity_of_social_value_perception[1]" scaling="10"/>
-			<isee:parameter name="Animal_Products_Demand.sensitivity_of_social_value_perception[1]" scaling="10"/>
 			<isee:parameter name="Total_Food_Demand.growth_rate_of_socioeconomic_effect[1]"/>
-			<isee:parameter name="Animal_Products_Demand.growth_rate_of_socioeconomic_effect[1]"/>
-			<isee:parameter name="Animal_Products_Demand.normal_sensitivity_of_personal_norm_to_climate_risk[1]" scaling="10"/>
-			<isee:parameter name="Climate_Risk_Perception.normal_sensitivity_to_climate_information[1]" scaling="10"/>
-			<isee:parameter name="Climate_Risk_Perception.normal_additional_time_horizon_of_reference_temperature_anomaly[1]"/>
 			<isee:payoff name="Behavioral Change Payoff" action="min"/>
 		</isee:optimizer_specs>
 		<isee:optimizer_specs name="Energy Demand" method="Powell" use_additional_starts_file="false" additional_starts="0" report_interval="1" confidence_range="0" init_step="0.001">
@@ -569,16 +547,10 @@
 			<isee:payoff_element name="Animal_Products.animal_products_production[1]" weight="0.00126970575543099">
 				<isee:time_range type="terminal_value"/>
 			</isee:payoff_element>
-			<isee:payoff_element name="Animal_Products_Demand.average_daily_demand_per_capita[1]" weight="0.00837548337050527">
-				<isee:time_range type="terminal_value"/>
-			</isee:payoff_element>
 			<isee:payoff_element name="Crop.crop_production[1]" weight="0.00000798751726359918">
 				<isee:time_range type="terminal_value"/>
 			</isee:payoff_element>
 			<isee:payoff_element name="Food_Demand.vegetal_product_demand_per_person_per_day[1]" weight="0.00100616787513765">
-				<isee:time_range type="terminal_value"/>
-			</isee:payoff_element>
-			<isee:payoff_element name="Food_Demand.direct_food_demand_per_person_per_day[1]" weight="0.00134681291055953">
 				<isee:time_range type="terminal_value"/>
 			</isee:payoff_element>
 			<isee:payoff_element name="Food_Demand.crop_demand_for_food[1]" weight="0.000217681012706321">

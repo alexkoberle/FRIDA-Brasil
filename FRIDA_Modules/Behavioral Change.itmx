@@ -300,7 +300,7 @@
 				<connect2 to="Total_Food_Demand.real_GDP_per_person_1" from="Food_Demand.real_GDP_per_person"/>
 			</module>
 			<isee:placeholder name="behavior change\ncalibration data">
-				<eqn>Animal_Products.animal_products_production[1] + Animal_Products_Demand.average_daily_demand_per_capita[1] + Crop.crop_production[1] + Food_Demand.direct_food_demand_per_person_per_day[1] + Food_Demand.crop_demand_for_food[1] + Food_Demand.animal_products_demand[1]</eqn>
+				<eqn>Animal_Products.animal_products_production[1] + Animal_Products_Demand.average_daily_demand_per_capita[1] + Crop.crop_production[1] + Food_Demand.direct_food_demand_per_person_per_day[1,Region] + Food_Demand.crop_demand_for_food[1] + Food_Demand.animal_products_demand[1]</eqn>
 			</isee:placeholder>
 		</variables>
 		<views>
@@ -351,7 +351,7 @@
 				<isee:iframe color="black" background="white" text_align="left" vertical_text_align="top" font_size="12pt" border_width="thin" border_style="solid"/>
 				<isee:financial_table color="black" background="#E0E0E0" text_align="right" font_size="12pt" hide_border="false" auto_fit="true" first_column_width="250" other_column_width="100" header_font_style="normal" header_font_weight="bold" header_text_decoration="none" header_text_align="center" header_vertical_text_align="center" header_font_color="black" header_font_family="Arial" header_font_size="14pt" header_text_padding="2" header_text_border_color="black" header_text_border_width="thin" header_text_border_style="none"/>
 			</style>
-			<view isee:show_pages="false" background="white" page_width="818" page_height="571" isee:page_cols="2" isee:page_rows="2" zoom="160" isee:popup_graphs_are_comparative="true" isee:enable_non_negative_highlights="false" type="stock_flow">
+			<view isee:show_pages="false" background="white" page_width="1122" page_height="793" isee:page_cols="2" isee:page_rows="2" zoom="80" isee:popup_graphs_are_comparative="true" isee:enable_non_negative_highlights="false" type="stock_flow">
 				<style color="black" background="white" font_style="normal" font_weight="normal" text_decoration="none" text_align="center" vertical_text_align="center" font_color="black" font_family="Arial" font_size="10pt" padding="2" border_color="black" border_width="thin" border_style="none">
 					<stock color="blue" background="white" font_color="blue" font_size="11pt" label_side="top">
 						<shape type="rectangle" width="45" height="35"/>
@@ -419,7 +419,7 @@
 				<dimensions>
 					<dim name="Run"/>
 				</dimensions>
-				<eqn>(indicated_average_desired_demand_per_capita-Desired_Average_Daily_Demand_Per_Capita)/time_to_adjust_consumption_pattern</eqn>
+				<eqn>(indicated_average_desired_demand_per_capita[Run,World]-Desired_Average_Daily_Demand_Per_Capita)/time_to_adjust_consumption_pattern</eqn>
 				<units>kcal/person/day/Year</units>
 			</flow>
 			<stock name="Desired Average Daily\nDemand Per Capita">
@@ -433,6 +433,9 @@
 			<aux name="UNIT cal per pcal">
 				<doc>${Unit}
 </doc>
+				<dimensions>
+					<dim name="Region"/>
+				</dimensions>
 				<eqn>1000000000000</eqn>
 				<units>KCal/PCal</units>
 			</aux>
@@ -440,18 +443,24 @@
 				<dimensions>
 					<dim name="Run"/>
 				</dimensions>
-				<eqn>average_daily_demand_per_capita*UNIT_days_per_year*UNIT_p_per_Mp/UNIT_cal_per_pcal</eqn>
+				<eqn>average_daily_demand_per_capita[Run,World]*UNIT_days_per_year[World]*UNIT_p_per_Mp[World]/UNIT_cal_per_pcal[World]</eqn>
 				<units>PCal/Mp/Year</units>
 			</aux>
 			<aux name="UNIT days per year">
 				<doc>${Unit}
 </doc>
+				<dimensions>
+					<dim name="Region"/>
+				</dimensions>
 				<eqn>365</eqn>
 				<units>days/year</units>
 			</aux>
 			<aux name="UNIT p per Mp">
 				<doc>${Unit}
 </doc>
+				<dimensions>
+					<dim name="Region"/>
+				</dimensions>
 				<eqn>1000000</eqn>
 				<units>person/Mp</units>
 			</aux>
@@ -482,20 +491,23 @@
 			<aux name="total yearly\nconsumption">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<eqn>MIN(total_yearly_demand, animal_products_production_1)</eqn>
+				<eqn>MIN(total_yearly_demand, animal_products_production_1[Run])</eqn>
 				<units>PCal/Year</units>
 			</aux>
 			<aux name="average daily\nconsumption per capita">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<eqn>total_yearly_consumption/Population_1/UNIT_days_per_year/UNIT_p_per_Mp*UNIT_cal_per_pcal</eqn>
+				<eqn>total_yearly_consumption/Population_1[Run]/UNIT_days_per_year[Region]/UNIT_p_per_Mp[Region]*UNIT_cal_per_pcal[Region]</eqn>
 				<units>kcal/person/day</units>
 			</aux>
 			<stock name="Perceived Average\nConsumption">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>average_daily_consumption_per_capita</eqn>
 				<inflow>updating_perceived_consumption</inflow>
@@ -504,6 +516,7 @@
 			<flow name="updating perceived\nconsumption">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>(average_daily_consumption_per_capita-Perceived_Average_Consumption)/time_to_perceive_average_consumption</eqn>
 				<units>kcal/person/day/Year</units>
@@ -513,8 +526,12 @@
 </doc>
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<element subscript="1">
+				<element subscript="1, World">
+					<eqn>2.85717522329896</eqn>
+				</element>
+				<element subscript="1, Brazil">
 					<eqn>2.85717522329896</eqn>
 				</element>
 				<range min="1" max="5"/>
@@ -523,6 +540,7 @@
 			<stock name="Reference\nShort Term\nConsumption">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>Perceived_Average_Consumption</eqn>
 				<inflow>updating_short_term_reference_consumption</inflow>
@@ -531,6 +549,7 @@
 			<flow name="updating short term\nreference consumption">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>(Perceived_Average_Consumption-Reference_Short_Term_Consumption)/time_horizon_for_short_term_perception</eqn>
 				<units>kcal/person/day/Year</units>
@@ -540,8 +559,12 @@
 </doc>
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<element subscript="1">
+				<element subscript="1, World">
+					<eqn>5.52520495175963</eqn>
+				</element>
+				<element subscript="1, Brazil">
 					<eqn>5.52520495175963</eqn>
 				</element>
 				<range min="1" max="20"/>
@@ -550,6 +573,7 @@
 			<stock name="Reference\nLong Term\nConsumption">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>Perceived_Average_Consumption</eqn>
 				<inflow>updating_long_term_reference_consumption</inflow>
@@ -558,6 +582,7 @@
 			<flow name="updating long term\nreference consumption">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>(Perceived_Average_Consumption-Reference_Long_Term_Consumption)/time_horizon_for_long_term_perception</eqn>
 				<units>kcal/person/day/Year</units>
@@ -567,8 +592,12 @@
 </doc>
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<element subscript="1">
+				<element subscript="1, World">
+					<eqn>55.4508307301875</eqn>
+				</element>
+				<element subscript="1, Brazil">
 					<eqn>55.4508307301875</eqn>
 				</element>
 				<range min="20" max="100"/>
@@ -577,6 +606,7 @@
 			<aux name="indicated short term\ntrend">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>(Perceived_Average_Consumption-Reference_Short_Term_Consumption)/Reference_Short_Term_Consumption/time_horizon_for_short_term_perception</eqn>
 				<units>dmnl/year</units>
@@ -587,21 +617,23 @@
 				<dimensions>
 					<dim name="Run"/>
 				</dimensions>
-				<eqn>Desired_Average_Daily_Demand_Per_Capita*(1+ indicated_short_term_trend*expectation_time_horizon)</eqn>
+				<eqn>Desired_Average_Daily_Demand_Per_Capita*(1+ indicated_short_term_trend[Run,World]*expectation_time_horizon)</eqn>
 				<units>kcal/person/day</units>
 			</aux>
 			<aux name="supply demand\nbalance">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<eqn>animal_products_production_1/total_yearly_demand</eqn>
+				<eqn>animal_products_production_1[Run]/total_yearly_demand</eqn>
 				<units>dmnl</units>
 			</aux>
 			<aux name="scarcity of products\ncompared to alternative">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<eqn>supply_demand_balance/crop_balance_1</eqn>
+				<eqn>supply_demand_balance/crop_balance_1[Run]</eqn>
 				<units>dmnl</units>
 			</aux>
 			<aux name="time to adjust desired\ndemand from accessibility">
@@ -609,8 +641,12 @@
 </doc>
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<element subscript="1">
+				<element subscript="1, World">
+					<eqn>1.0258931993514</eqn>
+				</element>
+				<element subscript="1, Brazil">
 					<eqn>1.0258931993514</eqn>
 				</element>
 				<range min="1" max="5"/>
@@ -619,6 +655,7 @@
 			<aux name="perceived consumption\nrelative to long term average">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>Perceived_Average_Consumption/Reference_Long_Term_Consumption</eqn>
 				<units>dmnl</units>
@@ -628,13 +665,15 @@
 </doc>
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<eqn>Desired_Average_Daily_Demand_Per_Capita*effect_of_climate_risk_on_personal_norm*effect_of_consumption_risk_on_personal_norm*effect_of_social_value_on_personal_norm</eqn>
+				<eqn>Desired_Average_Daily_Demand_Per_Capita[Run]*effect_of_climate_risk_on_personal_norm*effect_of_consumption_risk_on_personal_norm*effect_of_social_value_on_personal_norm</eqn>
 				<units>kcal/person/day</units>
 			</aux>
 			<aux name="sensitivity of personal norm\nto climate risk">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>IF TIME&gt;start_year AND switch_environmental_consciousness_policy  THEN 
 normal_sensitivity_of_personal_norm_to_climate_risk*(1 + maximum_effect_of_additional_environmental_consciousness*additional_environmental_consciousness_policy)
@@ -647,8 +686,12 @@ normal_sensitivity_of_personal_norm_to_climate_risk</eqn>
 Calibration Parameter: fertilizer use &amp; crop production</doc>
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<element subscript="1">
+				<element subscript="1, World">
+					<eqn>0.974113071330717</eqn>
+				</element>
+				<element subscript="1, Brazil">
 					<eqn>0.974113071330717</eqn>
 				</element>
 				<range min="0.1" max="1"/>
@@ -664,19 +707,24 @@ Calibration Parameter: fertilizer use &amp; crop production</doc>
 				<doc>${External Parameter}
 Planetary health diet from EAT Lancet https://www.thelancet.com/journals/lancet/article/PIIS0140-6736(18)31788-4/fulltext#seccestitle80
 </doc>
+				<dimensions>
+					<dim name="Region"/>
+				</dimensions>
 				<eqn>304</eqn>
 				<units>kcal/person/day</units>
 			</aux>
 			<aux name="consumption relative\nto healthy reference">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<eqn>average_daily_consumption_per_capita/healthy_reference_daily_consumption_per_capita</eqn>
+				<eqn>average_daily_consumption_per_capita/healthy_reference_daily_consumption_per_capita[Region]</eqn>
 				<units>dmnl</units>
 			</aux>
 			<aux name="perceived\nconsumption risk">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>SMTH1(consumption_relative_to_healthy_reference,  time_to_observe_consequences, consumption_relative_to_healthy_reference)</eqn>
 				<isee:delay_aux/>
@@ -687,8 +735,12 @@ Planetary health diet from EAT Lancet https://www.thelancet.com/journals/lancet/
 </doc>
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<element subscript="1">
+				<element subscript="1, World">
+					<eqn>25.0081155809568</eqn>
+				</element>
+				<element subscript="1, Brazil">
 					<eqn>25.0081155809568</eqn>
 				</element>
 				<range min="10" max="30"/>
@@ -699,8 +751,12 @@ Planetary health diet from EAT Lancet https://www.thelancet.com/journals/lancet/
 Calibration Parameter: fertilizer use &amp; crop production</doc>
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<element subscript="1">
+				<element subscript="1, World">
+					<eqn>-0.723804346469237</eqn>
+				</element>
+				<element subscript="1, Brazil">
 					<eqn>-0.723804346469237</eqn>
 				</element>
 				<range min="-1" max="-0.1"/>
@@ -730,13 +786,15 @@ Calibration Parameter: fertilizer use &amp; crop production</doc>
 			<aux name="effect of climate\nrisk on personal norm">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<eqn>perceived_climate_risk^(sensitivity_of_personal_norm_to_climate_risk)</eqn>
+				<eqn>perceived_climate_risk[Run]^(sensitivity_of_personal_norm_to_climate_risk)</eqn>
 				<units>dmnl</units>
 			</aux>
 			<aux name="effect of consumption\nrisk on personal norm">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>perceived_consumption_risk^sensitivity_of_personal_norm_to_consumption_risk</eqn>
 				<units>dmnl</units>
@@ -744,6 +802,7 @@ Calibration Parameter: fertilizer use &amp; crop production</doc>
 			<aux name="effect of social value\non personal norm">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>Perceived_Social_Value^sensitivity_of_personal_norm_to_social_value</eqn>
 				<units>dmnl</units>
@@ -760,6 +819,7 @@ Calibration Parameter: fertilizer use &amp; crop production</doc>
 </doc>
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>indicated_social_value</eqn>
 				<inflow>change_in_value_perception</inflow>
@@ -768,6 +828,7 @@ Calibration Parameter: fertilizer use &amp; crop production</doc>
 			<flow name="change in value perception">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>(indicated_social_value-Perceived_Social_Value)/time_to_adjust_value_perception</eqn>
 				<units>dmnl/year</units>
@@ -775,8 +836,9 @@ Calibration Parameter: fertilizer use &amp; crop production</doc>
 			<aux name="indicated social value">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<eqn>normal_perceived_social_value*effect_of_relative_long_term_consumption_on_social_value_perception</eqn>
+				<eqn>normal_perceived_social_value[Region]*effect_of_relative_long_term_consumption_on_social_value_perception</eqn>
 				<units>dmnl</units>
 			</aux>
 			<aux name="time to adjust\nvalue perception">
@@ -784,8 +846,12 @@ Calibration Parameter: fertilizer use &amp; crop production</doc>
 </doc>
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<element subscript="1">
+				<element subscript="1, World">
+					<eqn>4.38637838836956</eqn>
+				</element>
+				<element subscript="1, Brazil">
 					<eqn>4.38637838836956</eqn>
 				</element>
 				<range min="3" max="50"/>
@@ -794,6 +860,9 @@ Calibration Parameter: fertilizer use &amp; crop production</doc>
 			<aux name="UNIT c$ per billion c$">
 				<doc>${Unit}
 </doc>
+				<dimensions>
+					<dim name="Region"/>
+				</dimensions>
 				<eqn>1000000000</eqn>
 				<units>c$/bc$</units>
 			</aux>
@@ -802,8 +871,12 @@ Calibration Parameter: fertilizer use &amp; crop production</doc>
 </doc>
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<element subscript="1">
+				<element subscript="1, World">
+					<eqn>0.451123658177203</eqn>
+				</element>
+				<element subscript="1, Brazil">
 					<eqn>0.451123658177203</eqn>
 				</element>
 				<range min="0" max="1"/>
@@ -812,6 +885,7 @@ Calibration Parameter: fertilizer use &amp; crop production</doc>
 			<aux name="effect of\nrelative scarcity\non demand">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>scarcity_of_products_compared_to_alternative^sensitivity_of_demand_to_relative_scarcity</eqn>
 				<units>dmnl</units>
@@ -819,29 +893,35 @@ Calibration Parameter: fertilizer use &amp; crop production</doc>
 			<aux name="normal perceived\nsocial value">
 				<doc>${Assumption}
 </doc>
+				<dimensions>
+					<dim name="Region"/>
+				</dimensions>
 				<eqn>1</eqn>
 				<units>dmnl</units>
 			</aux>
 			<aux name="producer waste fraction">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<eqn>(animal_products_production_1-total_yearly_consumption)/animal_products_production_1</eqn>
+				<eqn>(animal_products_production_1[Run]-total_yearly_consumption)/animal_products_production_1[Run]</eqn>
 				<units>dmnl</units>
 			</aux>
-			<aux name="indicated\naverage desired demand per capita">
+			<aux name="indicated\naverage desired\ndemand per capita">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>MIN(Desired_Demand_from_Accessibility,  
-(weight_of_personal_norm*desired_demand_from_personal_norm + desired_demand_from_descriptive_norm*weight_of_descriptive_norm + weight_of_accessibility*Desired_Demand_from_Accessibility))</eqn>
+(weight_of_personal_norm*desired_demand_from_personal_norm + desired_demand_from_descriptive_norm[Run]*weight_of_descriptive_norm + weight_of_accessibility*Desired_Demand_from_Accessibility))</eqn>
 				<units>kcal/person/day</units>
 			</aux>
 			<aux name="indicated demand\nfrom accessibility">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<eqn>Average_Daily_Demand_Per_Capita_1*share_of_demand_from_consumption_domain</eqn>
+				<eqn>Average_Daily_Demand_Per_Capita_1[Run]*share_of_demand_from_consumption_domain</eqn>
 				<units>kcal/person/day</units>
 			</aux>
 			<stock name="Desired Demand\nfrom Accessibility">
@@ -849,14 +929,16 @@ Calibration Parameter: fertilizer use &amp; crop production</doc>
 </doc>
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<eqn>Average_Daily_Demand_Per_Capita_1*initial_share_of_demand_from_consumption_domain</eqn>
+				<eqn>Average_Daily_Demand_Per_Capita_1[Run]*initial_share_of_demand_from_consumption_domain</eqn>
 				<inflow>change_in_desired_demand_from_accessibility</inflow>
 				<units>kcal/person/day</units>
 			</stock>
 			<flow name="change in desired\ndemand from accessibility">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>(indicated_demand_from_accessibility-Desired_Demand_from_Accessibility)/time_to_adjust_desired_demand_from_accessibility</eqn>
 				<units>kcal/person/day/Year</units>
@@ -866,8 +948,12 @@ Calibration Parameter: fertilizer use &amp; crop production</doc>
 </doc>
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<element subscript="1">
+				<element subscript="1, World">
+					<eqn>0.178579728422547</eqn>
+				</element>
+				<element subscript="1, Brazil">
 					<eqn>0.178579728422547</eqn>
 				</element>
 				<range min="0.15" max="0.3"/>
@@ -876,6 +962,7 @@ Calibration Parameter: fertilizer use &amp; crop production</doc>
 			<aux name="share of demand\nfrom consumption domain">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>MIN(1,  initial_share_of_demand_from_consumption_domain*effect_of_GDP_per_capita_on_demand*effect_of_relative_scarcity_on_demand)</eqn>
 				<units>dmnl</units>
@@ -885,6 +972,7 @@ Calibration Parameter: fertilizer use &amp; crop production</doc>
 </doc>
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>reference_weight_of_accessibility*socioeconomic_effect_on_weight_of_accessibility</eqn>
 				<units>dmnl</units>
@@ -892,6 +980,7 @@ Calibration Parameter: fertilizer use &amp; crop production</doc>
 			<aux name="weight of\npersonal norm">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>(1-weight_of_accessibility)*relative_weight_of_personal_norm</eqn>
 				<units>dmnl</units>
@@ -899,6 +988,7 @@ Calibration Parameter: fertilizer use &amp; crop production</doc>
 			<aux name="weight of\ndescriptive norm">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>(1-weight_of_accessibility)*(1-relative_weight_of_personal_norm)</eqn>
 				<units>dmnl</units>
@@ -908,6 +998,7 @@ Calibration Parameter: fertilizer use &amp; crop production</doc>
 </doc>
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>0.5</eqn>
 				<units>dmnl</units>
@@ -915,8 +1006,9 @@ Calibration Parameter: fertilizer use &amp; crop production</doc>
 			<aux name="total yearly demand">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<eqn>average_yearly_demand_per_capita*Population_1</eqn>
+				<eqn>average_yearly_demand_per_capita[Run]*Population_1[Run]</eqn>
 				<units>PCal/Year</units>
 			</aux>
 			<aux name="average daily\ndemand per capita">
@@ -924,8 +1016,9 @@ Calibration Parameter: fertilizer use &amp; crop production</doc>
 </doc>
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<eqn>MIN(Desired_Average_Daily_Demand_Per_Capita, Desired_Demand_from_Accessibility)</eqn>
+				<eqn>MIN(Desired_Average_Daily_Demand_Per_Capita[Run], Desired_Demand_from_Accessibility)</eqn>
 				<units>kcal/person/day</units>
 			</aux>
 			<aux name="Average Daily\nDemand Per Capita 1" access="input">
@@ -938,6 +1031,7 @@ Calibration Parameter: fertilizer use &amp; crop production</doc>
 			<aux name="effect of GDP per capita\non demand">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>(real_GDP_per_person/INIT(real_GDP_per_person))^elasticity_of_demand_to_GDP</eqn>
 				<units>dmnl</units>
@@ -947,8 +1041,12 @@ Calibration Parameter: fertilizer use &amp; crop production</doc>
 </doc>
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<element subscript="1">
+				<element subscript="1, World">
+					<eqn>0.349012375980477</eqn>
+				</element>
+				<element subscript="1, Brazil">
 					<eqn>0.349012375980477</eqn>
 				</element>
 				<range min="0" max="1"/>
@@ -959,6 +1057,7 @@ Calibration Parameter: fertilizer use &amp; crop production</doc>
 </doc>
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>40000</eqn>
 				<range min="35000" max="45000"/>
@@ -967,13 +1066,15 @@ Calibration Parameter: fertilizer use &amp; crop production</doc>
 			<aux name="real GDP per person">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<eqn>real_GDP_per_person_1[Run,World]*&quot;UNIT_c$_per_billion_c$&quot;/UNIT_p_per_Mp</eqn>
+				<eqn>real_GDP_per_person_1[Run]*&quot;UNIT_c$_per_billion_c$&quot;[Region]/UNIT_p_per_Mp[Region]</eqn>
 				<units>c$/person/year</units>
 			</aux>
 			<aux name="relative GDP per person">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>real_GDP_per_person/reference_GDP_per_person_for_socioeconomic_effect</eqn>
 				<units>dmnl</units>
@@ -981,14 +1082,14 @@ Calibration Parameter: fertilizer use &amp; crop production</doc>
 			<aux name="socioeconomic effect\non weight of accessibility">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<eqn>minimum_socioeconomic_effect + (maximum_socioeconomic_effect-minimum_socioeconomic_effect)/(1+EXP(growth_rate_of_socioeconomic_effect*(inflection_point_of_relative_GDP-relative_GDP_per_person)))</eqn>
+				<eqn>minimum_socioeconomic_effect + (maximum_socioeconomic_effect-minimum_socioeconomic_effect)/(1+EXP(growth_rate_of_socioeconomic_effect*(inflection_point_of_relative_GDP[Region]-relative_GDP_per_person)))</eqn>
 				<units>dmnl</units>
 			</aux>
 			<aux name="real GDP per person 1" access="input">
 				<dimensions>
 					<dim name="Run"/>
-					<dim name="Region"/>
 				</dimensions>
 				<eqn>{Enter equation for use when not hooked up to other models}</eqn>
 				<units>bc$/Mp/year</units>
@@ -998,6 +1099,7 @@ Calibration Parameter: fertilizer use &amp; crop production</doc>
 </doc>
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>0.333333333333</eqn>
 				<units>dmnl</units>
@@ -1005,7 +1107,15 @@ Calibration Parameter: fertilizer use &amp; crop production</doc>
 			<aux name="inflection point of\nrelative GDP">
 				<doc>${Assumption}
 </doc>
-				<eqn>1</eqn>
+				<dimensions>
+					<dim name="Region"/>
+				</dimensions>
+				<element subscript="World">
+					<eqn>1</eqn>
+				</element>
+				<element subscript="Brazil">
+					<eqn>1</eqn>
+				</element>
 				<units>dmnl</units>
 			</aux>
 			<aux name="growth rate of\nsocioeconomic effect">
@@ -1013,8 +1123,14 @@ Calibration Parameter: fertilizer use &amp; crop production</doc>
 </doc>
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<eqn>-4.87065698552652</eqn>
+				<element subscript="1, World">
+					<eqn>-4.87065698552652</eqn>
+				</element>
+				<element subscript="1, Brazil">
+					<eqn>-4.87065698552652</eqn>
+				</element>
 				<range min="-7.5" max="-2.5"/>
 				<units>dmnl</units>
 			</aux>
@@ -1023,6 +1139,7 @@ Calibration Parameter: fertilizer use &amp; crop production</doc>
 </doc>
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>1+range_of_socioeconomic_effect/2</eqn>
 				<units>dmnl</units>
@@ -1032,6 +1149,7 @@ Calibration Parameter: fertilizer use &amp; crop production</doc>
 </doc>
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>1-(range_of_socioeconomic_effect)/2</eqn>
 				<units>dmnl</units>
@@ -1039,6 +1157,7 @@ Calibration Parameter: fertilizer use &amp; crop production</doc>
 			<aux name="effect of relative long term consumption on social value perception">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>1 + sensitivity_of_social_value_perception*(perceived_consumption_relative_to_long_term_average-1)</eqn>
 				<units>dmnl</units>
@@ -1048,8 +1167,12 @@ Calibration Parameter: fertilizer use &amp; crop production</doc>
 Calibration Parameter: fertilizer use &amp; crop production</doc>
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<element subscript="1">
+				<element subscript="1, World">
+					<eqn>1.41609954382117</eqn>
+				</element>
+				<element subscript="1, Brazil">
 					<eqn>1.41609954382117</eqn>
 				</element>
 				<range min="0.1" max="2"/>
@@ -1060,6 +1183,7 @@ Calibration Parameter: fertilizer use &amp; crop production</doc>
 </doc>
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>1</eqn>
 				<range min="0.5" max="1.5"/>
@@ -1070,8 +1194,12 @@ Calibration Parameter: fertilizer use &amp; crop production</doc>
 Calibration Parameter: fertilizer use &amp; crop production</doc>
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<element subscript="1">
+				<element subscript="1, World">
+					<eqn>-0.406981535128116</eqn>
+				</element>
+				<element subscript="1, Brazil">
 					<eqn>-0.406981535128116</eqn>
 				</element>
 				<range min="-1" max="-0.01"/>
@@ -1082,6 +1210,7 @@ Calibration Parameter: fertilizer use &amp; crop production</doc>
 </doc>
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>0.5</eqn>
 				<range min="0.25" max="0.75"/>
@@ -1153,7 +1282,7 @@ Calibration Parameter: fertilizer use &amp; crop production</doc>
 				<isee:iframe color="black" background="white" text_align="left" vertical_text_align="top" font_size="12pt" border_width="thin" border_style="solid"/>
 				<isee:financial_table color="black" background="#E0E0E0" text_align="right" font_size="12pt" hide_border="false" auto_fit="true" first_column_width="250" other_column_width="100" header_font_style="normal" header_font_weight="bold" header_text_decoration="none" header_text_align="center" header_vertical_text_align="center" header_font_color="black" header_font_family="Arial" header_font_size="14pt" header_text_padding="2" header_text_border_color="black" header_text_border_width="thin" header_text_border_style="none"/>
 			</style>
-			<view isee:show_pages="false" background="white" page_width="1122" page_height="793" isee:page_cols="4" isee:page_rows="3" isee:scroll_y="790.833" zoom="120" isee:popup_graphs_are_comparative="true" isee:enable_non_negative_highlights="false" type="stock_flow">
+			<view isee:show_pages="false" background="white" page_width="1122" page_height="793" isee:page_cols="4" isee:page_rows="3" zoom="80" isee:popup_graphs_are_comparative="true" isee:enable_non_negative_highlights="false" type="stock_flow">
 				<style color="black" background="white" font_style="normal" font_weight="normal" text_decoration="none" text_align="center" vertical_text_align="center" font_color="black" font_family="Arial" font_size="10pt" padding="2" border_color="black" border_width="thin" border_style="none">
 					<stock color="blue" background="white" font_color="blue" font_size="11pt" label_side="top">
 						<shape type="rectangle" width="45" height="35"/>
@@ -1239,19 +1368,20 @@ Calibration Parameter: fertilizer use &amp; crop production</doc>
 					<from>total_yearly_consumption</from>
 					<to>average_daily_consumption_per_capita</to>
 				</connector>
-				<stock x="1299.14" y="305.714" name="Perceived Average\nConsumption"/>
-				<flow label_side="bottom" x="1199.97" y="307.143" name="updating perceived\nconsumption">
+				<stock x="1314.14" y="274.072" name="Perceived Average\nConsumption"/>
+				<flow label_side="bottom" x="1224.72" y="307.143" name="updating perceived\nconsumption">
 					<pts>
 						<pt x="1111.29" y="307.143"/>
-						<pt x="1276.64" y="307.143"/>
+						<pt x="1314.14" y="307.143"/>
+						<pt x="1314.14" y="291.572"/>
 					</pts>
 				</flow>
-				<connector uid="15" angle="12.3311">
+				<connector uid="15" angle="14.2132">
 					<from>average_daily_consumption_per_capita</from>
 					<to>updating_perceived_consumption</to>
 				</connector>
 				<aux label_side="top" x="1223.18" y="236.857" name="time to perceive\naverage consumption"/>
-				<connector uid="16" angle="251.722">
+				<connector uid="16" angle="271.251">
 					<from>time_to_perceive_average_consumption</from>
 					<to>updating_perceived_consumption</to>
 				</connector>
@@ -1271,7 +1401,7 @@ Calibration Parameter: fertilizer use &amp; crop production</doc>
 					<from>time_horizon_for_short_term_perception</from>
 					<to>updating_short_term_reference_consumption</to>
 				</connector>
-				<connector uid="19" angle="26.9277">
+				<connector uid="19" angle="18.3368">
 					<from>Perceived_Average_Consumption</from>
 					<to>updating_short_term_reference_consumption</to>
 				</connector>
@@ -1295,12 +1425,12 @@ Calibration Parameter: fertilizer use &amp; crop production</doc>
 					<from>Reference_Long_Term_Consumption</from>
 					<to>updating_long_term_reference_consumption</to>
 				</connector>
-				<connector uid="23" angle="32.4252">
+				<connector uid="23" angle="27.6688">
 					<from>Perceived_Average_Consumption</from>
 					<to>updating_long_term_reference_consumption</to>
 				</connector>
 				<aux x="1324.97" y="449.429" name="indicated short term\ntrend"/>
-				<connector uid="24" angle="313.031">
+				<connector uid="24" angle="306.376">
 					<from>Perceived_Average_Consumption</from>
 					<to>indicated_short_term_trend</to>
 				</connector>
@@ -1329,7 +1459,7 @@ Calibration Parameter: fertilizer use &amp; crop production</doc>
 				<aux label_side="bottom" x="302.739" y="423.429" name="scarcity of products\ncompared to alternative"/>
 				<aux x="413.179" y="594.179" name="time to adjust desired\ndemand from accessibility"/>
 				<aux x="1547.06" y="617.857" name="perceived consumption\nrelative to long term average"/>
-				<connector uid="31" angle="29.2001">
+				<connector uid="31" angle="24.86">
 					<from>Perceived_Average_Consumption</from>
 					<to>perceived_consumption_relative_to_long_term_average</to>
 				</connector>
@@ -1434,7 +1564,7 @@ Calibration Parameter: fertilizer use &amp; crop production</doc>
 					<from>time_to_adjust_value_perception</from>
 					<to>change_in_value_perception</to>
 				</connector>
-				<connector uid="59" angle="266.516">
+				<connector uid="59" angle="266.514">
 					<from>indicated_social_value</from>
 					<to>change_in_value_perception</to>
 				</connector>
@@ -1473,21 +1603,12 @@ Calibration Parameter: fertilizer use &amp; crop production</doc>
 				</connector>
 				<stacked_container uid="80" x="1798.99" y="83.857" width="495.714" height="387.857">
 					<graph width="495.714" height="387.857" type="time_series" show_grid="false" isee:tick_type="none" include_units_in_legend="false" plot_numbers="false" isee:label_pie_slices="false" isee:show_pie_borders="true" num_x_grid_lines="0" num_y_grid_lines="0" num_x_labels="5" num_y_labels="3" isee:fill_intensity="0.1" isee:allow_zero_axis="true" left_axis_multi_scale="false" left_axis_auto_scale="true" left_include_units="true" right_axis_multi_scale="false" right_axis_auto_scale="true" right_include_units="true">
-						<plot color="blue" isee:keep_zero_visible="true" pen_width="1" index="0" show_y_axis="true">
-							<entity name="desired_demand_from_personal_norm[1]"/>
-						</plot>
-						<plot color="fuchsia" isee:keep_zero_visible="true" pen_width="1" index="1" show_y_axis="true">
+						<plot color="fuchsia" isee:keep_zero_visible="true" pen_width="1" index="0" show_y_axis="true">
 							<entity name="desired_demand_from_descriptive_norm[1]"/>
-						</plot>
-						<plot color="#FF2600" isee:keep_zero_visible="true" pen_width="1" index="2" show_y_axis="true">
-							<entity name="Desired_Demand_from_Accessibility[1]"/>
-						</plot>
-						<plot color="#008F44" isee:keep_zero_visible="true" pen_width="1" index="3" show_y_axis="true">
-							<entity name="indicated_average_desired_demand_per_capita[1]"/>
 						</plot>
 					</graph>
 				</stacked_container>
-				<aux x="825.429" y="687.857" name="indicated\naverage desired demand per capita"/>
+				<aux x="825.429" y="687.857" name="indicated\naverage desired\ndemand per capita"/>
 				<connector uid="81" angle="117.616">
 					<from>desired_demand_from_personal_norm</from>
 					<to>indicated_average_desired_demand_per_capita</to>
@@ -1612,7 +1733,7 @@ Calibration Parameter: fertilizer use &amp; crop production</doc>
 					<from>average_daily_demand_per_capita</from>
 					<to>average_yearly_demand_per_capita</to>
 				</connector>
-				<aux font_style="italic" font_weight="bold" label_side="bottom" x="575.048" y="816.571" name="Average Daily\nDemand Per Capita 1"/>
+				<aux font_style="italic" font_weight="bold" label_side="right" label_angle="315" x="575.048" y="816.571" name="Average Daily\nDemand Per Capita 1"/>
 				<connector uid="125" angle="216.022">
 					<from>Average_Daily_Demand_Per_Capita_1</from>
 					<to>indicated_demand_from_accessibility</to>
@@ -1692,17 +1813,7 @@ Calibration Parameter: fertilizer use &amp; crop production</doc>
 					<to>socioeconomic_effect_on_weight_of_accessibility</to>
 				</connector>
 				<stacked_container uid="144" x="1975.83" y="672.239">
-					<graph width="350" height="250" type="area" isee:sum_stacked_legend="true" isee:stacked_show_hover_values="true" show_grid="false" isee:tick_type="none" include_units_in_legend="false" plot_numbers="false" isee:label_pie_slices="false" isee:show_pie_borders="true" num_x_grid_lines="0" num_y_grid_lines="0" num_x_labels="5" num_y_labels="3" isee:fill_intensity="0.1" isee:allow_zero_axis="true" left_axis_multi_scale="false" left_axis_auto_scale="true" left_include_units="true" right_axis_multi_scale="false" right_axis_auto_scale="true" right_include_units="true">
-						<plot color="blue" isee:keep_zero_visible="true" pen_width="1" index="0" show_y_axis="true">
-							<entity name="weight_of_accessibility[1]"/>
-						</plot>
-						<plot color="red" isee:keep_zero_visible="true" pen_width="1" index="1" show_y_axis="true">
-							<entity name="weight_of_personal_norm[1]"/>
-						</plot>
-						<plot color="fuchsia" isee:keep_zero_visible="true" pen_width="1" index="2" show_y_axis="true">
-							<entity name="weight_of_descriptive_norm[1]"/>
-						</plot>
-					</graph>
+					<graph width="350" height="250" type="area" isee:sum_stacked_legend="true" isee:stacked_show_hover_values="true" show_grid="false" isee:tick_type="none" include_units_in_legend="false" plot_numbers="false" isee:label_pie_slices="false" isee:show_pie_borders="true" num_x_grid_lines="0" num_y_grid_lines="0" num_x_labels="5" num_y_labels="3" isee:fill_intensity="0.1" isee:allow_zero_axis="true" left_axis_multi_scale="false" left_axis_auto_scale="true" left_include_units="true" right_axis_multi_scale="false" right_axis_auto_scale="true" right_include_units="true"/>
 				</stacked_container>
 				<aux x="1448.55" y="751.834" name="effect of relative long term consumption on social value perception"/>
 				<aux label_side="bottom" x="1561.73" y="708.571" name="sensitivity of social value perception"/>
@@ -1770,7 +1881,7 @@ Calibration Parameter: fertilizer use &amp; crop production</doc>
 				<eqn>IF (switch_behavioral_impact =0) AND TIME &gt; today THEN PREVIOUS
 (SELF,Surface_Temperature_Anomaly )ELSE
 SMTH3
-(Surface_Temperature_Anomaly,time_to_report_and_perceive_climate_information ,Surface_Temperature_Anomaly )</eqn>
+(Surface_Temperature_Anomaly,time_to_report_and_perceive_climate_information[Run,World] ,Surface_Temperature_Anomaly )</eqn>
 				<isee:delay_aux/>
 				<units>deg C</units>
 			</aux>
@@ -1779,8 +1890,12 @@ SMTH3
 </doc>
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<element subscript="1">
+				<element subscript="1, World">
+					<eqn>6.83612517029621</eqn>
+				</element>
+				<element subscript="1, Brazil">
 					<eqn>6.83612517029621</eqn>
 				</element>
 				<range min="1" max="10"/>
@@ -1789,21 +1904,24 @@ SMTH3
 			<stock name="Reference Temperature\nAnomaly">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<eqn>Perceived_Temperature_Anomaly</eqn>
+				<eqn>Perceived_Temperature_Anomaly[Run]</eqn>
 				<inflow>updating_reference_temperature_anomaly</inflow>
 				<units>deg C</units>
 			</stock>
 			<flow name="updating reference temperature anomaly">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<eqn>(Perceived_Temperature_Anomaly-Reference_Temperature_Anomaly)/time_horizon_of_reference_temperature_anomaly</eqn>
+				<eqn>(Perceived_Temperature_Anomaly[Run]-Reference_Temperature_Anomaly)/time_horizon_of_reference_temperature_anomaly</eqn>
 				<units>deg C/Year</units>
 			</flow>
 			<aux name="additional time horizon of reference\ntemperature anomaly">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>IF TIME&gt;start_year AND switch_environmental_consciousness_policy THEN
 normal_additional_time_horizon_of_reference_temperature_anomaly*(1 + maximum_effect_of_additional_environmental_consciousness_on_reference_time_horizon*additional_environmental_consciousness_policy)
@@ -1814,24 +1932,27 @@ normal_additional_time_horizon_of_reference_temperature_anomaly</eqn>
 			<stock name="Perceived Climate\nExtremes Exposure">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<eqn>Climate_indices_with_record_breaking_exposure_per_person_per_year</eqn>
+				<eqn>Climate_indices_with_record_breaking_exposure_per_person_per_year[Run]</eqn>
 				<inflow>updating_climate_extremes_perception</inflow>
 				<units>Indices/person/year</units>
 			</stock>
-			<flow name="updating climate extremes perception">
+			<flow name="updating climate\nextremes perception">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>IF (switch_behavioral_impact =0) AND TIME &gt; today THEN PREVIOUS
 (SELF,0 )ELSE
 (
-Climate_indices_with_record_breaking_exposure_per_person_per_year-Perceived_Climate_Extremes_Exposure)/time_to_perceive_climate_extremes_exposure</eqn>
+Climate_indices_with_record_breaking_exposure_per_person_per_year[Run]-Perceived_Climate_Extremes_Exposure)/time_to_perceive_climate_extremes_exposure</eqn>
 				<units>Indices/person/year/Year</units>
 			</flow>
 			<stock name="Reference Climate\nExtremes Exposure">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>Perceived_Climate_Extremes_Exposure</eqn>
 				<inflow>updating_reference_climate_extremes_exposure</inflow>
@@ -1840,6 +1961,7 @@ Climate_indices_with_record_breaking_exposure_per_person_per_year-Perceived_Clim
 			<flow name="updating reference\nclimate extremes exposure">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>(Perceived_Climate_Extremes_Exposure-Reference_Climate_Extremes_Exposure)/time_horizon_of_reference_climate_extremes_exposure</eqn>
 				<units>Indices/person/year/Year</units>
@@ -1849,8 +1971,12 @@ Climate_indices_with_record_breaking_exposure_per_person_per_year-Perceived_Clim
 </doc>
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<element subscript="1">
+				<element subscript="1, World">
+					<eqn>51.3273572077805</eqn>
+				</element>
+				<element subscript="1, Brazil">
 					<eqn>51.3273572077805</eqn>
 				</element>
 				<range min="10" max="100"/>
@@ -1861,8 +1987,12 @@ Climate_indices_with_record_breaking_exposure_per_person_per_year-Perceived_Clim
 </doc>
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<element subscript="1">
+				<element subscript="1, World">
+					<eqn>4.96484260562089</eqn>
+				</element>
+				<element subscript="1, Brazil">
 					<eqn>4.96484260562089</eqn>
 				</element>
 				<format precision="0.01"/>
@@ -1872,8 +2002,9 @@ Climate_indices_with_record_breaking_exposure_per_person_per_year-Perceived_Clim
 			<aux name="relative perceived\ntemperature anomaly\ninformation">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<eqn>Perceived_Temperature_Anomaly/Reference_Temperature_Anomaly</eqn>
+				<eqn>Perceived_Temperature_Anomaly[Run]/Reference_Temperature_Anomaly</eqn>
 				<units>dmnl</units>
 			</aux>
 			<aux name="relative perceived\nclimate extremes exposure">
@@ -1883,6 +2014,7 @@ Magalhães SdS, Miranda DK, Miranda DMd, Malloy-Diniz LF, Romano-Silva MA (2018)
 - Some evidence that people have affective response to visuals of impacts of extreme events; however, in their sample images (arid land) which brazilians are used to (sensitized) then the response is not as strong </doc>
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>Perceived_Climate_Extremes_Exposure//Reference_Climate_Extremes_Exposure</eqn>
 				<units>dmnl</units>
@@ -1890,6 +2022,7 @@ Magalhães SdS, Miranda DK, Miranda DMd, Malloy-Diniz LF, Romano-Silva MA (2018)
 			<aux name="cognitive effect of climate information\non risk perception">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>relative_perceived_temperature_anomaly_information^sensitivity_to_climate_information</eqn>
 				<units>dmnl</units>
@@ -1897,6 +2030,7 @@ Magalhães SdS, Miranda DK, Miranda DMd, Malloy-Diniz LF, Romano-Silva MA (2018)
 			<aux name="sensitivity to climate information">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>IF TIME&gt;start_year AND switch_environmental_consciousness_policy THEN
 normal_sensitivity_to_climate_information*(1 + maximum_effect_of_additional_environmental_consciousness_on_climate_information_sensitivity*additional_environmental_consciousness_policy)
@@ -1910,7 +2044,7 @@ normal_sensitivity_to_climate_information</eqn>
 				<dimensions>
 					<dim name="Run"/>
 				</dimensions>
-				<eqn>normal_perceived_climate_change_risk*experiential_effect_of_climatic_events_on_risk_perception*cognitive_effect_of_climate_information_on_risk_perception</eqn>
+				<eqn>normal_perceived_climate_change_risk*experiential_effect_of_climatic_events_on_risk_perception[Run,World]*cognitive_effect_of_climate_information_on_risk_perception[Run,World]</eqn>
 				<units>dmnl</units>
 			</aux>
 			<aux name="sensitivity to\nclimatic events exposure">
@@ -1918,8 +2052,12 @@ normal_sensitivity_to_climate_information</eqn>
 </doc>
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<element subscript="1">
+				<element subscript="1, World">
+					<eqn>0.430081026703445</eqn>
+				</element>
+				<element subscript="1, Brazil">
 					<eqn>0.430081026703445</eqn>
 				</element>
 				<range min="0" max="1"/>
@@ -1928,9 +2066,10 @@ normal_sensitivity_to_climate_information</eqn>
 			<aux name="experiential effect of climatic events on risk perception">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<eqn>(relative_perceived_climate_extremes_exposure +
-relative_perceived_SLR_exposure)^sensitivity_to_climatic_events_exposure</eqn>
+				<eqn>(relative_perceived_climate_extremes_exposure[Run,World] +
+relative_perceived_SLR_exposure)^sensitivity_to_climatic_events_exposure[Run,World]</eqn>
 				<units>dmnl</units>
 			</aux>
 			<aux name="Climate indices with record breaking\nexposure per person per year" access="input">
@@ -1943,6 +2082,7 @@ relative_perceived_SLR_exposure)^sensitivity_to_climatic_events_exposure</eqn>
 			<aux name="time horizon of reference\ntemperature anomaly">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>time_to_report_and_perceive_climate_information+additional_time_horizon_of_reference_temperature_anomaly</eqn>
 				<units>year</units>
@@ -1950,8 +2090,9 @@ relative_perceived_SLR_exposure)^sensitivity_to_climatic_events_exposure</eqn>
 			<aux name="time horizon of reference\nclimate extremes exposure">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<eqn>time_to_perceive_climate_extremes_exposure[Run]+additional_time_horizon_of_reference_climate_extremes_exposure[Run]</eqn>
+				<eqn>time_to_perceive_climate_extremes_exposure[Run,Region]+additional_time_horizon_of_reference_climate_extremes_exposure[Run,Region]</eqn>
 				<units>year</units>
 			</aux>
 			<aux name="switch behavioral impact" access="input">
@@ -1973,6 +2114,7 @@ relative_perceived_SLR_exposure)^sensitivity_to_climatic_events_exposure</eqn>
 			<aux name="total people\nflooded annually from\nsea level rise">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>SUM(Number_of_people_flooded_annually_in_storm_surges[Run,*])</eqn>
 				<units>Mp/year</units>
@@ -1980,6 +2122,7 @@ relative_perceived_SLR_exposure)^sensitivity_to_climatic_events_exposure</eqn>
 			<stock name="Perceived SLR\nFlooding Exposure">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>total_people_flooded_annually_from_sea_level_rise</eqn>
 				<inflow>updating_SLR_flooding_exposure</inflow>
@@ -1988,6 +2131,7 @@ relative_perceived_SLR_exposure)^sensitivity_to_climatic_events_exposure</eqn>
 			<flow name="updating SLR flooding exposure">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>IF ( switch_behavioral_impact =0 OR switch_sea_level_rise_climate_risk_perception=0)  AND TIME &gt; today THEN PREVIOUS
 (SELF,0 )ELSE
@@ -1998,6 +2142,7 @@ total_people_flooded_annually_from_sea_level_rise-Perceived_SLR_Flooding_Exposur
 			<stock name="Reference SLR\nFlooding Exposure">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>minimum_reference_for_SLR_flooding_exposure</eqn>
 				<inflow>updating_reference_SLR_flooding_exposure</inflow>
@@ -2006,6 +2151,7 @@ total_people_flooded_annually_from_sea_level_rise-Perceived_SLR_Flooding_Exposur
 			<flow name="updating reference\nSLR flooding exposure">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>(MAX(minimum_reference_for_SLR_flooding_exposure, indicated_reference_SLR_flooding_exposure) - Reference_SLR_Flooding_Exposure)/DT</eqn>
 				<units>Mp/year/Year</units>
@@ -2015,8 +2161,14 @@ total_people_flooded_annually_from_sea_level_rise-Perceived_SLR_Flooding_Exposur
 </doc>
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<eqn>48.1554221451876</eqn>
+				<element subscript="1, World">
+					<eqn>48.1554221451876</eqn>
+				</element>
+				<element subscript="1, Brazil">
+					<eqn>48.1554221451876</eqn>
+				</element>
 				<range min="10" max="100"/>
 				<units>year</units>
 			</aux>
@@ -2025,8 +2177,12 @@ total_people_flooded_annually_from_sea_level_rise-Perceived_SLR_Flooding_Exposur
 </doc>
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<element subscript="1">
+				<element subscript="1, World">
+					<eqn>3.58579044095443</eqn>
+				</element>
+				<element subscript="1, Brazil">
 					<eqn>3.58579044095443</eqn>
 				</element>
 				<format precision="0.01"/>
@@ -2036,8 +2192,9 @@ total_people_flooded_annually_from_sea_level_rise-Perceived_SLR_Flooding_Exposur
 			<aux name="time horizon of updating reference\nSLR flooding exposure">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<eqn>time_to_perceive_SLR_flooding_exposure[Run]+additional_time_horizon_of_reference_SLR_flooding_exposure[Run]</eqn>
+				<eqn>time_to_perceive_SLR_flooding_exposure[Run,Region]+additional_time_horizon_of_reference_SLR_flooding_exposure[Run,Region]</eqn>
 				<units>year</units>
 			</aux>
 			<aux name="relative perceived\nSLR exposure">
@@ -2047,6 +2204,7 @@ Magalhães SdS, Miranda DK, Miranda DMd, Malloy-Diniz LF, Romano-Silva MA (2018)
 - Some evidence that people have affective response to visuals of impacts of extreme events; however, in their sample images (arid land) which brazilians are used to (sensitized) then the response is not as strong </doc>
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>Perceived_SLR_Flooding_Exposure//Reference_SLR_Flooding_Exposure</eqn>
 				<units>dmnl</units>
@@ -2054,6 +2212,7 @@ Magalhães SdS, Miranda DK, Miranda DMd, Malloy-Diniz LF, Romano-Silva MA (2018)
 			<aux name="indicated updating\nReference SLR flooding exposure">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>(Perceived_SLR_Flooding_Exposure-Reference_SLR_Flooding_Exposure)/time_horizon_of_updating_reference_SLR_flooding_exposure</eqn>
 				<units>Mp/year/Year</units>
@@ -2063,6 +2222,7 @@ Magalhães SdS, Miranda DK, Miranda DMd, Malloy-Diniz LF, Romano-Silva MA (2018)
 </doc>
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>10</eqn>
 				<range min="5" max="15"/>
@@ -2071,6 +2231,7 @@ Magalhães SdS, Miranda DK, Miranda DMd, Malloy-Diniz LF, Romano-Silva MA (2018)
 			<aux name="indicated reference\nSLR flooding exposure">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>Reference_SLR_Flooding_Exposure + indicated_updating_Reference_SLR_flooding_exposure*DT</eqn>
 				<units>Mp/year</units>
@@ -2086,8 +2247,14 @@ Magalhães SdS, Miranda DK, Miranda DMd, Malloy-Diniz LF, Romano-Silva MA (2018)
 </doc>
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<eqn>5</eqn>
+				<element subscript="1, World">
+					<eqn>5</eqn>
+				</element>
+				<element subscript="1, Brazil">
+					<eqn>5</eqn>
+				</element>
 				<range min="2.5" max="7.5"/>
 				<units>dmnl</units>
 			</aux>
@@ -2096,8 +2263,12 @@ Magalhães SdS, Miranda DK, Miranda DMd, Malloy-Diniz LF, Romano-Silva MA (2018)
 </doc>
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<element subscript="1">
+				<element subscript="1, World">
+					<eqn>10.0947438528098</eqn>
+				</element>
+				<element subscript="1, Brazil">
 					<eqn>10.0947438528098</eqn>
 				</element>
 				<range min="10" max="100"/>
@@ -2121,8 +2292,14 @@ Magalhães SdS, Miranda DK, Miranda DMd, Malloy-Diniz LF, Romano-Silva MA (2018)
 </doc>
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<eqn>0.5</eqn>
+				<element subscript="1, World">
+					<eqn>0.5</eqn>
+				</element>
+				<element subscript="1, Brazil">
+					<eqn>0.5</eqn>
+				</element>
 				<range min="0.25" max="0.75"/>
 				<units>dmnl</units>
 			</aux>
@@ -2131,8 +2308,12 @@ Magalhães SdS, Miranda DK, Miranda DMd, Malloy-Diniz LF, Romano-Silva MA (2018)
 </doc>
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<element subscript="1">
+				<element subscript="1, World">
+					<eqn>0.428871284003314</eqn>
+				</element>
+				<element subscript="1, Brazil">
 					<eqn>0.428871284003314</eqn>
 				</element>
 				<range min="0" max="1"/>
@@ -2195,7 +2376,7 @@ Magalhães SdS, Miranda DK, Miranda DMd, Malloy-Diniz LF, Romano-Silva MA (2018)
 				<isee:iframe color="black" background="white" text_align="left" vertical_text_align="top" font_size="12pt" border_width="thin" border_style="solid"/>
 				<isee:financial_table color="black" background="#E0E0E0" text_align="right" font_size="12pt" hide_border="false" auto_fit="true" first_column_width="250" other_column_width="100" header_font_style="normal" header_font_weight="bold" header_text_decoration="none" header_text_align="center" header_vertical_text_align="center" header_font_color="black" header_font_family="Arial" header_font_size="14pt" header_text_padding="2" header_text_border_color="black" header_text_border_width="thin" header_text_border_style="none"/>
 			</style>
-			<view isee:show_pages="false" background="white" page_width="1027" page_height="787" isee:page_cols="3" isee:page_rows="3" isee:scroll_x="225.833" isee:scroll_y="591.667" zoom="120" isee:popup_graphs_are_comparative="true" isee:enable_non_negative_highlights="false" type="stock_flow">
+			<view isee:show_pages="false" background="white" page_width="1122" page_height="793" isee:page_cols="3" isee:page_rows="3" zoom="80" isee:popup_graphs_are_comparative="true" isee:enable_non_negative_highlights="false" type="stock_flow">
 				<style color="black" background="white" font_style="normal" font_weight="normal" text_decoration="none" text_align="center" vertical_text_align="center" font_color="black" font_family="Arial" font_size="10pt" padding="2" border_color="black" border_width="thin" border_style="none">
 					<stock color="blue" background="white" font_color="blue" font_size="11pt" label_side="top">
 						<shape type="rectangle" width="45" height="35"/>
@@ -2250,9 +2431,6 @@ Magalhães SdS, Miranda DK, Miranda DMd, Malloy-Diniz LF, Romano-Silva MA (2018)
 						<plot color="blue" isee:keep_zero_visible="true" pen_width="1" index="0" show_y_axis="true">
 							<entity name="Energy_Balance_Model.Surface_Temperature_Anomaly[1]"/>
 						</plot>
-						<plot color="fuchsia" isee:keep_zero_visible="true" pen_width="1" index="1" show_y_axis="true">
-							<entity name="Reference_Temperature_Anomaly[1]"/>
-						</plot>
 					</graph>
 				</stacked_container>
 				<stock x="642.142" y="296.713" name="Reference Temperature\nAnomaly"/>
@@ -2268,7 +2446,7 @@ Magalhães SdS, Miranda DK, Miranda DMd, Malloy-Diniz LF, Romano-Silva MA (2018)
 					<to>updating_reference_temperature_anomaly</to>
 				</connector>
 				<stock x="300.321" y="511.357" name="Perceived Climate\nExtremes Exposure"/>
-				<flow x="203.482" y="508.571" name="updating climate extremes perception">
+				<flow x="203.482" y="508.571" name="updating climate\nextremes perception">
 					<pts>
 						<pt x="117.143" y="508.571"/>
 						<pt x="277.821" y="508.571"/>
@@ -2347,12 +2525,6 @@ Magalhães SdS, Miranda DK, Miranda DMd, Malloy-Diniz LF, Romano-Silva MA (2018)
 						<plot color="red" isee:keep_zero_visible="true" pen_width="1" index="0" show_y_axis="true">
 							<entity name="perceived_climate_change_risk[1]"/>
 						</plot>
-						<plot color="blue" isee:keep_zero_visible="true" pen_width="1" index="1" show_y_axis="true">
-							<entity name="experiential_effect_of_climatic_events_on_risk_perception[1]"/>
-						</plot>
-						<plot color="fuchsia" isee:keep_zero_visible="true" pen_width="1" index="2" show_y_axis="true">
-							<entity name="cognitive_effect_of_climate_information_on_risk_perception[1]"/>
-						</plot>
 					</graph>
 				</stacked_container>
 				<aux label_side="left" x="663.833" y="652.166" name="sensitivity to\nclimatic events exposure"/>
@@ -2375,7 +2547,7 @@ Magalhães SdS, Miranda DK, Miranda DMd, Malloy-Diniz LF, Romano-Silva MA (2018)
 					<from>additional_time_horizon_of_reference_temperature_anomaly</from>
 					<to>time_horizon_of_reference_temperature_anomaly</to>
 				</connector>
-				<connector uid="28" angle="15.1781">
+				<connector uid="28" angle="15.1782">
 					<from>time_horizon_of_reference_temperature_anomaly</from>
 					<to>updating_reference_temperature_anomaly</to>
 				</connector>
@@ -2775,8 +2947,12 @@ Magalhães SdS, Miranda DK, Miranda DMd, Malloy-Diniz LF, Romano-Silva MA (2018)
 </doc>
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<element subscript="1">
+				<element subscript="1, World">
+					<eqn>1.22985155285855</eqn>
+				</element>
+				<element subscript="1, Brazil">
 					<eqn>1.22985155285855</eqn>
 				</element>
 				<range min="1" max="5"/>
@@ -3008,7 +3184,7 @@ Calibration Parameter: fertilizer use &amp; crop production</doc>
 				<dimensions>
 					<dim name="Run"/>
 				</dimensions>
-				<eqn>(indicated_demand_from_accessibility-Desired_Demand_from_Accessibility)/time_to_adjust_desired_demand_from_accessibility</eqn>
+				<eqn>(indicated_demand_from_accessibility-Desired_Demand_from_Accessibility)/time_to_adjust_desired_demand_from_accessibility[Run,World]</eqn>
 				<units>kcal/person/day/Year</units>
 			</flow>
 			<aux name="weight of\naccessibility">
@@ -3089,7 +3265,6 @@ Calibration Parameter: fertilizer use &amp; crop production</doc>
 			<aux name="real GDP per person 1" access="output" throughput="true" isee:autocreated="true">
 				<dimensions>
 					<dim name="Run"/>
-					<dim name="Region"/>
 				</dimensions>
 				<eqn>{Enter equation for use when not hooked up to other models}</eqn>
 				<units>bc$/Mp/year</units>
@@ -3117,7 +3292,7 @@ Calibration Parameter: fertilizer use &amp; crop production</doc>
 				<dimensions>
 					<dim name="Run"/>
 				</dimensions>
-				<eqn>real_GDP_per_person_1[Run,World]*&quot;UNIT_c$_per_billion_c$&quot;/UNIT_p_per_Mp</eqn>
+				<eqn>real_GDP_per_person_1[Run]*&quot;UNIT_c$_per_billion_c$&quot;/UNIT_p_per_Mp</eqn>
 				<units>c$/person/year</units>
 			</aux>
 			<aux name="reference GDP per person\nfor socioeconomic effect">
@@ -3276,7 +3451,7 @@ Calibration Parameter: fertilizer use &amp; crop production</doc>
 				<isee:iframe color="black" background="white" text_align="left" vertical_text_align="top" font_size="12pt" border_width="thin" border_style="solid"/>
 				<isee:financial_table color="black" background="#E0E0E0" text_align="right" font_size="12pt" hide_border="false" auto_fit="true" first_column_width="250" other_column_width="100" header_font_style="normal" header_font_weight="bold" header_text_decoration="none" header_text_align="center" header_vertical_text_align="center" header_font_color="black" header_font_family="Arial" header_font_size="14pt" header_text_padding="2" header_text_border_color="black" header_text_border_width="thin" header_text_border_style="none"/>
 			</style>
-			<view isee:show_pages="false" background="white" page_width="1122" page_height="793" isee:page_cols="3" isee:page_rows="3" isee:scroll_y="760" zoom="140" isee:popup_graphs_are_comparative="true" isee:enable_non_negative_highlights="false" type="stock_flow">
+			<view isee:show_pages="false" background="white" page_width="1122" page_height="793" isee:page_cols="3" isee:page_rows="3" zoom="60" isee:popup_graphs_are_comparative="true" isee:enable_non_negative_highlights="false" type="stock_flow">
 				<style color="black" background="white" font_style="normal" font_weight="normal" text_decoration="none" text_align="center" vertical_text_align="center" font_color="black" font_family="Arial" font_size="10pt" padding="2" border_color="black" border_width="thin" border_style="none">
 					<stock color="blue" background="white" font_color="blue" font_size="11pt" label_side="top">
 						<shape type="rectangle" width="45" height="35"/>

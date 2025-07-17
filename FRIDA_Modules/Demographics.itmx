@@ -1015,7 +1015,7 @@ Calibration Parameter: fertility</doc>
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>real_GDP_per_person[Run,Region]/INIT(real_GDP_per_person[Run,Region])</eqn>
+				<eqn>real_GDP_per_person[Run]/INIT(real_GDP_per_person[Run])</eqn>
 				<units>1</units>
 			</aux>
 			<aux name="sensitivity of fertility\nto inverse\nGDP per person">
@@ -1342,7 +1342,7 @@ initial_fertility+effect_of_GDP_on_change_in_fertility+effect_of_literacy_on_cha
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>real_GDP_per_person[Run,Region]*&quot;UNIT_c$_per_bc$&quot;[Region]/UNIT_p_per_mp[Region]</eqn>
+				<eqn>real_GDP_per_person[Run]*&quot;UNIT_c$_per_bc$&quot;[Region]/UNIT_p_per_mp[Region]</eqn>
 				<units>c$/person/year</units>
 			</aux>
 			<aux name="UNIT c$ per bc$">
@@ -1999,7 +1999,6 @@ Miladinov, G. 2020. Socioeconomic development and life expectancy relationship: 
 </doc>
 				<dimensions>
 					<dim name="Run"/>
-					<dim name="Region"/>
 				</dimensions>
 				<eqn>&quot;Real_GDP_in_2021c$&quot;[Run]/Population[Run]</eqn>
 				<units>bc$/Mp/year</units>
