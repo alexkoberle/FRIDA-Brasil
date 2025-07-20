@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xmile version="1.0" xmlns="http://docs.oasis-open.org/xmile/ns/XMILE/v1.0" xmlns:isee="http://iseesystems.com/XMILE">
 	<header>
-		<smile version="1.0" namespace="std, isee" uses_arrays="3" uses_conveyor="" uses_submodels=""/>
+		<smile version="1.0" namespace="std, isee" uses_arrays="4" uses_conveyor="" uses_submodels=""/>
 		<name>FRIDA</name>
 		<uuid>fe807591-4e3d-4e2c-b464-70ec4fb12094</uuid>
 		<vendor>isee systems, inc.</vendor>
@@ -129,29 +129,9 @@
 			<isee:payoff name="Literacy Payoff" action="min"/>
 		</isee:optimizer_specs>
 		<isee:optimizer_specs name="Behavioral Change Calibration" method="Powell" use_additional_starts_file="false" additional_starts="0" report_interval="1" confidence_range="0" maxiter="0">
-			<isee:parameter name="Animal_Products_Demand.time_to_adjust_consumption_pattern[1]" scaling="10"/>
-			<isee:parameter name="Animal_Products_Demand.average_daily_demand_per_capita_in_1980[1]"/>
-			<isee:parameter name="Total_Food_Demand.sensitivity_of_demand_to_scarcity[1]" scaling="10"/>
-			<isee:parameter name="Total_Food_Demand.sensitivity_of_personal_norm_to_climate_risk[1]" scaling="10"/>
-			<isee:parameter name="Total_Food_Demand.sensitivity_of_personal_norm_to_consumption_risk[1]" scaling="10"/>
-			<isee:parameter name="Total_Food_Demand.sensitivity_of_personal_norm_to_social_value[1]" scaling="10"/>
-			<isee:parameter name="Total_Food_Demand.time_horizon_for_long_term_perception[1]"/>
-			<isee:parameter name="Total_Food_Demand.time_horizon_for_short_term_perception[1]"/>
-			<isee:parameter name="Total_Food_Demand.time_to_adjust_consumption_pattern[1]"/>
-			<isee:parameter name="Total_Food_Demand.time_to_adjust_value_perception[1]"/>
-			<isee:parameter name="Total_Food_Demand.time_to_observe_consequences[1]"/>
-			<isee:parameter name="Total_Food_Demand.time_to_perceive_average_consumption[1]"/>
-			<isee:parameter name="Total_Food_Demand.average_daily_demand_per_capita_in_1980[1]" scaling="0.1"/>
-			<isee:parameter name="Total_Food_Demand.elasticity_of_demand_to_GDP[1]" scaling="10"/>
-			<isee:parameter name="Total_Food_Demand.sensitivity_of_social_value_perception[1]" scaling="10"/>
-			<isee:parameter name="Total_Food_Demand.growth_rate_of_socioeconomic_effect[1]"/>
 			<isee:payoff name="Behavioral Change Payoff" action="min"/>
 		</isee:optimizer_specs>
 		<isee:optimizer_specs name="Energy Demand" method="Powell" use_additional_starts_file="false" additional_starts="0" report_interval="1" confidence_range="0" init_step="0.001">
-			<isee:parameter name="energy_demand.effect_of_GDP_on_per_person_use_of_energy_alpha[1]" scaling="100"/>
-			<isee:parameter name="energy_demand.normal_per_person_use_of_energy[1]" scaling="10"/>
-			<isee:parameter name="energy_demand.effect_of_GDP_on_per_person_use_of_energy_beta[1]" scaling="100"/>
-			<isee:parameter name="energy_demand.sensitivity_of_effect_of_energy_prices_on_demand[1]" scaling="1000"/>
 			<isee:payoff name="Energy Demand" action="min"/>
 		</isee:optimizer_specs>
 		<isee:optimizer_specs name="Carbon Balance Calibration" method="Powell" use_additional_starts_file="false" additional_starts="0" report_interval="1" confidence_range="0" maxiter="0">
@@ -281,129 +261,37 @@
 			<isee:payoff name="Real GDP" action="min"/>
 		</isee:optimizer_specs>
 		<isee:optimizer_specs name="Energy Calibration" method="Powell" use_additional_starts_file="false" additional_starts="0" report_interval="1" confidence_range="0" tolerance="0.000001" maxiter="0">
-			<isee:parameter name="bio_fuel_energy.stepping_on_toes_parameter[1]" scaling="100"/>
-			<isee:parameter name="bio_fuel_energy.Learning_Rate[1]" scaling="100"/>
-			<isee:parameter name="bio_fuel_energy.Floor_Costs[1]" scaling="1e-7"/>
-			<isee:parameter name="bio_fuel_energy.Initial_Installation_Costs[1]" scaling="0.00001"/>
 			<isee:parameter name="bio_fuel_energy.bio_fuel_primary_energy_content[1]" scaling="1000000"/>
-			<isee:parameter name="wind_energy.Renewable_Energy_Floor_Costs[1]" scaling="0.01"/>
-			<isee:parameter name="wind_energy.Wind_Energy_Full_Load_Hours[1]" scaling="0.01"/>
-			<isee:parameter name="wind_energy.sensitivity_of_renewable_floor_costs_to_grid_storage_needs_non_linear_part[1]" scaling="10"/>
-			<isee:parameter name="wind_energy.sensitivity_of_renewable_floor_costs_to_grid_storage_needs[1]" scaling="10"/>
-			<isee:parameter name="solar_energy.Renewable_Energy_Floor_Costs[1]" scaling="0.01"/>
-			<isee:parameter name="solar_energy.Solar_Energy_Full_Load_Hours[1]" scaling="0.01"/>
-			<isee:parameter name="solar_energy.sensitivity_of_renewable_floor_costs_to_grid_storage_needs_non_linear_part[1]" scaling="10"/>
-			<isee:parameter name="solar_energy.sensitivity_of_renewable_floor_costs_to_grid_storage_needs[1]" scaling="10"/>
-			<isee:parameter name="hydropower_energy.Base_Hydropower_Installation_Costs[1]"/>
-			<isee:parameter name="hydropower_energy.Slope_of_Hydropower_Installation_Costs_wrt_Capacity[1]" scaling="10000000"/>
 			<isee:parameter name="fossil_energy_coal.initial_fossil_extraction_knowledge[1]"/>
-			<isee:parameter name="fossil_energy_coal.productivity_per_extractionknowledge[1]" scaling="100000"/>
 			<isee:parameter name="fossil_energy_oil.initial_fossil_extraction_knowledge[1]"/>
-			<isee:parameter name="fossil_energy_oil.productivity_per_extractionknowledge[1]" scaling="100000"/>
 			<isee:parameter name="fossil_energy_gas.initial_fossil_extraction_knowledge[1]"/>
-			<isee:parameter name="fossil_energy_gas.productivity_per_extractionknowledge[1]" scaling="100000"/>
 			<isee:parameter name="fossil_energy_coal.carbon_intensity_in_btu[1]" scaling="1000"/>
 			<isee:parameter name="fossil_energy_oil.carbon_intensity_in_btu[1]" scaling="1000"/>
 			<isee:parameter name="fossil_energy_gas.carbon_intensity_in_btu[1]" scaling="1000"/>
 			<isee:parameter name="fossil_energy_coal.initial_fossil_energy_capital[1]" scaling="1e-10"/>
-			<isee:parameter name="fossil_energy_coal.initial_fossil_fuel_extraction_capital[1]" scaling="1e-10"/>
-			<isee:parameter name="fossil_energy_gas.initial_fossil_energy_capital[1]" scaling="1e-10"/>
-			<isee:parameter name="fossil_energy_gas.initial_fossil_fuel_extraction_capital[1]" scaling="1e-10"/>
-			<isee:parameter name="fossil_energy_oil.initial_fossil_energy_capital[1]" scaling="1e-10"/>
-			<isee:parameter name="fossil_energy_oil.initial_fossil_fuel_extraction_capital[1]" scaling="1e-10"/>
-			<isee:parameter name="energy_demand.effect_of_GDP_on_per_person_use_of_energy_alpha[1]" scaling="100"/>
-			<isee:parameter name="energy_demand.normal_per_person_use_of_energy[1]" scaling="10"/>
-			<isee:parameter name="energy_demand.effect_of_GDP_on_per_person_use_of_energy_beta[1]" scaling="100"/>
-			<isee:parameter name="energy_demand.sensitivity_of_effect_of_energy_prices_on_demand[1]" scaling="1000"/>
-			<isee:parameter name="energy_investments.historical_cost_adjustment[1, *, *]" scaling="1000"/>
-			<isee:parameter name="fossil_energy_gas.sensitivity_of_effect_of_capital_to_fuel_ratio_on_stranded_capital[1]" scaling="10"/>
-			<isee:parameter name="fossil_energy_gas.reference_formation_time[1]"/>
-			<isee:parameter name="fossil_energy_oil.reference_formation_time[1]"/>
-			<isee:parameter name="fossil_energy_oil.sensitivity_of_effect_of_capital_to_fuel_ratio_on_stranded_capital[1]" scaling="10"/>
-			<isee:parameter name="fossil_energy_coal.reference_formation_time[1]"/>
-			<isee:parameter name="fossil_energy_coal.sensitivity_of_effect_of_capital_to_fuel_ratio_on_stranded_capital[1]" scaling="10"/>
-			<isee:parameter name="energy_investments.sensitivity_of_effect_of_perceived_marginal_energy_supply_cost_on_investment[1]" scaling="100"/>
 			<isee:parameter name="fossil_energy_oil.Slope_of_cost_curve[1]" scaling="1e-9"/>
 			<isee:parameter name="fossil_energy_gas.Slope_of_cost_curve[1]" scaling="1e-9"/>
 			<isee:parameter name="fossil_energy_coal.Slope_of_cost_curve[1]" scaling="1e-9"/>
 			<isee:parameter name="fossil_energy_gas.Initial_extraction_costs[1]" scaling="1e-9"/>
 			<isee:parameter name="fossil_energy_oil.Initial_extraction_costs[1]" scaling="1e-9"/>
 			<isee:parameter name="fossil_energy_coal.Initial_extraction_costs[1]" scaling="1e-9"/>
-			<isee:parameter name="energy_investments.sensitivity_of_cost_adjustment_to_relative_stranded_capital[1]"/>
-			<isee:parameter name="fossil_energy_coal.Fossil_Energy_Capital_Scaling_Parameter[1]" scaling="100"/>
-			<isee:parameter name="fossil_energy_gas.Fossil_Energy_Capital_Scaling_Parameter[1]" scaling="100"/>
-			<isee:parameter name="fossil_energy_oil.Fossil_Energy_Capital_Scaling_Parameter[1]" scaling="100"/>
-			<isee:parameter name="solar_energy.Initial_Solar_Energy_Installation_Costs[1]" scaling="0.01"/>
-			<isee:parameter name="wind_energy.Initial_Wind_Energy_Installation_Costs[1]" scaling="0.01"/>
-			<isee:parameter name="fossil_energy_oil.TFP_Ramp_Speed[1]" scaling="100"/>
-			<isee:parameter name="fossil_energy_oil.TFP_Max_Ramp_Year[1]"/>
-			<isee:parameter name="fossil_energy_gas.TFP_Ramp_Speed[1]" scaling="100"/>
-			<isee:parameter name="fossil_energy_gas.TFP_Max_Ramp_Year[1]"/>
-			<isee:parameter name="fossil_energy_coal.TFP_Ramp_Speed[1]" scaling="100"/>
-			<isee:parameter name="fossil_energy_coal.TFP_Max_Ramp_Year[1]"/>
 			<isee:payoff name="Energy Payoff" action="min"/>
 		</isee:optimizer_specs>
 		<isee:optimizer_specs name="Econ &amp; Energy Calibration" method="Powell" use_additional_starts_file="false" additional_starts="0" report_interval="1" confidence_range="0" maxiter="0">
-			<isee:parameter name="bio_fuel_energy.stepping_on_toes_parameter[1]" scaling="100"/>
-			<isee:parameter name="bio_fuel_energy.Learning_Rate[1]" scaling="100"/>
-			<isee:parameter name="bio_fuel_energy.Floor_Costs[1]" scaling="1e-7"/>
-			<isee:parameter name="bio_fuel_energy.Initial_Installation_Costs[1]" scaling="0.00001"/>
 			<isee:parameter name="bio_fuel_energy.bio_fuel_primary_energy_content[1]" scaling="1000000"/>
-			<isee:parameter name="wind_energy.Renewable_Energy_Floor_Costs[1]" scaling="0.01"/>
-			<isee:parameter name="wind_energy.Wind_Energy_Full_Load_Hours[1]" scaling="0.01"/>
-			<isee:parameter name="wind_energy.sensitivity_of_renewable_floor_costs_to_grid_storage_needs_non_linear_part[1]" scaling="10"/>
-			<isee:parameter name="wind_energy.sensitivity_of_renewable_floor_costs_to_grid_storage_needs[1]" scaling="10"/>
-			<isee:parameter name="solar_energy.Renewable_Energy_Floor_Costs[1]" scaling="0.01"/>
-			<isee:parameter name="solar_energy.Solar_Energy_Full_Load_Hours[1]" scaling="0.01"/>
-			<isee:parameter name="solar_energy.sensitivity_of_renewable_floor_costs_to_grid_storage_needs_non_linear_part[1]" scaling="10"/>
-			<isee:parameter name="solar_energy.sensitivity_of_renewable_floor_costs_to_grid_storage_needs[1]" scaling="10"/>
-			<isee:parameter name="hydropower_energy.Base_Hydropower_Installation_Costs[1]"/>
-			<isee:parameter name="hydropower_energy.Slope_of_Hydropower_Installation_Costs_wrt_Capacity[1]" scaling="10000000"/>
 			<isee:parameter name="fossil_energy_coal.initial_fossil_extraction_knowledge[1]"/>
-			<isee:parameter name="fossil_energy_coal.productivity_per_extractionknowledge[1]" scaling="100000"/>
 			<isee:parameter name="fossil_energy_oil.initial_fossil_extraction_knowledge[1]"/>
-			<isee:parameter name="fossil_energy_oil.productivity_per_extractionknowledge[1]" scaling="100000"/>
 			<isee:parameter name="fossil_energy_gas.initial_fossil_extraction_knowledge[1]"/>
-			<isee:parameter name="fossil_energy_gas.productivity_per_extractionknowledge[1]" scaling="100000"/>
 			<isee:parameter name="fossil_energy_coal.carbon_intensity_in_btu[1]" scaling="1000"/>
 			<isee:parameter name="fossil_energy_oil.carbon_intensity_in_btu[1]" scaling="1000"/>
 			<isee:parameter name="fossil_energy_gas.carbon_intensity_in_btu[1]" scaling="1000"/>
 			<isee:parameter name="fossil_energy_coal.initial_fossil_energy_capital[1]" scaling="1e-10"/>
-			<isee:parameter name="fossil_energy_coal.initial_fossil_fuel_extraction_capital[1]" scaling="1e-10"/>
-			<isee:parameter name="fossil_energy_gas.initial_fossil_energy_capital[1]" scaling="1e-10"/>
-			<isee:parameter name="fossil_energy_gas.initial_fossil_fuel_extraction_capital[1]" scaling="1e-10"/>
-			<isee:parameter name="fossil_energy_oil.initial_fossil_energy_capital[1]" scaling="1e-10"/>
-			<isee:parameter name="fossil_energy_oil.initial_fossil_fuel_extraction_capital[1]" scaling="1e-10"/>
-			<isee:parameter name="energy_demand.effect_of_GDP_on_per_person_use_of_energy_alpha[1]" scaling="100"/>
-			<isee:parameter name="energy_demand.normal_per_person_use_of_energy[1]" scaling="10"/>
-			<isee:parameter name="energy_demand.effect_of_GDP_on_per_person_use_of_energy_beta[1]" scaling="100"/>
-			<isee:parameter name="energy_demand.sensitivity_of_effect_of_energy_prices_on_demand[1]" scaling="1000"/>
-			<isee:parameter name="energy_investments.historical_cost_adjustment[1, *, *]" scaling="1000"/>
-			<isee:parameter name="fossil_energy_gas.sensitivity_of_effect_of_capital_to_fuel_ratio_on_stranded_capital[1]" scaling="10"/>
-			<isee:parameter name="fossil_energy_gas.reference_formation_time[1]"/>
-			<isee:parameter name="fossil_energy_oil.reference_formation_time[1]"/>
-			<isee:parameter name="fossil_energy_oil.sensitivity_of_effect_of_capital_to_fuel_ratio_on_stranded_capital[1]" scaling="10"/>
-			<isee:parameter name="fossil_energy_coal.reference_formation_time[1]"/>
-			<isee:parameter name="fossil_energy_coal.sensitivity_of_effect_of_capital_to_fuel_ratio_on_stranded_capital[1]" scaling="10"/>
-			<isee:parameter name="energy_investments.sensitivity_of_effect_of_perceived_marginal_energy_supply_cost_on_investment[1]" scaling="100"/>
 			<isee:parameter name="fossil_energy_oil.Slope_of_cost_curve[1]" scaling="1e-9"/>
 			<isee:parameter name="fossil_energy_gas.Slope_of_cost_curve[1]" scaling="1e-9"/>
 			<isee:parameter name="fossil_energy_coal.Slope_of_cost_curve[1]" scaling="1e-9"/>
 			<isee:parameter name="fossil_energy_gas.Initial_extraction_costs[1]" scaling="1e-9"/>
 			<isee:parameter name="fossil_energy_oil.Initial_extraction_costs[1]" scaling="1e-9"/>
 			<isee:parameter name="fossil_energy_coal.Initial_extraction_costs[1]" scaling="1e-9"/>
-			<isee:parameter name="energy_investments.sensitivity_of_cost_adjustment_to_relative_stranded_capital[1]"/>
-			<isee:parameter name="fossil_energy_coal.Fossil_Energy_Capital_Scaling_Parameter[1]" scaling="100"/>
-			<isee:parameter name="fossil_energy_gas.Fossil_Energy_Capital_Scaling_Parameter[1]" scaling="100"/>
-			<isee:parameter name="fossil_energy_oil.Fossil_Energy_Capital_Scaling_Parameter[1]" scaling="100"/>
-			<isee:parameter name="solar_energy.Initial_Solar_Energy_Installation_Costs[1]" scaling="0.01"/>
-			<isee:parameter name="wind_energy.Initial_Wind_Energy_Installation_Costs[1]" scaling="0.01"/>
-			<isee:parameter name="fossil_energy_oil.TFP_Ramp_Speed[1]" scaling="100"/>
-			<isee:parameter name="fossil_energy_oil.TFP_Max_Ramp_Year[1]"/>
-			<isee:parameter name="fossil_energy_gas.TFP_Ramp_Speed[1]" scaling="100"/>
-			<isee:parameter name="fossil_energy_gas.TFP_Max_Ramp_Year[1]"/>
-			<isee:parameter name="fossil_energy_coal.TFP_Ramp_Speed[1]" scaling="100"/>
-			<isee:parameter name="fossil_energy_coal.TFP_Max_Ramp_Year[1]"/>
 			<isee:payoff name="Econ &amp; Energy Payoff" action="min"/>
 		</isee:optimizer_specs>
 		<isee:optimizer_specs name="SDG10.1.1" method="Powell" use_additional_starts_file="false" additional_starts="0" report_interval="1" confidence_range="0">
@@ -678,25 +566,10 @@
 			<isee:payoff_element name="energy_supply.Total_Energy_Output[1]" weight="4.66471699236615e-7">
 				<isee:time_range type="terminal_value"/>
 			</isee:payoff_element>
-			<isee:payoff_element name="renewable_energy.Total_Renewable_Energy_Capacity[1]" weight="0.000486405329147047">
-				<isee:time_range type="terminal_value"/>
-			</isee:payoff_element>
 			<isee:payoff_element name="solar_energy.Solar_Energy_Capacity[1]" weight="0.000107571664019812">
 				<isee:time_range type="terminal_value"/>
 			</isee:payoff_element>
 			<isee:payoff_element name="wind_energy.Wind_Energy_Capacity[1]" weight="0.000106511721135456">
-				<isee:time_range type="terminal_value"/>
-			</isee:payoff_element>
-			<isee:payoff_element name="hydropower_energy.Hydropower_Energy_Capacity[1]" weight="0.00113200224573693">
-				<isee:time_range type="terminal_value"/>
-			</isee:payoff_element>
-			<isee:payoff_element name="bio_fuel_energy.bio_fuel_production[1]" weight="0.0189064308561727">
-				<isee:time_range type="terminal_value"/>
-			</isee:payoff_element>
-			<isee:payoff_element name="nuclear_energy.Nuclear_Energy_Capacity[1]" weight="0.0183272228340283">
-				<isee:time_range type="terminal_value"/>
-			</isee:payoff_element>
-			<isee:payoff_element name="nuclear_energy.Nuclear_Installation_Costs[1]" weight="0.00000811106276902032">
 				<isee:time_range type="terminal_value"/>
 			</isee:payoff_element>
 			<isee:payoff_element name="fossil_energy.Primary_Fossil_Energy_FUEL[1]" weight="6350.38890221125">
@@ -751,15 +624,6 @@
 				<isee:time_range type="terminal_value"/>
 			</isee:payoff_element>
 			<isee:payoff_element name="energy_investments.Gross_Investments_in_Biofuel_Capacity[1]" weight="8.76012136738472e-21">
-				<isee:time_range type="terminal_value"/>
-			</isee:payoff_element>
-			<isee:payoff_element name="wind_energy.Installation_Cost_of_Wind_capacity[1]" weight="0.00000942306446582998">
-				<isee:time_range type="terminal_value"/>
-			</isee:payoff_element>
-			<isee:payoff_element name="solar_energy.Installation_Cost_of_Solar_capacity[1]" weight="0.00000752955498819715">
-				<isee:time_range type="terminal_value"/>
-			</isee:payoff_element>
-			<isee:payoff_element name="hydropower_energy.Hydropower_Installation_Costs[1]" weight="0.0000211462388404552">
 				<isee:time_range type="terminal_value"/>
 			</isee:payoff_element>
 			<isee:payoff_element name="energy_investments.share_of_GDP_invested_in_fuel_extraction[1]" weight="148296.822326275">
@@ -848,25 +712,10 @@
 			<isee:payoff_element name="energy_supply.Total_Energy_Output[1]" weight="2.46996e-7">
 				<isee:time_range type="terminal_value"/>
 			</isee:payoff_element>
-			<isee:payoff_element name="renewable_energy.Total_Renewable_Energy_Capacity[1]" weight="0.0000244669">
-				<isee:time_range type="terminal_value"/>
-			</isee:payoff_element>
 			<isee:payoff_element name="solar_energy.Solar_Energy_Capacity[1]" weight="0.0000134435">
 				<isee:time_range type="terminal_value"/>
 			</isee:payoff_element>
 			<isee:payoff_element name="wind_energy.Wind_Energy_Capacity[1]" weight="0.000123616">
-				<isee:time_range type="terminal_value"/>
-			</isee:payoff_element>
-			<isee:payoff_element name="hydropower_energy.Hydropower_Energy_Capacity[1]" weight="0.00141366">
-				<isee:time_range type="terminal_value"/>
-			</isee:payoff_element>
-			<isee:payoff_element name="bio_fuel_energy.bio_fuel_production[1]" weight="0.0013545">
-				<isee:time_range type="terminal_value"/>
-			</isee:payoff_element>
-			<isee:payoff_element name="nuclear_energy.Nuclear_Energy_Capacity[1]" weight="0.00363301">
-				<isee:time_range type="terminal_value"/>
-			</isee:payoff_element>
-			<isee:payoff_element name="nuclear_energy.Nuclear_Installation_Costs[1]" weight="0.00000830275">
 				<isee:time_range type="terminal_value"/>
 			</isee:payoff_element>
 			<isee:payoff_element name="fossil_energy.Primary_Fossil_Energy_FUEL[1]" weight="3932.1">
@@ -921,15 +770,6 @@
 				<isee:time_range type="terminal_value"/>
 			</isee:payoff_element>
 			<isee:payoff_element name="energy_investments.Gross_Investments_in_Biofuel_Capacity[1]" weight="4.82588e-21">
-				<isee:time_range type="terminal_value"/>
-			</isee:payoff_element>
-			<isee:payoff_element name="wind_energy.Installation_Cost_of_Wind_capacity[1]" weight="0.000013075">
-				<isee:time_range type="terminal_value"/>
-			</isee:payoff_element>
-			<isee:payoff_element name="solar_energy.Installation_Cost_of_Solar_capacity[1]" weight="0.00000241062">
-				<isee:time_range type="terminal_value"/>
-			</isee:payoff_element>
-			<isee:payoff_element name="hydropower_energy.Hydropower_Installation_Costs[1]" weight="0.0000217454">
 				<isee:time_range type="terminal_value"/>
 			</isee:payoff_element>
 			<isee:payoff_element name="energy_investments.share_of_GDP_invested_in_fuel_extraction[1]" weight="127585">
@@ -3407,7 +3247,6 @@ This is what determines when the model stops calculating</doc>
 					</graph>
 					<graph width="570" height="470" comparative="true" type="time_series" show_grid="true" isee:tick_type="none" include_units_in_legend="false" plot_numbers="false" isee:label_pie_slices="false" isee:show_pie_borders="true" num_x_grid_lines="13" num_y_grid_lines="7" num_x_labels="13" num_y_labels="7" title="Heating Degree Days Per Person Per Year" isee:fill_intensity="0.1" to="2100" isee:allow_zero_axis="true" left_axis_multi_scale="false" left_axis_auto_scale="true" left_include_units="true" right_axis_multi_scale="false" right_axis_auto_scale="true" right_include_units="true">
 						<plot color="blue" isee:keep_zero_visible="true" pen_width="1" index="0" show_y_axis="true">
-							<entity name="energy_demand.HDD[1]"/>
 							<scale max="1500"/>
 						</plot>
 					</graph>
