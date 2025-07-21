@@ -175,13 +175,8 @@
 			<isee:payoff name="Concrete Payoff" action="min"/>
 		</isee:optimizer_specs>
 		<isee:optimizer_specs name="Land Use and Agriculture Calibration" method="Powell" use_additional_starts_file="false" additional_starts="0" report_interval="1" confidence_range="0" maxiter="0">
-			<isee:parameter name="Animal_Products.elasticity_of_aquatic_animal_product_share_to_GDP_per_person[1]" scaling="100"/>
-			<isee:parameter name="Animal_Products.aquatic_animal_product_share_1980[1]" scaling="10000"/>
 			<isee:parameter name="Animal_Products.average_animal_product_growth_efficiency[1]" scaling="10"/>
 			<isee:parameter name="Animal_Products.Animal_Products_Yield_in_1980[1]" scaling="100"/>
-			<isee:parameter name="Land_Nutrients.elasticity_of_effect_of_animal_products_on_manure_fertilizer_use[1]" scaling="100"/>
-			<isee:parameter name="Land_Nutrients.sensitivity_demand_to_relative_use[1]" scaling="100"/>
-			<isee:parameter name="Land_Nutrients.sensitivity_of_fertilizer_use_to_crop_balance_with_reserves[1]" scaling="100"/>
 			<isee:parameter name="Sea_Level.initial_sea_level_anomaly_from_LWS[1]" scaling="100"/>
 			<isee:parameter name="Sea_Level.Water_catchment_per_GW_of_hydropower[1]" scaling="0.000001"/>
 			<isee:parameter name="Land_Use.time_to_close_grassland_gap[1]" scaling="100"/>
@@ -202,26 +197,14 @@
 			<isee:parameter name="Crop.soil_carbon_crop_yield_parameter[1]" scaling="100"/>
 			<isee:parameter name="Crop.irrigation_crop_yield_parameter[1]"/>
 			<isee:parameter name="Crop.fertilizer_use_crop_yield_parameter[1]" scaling="100"/>
-			<isee:parameter name="Food_Demand.crops_used_for_seed_or_lost_per_person_1980[1]" scaling="100"/>
-			<isee:parameter name="Food_Demand.elasticity_of_crops_used_for_seed_or_lost_to_GDP_per_person[1]" scaling="100"/>
-			<isee:parameter name="Food_Demand.elasticity_of_crops_used_for_non_energy_other_to_GDP_per_person[1]" scaling="100"/>
-			<isee:parameter name="Food_Demand.crops_used_for_non_energy_other_per_person[1]" scaling="100"/>
 			<isee:parameter name="Crop.initial_crop_yield[1]" scaling="100"/>
-			<isee:parameter name="Animal_Products.normal_rate_of_change_in_grazing_land_yield[1]" scaling="100"/>
-			<isee:parameter name="Animal_Products.sensitivity_of_rate_of_change_in_animal_products_balance_to_growth_rate_in_yield[1]"/>
-			<isee:parameter name="Food_Demand.time_to_change_demand_for_feed[1]"/>
 			<isee:parameter name="Land_Use.sensitivity_of_crop_land_use_time_to_cropland_size[1]"/>
 			<isee:parameter name="Food_Demand.initial_crop_demand_for_feed_offset[1]" scaling="100"/>
-			<isee:parameter name="Animal_Products.desired_animal_products_reserve_capacity[1]" scaling="100"/>
 			<isee:parameter name="Crop.harvest_index_for_feed_crops[1]" scaling="100"/>
 			<isee:parameter name="Crop.harvest_index_for_energy_crops[1]" scaling="100"/>
 			<isee:parameter name="Crop.normal_harvest_index_for_food_crops[1]" scaling="1000"/>
-			<isee:parameter name="Land_Nutrients.maximum_desired_growth_in_fertilizer_use[1]" scaling="100"/>
-			<isee:parameter name="Animal_Products.averaging_time[1]" scaling="10"/>
 			<isee:parameter name="Crop.tolerance_of_the_cap_on_harvest_index_and_residue_on_field_fraction[1]" scaling="1000"/>
-			<isee:parameter name="Land_Nutrients.time_to_change_fertilizer_use[1]" scaling="100"/>
 			<isee:parameter name="Land_Use.sensitivity_of_cutting_time_to_forest_size[1]" scaling="100"/>
-			<isee:parameter name="Food_Demand.time_to_change_crop_demand_components[1]"/>
 			<isee:payoff name="Land Use and Agriculture Payoff" action="min"/>
 		</isee:optimizer_specs>
 		<isee:optimizer_specs name="Economy Calibration" method="Powell" use_additional_starts_file="false" additional_starts="0" report_interval="1" confidence_range="0" tolerance="0.000001" maxiter="0">
@@ -283,9 +266,6 @@
 			<isee:payoff_element name="Land_Use.Cropland[1]" weight="0.00582107396354167">
 				<isee:time_range type="terminal_value"/>
 			</isee:payoff_element>
-			<isee:payoff_element name="Animal_Products.animal_products_production[1]" weight="0.00468550787252373">
-				<isee:time_range type="terminal_value"/>
-			</isee:payoff_element>
 			<isee:payoff_element name="Freshwater.fraction_of_water_withdrawal_for_agriculture[1]" weight="67135781.402348">
 				<isee:time_range type="terminal_value"/>
 			</isee:payoff_element>
@@ -295,22 +275,10 @@
 			<isee:payoff_element name="Land_Nutrients.manure_fertilizer_use[1]" weight="1.6584043811679">
 				<isee:time_range type="terminal_value"/>
 			</isee:payoff_element>
-			<isee:payoff_element name="Land_Nutrients.fertilizer_use[1]" weight="0.0644566806895358">
-				<isee:time_range type="terminal_value"/>
-			</isee:payoff_element>
-			<isee:payoff_element name="Animal_Products.aquatic_animal_product_share[1]" weight="322599.851848386">
-				<isee:time_range type="terminal_value"/>
-			</isee:payoff_element>
 			<isee:payoff_element name="Sea_Level.Sea_level_anomaly_from_LWS[1]" weight="410962.47191187">
 				<isee:time_range type="terminal_value"/>
 			</isee:payoff_element>
 			<isee:payoff_element name="Sea_Level.Land_water_storage_from_water_impoundment[1]" weight="8.52684424347111e-24">
-				<isee:time_range type="terminal_value"/>
-			</isee:payoff_element>
-			<isee:payoff_element name="Food_Demand.Crops_used_for_Seed_or_Lost[1]" weight="0.000159707174140562">
-				<isee:time_range type="terminal_value"/>
-			</isee:payoff_element>
-			<isee:payoff_element name="Food_Demand.crop_demand_for_food[1]" weight="0.000282547501744053">
 				<isee:time_range type="terminal_value"/>
 			</isee:payoff_element>
 			<isee:payoff_element name="Food_Demand.feed_production[1]" weight="0.000232087884459429">
@@ -396,16 +364,7 @@
 		</isee:payoff_specs>
 		<isee:payoff_specs name="Literacy Payoff" calibration="true" recompute_weights="true" compare_tolerance="0" compare_type="ls" compare_run="Calibration Data"/>
 		<isee:payoff_specs name="Behavioral Change Payoff" calibration="true" recompute_weights="true" compare_tolerance="0" compare_type="ls" compare_run="Calibration Data">
-			<isee:payoff_element name="Animal_Products.animal_products_production[1]" weight="0.00126970575543099">
-				<isee:time_range type="terminal_value"/>
-			</isee:payoff_element>
 			<isee:payoff_element name="Crop.crop_production[1]" weight="0.00000798751726359918">
-				<isee:time_range type="terminal_value"/>
-			</isee:payoff_element>
-			<isee:payoff_element name="Food_Demand.vegetal_product_demand_per_person_per_day[1]" weight="0.00100616787513765">
-				<isee:time_range type="terminal_value"/>
-			</isee:payoff_element>
-			<isee:payoff_element name="Food_Demand.crop_demand_for_food[1]" weight="0.000217681012706321">
 				<isee:time_range type="terminal_value"/>
 			</isee:payoff_element>
 			<isee:payoff_element name="Food_Demand.animal_products_demand[1]" weight="0.00155771433583948">
@@ -2937,9 +2896,6 @@ This is what determines when the model stops calculating</doc>
 				</stacked_container>
 				<stacked_container uid="87" x="598.5" y="2280.5" width="568" height="300">
 					<graph font_size="24pt" legend_position="none" isee:hide_border="true" axis_title_font_size="18pt" axis_label_font_size="14pt" width="568" height="300" comparative="true" type="box" show_grid="true" isee:tick_type="none" include_units_in_legend="false" plot_numbers="false" isee:label_pie_slices="false" isee:show_pie_borders="true" num_x_grid_lines="9" num_y_grid_lines="5" num_x_labels="5" num_y_labels="5" title="h) Animal Products Production (PCal/Year)" isee:fill_intensity="0.1" isee:allow_zero_axis="true" left_axis_multi_scale="false" left_axis_auto_scale="true" left_include_units="true" right_axis_multi_scale="false" right_axis_auto_scale="true" right_include_units="true">
-						<plot color="blue" isee:keep_zero_visible="true" pen_width="1" index="0" show_y_axis="true">
-							<entity name="Animal_Products.animal_products_production[*]"/>
-						</plot>
 						<isee:time_points>
 							<isee:time_point>2030</isee:time_point>
 							<isee:time_point>2040</isee:time_point>
@@ -2987,11 +2943,7 @@ This is what determines when the model stops calculating</doc>
 					<graph font_size="24pt" legend_position="none" isee:hide_border="true" axis_title_font_size="18pt" axis_label_font_size="14pt" width="568" height="300" comparative="true" type="time_series" isee:points_only="true" show_grid="true" isee:tick_type="none" include_units_in_legend="false" plot_numbers="false" isee:label_pie_slices="false" isee:show_pie_borders="true" num_x_grid_lines="9" num_y_grid_lines="5" num_x_labels="5" num_y_labels="5" title="d) Population (Million People)" isee:fill_intensity="0.1" to="2020" isee:allow_zero_axis="true" left_axis_multi_scale="false" left_axis_auto_scale="true" left_include_units="true" right_axis_multi_scale="false" right_axis_auto_scale="true" right_include_units="true"/>
 				</stacked_container>
 				<stacked_container uid="93" x="611.917" y="3199.5" width="568" height="300">
-					<graph font_size="24pt" legend_position="none" isee:hide_border="true" axis_title_font_size="18pt" axis_label_font_size="14pt" width="568" height="300" comparative="true" type="time_series" show_grid="true" isee:tick_type="none" include_units_in_legend="false" plot_numbers="false" isee:label_pie_slices="false" isee:show_pie_borders="true" num_x_grid_lines="9" num_y_grid_lines="5" num_x_labels="5" num_y_labels="5" title="e) Animal Products Production (PCal/Year)" isee:fill_intensity="0.1" to="2020" isee:allow_zero_axis="true" left_axis_multi_scale="false" left_axis_auto_scale="true" left_include_units="true" right_axis_multi_scale="false" right_axis_auto_scale="true" right_include_units="true">
-						<plot color="blue" isee:keep_zero_visible="true" pen_width="1" index="0" show_y_axis="true">
-							<entity name="Animal_Products.animal_products_production[1]"/>
-						</plot>
-					</graph>
+					<graph font_size="24pt" legend_position="none" isee:hide_border="true" axis_title_font_size="18pt" axis_label_font_size="14pt" width="568" height="300" comparative="true" type="time_series" isee:points_only="true" show_grid="true" isee:tick_type="none" include_units_in_legend="false" plot_numbers="false" isee:label_pie_slices="false" isee:show_pie_borders="true" num_x_grid_lines="9" num_y_grid_lines="5" num_x_labels="5" num_y_labels="5" title="e) Animal Products Production (PCal/Year)" isee:fill_intensity="0.1" to="2020" isee:allow_zero_axis="true" left_axis_multi_scale="false" left_axis_auto_scale="true" left_include_units="true" right_axis_multi_scale="false" right_axis_auto_scale="true" right_include_units="true"/>
 				</stacked_container>
 				<stacked_container uid="94" x="1182.92" y="3199.5" width="568" height="300">
 					<graph font_size="24pt" legend_position="none" isee:hide_border="true" axis_title_font_size="18pt" axis_label_font_size="14pt" width="568" height="300" comparative="true" type="time_series" show_grid="true" isee:tick_type="none" include_units_in_legend="false" plot_numbers="false" isee:label_pie_slices="false" isee:show_pie_borders="true" num_x_grid_lines="9" num_y_grid_lines="5" num_x_labels="5" num_y_labels="5" title="f) Crop Production (PCal/Year)" isee:fill_intensity="0.1" to="2020" isee:allow_zero_axis="true" left_axis_multi_scale="false" left_axis_auto_scale="true" left_include_units="true" right_axis_multi_scale="false" right_axis_auto_scale="true" right_include_units="true">
@@ -3182,9 +3134,6 @@ This is what determines when the model stops calculating</doc>
 							<entity name="energy_supply.Total_Energy_Output[1]"/>
 						</item>
 						<item>
-							<entity name="Animal_Products.animal_products_production[1]"/>
-						</item>
-						<item>
 							<entity name="Crop.crop_production[1]"/>
 						</item>
 					</table>
@@ -3293,44 +3242,19 @@ This is what determines when the model stops calculating</doc>
 							<entity name="degraded_land_soil_carbon.degraded_land_litter[1]"/>
 						</plot>
 					</graph>
-					<graph width="570" height="470" type="area" isee:sum_stacked_legend="true" isee:stacked_show_hover_values="true" show_grid="true" isee:tick_type="none" include_units_in_legend="false" plot_numbers="false" isee:label_pie_slices="false" isee:show_pie_borders="true" num_x_grid_lines="13" num_y_grid_lines="9" num_x_labels="13" num_y_labels="9" title="Human Food Production" isee:fill_intensity="1" to="2150" isee:allow_zero_axis="true" left_axis_title="PCal/Year" left_axis_multi_scale="false" left_axis_auto_scale="true" left_include_units="true" right_axis_multi_scale="false" right_axis_auto_scale="true" right_include_units="true">
-						<plot color="blue" title="Vegetal Products" isee:keep_zero_visible="true" pen_width="1" index="0" show_y_axis="true">
-							<entity name="Food_Demand.crop_demand_for_food[1]"/>
-						</plot>
-						<plot color="red" title="Animal Products" isee:keep_zero_visible="true" pen_width="1" index="1" show_y_axis="true">
-							<entity name="Animal_Products.animal_products_production[1]"/>
-						</plot>
-					</graph>
+					<graph width="570" height="470" type="area" isee:sum_stacked_legend="true" isee:stacked_show_hover_values="true" show_grid="true" isee:tick_type="none" include_units_in_legend="false" plot_numbers="false" isee:label_pie_slices="false" isee:show_pie_borders="true" num_x_grid_lines="13" num_y_grid_lines="9" num_x_labels="13" num_y_labels="9" title="Human Food Production" isee:fill_intensity="1" to="2150" isee:allow_zero_axis="true" left_axis_title="PCal/Year" left_axis_multi_scale="false" left_axis_auto_scale="true" left_include_units="true" right_axis_multi_scale="false" right_axis_auto_scale="true" right_include_units="true"/>
 					<graph width="570" height="470" type="area" isee:sum_stacked_legend="true" isee:stacked_show_hover_values="true" show_grid="true" isee:tick_type="none" include_units_in_legend="false" plot_numbers="false" isee:label_pie_slices="false" isee:show_pie_borders="true" num_x_grid_lines="13" num_y_grid_lines="7" num_x_labels="13" num_y_labels="7" title="Crop Demand" isee:fill_intensity="1" to="2100" isee:allow_zero_axis="true" left_axis_multi_scale="false" left_axis_auto_scale="true" left_include_units="true" right_axis_multi_scale="false" right_axis_auto_scale="true" right_include_units="true">
-						<plot color="blue" title="Vegetal Products" isee:keep_zero_visible="true" pen_width="1" index="0" show_y_axis="true">
-							<entity name="Food_Demand.crop_demand_for_food[1]"/>
-						</plot>
-						<plot color="red" title="Feed" isee:keep_zero_visible="true" pen_width="1" index="1" show_y_axis="true">
-							<entity name="Food_Demand.crop_demand_for_feed[1]"/>
-						</plot>
-						<plot color="fuchsia" title="Bio Fuel" isee:keep_zero_visible="true" pen_width="1" index="2" show_y_axis="true">
+						<plot color="fuchsia" title="Bio Fuel" isee:keep_zero_visible="true" pen_width="1" index="0" show_y_axis="true">
 							<entity name="bio_fuel_energy.crops_demanded_for_bio_fuel[1]"/>
 						</plot>
 					</graph>
 					<graph width="570" height="470" type="area" isee:sum_stacked_legend="true" isee:stacked_show_hover_values="true" show_grid="true" isee:tick_type="none" include_units_in_legend="false" plot_numbers="false" isee:label_pie_slices="false" isee:show_pie_borders="true" num_x_grid_lines="13" num_y_grid_lines="9" num_x_labels="13" num_y_labels="9" title="Crop Production" isee:fill_intensity="1" to="2100" isee:allow_zero_axis="true" left_axis_multi_scale="false" left_axis_auto_scale="true" left_include_units="true" right_axis_multi_scale="false" right_axis_auto_scale="true" right_include_units="true">
-						<plot color="blue" title="Vegetal Products" isee:keep_zero_visible="true" pen_width="1" index="0" show_y_axis="true">
-							<entity name="Food_Demand.crop_demand_for_food[1]"/>
-						</plot>
-						<plot color="fuchsia" title="Biofuel Feedstock" isee:keep_zero_visible="true" pen_width="1" index="1" show_y_axis="true">
+						<plot color="fuchsia" title="Biofuel Feedstock" isee:keep_zero_visible="true" pen_width="1" index="0" show_y_axis="true">
 							<entity name="Food_Demand.crops_for_energy[1]"/>
 						</plot>
 					</graph>
 					<graph width="570" height="470" type="area" isee:sum_stacked_legend="true" isee:stacked_show_hover_values="true" show_grid="true" isee:tick_type="none" include_units_in_legend="false" plot_numbers="false" isee:label_pie_slices="false" isee:show_pie_borders="true" num_x_grid_lines="13" num_y_grid_lines="9" num_x_labels="13" num_y_labels="9" title="Crop Production by Use" isee:fill_intensity="1" to="2100" isee:allow_zero_axis="true" left_axis_title="PCal/Year" left_axis_multi_scale="false" left_axis_auto_scale="true" left_include_units="true" right_axis_multi_scale="false" right_axis_auto_scale="true" right_include_units="true">
-						<plot color="blue" title="Vegetal Products" isee:keep_zero_visible="true" pen_width="1" index="0" show_y_axis="true">
-							<entity name="Food_Demand.crop_demand_for_food[1]"/>
-						</plot>
-						<plot color="red" title="Animal Products" isee:keep_zero_visible="true" pen_width="1" index="1" show_y_axis="true">
-							<entity name="Animal_Products.animal_products_production[1]"/>
-						</plot>
-						<plot color="#B30000" title="Calories Consumed by Animals not Transferred to Humans" isee:keep_zero_visible="true" pen_width="1" index="2" show_y_axis="true">
-							<entity name="Animal_Products.calories_consumed_by_animals_not_transferred_to_humans[1]"/>
-						</plot>
-						<plot color="#F612FF" title="Biofuel Feedstock" isee:keep_zero_visible="true" pen_width="1" index="3" show_y_axis="true">
+						<plot color="#F612FF" title="Biofuel Feedstock" isee:keep_zero_visible="true" pen_width="1" index="0" show_y_axis="true">
 							<entity name="Food_Demand.crops_for_energy[1]"/>
 						</plot>
 					</graph>

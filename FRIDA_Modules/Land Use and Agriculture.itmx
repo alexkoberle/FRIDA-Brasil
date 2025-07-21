@@ -1240,12 +1240,13 @@ Corresponding author: Axel Eriksson, ax3635er-s@student.lu.se or j.axel.e.erikss
 				<dimensions>
 					<dim name="Run"/>
 				</dimensions>
-				<eqn>animal_products_production/livestock_demand</eqn>
+				<eqn>animal_products_production[Run,World]/livestock_demand</eqn>
 				<units>1</units>
 			</aux>
 			<flow name="change in grazing land\nanimal products yield">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>Grazing_Land_Animal_Products_Yield*rate_of_change_in_grazing_land_yield</eqn>
 				<units>PCal/Mha/Year/Year</units>
@@ -1253,8 +1254,9 @@ Corresponding author: Axel Eriksson, ax3635er-s@student.lu.se or j.axel.e.erikss
 			<stock name="Grazing Land\nAnimal Products Yield" access="output">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<eqn>Animal_Products_Yield_in_1980</eqn>
+				<eqn>Animal_Products_Yield_in_1980[Run]</eqn>
 				<inflow>change_in_grazing_land_animal_products_yield</inflow>
 				<units>PCal/Mha/Year</units>
 			</stock>
@@ -1275,16 +1277,20 @@ Corresponding author: Axel Eriksson, ax3635er-s@student.lu.se or j.axel.e.erikss
 				<dimensions>
 					<dim name="Run"/>
 				</dimensions>
-				<eqn>animal_products_balance/(1+desired_animal_products_reserve_capacity)</eqn>
+				<eqn>animal_products_balance/(1+desired_animal_products_reserve_capacity[Run,World])</eqn>
 				<units>1</units>
 			</aux>
-			<aux name="desired animal products reserve capacity">
+			<aux name="desired animal products\nreserve capacity">
 				<doc>${Internal Calibration Parameter}
 Calibration Parameter: forest land &amp; CO2 emissions from land cover change &amp; agricultural land &amp; crop production &amp; fertilizer use</doc>
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<element subscript="1">
+				<element subscript="1, World">
+					<eqn>0.0725050241819243</eqn>
+				</element>
+				<element subscript="1, Brazil">
 					<eqn>0.0725050241819243</eqn>
 				</element>
 				<range min="0" max="0.1"/>
@@ -1295,8 +1301,9 @@ Calibration Parameter: forest land &amp; CO2 emissions from land cover change &a
 </doc>
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<eqn>(actual_animal_product_growth_efficiency*(grazing_land*(1+aquatic_animal_product_share)*Grazing_Land_Animal_Products_Yield+feed_production_1))</eqn>
+				<eqn>(actual_animal_product_growth_efficiency[Run]*(grazing_land[Run]*(1+aquatic_animal_product_share)*Grazing_Land_Animal_Products_Yield+feed_production_1[Run]))</eqn>
 				<units>PCal/Year</units>
 			</aux>
 			<aux name="grazing land" access="input">
@@ -1318,6 +1325,7 @@ Calibration Parameter: forest land &amp; CO2 emissions from land cover change &a
 </doc>
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>IF switch_aquatic_animal_products_fraction_policy AND TIME &gt; start_year THEN aquatic_animal_products_fraction_policy
 ELSE
@@ -1327,17 +1335,22 @@ aquatic_animal_product_share_1980*(perceived_GDP_per_person/INIT(perceived_GDP_p
 			<aux name="perceived GDP per person" access="input">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>{Enter equation for use when not hooked up to other models}</eqn>
 				<units>bc$/Mp/year</units>
 			</aux>
-			<aux name="elasticity of aquatic animal product share to GDP per person">
+			<aux name="elasticity of aquatic animal\nproduct share to GDP per person">
 				<doc>${Internal Calibration Parameter}
 </doc>
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<element subscript="1">
+				<element subscript="1, World">
+					<eqn>0.394319330814918</eqn>
+				</element>
+				<element subscript="1, Brazil">
 					<eqn>0.394319330814918</eqn>
 				</element>
 				<range min="0" max="1"/>
@@ -1348,8 +1361,12 @@ aquatic_animal_product_share_1980*(perceived_GDP_per_person/INIT(perceived_GDP_p
 </doc>
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<element subscript="1">
+				<element subscript="1, World">
+					<eqn>0.0609962335002205</eqn>
+				</element>
+				<element subscript="1, Brazil">
 					<eqn>0.0609962335002205</eqn>
 				</element>
 				<range min="0.059" max="0.061"/>
@@ -1414,15 +1431,17 @@ average_animal_product_growth_efficiency[Run]</eqn>
 			<aux name="feed per unit of animal\nproduct production">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<eqn>feed_production_1/animal_products_production</eqn>
+				<eqn>feed_production_1[Run]/animal_products_production</eqn>
 				<units>dmnl</units>
 			</aux>
-			<aux name="calories consumed by animals not transferred to humans">
+			<aux name="calories consumed by animals\nnot transferred to humans">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<eqn>feed_production_1-animal_products_production</eqn>
+				<eqn>feed_production_1[Run]-animal_products_production</eqn>
 				<units>PCal/Year</units>
 			</aux>
 			<aux name="feed production 1" access="input">
@@ -1437,16 +1456,21 @@ average_animal_product_growth_efficiency[Run]</eqn>
 </doc>
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<element subscript="1">
+				<element subscript="1, World">
+					<eqn>0.0299527655360562</eqn>
+				</element>
+				<element subscript="1, Brazil">
 					<eqn>0.0299527655360562</eqn>
 				</element>
 				<range min="0.01" max="0.1"/>
 				<units>1/year</units>
 			</aux>
-			<aux name="rate of change in grazing land yield">
+			<aux name="rate of change in\ngrazing land yield">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>normal_rate_of_change_in_grazing_land_yield*effect_of_animal_products_balance_on_grazing_land_yield_increase</eqn>
 				<units>1/year</units>
@@ -1454,6 +1478,7 @@ average_animal_product_growth_efficiency[Run]</eqn>
 			<aux name="effect of animal products balance\non grazing land yield increase">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>1+sensitivity_of_rate_of_change_in_animal_products_balance_to_growth_rate_in_yield*(effective_average_animal_products_balance-1)</eqn>
 				<units>dmnl</units>
@@ -1463,8 +1488,12 @@ average_animal_product_growth_efficiency[Run]</eqn>
 </doc>
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<element subscript="1">
+				<element subscript="1, World">
+					<eqn>-69.8418280979725</eqn>
+				</element>
+				<element subscript="1, Brazil">
 					<eqn>-69.8418280979725</eqn>
 				</element>
 				<range min="-100" max="0"/>
@@ -1508,8 +1537,9 @@ average_animal_product_growth_efficiency[Run]</eqn>
 			<aux name="effective average\nanimal products\nbalance">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<eqn>MINSOFT(SMTH1(animal_products_balance, averaging_time), maximum_effective_animal_products_balance, tolerance_of_maximum_effective_animal_products_balance)</eqn>
+				<eqn>MINSOFT(SMTH1(animal_products_balance[Run], averaging_time), maximum_effective_animal_products_balance[Region], tolerance_of_maximum_effective_animal_products_balance[Region])</eqn>
 				<units>1</units>
 			</aux>
 			<aux name="averaging time">
@@ -1517,22 +1547,32 @@ average_animal_product_growth_efficiency[Run]</eqn>
 </doc>
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<element subscript="1">
+				<element subscript="1, World">
+					<eqn>4.89771767092869</eqn>
+				</element>
+				<element subscript="1, Brazil">
 					<eqn>4.89771767092869</eqn>
 				</element>
 				<range min="2" max="8"/>
 				<units>years</units>
 			</aux>
-			<aux name="maximum effective animal products balance">
+			<aux name="maximum effective\nanimal products balance">
 				<doc>${Assumption}
 Not in sensi analysis because this is so far outside the range of where calibration goes.  This is just for a &quot;vegan&quot; world</doc>
+				<dimensions>
+					<dim name="Region"/>
+				</dimensions>
 				<eqn>2</eqn>
 				<units>dmnl</units>
 			</aux>
-			<aux name="tolerance of maximum effective animal products balance">
+			<aux name="tolerance of maximum effective\nanimal products balance">
 				<doc>${Assumption}
 Not in sensi analysis because this is so far outside the range of where calibration goes.  This is just for a &quot;vegan&quot; world</doc>
+				<dimensions>
+					<dim name="Region"/>
+				</dimensions>
 				<eqn>.1</eqn>
 				<units>dmnl</units>
 			</aux>
@@ -1585,7 +1625,7 @@ Not in sensi analysis because this is so far outside the range of where calibrat
 				<isee:iframe color="black" background="white" text_align="left" vertical_text_align="top" font_size="12pt" border_width="thin" border_style="solid"/>
 				<isee:financial_table color="black" background="#E0E0E0" text_align="right" font_size="12pt" hide_border="false" auto_fit="true" first_column_width="250" other_column_width="100" header_font_style="normal" header_font_weight="bold" header_text_decoration="none" header_text_align="center" header_vertical_text_align="center" header_font_color="black" header_font_family="Arial" header_font_size="14pt" header_text_padding="2" header_text_border_color="black" header_text_border_width="thin" header_text_border_style="none"/>
 			</style>
-			<view isee:show_pages="false" background="white" page_width="768" page_height="588" isee:page_cols="2" isee:page_rows="2" isee:scroll_x="643.571" isee:scroll_y="326.429" zoom="140" isee:popup_graphs_are_comparative="true" isee:enable_non_negative_highlights="false" type="stock_flow">
+			<view isee:show_pages="false" background="white" page_width="1122" page_height="793" isee:page_cols="2" isee:page_rows="2" isee:scroll_y="196.667" zoom="120" isee:popup_graphs_are_comparative="true" isee:enable_non_negative_highlights="false" type="stock_flow">
 				<style color="black" background="white" font_style="normal" font_weight="normal" text_decoration="none" text_align="center" vertical_text_align="center" font_color="black" font_family="Arial" font_size="10pt" padding="2" border_color="black" border_width="thin" border_style="none">
 					<stock color="blue" background="white" font_color="blue" font_size="11pt" label_side="top">
 						<shape type="rectangle" width="45" height="35"/>
@@ -1633,8 +1673,8 @@ Not in sensi analysis because this is so far outside the range of where calibrat
 				</flow>
 				<stock label_side="top" x="1062.5" y="764.5" name="Grazing Land\nAnimal Products Yield"/>
 				<aux label_side="bottom" x="1167.94" y="799" name="Animal Products Yield in 1980"/>
-				<aux x="421" y="559.599" name="animal products balance\nwith reserves"/>
-				<aux label_side="top" x="479" y="471.456" name="desired animal products reserve capacity"/>
+				<aux label_side="bottom" x="421" y="559.599" name="animal products balance\nwith reserves"/>
+				<aux label_side="top" x="479" y="471.456" name="desired animal products\nreserve capacity"/>
 				<aux x="933.63" y="474.75" name="animal products production"/>
 				<connector uid="3" angle="152.738">
 					<from>animal_products_production</from>
@@ -1664,7 +1704,7 @@ Not in sensi analysis because this is so far outside the range of where calibrat
 					<from>perceived_GDP_per_person</from>
 					<to>aquatic_animal_product_share</to>
 				</connector>
-				<aux x="1409" y="423" name="elasticity of aquatic animal product share to GDP per person"/>
+				<aux x="1409" y="423" name="elasticity of aquatic animal\nproduct share to GDP per person"/>
 				<connector uid="13" angle="200.631">
 					<from>elasticity_of_aquatic_animal_product_share_to_GDP_per_person</from>
 					<to>aquatic_animal_product_share</to>
@@ -1721,7 +1761,7 @@ Not in sensi analysis because this is so far outside the range of where calibrat
 					</from>
 					<to>feed_per_unit_of_animal_product_production</to>
 				</connector>
-				<aux x="999" y="244" name="calories consumed by animals not transferred to humans"/>
+				<aux x="999" y="244" name="calories consumed by animals\nnot transferred to humans"/>
 				<connector uid="37" angle="74.1829">
 					<from>animal_products_production</from>
 					<to>calories_consumed_by_animals_not_transferred_to_humans</to>
@@ -1742,7 +1782,7 @@ Not in sensi analysis because this is so far outside the range of where calibrat
 					<to>feed_per_unit_of_animal_product_production</to>
 				</connector>
 				<aux x="842" y="965" name="normal rate of\nchange in grazing\nland yield"/>
-				<aux x="867.143" y="836" name="rate of change in grazing land yield"/>
+				<aux x="867.143" y="836" name="rate of change in\ngrazing land yield"/>
 				<connector uid="45" angle="78.971">
 					<from>normal_rate_of_change_in_grazing_land_yield</from>
 					<to>rate_of_change_in_grazing_land_yield</to>
@@ -1792,8 +1832,8 @@ Not in sensi analysis because this is so far outside the range of where calibrat
 					<from>averaging_time</from>
 					<to>effective_average_animal_products_balance</to>
 				</connector>
-				<aux x="570.464" y="609" name="maximum effective animal products balance"/>
-				<aux x="754.393" y="614" name="tolerance of maximum effective animal products balance"/>
+				<aux x="570.464" y="609" name="maximum effective\nanimal products balance"/>
+				<aux x="754.393" y="614" name="tolerance of maximum effective\nanimal products balance"/>
 				<connector uid="77" angle="326.45">
 					<from>maximum_effective_animal_products_balance</from>
 					<to>effective_average_animal_products_balance</to>
@@ -1913,6 +1953,7 @@ Food and Agriculture Organization of the United Nations (2023)</doc>
 			<stock name="fertilizer use" access="input">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>{Enter equation for use when not hooked up to other models}</eqn>
 				<units>MtN/year</units>
@@ -2007,7 +2048,7 @@ Karstens, K., Bodirsky, B. L., Dietrich, J. P., Dondini, M., Heinke, J., Kuhnert
 				<dimensions>
 					<dim name="Run"/>
 				</dimensions>
-				<eqn>fertilizer_use/crop_production</eqn>
+				<eqn>fertilizer_use[Run,Region]/crop_production</eqn>
 				<units>Million*tN/PCal</units>
 			</aux>
 			<aux name="agricultural water\nwithdrawal" access="input">
@@ -2320,7 +2361,7 @@ rel_change_in_crop_productivity_from_climate
 				<dimensions>
 					<dim name="Run"/>
 				</dimensions>
-				<eqn>(fertilizer_use-INIT(fertilizer_use))*fertilizer_use_crop_yield_parameter</eqn>
+				<eqn>(fertilizer_use[Run,Region]-INIT(fertilizer_use[Run,Region]))*fertilizer_use_crop_yield_parameter</eqn>
 				<units>dmnl</units>
 			</aux>
 			<aux name="fertilizer use crop yield parameter">
@@ -2994,9 +3035,9 @@ Tilman D, Balzer C, Hill J, Befort BL. 2011. Global food demand and the sustaina
 				<dimensions>
 					<dim name="Run"/>
 				</dimensions>
-				<eqn>crop_demand_for_food + crop_demand_for_feed + crop_demand_for_energy+
-Crops_used_for_Seed_or_Lost+
-crop_used_for_non_energy_other</eqn>
+				<eqn>crop_demand_for_food[Run,World] + crop_demand_for_feed[Run,World] + crop_demand_for_energy[Run,World]+
+Crops_used_for_Seed_or_Lost[Run,World]+
+crop_used_for_non_energy_other[Run,World]</eqn>
 				<units>PCal/year</units>
 			</aux>
 			<aux name="Population" access="output" throughput="true">
@@ -3012,7 +3053,7 @@ crop_used_for_non_energy_other</eqn>
 				<dimensions>
 					<dim name="Run"/>
 				</dimensions>
-				<eqn>Population*animal_products_demand_per_capita</eqn>
+				<eqn>Population*animal_products_demand_per_capita[Run,World]</eqn>
 				<units>PCal/Year</units>
 			</aux>
 			<aux name="crop demand for food">
@@ -3020,8 +3061,9 @@ crop_used_for_non_energy_other</eqn>
 </doc>
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<eqn>direct_crop_demand_per_capita*Population</eqn>
+				<eqn>direct_crop_demand_per_capita*Population[Run]</eqn>
 				<units>PCal/year</units>
 			</aux>
 			<aux name="food demand policy" access="input">
@@ -3052,6 +3094,7 @@ crop_used_for_non_energy_other</eqn>
 			<stock name="Livestock Yield" access="input">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>{Enter equation for use when not hooked up to other models}</eqn>
 				<units>PCal/Mha/Year</units>
@@ -3059,18 +3102,23 @@ crop_used_for_non_energy_other</eqn>
 			<aux name="perceived GDP per person" access="output" isee:autocreated="true">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<eqn>SMTH1(real_GDP_per_person[Run], time_to_change_crop_demand_components)</eqn>
+				<eqn>SMTH1(real_GDP_per_person[Run], time_to_change_crop_demand_components[Run,Region])</eqn>
 				<isee:delay_aux/>
 				<units>bc$/Mp/year</units>
 			</aux>
-			<aux name="time to change crop demand components">
+			<aux name="time to change crop\ndemand components">
 				<doc>${Internal Calibration Parameter}
 </doc>
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<element subscript="1">
+				<element subscript="1, World">
+					<eqn>6.71244517171147</eqn>
+				</element>
+				<element subscript="1, Brazil">
 					<eqn>6.71244517171147</eqn>
 				</element>
 				<range min="5" max="20"/>
@@ -3079,34 +3127,47 @@ crop_used_for_non_energy_other</eqn>
 			<aux name="UNIT days per year">
 				<doc>${Unit}
 </doc>
+				<dimensions>
+					<dim name="Region"/>
+				</dimensions>
 				<eqn>365</eqn>
 				<units>days/year</units>
 			</aux>
 			<aux name="UNIT cal per pcal">
 				<doc>${Unit}
 </doc>
+				<dimensions>
+					<dim name="Region"/>
+				</dimensions>
 				<eqn>1000000000000</eqn>
 				<units>kCal/PCal</units>
 			</aux>
 			<aux name="UNIT p per Mp">
 				<doc>${Unit}
 </doc>
+				<dimensions>
+					<dim name="Region"/>
+				</dimensions>
 				<eqn>1000000</eqn>
 				<units>p/Mp</units>
 			</aux>
 			<aux name="direct food demand\nper person per day" access="output">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>IF TIME &gt; policy_start_year AND switch_food_demand_policy THEN food_demand_policy
-ELSE IF switch_use_GDP_for_food_demand THEN
-direct_food_demand_per_person_per_day_1980*(perceived_GDP_per_person/INIT(perceived_GDP_per_person))^elasticity_of_food_demand_to_GDP_per_person
-ELSE Average_Daily_Demand_Per_Capita</eqn>
+ELSE IF switch_use_GDP_for_food_demand[Region] THEN
+direct_food_demand_per_person_per_day_1980[Region]*(perceived_GDP_per_person/INIT(perceived_GDP_per_person))^elasticity_of_food_demand_to_GDP_per_person[Region]
+ELSE Average_Daily_Demand_Per_Capita[Run]</eqn>
 				<units>kCal/Person/Day</units>
 			</aux>
 			<aux name="elasticity of food demand\nto GDP per person">
 				<doc>${No Sensi}
 This is just for the GDP based demand counterfactual</doc>
+				<dimensions>
+					<dim name="Region"/>
+				</dimensions>
 				<eqn>0.256870140176168</eqn>
 				<range min="0" max="2"/>
 				<units>dmnl</units>
@@ -3114,6 +3175,9 @@ This is just for the GDP based demand counterfactual</doc>
 			<aux name="direct food demand\nper person per day 1980">
 				<doc>${No Sensi}
 This is just for the GDP based demand counterfactual</doc>
+				<dimensions>
+					<dim name="Region"/>
+				</dimensions>
 				<eqn>2480.82102599208</eqn>
 				<range min="2000" max="3000"/>
 				<units>kCal/Person/Day</units>
@@ -3121,25 +3185,28 @@ This is just for the GDP based demand counterfactual</doc>
 			<aux name="direct food demand\nper capita">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<eqn>direct_food_demand_per_person_per_day*UNIT_p_per_Mp*UNIT_days_per_year/UNIT_cal_per_pcal</eqn>
+				<eqn>direct_food_demand_per_person_per_day*UNIT_p_per_Mp[Region]*UNIT_days_per_year[Region]/UNIT_cal_per_pcal[Region]</eqn>
 				<units>PCal/Mp/Year</units>
 			</aux>
 			<aux name="direct crop demand\nper capita">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>direct_food_demand_per_capita-animal_products_demand_per_capita</eqn>
 				<units>PCal/Mp/Year</units>
 			</aux>
-			<aux name="animal products demand per capita">
+			<aux name="animal products\ndemand per capita">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>IF TIME &gt; start_year AND switch_animal_products_fraction_policy THEN direct_food_demand_per_capita*animal_products_fraction_policy 
-ELSE IF switch_use_GDP_for_food_demand THEN
-animal_product_demand_per_person_1980*(perceived_GDP_per_person/INIT(perceived_GDP_per_person))^elasticity_of_animal_product_demand_to_GDP_per_person
-ELSE average_yearly_demand_per_capita</eqn>
+ELSE IF switch_use_GDP_for_food_demand[Region] THEN
+animal_product_demand_per_person_1980[Region]*(perceived_GDP_per_person/INIT(perceived_GDP_per_person))^elasticity_of_animal_product_demand_to_GDP_per_person[Region]
+ELSE average_yearly_demand_per_capita[Run]</eqn>
 				<units>PCal/Mp/Year</units>
 			</aux>
 			<aux name="animal products fraction policy" access="input">
@@ -3154,15 +3221,16 @@ ELSE average_yearly_demand_per_capita</eqn>
 			<aux name="animal products\ncalorie requirements">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<eqn>1/actual_animal_product_growth_efficiency * animal_products_demand</eqn>
+				<eqn>1/actual_animal_product_growth_efficiency[Run] * animal_products_demand[Run]</eqn>
 				<units>PCal/Year</units>
 			</aux>
 			<aux name="animal products calorie\nrequirements\nmet via grazing" access="output" isee:autocreated="true">
 				<dimensions>
 					<dim name="Run"/>
 				</dimensions>
-				<eqn>MIN(animal_products_calorie_requirements,  Livestock_Yield*grazing_land)</eqn>
+				<eqn>MIN(animal_products_calorie_requirements[Run,World],  Livestock_Yield[Run,World]*grazing_land)</eqn>
 				<units>PCal/Year</units>
 			</aux>
 			<aux name="grazing land" access="input">
@@ -3175,8 +3243,9 @@ ELSE average_yearly_demand_per_capita</eqn>
 			<stock name="crop demand for feed">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<eqn>desired_crop_demand_for_feed*initial_crop_demand_for_feed_offset</eqn>
+				<eqn>desired_crop_demand_for_feed*initial_crop_demand_for_feed_offset[Run]</eqn>
 				<inflow>change_in_crop_demand_for_feed</inflow>
 				<units>PCal/Year</units>
 			</stock>
@@ -3222,20 +3291,22 @@ ELSE average_yearly_demand_per_capita</eqn>
 			<aux name="crop supply\nfor feed and energy">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<eqn>crop_production - (crop_demand_for_food + Crops_used_for_Seed_or_Lost + crop_used_for_non_energy_other)</eqn>
+				<eqn>crop_production[Run] - (crop_demand_for_food + Crops_used_for_Seed_or_Lost + crop_used_for_non_energy_other)</eqn>
 				<units>PCal/Year</units>
 			</aux>
 			<aux name="crops for energy" access="output">
 				<dimensions>
 					<dim name="Run"/>
 				</dimensions>
-				<eqn>MAX(0, crop_demand_for_energy*share_of_crops_for_feed_and_energy_fulfilled)</eqn>
+				<eqn>MAX(0, crop_demand_for_energy[Run,World]*share_of_crops_for_feed_and_energy_fulfilled[Run,World])</eqn>
 				<units>PCal/Year</units>
 			</aux>
 			<aux name="crop demand for feed and energy">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>crop_demand_for_energy + crop_demand_for_feed</eqn>
 				<units>PCal/Year</units>
@@ -3243,20 +3314,23 @@ ELSE average_yearly_demand_per_capita</eqn>
 			<aux name="share of crops for feed\nand energy fulfilled">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>crop_supply_for_feed_and_energy/crop_demand_for_feed_and_energy</eqn>
 				<units>dmnl</units>
 			</aux>
-			<aux name="share of diet from animal products" access="output">
+			<aux name="share of diet from\nanimal products" access="output">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>animal_products_demand_per_capita/(direct_crop_demand_per_capita+animal_products_demand_per_capita)</eqn>
 				<units>dmnl</units>
 			</aux>
-			<aux name="vegetal product demand per person per day">
+			<aux name="vegetal product demand\nper person per day">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>direct_food_demand_per_person_per_day*(1-share_of_diet_from_animal_products)</eqn>
 				<units>kCal/Person/Day</units>
@@ -3264,6 +3338,7 @@ ELSE average_yearly_demand_per_capita</eqn>
 			<aux name="animal product demand\nper person per day">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>direct_food_demand_per_person_per_day*share_of_diet_from_animal_products</eqn>
 				<units>kCal/Person/Day</units>
@@ -3273,37 +3348,47 @@ ELSE average_yearly_demand_per_capita</eqn>
 </doc>
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<eqn>Population*Crops_used_for_Seed_or_Lost_per_capita</eqn>
+				<eqn>Population[Run]*Crops_used_for_Seed_or_Lost_per_capita</eqn>
 				<units>PCal/year</units>
 			</aux>
-			<aux name="elasticity of crops used for seed or lost to GDP per person">
+			<aux name="elasticity of crops used for\nseed or lost to GDP per person">
 				<doc>${Internal Calibration Parameter}
 Calibration Parameter: fertilizer use &amp; crop production</doc>
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<element subscript="1">
+				<element subscript="1, World">
+					<eqn>0.402627060131928</eqn>
+				</element>
+				<element subscript="1, Brazil">
 					<eqn>0.402627060131928</eqn>
 				</element>
 				<range min="0" max="2"/>
 				<units>dmnl</units>
 			</aux>
-			<aux name="crops used for seed or lost per person 1980">
+			<aux name="crops used for seed or\nlost per person 1980">
 				<doc>${Internal Calibration Parameter}
 Calibration Parameter: fertilizer use &amp; crop production</doc>
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<element subscript="1">
+				<element subscript="1, World">
+					<eqn>0.127318786431931</eqn>
+				</element>
+				<element subscript="1, Brazil">
 					<eqn>0.127318786431931</eqn>
 				</element>
 				<range min="0" max="1"/>
 				<units>PCal/Mp/Year</units>
 			</aux>
-			<aux name="Crops used for Seed or Lost per capita">
+			<aux name="Crops used for Seed\nor Lost per capita">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>crops_used_for_seed_or_lost_per_person_1980*(perceived_GDP_per_person/INIT(perceived_GDP_per_person))^elasticity_of_crops_used_for_seed_or_lost_to_GDP_per_person</eqn>
 				<units>PCal/Mp/year</units>
@@ -3311,6 +3396,9 @@ Calibration Parameter: fertilizer use &amp; crop production</doc>
 			<aux name="switch use GDP for\nfood demand">
 				<doc>${No Sensi}
 </doc>
+				<dimensions>
+					<dim name="Region"/>
+				</dimensions>
 				<eqn>0</eqn>
 				<format precision="1"/>
 				<range min="0" max="1"/>
@@ -3319,6 +3407,9 @@ Calibration Parameter: fertilizer use &amp; crop production</doc>
 			<aux name="elasticity of animal product demand\nto GDP per person">
 				<doc>${No Sensi}
 This is just for the GDP based demand counterfactual</doc>
+				<dimensions>
+					<dim name="Region"/>
+				</dimensions>
 				<eqn>0.494190813685668</eqn>
 				<range min="0" max="2"/>
 				<units>dmnl</units>
@@ -3326,6 +3417,9 @@ This is just for the GDP based demand counterfactual</doc>
 			<aux name="animal product demand\nper person 1980">
 				<doc>${No Sensi}
 This is just for the GDP based demand counterfactual</doc>
+				<dimensions>
+					<dim name="Region"/>
+				</dimensions>
 				<eqn>0.147907225282667</eqn>
 				<range min="0" max="1"/>
 				<units>PCal/Mp/Year</units>
@@ -3336,43 +3430,53 @@ This is just for the GDP based demand counterfactual</doc>
 				<dimensions>
 					<dim name="Run"/>
 				</dimensions>
-				<eqn>MAX(0, crop_supply_for_feed_and_energy-crops_for_energy)</eqn>
+				<eqn>MAX(0, crop_supply_for_feed_and_energy[Run,World]-crops_for_energy)</eqn>
 				<units>PCal/Year</units>
 			</aux>
 			<aux name="crop used for\nnon energy other">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<eqn>crops_used_for_non_energy_other_per_capita*Population</eqn>
+				<eqn>crops_used_for_non_energy_other_per_capita*Population[Run]</eqn>
 				<units>PCal/Year</units>
 			</aux>
-			<aux name="elasticity of crops used for non energy other to GDP per person">
+			<aux name="elasticity of crops used for non\nenergy other to GDP per person">
 				<doc>${Internal Calibration Parameter}
 Calibration Parameter: fertilizer use &amp; crop production</doc>
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<element subscript="1">
+				<element subscript="1, World">
+					<eqn>0.362230160734174</eqn>
+				</element>
+				<element subscript="1, Brazil">
 					<eqn>0.362230160734174</eqn>
 				</element>
 				<range min="0" max="2"/>
 				<units>dmnl</units>
 			</aux>
-			<aux name="crops used for non energy other per person">
+			<aux name="crops used for non\nenergy other per person">
 				<doc>${Internal Calibration Parameter}
 Calibration Parameter: fertilizer use &amp; crop production</doc>
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<element subscript="1">
+				<element subscript="1, World">
+					<eqn>0.544013209683342</eqn>
+				</element>
+				<element subscript="1, Brazil">
 					<eqn>0.544013209683342</eqn>
 				</element>
 				<range min="0" max="1"/>
 				<units>PCal/Mp/Year</units>
 			</aux>
-			<aux name="crops used for non energy other per capita">
+			<aux name="crops used for non\nenergy other per capita">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>crops_used_for_non_energy_other_per_person*(perceived_GDP_per_person/INIT(perceived_GDP_per_person))^elasticity_of_crops_used_for_non_energy_other_to_GDP_per_person</eqn>
 				<units>PCal/Mp/year</units>
@@ -3394,20 +3498,23 @@ Calibration Parameter: fertilizer use &amp; crop production</doc>
 			<aux name="crop demand for energy" access="output" isee:autocreated="true">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<eqn>crops_needed_for_bio_fuel</eqn>
+				<eqn>crops_needed_for_bio_fuel[Run]</eqn>
 				<units>PCal/Year</units>
 			</aux>
 			<aux name="desired crop demand for\nfeed">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<eqn>MAX(0, animal_products_calorie_requirements-animal_products_calorie_requirements_met_via_grazing)</eqn>
+				<eqn>MAX(0, animal_products_calorie_requirements-animal_products_calorie_requirements_met_via_grazing[Run])</eqn>
 				<units>PCal/Year</units>
 			</aux>
 			<flow name="change in crop\ndemand for feed">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>(desired_crop_demand_for_feed-crop_demand_for_feed)/time_to_change_demand_for_feed</eqn>
 				<units>PCal/Year/Year</units>
@@ -3417,10 +3524,9 @@ Calibration Parameter: fertilizer use &amp; crop production</doc>
 </doc>
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<element subscript="1">
-					<eqn>9.86970946764368</eqn>
-				</element>
+				<eqn>9.86970946764368</eqn>
 				<range min="1" max="10"/>
 				<units>years</units>
 			</aux>
@@ -3454,7 +3560,7 @@ Calibration Parameter: fertilizer use &amp; crop production</doc>
 				<dimensions>
 					<dim name="Run"/>
 				</dimensions>
-				<eqn>crop_demand_for_food 
+				<eqn>crop_demand_for_food[Run,World] 
 
 {FRIDA assumes that all crop demand is met; no starvation}</eqn>
 				<units>PCal/Year</units>
@@ -3508,7 +3614,7 @@ Calibration Parameter: fertilizer use &amp; crop production</doc>
 				<isee:iframe color="black" background="white" text_align="left" vertical_text_align="top" font_size="12pt" border_width="thin" border_style="solid"/>
 				<isee:financial_table color="black" background="#E0E0E0" text_align="right" font_size="12pt" hide_border="false" auto_fit="true" first_column_width="250" other_column_width="100" header_font_style="normal" header_font_weight="bold" header_text_decoration="none" header_text_align="center" header_vertical_text_align="center" header_font_color="black" header_font_family="Arial" header_font_size="14pt" header_text_padding="2" header_text_border_color="black" header_text_border_width="thin" header_text_border_style="none"/>
 			</style>
-			<view isee:show_pages="false" background="white" page_width="1122" page_height="793" isee:page_cols="2" isee:page_rows="3" isee:scroll_x="26" isee:scroll_y="902" isee:popup_graphs_are_comparative="true" isee:enable_non_negative_highlights="false" type="stock_flow">
+			<view isee:show_pages="false" background="white" page_width="1122" page_height="793" isee:page_cols="2" isee:page_rows="3" zoom="80" isee:popup_graphs_are_comparative="true" isee:enable_non_negative_highlights="false" type="stock_flow">
 				<style color="black" background="white" font_style="normal" font_weight="normal" text_decoration="none" text_align="center" vertical_text_align="center" font_color="black" font_family="Arial" font_size="10pt" padding="2" border_color="black" border_width="thin" border_style="none">
 					<stock color="blue" background="white" font_color="blue" font_size="11pt" label_side="top">
 						<shape type="rectangle" width="45" height="35"/>
@@ -3573,7 +3679,7 @@ Calibration Parameter: fertilizer use &amp; crop production</doc>
 				<aux font_style="italic" font_weight="bold" x="909.571" y="826.286" name="switch animal products fraction policy"/>
 				<stock font_style="italic" font_weight="bold" x="1160.71" y="292.857" name="Livestock Yield"/>
 				<aux x="596.988" y="1257.62" name="perceived GDP per person"/>
-				<aux x="533.071" y="1458.62" name="time to change crop demand components"/>
+				<aux x="533.071" y="1458.62" name="time to change crop\ndemand components"/>
 				<connector uid="7" angle="72.3597">
 					<from>time_to_change_crop_demand_components</from>
 					<to>perceived_GDP_per_person</to>
@@ -3614,7 +3720,7 @@ Calibration Parameter: fertilizer use &amp; crop production</doc>
 					<from>direct_food_demand_per_capita</from>
 					<to>direct_crop_demand_per_capita</to>
 				</connector>
-				<aux x="747.071" y="722.286" name="animal products demand per capita"/>
+				<aux x="747.071" y="722.286" name="animal products\ndemand per capita"/>
 				<connector uid="20" angle="180.912">
 					<from>animal_products_demand_per_capita</from>
 					<to>direct_crop_demand_per_capita</to>
@@ -3726,7 +3832,7 @@ Calibration Parameter: fertilizer use &amp; crop production</doc>
 					<from>share_of_crops_for_feed_and_energy_fulfilled</from>
 					<to>crops_for_energy</to>
 				</connector>
-				<aux x="636.821" y="643.143" name="share of diet from animal products"/>
+				<aux x="636.821" y="643.143" name="share of diet from\nanimal products"/>
 				<connector uid="61" angle="64.146">
 					<from>direct_crop_demand_per_capita</from>
 					<to>share_of_diet_from_animal_products</to>
@@ -3735,7 +3841,7 @@ Calibration Parameter: fertilizer use &amp; crop production</doc>
 					<from>animal_products_demand_per_capita</from>
 					<to>share_of_diet_from_animal_products</to>
 				</connector>
-				<aux x="75.678" y="843.572" name="vegetal product demand per person per day"/>
+				<aux x="75.678" y="843.572" name="vegetal product demand\nper person per day"/>
 				<aux x="225.357" y="843.572" name="animal product demand\nper person per day"/>
 				<connector uid="65" angle="233.603">
 					<from>
@@ -3770,9 +3876,9 @@ Calibration Parameter: fertilizer use &amp; crop production</doc>
 					<from>Crops_used_for_Seed_or_Lost</from>
 					<to>crop_supply_for_feed_and_energy</to>
 				</connector>
-				<aux label_side="left" label_angle="225" x="300.857" y="595.752" name="elasticity of crops used for seed or lost to GDP per person"/>
-				<aux label_side="left" label_angle="225" x="184.428" y="554.286" name="crops used for seed or lost per person 1980"/>
-				<aux x="286.643" y="455.752" name="Crops used for Seed or Lost per capita"/>
+				<aux label_side="left" label_angle="225" x="300.857" y="595.752" name="elasticity of crops used for\nseed or lost to GDP per person"/>
+				<aux label_side="left" label_angle="225" x="184.428" y="554.286" name="crops used for seed or\nlost per person 1980"/>
+				<aux x="286.643" y="455.752" name="Crops used for Seed\nor Lost per capita"/>
 				<connector uid="73" angle="95.7973">
 					<from>elasticity_of_crops_used_for_seed_or_lost_to_GDP_per_person</from>
 					<to>Crops_used_for_Seed_or_Lost_per_capita</to>
@@ -3836,9 +3942,9 @@ Calibration Parameter: fertilizer use &amp; crop production</doc>
 					<from>crop_used_for_non_energy_other</from>
 					<to>crop_demand</to>
 				</connector>
-				<aux label_side="left" label_angle="225" x="67.9643" y="330.038" name="elasticity of crops used for non energy other to GDP per person"/>
-				<aux label_side="left" label_angle="225" x="92.1423" y="428.572" name="crops used for non energy other per person"/>
-				<aux x="194.357" y="330.038" name="crops used for non energy other per capita"/>
+				<aux label_side="left" label_angle="225" x="67.9643" y="330.038" name="elasticity of crops used for non\nenergy other to GDP per person"/>
+				<aux label_side="left" label_angle="225" x="92.1423" y="428.572" name="crops used for non\nenergy other per person"/>
+				<aux x="194.357" y="330.038" name="crops used for non\nenergy other per capita"/>
 				<connector uid="93" angle="5.0726">
 					<from>elasticity_of_crops_used_for_non_energy_other_to_GDP_per_person</from>
 					<to>crops_used_for_non_energy_other_per_capita</to>
@@ -3891,7 +3997,7 @@ Calibration Parameter: fertilizer use &amp; crop production</doc>
 					<from>animal_products_calorie_requirements_met_via_grazing</from>
 					<to>desired_crop_demand_for_feed</to>
 				</connector>
-				<flow x="910.75" y="393.75" name="change in crop\ndemand for feed">
+				<flow x="910.751" y="393.75" name="change in crop\ndemand for feed">
 					<pts>
 						<pt x="974.001" y="393.75"/>
 						<pt x="859.5" y="393.75"/>
@@ -3906,7 +4012,7 @@ Calibration Parameter: fertilizer use &amp; crop production</doc>
 					<to>change_in_crop_demand_for_feed</to>
 				</connector>
 				<aux x="861.321" y="503.893" name="time to change demand\nfor feed"/>
-				<connector uid="107" angle="65.8308">
+				<connector uid="107" angle="65.8306">
 					<from>time_to_change_demand_for_feed</from>
 					<to>change_in_crop_demand_for_feed</to>
 				</connector>
@@ -6538,6 +6644,7 @@ Breier, J. (2023). Regionalisation of FAO &amp; Hyde data (Version 0.1.0) [Compu
 Includes Manure and Technological</doc>
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>man_made_fertilizer_use_1980 + manure_fertilizer_use_1980</eqn>
 				<inflow>change_in_fertilizer_user</inflow>
@@ -6548,6 +6655,7 @@ Includes Manure and Technological</doc>
 From Calibration Data</doc>
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>60.6</eqn>
 				<range min="58" max="64"/>
@@ -6559,7 +6667,7 @@ From Calibration Data</doc>
 				<dimensions>
 					<dim name="Run"/>
 				</dimensions>
-				<eqn>fertilizer_use-manure_fertilizer_use</eqn>
+				<eqn>fertilizer_use[Run,World]-manure_fertilizer_use</eqn>
 				<units>MtN/year</units>
 			</aux>
 			<aux name="manure\nfertilizer use\n1980">
@@ -6567,6 +6675,7 @@ From Calibration Data</doc>
 From Calibration Data</doc>
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>22.96867648</eqn>
 				<range min="20" max="25"/>
@@ -6578,7 +6687,7 @@ From Calibration Data</doc>
 				<dimensions>
 					<dim name="Run"/>
 				</dimensions>
-				<eqn>manure_fertilizer_use_1980*effect_of_animal_products_on_manure_fertilizer_use</eqn>
+				<eqn>manure_fertilizer_use_1980[Run,World]*effect_of_animal_products_on_manure_fertilizer_use[Run,World]</eqn>
 				<units>MtN/year</units>
 			</aux>
 			<aux name="elasticity of effect of animal products\non manure fertilizer use">
@@ -6586,16 +6695,16 @@ From Calibration Data</doc>
 </doc>
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<element subscript="1">
-					<eqn>0.0970036314376746</eqn>
-				</element>
+				<eqn>0.0970036314376746</eqn>
 				<range min="0.01" max="1.5"/>
 				<units>dmnl</units>
 			</aux>
 			<aux name="effect of animal products\non manure fertilizer use">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>(production/INIT(production))^elasticity_of_effect_of_animal_products_on_manure_fertilizer_use</eqn>
 				<units>dmnl</units>
@@ -6603,6 +6712,7 @@ From Calibration Data</doc>
 			<aux name="production" access="input">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>{Enter equation for use when not hooked up to other models}</eqn>
 				<units>PCal/Year</units>
@@ -6617,6 +6727,7 @@ From Calibration Data</doc>
 			<flow name="change in\nfertilizer user">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>(indicated_fertilizer_use-fertilizer_use)/time_to_change_fertilizer_use</eqn>
 				<units>MtN/year/Year</units>
@@ -6624,6 +6735,7 @@ From Calibration Data</doc>
 			<aux name="indicated fertilizer use">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>MIN(fertilizer_use*(1+maximum_desired_growth_in_fertilizer_use), fertilizer_use*effect_of_crop_balance_on_indicated_fertilizer_use*effect_of_fertilizer_use_on_indicated_fertilizer_use)</eqn>
 				<units>MtN/year</units>
@@ -6633,8 +6745,12 @@ From Calibration Data</doc>
 </doc>
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<element subscript="1">
+				<element subscript="1, World">
+					<eqn>2.99477652618579</eqn>
+				</element>
+				<element subscript="1, Brazil">
 					<eqn>2.99477652618579</eqn>
 				</element>
 				<range min="2" max="5"/>
@@ -6643,17 +6759,22 @@ From Calibration Data</doc>
 			<aux name="effect of crop balance on\nindicated fertilizer use">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<eqn>1+sensitivity_of_fertilizer_use_to_crop_balance_with_reserves*(crop_balance_with_reserves-1)</eqn>
+				<eqn>1+sensitivity_of_fertilizer_use_to_crop_balance_with_reserves*(crop_balance_with_reserves[Run]-1)</eqn>
 				<units>dmnl</units>
 			</aux>
-			<aux name="sensitivity of fertilizer use to crop balance with reserves">
+			<aux name="sensitivity of fertilizer use\nto crop balance with reserves">
 				<doc>${Internal Calibration Parameter}
 </doc>
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<element subscript="1">
+				<element subscript="1, World">
+					<eqn>-1.85338957870363</eqn>
+				</element>
+				<element subscript="1, Brazil">
 					<eqn>-1.85338957870363</eqn>
 				</element>
 				<range min="-10" max="-0.2"/>
@@ -6662,6 +6783,7 @@ From Calibration Data</doc>
 			<aux name="relative fertilizer use">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>fertilizer_use/reference_fertilizer_use</eqn>
 				<units>dmnl</units>
@@ -6670,6 +6792,7 @@ From Calibration Data</doc>
 				<doc>Added Sept 13th 2024 b/c fertilizer we wanted to represent the relationship that more fertilizer use means more farmers using it, and as you have more farmers using it, you inevitably get to the point where poorer farmers cannot afford it.</doc>
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>relative_fertilizer_use^sensitivity_demand_to_relative_use</eqn>
 				<units>dmnl</units>
@@ -6679,8 +6802,12 @@ From Calibration Data</doc>
 </doc>
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<element subscript="1">
+				<element subscript="1, World">
+					<eqn>-0.0191652954443731</eqn>
+				</element>
+				<element subscript="1, Brazil">
 					<eqn>-0.0191652954443731</eqn>
 				</element>
 				<range min="-0.5" max="-0.001"/>
@@ -6691,8 +6818,12 @@ From Calibration Data</doc>
 </doc>
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<element subscript="1">
+				<element subscript="1, World">
+					<eqn>0.0499909963335135</eqn>
+				</element>
+				<element subscript="1, Brazil">
 					<eqn>0.0499909963335135</eqn>
 				</element>
 				<range min="0" max="0.05"/>
@@ -6703,6 +6834,7 @@ From Calibration Data</doc>
 An external reference point - this can be converted to the initial value for fertilizer use if we wish.</doc>
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>85</eqn>
 				<range min="60" max="120"/>
@@ -6757,7 +6889,7 @@ An external reference point - this can be converted to the initial value for fer
 				<isee:iframe color="black" background="white" text_align="left" vertical_text_align="top" font_size="12pt" border_width="thin" border_style="solid"/>
 				<isee:financial_table color="black" background="#E0E0E0" text_align="right" font_size="12pt" hide_border="false" auto_fit="true" first_column_width="250" other_column_width="100" header_font_style="normal" header_font_weight="bold" header_text_decoration="none" header_text_align="center" header_vertical_text_align="center" header_font_color="black" header_font_family="Arial" header_font_size="14pt" header_text_padding="2" header_text_border_color="black" header_text_border_width="thin" header_text_border_style="none"/>
 			</style>
-			<view isee:show_pages="false" background="white" page_width="1122" page_height="793" isee:page_cols="2" isee:page_rows="2" isee:scroll_x="116" isee:popup_graphs_are_comparative="true" isee:enable_non_negative_highlights="false" type="stock_flow">
+			<view isee:show_pages="false" background="white" page_width="1122" page_height="793" isee:page_cols="2" isee:page_rows="2" isee:scroll_x="186" isee:popup_graphs_are_comparative="true" isee:enable_non_negative_highlights="false" type="stock_flow">
 				<style color="black" background="white" font_style="normal" font_weight="normal" text_decoration="none" text_align="center" vertical_text_align="center" font_color="black" font_family="Arial" font_size="10pt" padding="2" border_color="black" border_width="thin" border_style="none">
 					<stock color="blue" background="white" font_color="blue" font_size="11pt" label_side="top">
 						<shape type="rectangle" width="45" height="35"/>
@@ -6846,7 +6978,7 @@ An external reference point - this can be converted to the initial value for fer
 					<from>crop_balance_with_reserves</from>
 					<to>effect_of_crop_balance_on_indicated_fertilizer_use</to>
 				</connector>
-				<aux x="320" y="604" name="sensitivity of fertilizer use to crop balance with reserves"/>
+				<aux x="320" y="604" name="sensitivity of fertilizer use\nto crop balance with reserves"/>
 				<connector uid="9" angle="17.1556">
 					<from>sensitivity_of_fertilizer_use_to_crop_balance_with_reserves</from>
 					<to>effect_of_crop_balance_on_indicated_fertilizer_use</to>
@@ -7096,7 +7228,7 @@ Calibration Parameter: forest land &amp; CO2 emissions from land cover change &a
 				<dimensions>
 					<dim name="Run"/>
 				</dimensions>
-				<eqn>Grassland[Run,Region]*fraction_of_grassland_for_grazing</eqn>
+				<eqn>Grassland[Run,World]*fraction_of_grassland_for_grazing</eqn>
 				<units>Mha</units>
 			</aux>
 			<aux name="indicated grazing land">
@@ -7280,7 +7412,7 @@ Calibration Parameter: forest land &amp; CO2 emissions from land cover change &a
 				<dimensions>
 					<dim name="Run"/>
 				</dimensions>
-				<eqn>(Livestock_Yield/INIT(Livestock_Yield))^elasticity_of_effect_of_animal_products_yield_on_fraction_of_grassland_degrading</eqn>
+				<eqn>(Livestock_Yield[Run,Region]/INIT(Livestock_Yield[Run,Region]))^elasticity_of_effect_of_animal_products_yield_on_fraction_of_grassland_degrading</eqn>
 				<units>dmnl</units>
 			</aux>
 			<aux name="elasticity of effect of animal products\nyield on fraction\nof grassland degrading">
@@ -7331,6 +7463,7 @@ Calibration Parameter: forest land &amp; CO2 emissions from land cover change &a
 			<stock name="Livestock Yield" access="input">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>{Enter equation for use when not hooked up to other models}</eqn>
 				<units>PCal/Mha/Year</units>
@@ -9093,7 +9226,7 @@ Used for policy implementation only.</doc>
 				<isee:iframe color="black" background="white" text_align="left" vertical_text_align="top" font_size="12pt" border_width="thin" border_style="solid"/>
 				<isee:financial_table color="black" background="#E0E0E0" text_align="right" font_size="12pt" hide_border="false" auto_fit="true" first_column_width="250" other_column_width="100" header_font_style="normal" header_font_weight="bold" header_text_decoration="none" header_text_align="center" header_vertical_text_align="center" header_font_color="black" header_font_family="Arial" header_font_size="14pt" header_text_padding="2" header_text_border_color="black" header_text_border_width="thin" header_text_border_style="none"/>
 			</style>
-			<view isee:show_pages="false" background="white" page_width="768" page_height="576" isee:page_cols="3" isee:page_rows="2" isee:popup_graphs_are_comparative="true" isee:enable_non_negative_highlights="false" type="stock_flow">
+			<view isee:show_pages="false" background="white" page_width="1122" page_height="793" isee:page_cols="3" isee:page_rows="2" isee:popup_graphs_are_comparative="true" isee:enable_non_negative_highlights="false" type="stock_flow">
 				<style color="black" background="white" font_style="normal" font_weight="normal" text_decoration="none" text_align="center" vertical_text_align="center" font_color="black" font_family="Arial" font_size="10pt" padding="2" border_color="black" border_width="thin" border_style="none">
 					<stock color="blue" background="white" font_color="blue" font_size="11pt" label_side="top">
 						<shape type="rectangle" width="45" height="35"/>
@@ -10573,7 +10706,7 @@ https://doi.org/10.1126/science.1201609</doc>
 				<isee:iframe color="black" background="white" text_align="left" vertical_text_align="top" font_size="12pt" border_width="thin" border_style="solid"/>
 				<isee:financial_table color="black" background="#E0E0E0" text_align="right" font_size="12pt" hide_border="false" auto_fit="true" first_column_width="250" other_column_width="100" header_font_style="normal" header_font_weight="bold" header_text_decoration="none" header_text_align="center" header_vertical_text_align="center" header_font_color="black" header_font_family="Arial" header_font_size="14pt" header_text_padding="2" header_text_border_color="black" header_text_border_width="thin" header_text_border_style="none"/>
 			</style>
-			<view isee:show_pages="false" background="white" page_width="768" page_height="576" isee:page_cols="4" isee:page_rows="3" isee:popup_graphs_are_comparative="true" isee:enable_non_negative_highlights="false" type="stock_flow">
+			<view isee:show_pages="false" background="white" page_width="1122" page_height="793" isee:page_cols="4" isee:page_rows="3" isee:scroll_x="205" isee:popup_graphs_are_comparative="true" isee:enable_non_negative_highlights="false" type="stock_flow">
 				<style color="black" background="white" font_style="normal" font_weight="normal" text_decoration="none" text_align="center" vertical_text_align="center" font_color="black" font_family="Arial" font_size="10pt" padding="2" border_color="black" border_width="thin" border_style="none">
 					<stock color="blue" background="white" font_color="blue" font_size="11pt" label_side="top">
 						<shape type="rectangle" width="45" height="35"/>
