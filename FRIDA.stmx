@@ -137,17 +137,9 @@
 		<isee:optimizer_specs name="Carbon Balance Calibration" method="Powell" use_additional_starts_file="false" additional_starts="0" report_interval="1" confidence_range="0" maxiter="0">
 			<isee:parameter name="Crop.sensitivity_of_effect_of_crop_yield_on_harvest_index[1]" scaling="100"/>
 			<isee:parameter name="Crop.sensitivity_of_effect_of_crop_residue_production_on_field_fraction[1]" scaling="100"/>
-			<isee:parameter name="Forest.CO2_tree_net_primary_production_parameter[1]" scaling="10000"/>
-			<isee:parameter name="Grass.CO2_grass_net_primary_production_parameter[1]" scaling="10000"/>
 			<isee:parameter name="Land_Use.normal_average_cutting_time[1]" scaling="0.1"/>
 			<isee:parameter name="Land_Use.normal_average_time_cropland_in_use[1]" scaling="0.1"/>
 			<isee:parameter name="Land_Use.percent_of_forest_recovering_in_1980[1]" scaling="100"/>
-			<isee:parameter name="Grass.grass_net_primary_production_in_1980[1]" scaling="1000"/>
-			<isee:parameter name="Grass.GtC_per_PCal_of_grazing_multiplier[1]" scaling="1000"/>
-			<isee:parameter name="Grass.STA_grass_net_primary_production_parameter[1]" scaling="1000"/>
-			<isee:parameter name="Grass.STA_squared_grass_net_primary_production_parameter[1]" scaling="1000"/>
-			<isee:parameter name="Forest.STA_tree_net_primary_production_parameter[1]" scaling="1000"/>
-			<isee:parameter name="Forest.STA_squared_tree_net_primary_production_parameter[1]" scaling="1000"/>
 			<isee:parameter name="soil_carbon_decay.natural_decay_rate_fast_soil_carbon[1]" scaling="1000"/>
 			<isee:parameter name="soil_carbon_decay.natural_decay_rate_slow_soil_carbon[1]" scaling="10000"/>
 			<isee:parameter name="soil_carbon_decay.natural_decay_rate_litter_carbon[1]" scaling="100"/>
@@ -157,7 +149,6 @@
 			<isee:parameter name="grassland_soil_carbon.grassland_soil_carbon_1980[1]" scaling="0.1"/>
 			<isee:parameter name="soil_carbon_decay.grassland_litter_input_share_slow_soil_carbon[1]" scaling="1000"/>
 			<isee:parameter name="soil_carbon_decay.grassland_slow_soil_carbon_historic_share[1]" scaling="100"/>
-			<isee:parameter name="Forest.tree_net_primary_production_in_1980[1]" scaling="1000"/>
 			<isee:parameter name="soil_carbon_decay.cropland_litter_input_share_slow_soil_carbon[1]" scaling="1000"/>
 			<isee:parameter name="soil_carbon_decay.cropland_slow_soil_carbon_historic_share[1]" scaling="100"/>
 			<isee:parameter name="soil_carbon_decay.young_forest_litter_input_share_slow_soil_carbon[1]" scaling="1000"/>
@@ -165,12 +156,8 @@
 			<isee:parameter name="soil_carbon_decay.mature_forest_litter_input_share_slow_soil_carbon[1]" scaling="1000"/>
 			<isee:parameter name="soil_carbon_decay.mature_forest_slow_soil_carbon_historic_share[1]" scaling="100"/>
 			<isee:parameter name="soil_carbon_decay.e0[1]"/>
-			<isee:parameter name="Forest.forest_aboveground_biomass_1980[1]" scaling="0.1"/>
-			<isee:parameter name="Forest.Young_mature_forest_biomass_ratio[1]" scaling="100"/>
 			<isee:parameter name="Land_Use.forest_recovery_time[1]"/>
 			<isee:parameter name="Terrestrial_Carbon_Balance.Global_peatland_carbon_uptake_rate[1]" scaling="100"/>
-			<isee:parameter name="Forest.STA_squared_maximum_aboveground_biomass_per_area_parameter[1]" scaling="1000"/>
-			<isee:parameter name="Forest.STA_maximum_aboveground_biomass_per_area_parameter[1]" scaling="1000"/>
 			<isee:parameter name="Crop.harvest_index_for_feed_crops[1]" scaling="100"/>
 			<isee:parameter name="Crop.harvest_index_for_energy_crops[1]" scaling="100"/>
 			<isee:parameter name="Crop.normal_harvest_index_for_food_crops[1]" scaling="1000"/>
@@ -192,18 +179,6 @@
 			<isee:parameter name="Animal_Products.aquatic_animal_product_share_1980[1]" scaling="10000"/>
 			<isee:parameter name="Animal_Products.average_animal_product_growth_efficiency[1]" scaling="10"/>
 			<isee:parameter name="Animal_Products.Animal_Products_Yield_in_1980[1]" scaling="100"/>
-			<isee:parameter name="Freshwater.non_agricultural_water_withdrawal_1980[1]" scaling="1e-8"/>
-			<isee:parameter name="Freshwater.elasticity_of_non_agricultural_water_withdrawal_per_capita_to_GDP_per_person[1]" scaling="100"/>
-			<isee:parameter name="Freshwater.sensitivity_of_effect_of_available_water_supply_on_land_irrigated[1]" scaling="10"/>
-			<isee:parameter name="Freshwater.water_withdrawal_per_MHa_irrigated_1980[1]" scaling="1e-10"/>
-			<isee:parameter name="Freshwater.rate_of_change_in_irrigation_efficiency[1]" scaling="1000000"/>
-			<isee:parameter name="Freshwater.initial_available_water_supply[1]" scaling="0.000001"/>
-			<isee:parameter name="Freshwater.sensitivity_of_pressure_to_expand_water_supply_to_available_water_supply[1]" scaling="100"/>
-			<isee:parameter name="Freshwater.technological_water_discovery_1980[1]" scaling="1e-8"/>
-			<isee:parameter name="Freshwater.rate_of_change_in_technological_water_discovery[1]" scaling="100"/>
-			<isee:parameter name="Freshwater.sensitivity_of_fraction_of_cropland_irrigated_indicated_to_GDP_per_person[1]" scaling="100"/>
-			<isee:parameter name="Freshwater.base_fraction_of_cropland_irrigated[1]" scaling="100"/>
-			<isee:parameter name="Freshwater.initial_fraction_of_unsustainable_water_withdrawal[1]" scaling="100"/>
 			<isee:parameter name="Land_Nutrients.elasticity_of_effect_of_animal_products_on_manure_fertilizer_use[1]" scaling="100"/>
 			<isee:parameter name="Land_Nutrients.sensitivity_demand_to_relative_use[1]" scaling="100"/>
 			<isee:parameter name="Land_Nutrients.sensitivity_of_fertilizer_use_to_crop_balance_with_reserves[1]" scaling="100"/>
@@ -247,8 +222,6 @@
 			<isee:parameter name="Land_Nutrients.time_to_change_fertilizer_use[1]" scaling="100"/>
 			<isee:parameter name="Land_Use.sensitivity_of_cutting_time_to_forest_size[1]" scaling="100"/>
 			<isee:parameter name="Food_Demand.time_to_change_crop_demand_components[1]"/>
-			<isee:parameter name="Freshwater.initial_average_relative_real_gdp_per_person[1]" scaling="100"/>
-			<isee:parameter name="Freshwater.time_for_GDP_to_impact_irrigation[1]"/>
 			<isee:payoff name="Land Use and Agriculture Payoff" action="min"/>
 		</isee:optimizer_specs>
 		<isee:optimizer_specs name="Economy Calibration" method="Powell" use_additional_starts_file="false" additional_starts="0" report_interval="1" confidence_range="0" tolerance="0.000001" maxiter="0">
@@ -310,16 +283,10 @@
 			<isee:payoff_element name="Land_Use.Cropland[1]" weight="0.00582107396354167">
 				<isee:time_range type="terminal_value"/>
 			</isee:payoff_element>
-			<isee:payoff_element name="Freshwater.total_water_withdrawal[1]" weight="1.23449368543618e-22">
-				<isee:time_range type="terminal_value"/>
-			</isee:payoff_element>
 			<isee:payoff_element name="Animal_Products.animal_products_production[1]" weight="0.00468550787252373">
 				<isee:time_range type="terminal_value"/>
 			</isee:payoff_element>
 			<isee:payoff_element name="Freshwater.fraction_of_water_withdrawal_for_agriculture[1]" weight="67135781.402348">
-				<isee:time_range type="terminal_value"/>
-			</isee:payoff_element>
-			<isee:payoff_element name="Freshwater.available_water_supply[1]" weight="3.38041765672179e-23">
 				<isee:time_range type="terminal_value"/>
 			</isee:payoff_element>
 			<isee:payoff_element name="Land_Nutrients.man_made_fertilizer_use[1]" weight="0.0826399196547697">
@@ -329,9 +296,6 @@
 				<isee:time_range type="terminal_value"/>
 			</isee:payoff_element>
 			<isee:payoff_element name="Land_Nutrients.fertilizer_use[1]" weight="0.0644566806895358">
-				<isee:time_range type="terminal_value"/>
-			</isee:payoff_element>
-			<isee:payoff_element name="Freshwater.irrigated_cropland[1]" weight="0.0265670910232126">
 				<isee:time_range type="terminal_value"/>
 			</isee:payoff_element>
 			<isee:payoff_element name="Animal_Products.aquatic_animal_product_share[1]" weight="322599.851848386">
@@ -3374,13 +3338,10 @@ This is what determines when the model stops calculating</doc>
 						<plot color="blue" title="Agricultural" isee:keep_zero_visible="true" pen_width="1" index="0" show_y_axis="true">
 							<entity name="Freshwater.agricultural_water_withdrawal[1]"/>
 						</plot>
-						<plot color="red" title="Non Agricultural" isee:keep_zero_visible="true" pen_width="1" index="1" show_y_axis="true">
-							<entity name="Freshwater.non_agricultural_water_withdrawl[1]"/>
-						</plot>
 					</graph>
 					<graph width="570" height="470" type="time_series" show_grid="true" isee:tick_type="none" include_units_in_legend="false" plot_numbers="false" isee:label_pie_slices="false" isee:show_pie_borders="true" num_x_grid_lines="13" num_y_grid_lines="9" num_x_labels="13" num_y_labels="9" title="Water Sustainability (to be combined with Water Use)" isee:fill_intensity="1" to="2100" isee:allow_zero_axis="true" left_axis_multi_scale="false" left_axis_auto_scale="true" left_include_units="true" right_axis_multi_scale="false" right_axis_auto_scale="true" right_include_units="true">
 						<plot color="blue" title="Total Water Use" isee:keep_zero_visible="true" pen_width="1" index="0" show_y_axis="true">
-							<entity name="Freshwater.total_water_withdrawal[1]"/>
+							<entity name="Freshwater.total_water_withdrawal[1, World]"/>
 						</plot>
 						<plot color="red" title="Unsustainable Water Use" isee:keep_zero_visible="true" pen_width="1" index="1" show_y_axis="true">
 							<entity name="Freshwater.unsustainable_groundwater_withdrawal[1]"/>
@@ -3573,10 +3534,7 @@ This is what determines when the model stops calculating</doc>
 						<plot color="#FFEC00" title="Cropland" isee:keep_zero_visible="true" pen_width="1" index="2" show_y_axis="true">
 							<entity name="Land_Use.Cropland[1]"/>
 						</plot>
-						<plot color="#6DFF00" title="Grassland" isee:keep_zero_visible="true" pen_width="1" index="3" show_y_axis="true">
-							<entity name="Land_Use.Grassland[1]"/>
-						</plot>
-						<plot color="red" title="Degraded Land" isee:keep_zero_visible="true" pen_width="1" index="4" show_y_axis="true">
+						<plot color="red" title="Degraded Land" isee:keep_zero_visible="true" pen_width="1" index="3" show_y_axis="true">
 							<entity name="Land_Use.Degraded_Land[1]"/>
 						</plot>
 					</graph>

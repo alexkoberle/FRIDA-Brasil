@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xmile version="1.0" xmlns="http://docs.oasis-open.org/xmile/ns/XMILE/v1.0" xmlns:isee="http://iseesystems.com/XMILE">
 	<header>
-		<smile version="1.0" namespace="std, isee" uses_arrays="1" uses_submodels=""/>
+		<smile version="1.0" namespace="std, isee" uses_arrays="2" uses_submodels=""/>
 		<name>Land Use and Agriculture</name>
 		<uuid>fe807591-4e3d-4e2c-b464-70ec4fb12094</uuid>
 		<vendor>isee systems, inc.</vendor>
@@ -14,6 +14,10 @@
 	</sim_specs>
 	<dimensions>
 		<dim name="CropImpactsCase" size="11"/>
+		<dim name="Region">
+			<elem name="World"/>
+			<elem name="Brazil"/>
+		</dim>
 		<dim name="Run" size="1"/>
 	</dimensions>
 	<isee:prefs saved_runs="5" keep="false" show_module_prefix="true" live_update_on_drag="true" show_restore_buttons="false" layer="model" isee:design="Deluxe Prev-Next Blue Green Pastel" isee:design_custom="false" interface_secure_mode="true" interface_scale_ui="true" interface_max_page_width="10000" interface_max_page_height="10000" interface_min_page_width="0" interface_min_page_height="0" rifp="true">
@@ -255,8 +259,8 @@ This isn&apos;t in the uncertainty analysis b/c it needs to be integrated with t
 				<dimensions>
 					<dim name="Run"/>
 				</dimensions>
-				<eqn>(Mature_Forest * Albedo_forest_land + Grassland * Albedo_grassland + Cropland * Albedo_cropland + Recovering_Forest *albedo_recovering_forest )
-/ (Mature_Forest + Cropland + Grassland + Recovering_Forest)</eqn>
+				<eqn>(Mature_Forest * Albedo_forest_land + Grassland[Run,Region] * Albedo_grassland + Cropland * Albedo_cropland + Recovering_Forest *albedo_recovering_forest )
+/ (Mature_Forest + Cropland + Grassland[Run,Region] + Recovering_Forest)</eqn>
 				<units>dmnl</units>
 			</aux>
 			<aux name="albedo recovering forest">
@@ -533,6 +537,7 @@ This isn&apos;t in the uncertainty analysis b/c it needs to be integrated with t
 			<stock name="Grassland" access="input">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<units>Mha</units>
 			</stock>
@@ -1012,7 +1017,7 @@ Corresponding author: Axel Eriksson, ax3635er-s@student.lu.se or j.axel.e.erikss
 				<isee:iframe color="black" background="white" text_align="left" vertical_text_align="top" font_size="12pt" border_width="thin" border_style="solid"/>
 				<isee:financial_table color="black" background="#E0E0E0" text_align="right" font_size="12pt" hide_border="false" auto_fit="true" first_column_width="250" other_column_width="100" header_font_style="normal" header_font_weight="bold" header_text_decoration="none" header_text_align="center" header_vertical_text_align="center" header_font_color="black" header_font_family="Arial" header_font_size="14pt" header_text_padding="2" header_text_border_color="black" header_text_border_width="thin" header_text_border_style="none"/>
 			</style>
-			<view isee:show_pages="false" background="white" page_width="768" page_height="588" isee:page_cols="5" isee:page_rows="2" isee:popup_graphs_are_comparative="true" isee:enable_non_negative_highlights="false" type="stock_flow">
+			<view isee:show_pages="false" background="white" page_width="1122" page_height="793" isee:page_cols="5" isee:page_rows="2" isee:popup_graphs_are_comparative="true" isee:enable_non_negative_highlights="false" type="stock_flow">
 				<style color="black" background="white" font_style="normal" font_weight="normal" text_decoration="none" text_align="center" vertical_text_align="center" font_color="black" font_family="Arial" font_size="10pt" padding="2" border_color="black" border_width="thin" border_style="none">
 					<stock color="blue" background="white" font_color="blue" font_size="12.51pt" label_side="top">
 						<shape type="rectangle" width="45" height="35"/>
@@ -1900,6 +1905,7 @@ Food and Agriculture Organization of the United Nations (2023)</doc>
 			<aux name="fraction of cropland\nirrigated" access="input">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>{Enter equation for use when not hooked up to other models}</eqn>
 				<units>dmnl</units>
@@ -2281,7 +2287,7 @@ rel_change_in_crop_productivity_from_climate
 				<dimensions>
 					<dim name="Run"/>
 				</dimensions>
-				<eqn>(fraction_of_cropland_irrigated-INIT(fraction_of_cropland_irrigated))*irrigation_crop_yield_parameter</eqn>
+				<eqn>(fraction_of_cropland_irrigated[Run,World]-INIT(fraction_of_cropland_irrigated[Run,World]))*irrigation_crop_yield_parameter</eqn>
 				<units>dmnl</units>
 			</aux>
 			<aux name="irrigation crop yield parameter">
@@ -2492,7 +2498,7 @@ harvest_index_for_food_crops * (1 - Fraction_of_crop_production_for_energy - Fra
 				<isee:iframe color="black" background="white" text_align="left" vertical_text_align="top" font_size="12pt" border_width="thin" border_style="solid"/>
 				<isee:financial_table color="black" background="#E0E0E0" text_align="right" font_size="12pt" hide_border="false" auto_fit="true" first_column_width="250" other_column_width="100" header_font_style="normal" header_font_weight="bold" header_text_decoration="none" header_text_align="center" header_vertical_text_align="center" header_font_color="black" header_font_family="Arial" header_font_size="14pt" header_text_padding="2" header_text_border_color="black" header_text_border_width="thin" header_text_border_style="none"/>
 			</style>
-			<view isee:show_pages="false" background="white" page_width="1026" page_height="786" isee:page_cols="5" isee:page_rows="6" isee:scroll_x="1223" isee:scroll_y="1420" isee:popup_graphs_are_comparative="true" isee:enable_non_negative_highlights="false" type="stock_flow">
+			<view isee:show_pages="false" background="white" page_width="1122" page_height="793" isee:page_cols="5" isee:page_rows="6" isee:scroll_x="622" isee:scroll_y="1185" isee:popup_graphs_are_comparative="true" isee:enable_non_negative_highlights="false" type="stock_flow">
 				<style color="black" background="white" font_style="normal" font_weight="normal" text_decoration="none" text_align="center" vertical_text_align="center" font_color="black" font_family="Arial" font_size="10pt" padding="2" border_color="black" border_width="thin" border_style="none">
 					<stock color="blue" background="white" font_color="blue" font_size="11pt" label_side="top">
 						<shape type="rectangle" width="45" height="35"/>
@@ -3949,7 +3955,7 @@ Calibration Parameter: fertilizer use &amp; crop production</doc>
 				<dimensions>
 					<dim name="Run"/>
 				</dimensions>
-				<eqn>MAXSOFT(tree_net_primary_production_in_1980 + change_in_tree_net_primary_production_from_CO2+change_in_tree_net_primary_production_from_STA+change_in_tree_net_primary_production_from_STA_squared, tree_net_primary_production_in_1980*minimum_fraction_of_1980_tree_primary_production,tolerance_for_net_primary_production )</eqn>
+				<eqn>MAXSOFT(tree_net_primary_production_in_1980[Run,World] + change_in_tree_net_primary_production_from_CO2[Run,World]+change_in_tree_net_primary_production_from_STA[Run,World]+change_in_tree_net_primary_production_from_STA_squared[Run,World], tree_net_primary_production_in_1980[Run,World]*minimum_fraction_of_1980_tree_primary_production[World],tolerance_for_net_primary_production[World] )</eqn>
 				<units>GtC/(Mha*year)</units>
 			</aux>
 			<aux name="CO2 tree net primary\nproduction parameter">
@@ -3957,8 +3963,12 @@ Calibration Parameter: fertilizer use &amp; crop production</doc>
 </doc>
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<element subscript="1">
+				<element subscript="1, World">
+					<eqn>0.001</eqn>
+				</element>
+				<element subscript="1, Brazil">
 					<eqn>0.001</eqn>
 				</element>
 				<range min="0.0005" max="0.001"/>
@@ -3967,16 +3977,18 @@ Calibration Parameter: fertilizer use &amp; crop production</doc>
 			<aux name="effect of CO2 on\ntree net primary production">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>IF (switch_land_carbon_impact =0) AND TIME &gt; today THEN PREVIOUS
-(SELF,0 )ELSE
+(SELF[Run,Region],0 )ELSE
 (
-Atmospheric_CO2_Concentration_1- INIT (Atmospheric_CO2_Concentration_1))*CO2_tree_net_primary_production_parameter</eqn>
+Atmospheric_CO2_Concentration_1[Run]- INIT (Atmospheric_CO2_Concentration_1[Run]))*CO2_tree_net_primary_production_parameter</eqn>
 				<units>dmnl</units>
 			</aux>
 			<aux name="change in tree net\nprimary production from CO2">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>tree_net_primary_production_in_1980*effect_of_CO2_on_tree_net_primary_production</eqn>
 				<units>GtC/(Mha*year)</units>
@@ -3984,6 +3996,7 @@ Atmospheric_CO2_Concentration_1- INIT (Atmospheric_CO2_Concentration_1))*CO2_tre
 			<aux name="change in tree net\nprimary production from STA">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>tree_net_primary_production_in_1980*effect_of_STA_on_tree_net_primary_production</eqn>
 				<units>GtC/(Mha*year)</units>
@@ -3991,11 +4004,12 @@ Atmospheric_CO2_Concentration_1- INIT (Atmospheric_CO2_Concentration_1))*CO2_tre
 			<aux name="effect of STA on\ntree net primary production">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>IF (switch_land_carbon_impact =0) AND TIME &gt; today THEN PREVIOUS
-(SELF,0 )ELSE
+(SELF[Run,Region],0 )ELSE
 (
-Surface_Temperature_Anomaly_1-INIT(Surface_Temperature_Anomaly_1))*STA_tree_net_primary_production_parameter</eqn>
+Surface_Temperature_Anomaly_1[Run]-INIT(Surface_Temperature_Anomaly_1[Run]))*STA_tree_net_primary_production_parameter</eqn>
 				<units>dmnl</units>
 			</aux>
 			<aux name="STA tree net primary\nproduction parameter">
@@ -4003,8 +4017,12 @@ Surface_Temperature_Anomaly_1-INIT(Surface_Temperature_Anomaly_1))*STA_tree_net_
 </doc>
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<element subscript="1">
+				<element subscript="1, World">
+					<eqn>0.125348729</eqn>
+				</element>
+				<element subscript="1, Brazil">
 					<eqn>0.125348729</eqn>
 				</element>
 				<range min="0.01" max="0.13"/>
@@ -4013,6 +4031,7 @@ Surface_Temperature_Anomaly_1-INIT(Surface_Temperature_Anomaly_1))*STA_tree_net_
 			<aux name="change in tree net primary production\nfrom STA squared">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>tree_net_primary_production_in_1980*effect_of_STA_squared_on_tree_net_primary_production</eqn>
 				<units>GtC/(Mha*year)</units>
@@ -4020,11 +4039,12 @@ Surface_Temperature_Anomaly_1-INIT(Surface_Temperature_Anomaly_1))*STA_tree_net_
 			<aux name="effect of STA squared on\ntree net primary production">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>IF (switch_land_carbon_impact =0) AND TIME &gt; today THEN PREVIOUS
-(SELF,0 )ELSE
+(SELF[Run,Region],0 )ELSE
 (
-(Surface_Temperature_Anomaly_1-INIT(Surface_Temperature_Anomaly_1))^2)*STA_squared_tree_net_primary_production_parameter</eqn>
+(Surface_Temperature_Anomaly_1[Run]-INIT(Surface_Temperature_Anomaly_1[Run]))^2)*STA_squared_tree_net_primary_production_parameter</eqn>
 				<units>dmnl</units>
 			</aux>
 			<aux name="STA squared tree net\nprimary production parameter">
@@ -4032,8 +4052,12 @@ Surface_Temperature_Anomaly_1-INIT(Surface_Temperature_Anomaly_1))*STA_tree_net_
 </doc>
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<element subscript="1">
+				<element subscript="1, World">
+					<eqn>-0.023015026</eqn>
+				</element>
+				<element subscript="1, Brazil">
 					<eqn>-0.023015026</eqn>
 				</element>
 				<range min="-0.05" max="-0.01"/>
@@ -4042,6 +4066,7 @@ Surface_Temperature_Anomaly_1-INIT(Surface_Temperature_Anomaly_1))*STA_tree_net_
 			<aux name="combined change in tree net primary production\nfrom STA">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>change_in_tree_net_primary_production_from_STA+change_in_tree_net_primary_production_from_STA_squared</eqn>
 				<units>GtC/(Mha*year)</units>
@@ -4050,7 +4075,7 @@ Surface_Temperature_Anomaly_1-INIT(Surface_Temperature_Anomaly_1))*STA_tree_net_
 				<dimensions>
 					<dim name="Run"/>
 				</dimensions>
-				<eqn>young_forest_net_primary_production*(1-Young_forest_net_primary_production_aboveground_biomass_share)</eqn>
+				<eqn>young_forest_net_primary_production*(1-Young_forest_net_primary_production_aboveground_biomass_share[Run,World])</eqn>
 				<units>GtC/Year</units>
 			</aux>
 			<aux name="tree net primary production\nin 1980">
@@ -4060,8 +4085,12 @@ https://doi.org/10.1038/nature07276 (0.00545)
 https://doi.org/10.1073/pnas.0704243104 (0.0072)</doc>
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<element subscript="1">
+				<element subscript="1, World">
+					<eqn>0.008320717</eqn>
+				</element>
+				<element subscript="1, Brazil">
 					<eqn>0.008320717</eqn>
 				</element>
 				<range min="0.005" max="0.01"/>
@@ -4100,6 +4129,7 @@ https://doi.org/10.1073/pnas.0704243104 (0.0072)</doc>
 				<doc>https://doi.org/10.1890/1051-0761(2001)011[1395:NPPACA]2.0.CO;2</doc>
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>MAX(0, (1.0 - Young_forest_aboveground_biomass_per_area/Mature_forest_aboveground_biomass_per_area))</eqn>
 				<units>dmnl</units>
@@ -4107,8 +4137,9 @@ https://doi.org/10.1073/pnas.0704243104 (0.0072)</doc>
 			<flow name="young forest growth" access="output" isee:autocreated="true">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<eqn>young_forest_net_primary_production*Young_forest_net_primary_production_aboveground_biomass_share</eqn>
+				<eqn>young_forest_net_primary_production[Run]*Young_forest_net_primary_production_aboveground_biomass_share[Run,World]</eqn>
 				<non_negative/>
 				<units>GtC/Year</units>
 			</flow>
@@ -4130,7 +4161,7 @@ https://doi.org/10.1073/pnas.0704243104 (0.0072)</doc>
 				<dimensions>
 					<dim name="Run"/>
 				</dimensions>
-				<eqn>forest_aboveground_biomass_1980-Young_forest_aboveground_biomass</eqn>
+				<eqn>forest_aboveground_biomass_1980[Run,World]-Young_forest_aboveground_biomass[Run,World]</eqn>
 				<format precision="full"/>
 				<inflow>maturing</inflow>
 				<inflow>Mature_forest_growth</inflow>
@@ -4142,8 +4173,9 @@ https://doi.org/10.1073/pnas.0704243104 (0.0072)</doc>
 			<flow name="maturing" access="output" isee:autocreated="true">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<eqn>forest_completing_recovery*Mature_forest_aboveground_biomass_per_area</eqn>
+				<eqn>forest_completing_recovery[Run]*Mature_forest_aboveground_biomass_per_area</eqn>
 				<format precision="full"/>
 				<non_negative/>
 				<units>GtC/Year</units>
@@ -4152,7 +4184,7 @@ https://doi.org/10.1073/pnas.0704243104 (0.0072)</doc>
 				<dimensions>
 					<dim name="Run"/>
 				</dimensions>
-				<eqn>(clearing_forest_for_grassland+clearing_forests_for_crops_1) * Mature_forest_aboveground_biomass_per_area</eqn>
+				<eqn>(clearing_forest_for_grassland[Run,World]+clearing_forests_for_crops_1) * Mature_forest_aboveground_biomass_per_area[Run,World]</eqn>
 				<format precision="full"/>
 				<non_negative/>
 				<units>GtC/Year</units>
@@ -4176,8 +4208,12 @@ https://doi.org/10.1073/pnas.0704243104 (0.0072)</doc>
 https://doi.org/10.5194/essd-13-3927-2021, 2021.</doc>
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<element subscript="1">
+				<element subscript="1, World">
+					<eqn>546.9907432</eqn>
+				</element>
+				<element subscript="1, Brazil">
 					<eqn>546.9907432</eqn>
 				</element>
 				<range min="450" max="700"/>
@@ -4189,8 +4225,12 @@ https://doi.org/10.1038/s41467-018-05132-5
 https://doi.org/10.1016/j.foreco.2021.119507</doc>
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<element subscript="1">
+				<element subscript="1, World">
+					<eqn>0.558925781</eqn>
+				</element>
+				<element subscript="1, Brazil">
 					<eqn>0.558925781</eqn>
 				</element>
 				<range min="0.3" max="0.7"/>
@@ -4199,6 +4239,7 @@ https://doi.org/10.1016/j.foreco.2021.119507</doc>
 			<aux name="clearing forest\nfor grassland" access="input">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>{Enter equation for use when not hooked up to other models}</eqn>
 				<units>Mha/year</units>
@@ -4207,7 +4248,7 @@ https://doi.org/10.1016/j.foreco.2021.119507</doc>
 				<dimensions>
 					<dim name="Run"/>
 				</dimensions>
-				<eqn>Young_forest_aboveground_biomass+Mature_forest_aboveground_biomass</eqn>
+				<eqn>Young_forest_aboveground_biomass[Run,World]+Mature_forest_aboveground_biomass</eqn>
 				<format precision="full"/>
 				<units>GtC</units>
 			</aux>
@@ -4215,14 +4256,15 @@ https://doi.org/10.1016/j.foreco.2021.119507</doc>
 				<dimensions>
 					<dim name="Run"/>
 				</dimensions>
-				<eqn>forest_aboveground_biomass-forest_aboveground_biomass_1980</eqn>
+				<eqn>forest_aboveground_biomass-forest_aboveground_biomass_1980[Run,World]</eqn>
 				<units>GtC</units>
 			</aux>
 			<stock name="Young forest\naboveground biomass">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<eqn>forest_aboveground_biomass_1980*Young_mature_forest_biomass_ratio*young_forest_share</eqn>
+				<eqn>forest_aboveground_biomass_1980*Young_mature_forest_biomass_ratio*young_forest_share[Run]</eqn>
 				<format precision="full"/>
 				<inflow>young_forest_growth</inflow>
 				<outflow>maturing</outflow>
@@ -4240,7 +4282,7 @@ https://doi.org/10.1016/j.foreco.2021.119507</doc>
 				<dimensions>
 					<dim name="Run"/>
 				</dimensions>
-				<eqn>cutting_1*Mature_forest_aboveground_biomass_per_area</eqn>
+				<eqn>cutting_1*Mature_forest_aboveground_biomass_per_area[Run,World]</eqn>
 				<non_negative/>
 				<units>GtC/Year</units>
 			</flow>
@@ -4266,18 +4308,20 @@ https://doi.org/10.1016/j.foreco.2021.119507</doc>
 				<eqn>{Enter equation for use when not hooked up to other models}</eqn>
 				<units>Mha/Year</units>
 			</aux>
-			<aux name="Mature forest aboveground biomass per area">
+			<aux name="Mature forest aboveground\nbiomass per area">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<eqn>Mature_forest_aboveground_biomass/Mature_Forest</eqn>
+				<eqn>Mature_forest_aboveground_biomass[Run]/Mature_Forest[Run]</eqn>
 				<units>GtC/Mha</units>
 			</aux>
 			<aux name="Young forest aboveground\nbiomass per area">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<eqn>Young_forest_aboveground_biomass/Young_Forest</eqn>
+				<eqn>Young_forest_aboveground_biomass/Young_Forest[Run]</eqn>
 				<units>GtC/Mha</units>
 			</aux>
 			<aux name="forest completing\nrecovery" access="input">
@@ -4291,13 +4335,14 @@ https://doi.org/10.1016/j.foreco.2021.119507</doc>
 				<dimensions>
 					<dim name="Run"/>
 				</dimensions>
-				<eqn>mature_forest_net_primary_production*Mature_forest_net_primary_production_aboveground_biomass_share</eqn>
+				<eqn>mature_forest_net_primary_production*Mature_forest_net_primary_production_aboveground_biomass_share[Run,World]</eqn>
 				<units>GtC/Year</units>
 			</flow>
 			<aux name="Mature forest net primary\nproduction aboveground\nbiomass share">
 				<doc>https://doi.org/10.1890/1051-0761(2001)011[1395:NPPACA]2.0.CO;2</doc>
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>MAX(0, (1.0 - Mature_forest_aboveground_biomass_per_area/Maximum_mature_forest_aboveground_biomass_per_area))</eqn>
 				<units>dmnl</units>
@@ -4306,6 +4351,7 @@ https://doi.org/10.1016/j.foreco.2021.119507</doc>
 				<doc>https://doi.org/10.1890/1051-0761(2001)011[1395:NPPACA]2.0.CO;2</doc>
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>INIT(Mature_forest_aboveground_biomass_per_area)</eqn>
 				<units>GtC/Mha</units>
@@ -4313,6 +4359,7 @@ https://doi.org/10.1016/j.foreco.2021.119507</doc>
 			<aux name="Change in maximum mature forest\naboveground biomass per area">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>Normal_mature_forest_aboveground_biomass_per_area *  (STA_effect_on_aboveground_biomass_per_area+STA_squared_effect_on_aboveground_biomass_per_area)</eqn>
 				<units>GtC/Mha</units>
@@ -4321,8 +4368,9 @@ https://doi.org/10.1016/j.foreco.2021.119507</doc>
 				<doc>https://doi.org/10.1890/1051-0761(2001)011[1395:NPPACA]2.0.CO;2</doc>
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<eqn>MAXSOFT(Normal_mature_forest_aboveground_biomass_per_area+Change_in_maximum_mature_forest_aboveground_biomass_per_area,  minimum_fraction_of_normal_mature_forest_aboveground_biomass_per_area*Normal_mature_forest_aboveground_biomass_per_area,  tolerance_for_minimum_fraction_of_normal_mature_forest_aboveground_biomass_per_area)</eqn>
+				<eqn>MAXSOFT(Normal_mature_forest_aboveground_biomass_per_area+Change_in_maximum_mature_forest_aboveground_biomass_per_area,  minimum_fraction_of_normal_mature_forest_aboveground_biomass_per_area[Region]*Normal_mature_forest_aboveground_biomass_per_area,  tolerance_for_minimum_fraction_of_normal_mature_forest_aboveground_biomass_per_area[Region])</eqn>
 				<units>GtC/Mha</units>
 			</aux>
 			<aux name="STA maximum aboveground\nbiomass per area parameter">
@@ -4330,8 +4378,12 @@ https://doi.org/10.1016/j.foreco.2021.119507</doc>
 </doc>
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<element subscript="1">
+				<element subscript="1, World">
+					<eqn>0.253488316</eqn>
+				</element>
+				<element subscript="1, Brazil">
 					<eqn>0.253488316</eqn>
 				</element>
 				<range min="0.2" max="0.35"/>
@@ -4342,33 +4394,39 @@ https://doi.org/10.1016/j.foreco.2021.119507</doc>
 </doc>
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<element subscript="1">
+				<element subscript="1, World">
+					<eqn>-0.048709811</eqn>
+				</element>
+				<element subscript="1, Brazil">
 					<eqn>-0.048709811</eqn>
 				</element>
 				<range min="-0.08" max="-0.02"/>
 				<units>1/(deg C^2)</units>
 			</aux>
-			<aux name="STA squared effect on aboveground biomass per area">
+			<aux name="STA squared effect on\naboveground biomass per area">
 				<doc>https://doi.org/10.1890/1051-0761(2001)011[1395:NPPACA]2.0.CO;2</doc>
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>IF (switch_land_carbon_impact_1 =0) AND TIME &gt; today_1 THEN PREVIOUS
-(SELF,0 )ELSE
+(SELF[Run,Region],0 )ELSE
 (
-(Surface_Temperature_Anomaly_1-INIT(Surface_Temperature_Anomaly_1))^2)*STA_squared_maximum_aboveground_biomass_per_area_parameter</eqn>
+(Surface_Temperature_Anomaly_1[Run]-INIT(Surface_Temperature_Anomaly_1[Run]))^2)*STA_squared_maximum_aboveground_biomass_per_area_parameter</eqn>
 				<units>1</units>
 			</aux>
 			<aux name="STA effect on\naboveground biomass per area">
 				<doc>https://doi.org/10.1890/1051-0761(2001)011[1395:NPPACA]2.0.CO;2</doc>
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>IF (switch_land_carbon_impact_1 =0) AND TIME &gt; today_1 THEN PREVIOUS
-(SELF,0 )ELSE
+(SELF[Run,Region],0 )ELSE
 (
-Surface_Temperature_Anomaly_1-INIT(Surface_Temperature_Anomaly_1))*STA_maximum_aboveground_biomass_per_area_parameter</eqn>
+Surface_Temperature_Anomaly_1[Run]-INIT(Surface_Temperature_Anomaly_1[Run]))*STA_maximum_aboveground_biomass_per_area_parameter</eqn>
 				<units>1</units>
 			</aux>
 			<aux name="today 1" access="input">
@@ -4384,24 +4442,36 @@ Surface_Temperature_Anomaly_1-INIT(Surface_Temperature_Anomaly_1))*STA_maximum_a
 When STA grows past 7 deg C, how low can mature aboveground forest biomass be?  Total estimate of 25% of the &quot;normal&quot; but this is defensible because we know its not 0, and at an STA that high, so much has happened that we&apos;re really in uncharted territory for all of the climate feedback functions.
 
 Limits for extreme conditions in no feedback cases</doc>
+				<dimensions>
+					<dim name="Region"/>
+				</dimensions>
 				<eqn>.25</eqn>
 				<units>dmnl</units>
 			</aux>
 			<aux name="tolerance for minimum fraction of normal\nmature forest aboveground\nbiomass per area">
 				<doc>${Assumption}
 Limits for extreme conditions in no feedback cases</doc>
+				<dimensions>
+					<dim name="Region"/>
+				</dimensions>
 				<eqn>.05</eqn>
 				<units>GtC/Mha</units>
 			</aux>
-			<aux name="minimum fraction of 1980 tree primary production">
+			<aux name="minimum fraction of 1980\ntree primary production">
 				<doc>${Assumption}
 Limits for extreme conditions in no feedback cases</doc>
+				<dimensions>
+					<dim name="Region"/>
+				</dimensions>
 				<eqn>.2</eqn>
 				<units>dmnl</units>
 			</aux>
-			<aux name="tolerance for net primary production">
+			<aux name="tolerance for net\nprimary production">
 				<doc>${Assumption}
 Limits for extreme conditions in no feedback cases</doc>
+				<dimensions>
+					<dim name="Region"/>
+				</dimensions>
 				<eqn>.001</eqn>
 				<units>GtC/(Mha*year)</units>
 			</aux>
@@ -4454,7 +4524,7 @@ Limits for extreme conditions in no feedback cases</doc>
 				<isee:iframe color="black" background="white" text_align="left" vertical_text_align="top" font_size="12pt" border_width="thin" border_style="solid"/>
 				<isee:financial_table color="black" background="#E0E0E0" text_align="right" font_size="12pt" hide_border="false" auto_fit="true" first_column_width="250" other_column_width="100" header_font_style="normal" header_font_weight="bold" header_text_decoration="none" header_text_align="center" header_vertical_text_align="center" header_font_color="black" header_font_family="Arial" header_font_size="14pt" header_text_padding="2" header_text_border_color="black" header_text_border_width="thin" header_text_border_style="none"/>
 			</style>
-			<view isee:show_pages="false" background="white" page_width="1027" page_height="787" isee:page_cols="3" isee:page_rows="3" isee:scroll_x="970" isee:scroll_y="873" isee:popup_graphs_are_comparative="true" isee:enable_non_negative_highlights="false" type="stock_flow">
+			<view isee:show_pages="false" background="white" page_width="1122" page_height="793" isee:page_cols="3" isee:page_rows="3" isee:scroll_x="685" zoom="80" isee:popup_graphs_are_comparative="true" isee:enable_non_negative_highlights="false" type="stock_flow">
 				<style color="black" background="white" font_style="normal" font_weight="normal" text_decoration="none" text_align="center" vertical_text_align="center" font_color="black" font_family="Arial" font_size="10pt" padding="2" border_color="black" border_width="thin" border_style="none">
 					<stock color="blue" background="white" font_color="blue" font_size="11pt" label_side="top">
 						<shape type="rectangle" width="45" height="35"/>
@@ -4621,7 +4691,7 @@ Limits for extreme conditions in no feedback cases</doc>
 					<from>tree_net_primary_production</from>
 					<to>mature_forest_net_primary_production</to>
 				</connector>
-				<connector uid="28" angle="1.2817">
+				<connector uid="28" angle="1.28162">
 					<from>Young_forest_net_primary_production_aboveground_biomass_share</from>
 					<to>young_forest_growth</to>
 				</connector>
@@ -4679,7 +4749,7 @@ Limits for extreme conditions in no feedback cases</doc>
 					<to>forest_aboveground_biomass</to>
 				</connector>
 				<aux font_style="italic" font_weight="bold" x="1178.57" y="315" name="cutting 1"/>
-				<connector uid="37" angle="26.9394">
+				<connector uid="37" angle="26.9398">
 					<from>cutting_1</from>
 					<to>cutting</to>
 				</connector>
@@ -4689,7 +4759,7 @@ Limits for extreme conditions in no feedback cases</doc>
 						<pt x="1256" y="190"/>
 					</pts>
 				</flow>
-				<connector uid="38" angle="59.3327">
+				<connector uid="38" angle="59.3326">
 					<from>cutting</from>
 					<to>timber</to>
 				</connector>
@@ -4717,7 +4787,7 @@ Limits for extreme conditions in no feedback cases</doc>
 					<from>clearing_forests_for_crops_1</from>
 					<to>clearing</to>
 				</connector>
-				<aux x="1358.75" y="487.571" name="Mature forest aboveground biomass per area"/>
+				<aux x="1358.75" y="487.571" name="Mature forest aboveground\nbiomass per area"/>
 				<connector uid="44" angle="323.425">
 					<from>Mature_forest_aboveground_biomass</from>
 					<to>Mature_forest_aboveground_biomass_per_area</to>
@@ -4824,7 +4894,7 @@ Limits for extreme conditions in no feedback cases</doc>
 					<from>STA_squared_maximum_aboveground_biomass_per_area_parameter</from>
 					<to>STA_squared_effect_on_aboveground_biomass_per_area</to>
 				</connector>
-				<aux color="blue" x="1664.43" y="661.916" name="STA squared effect on aboveground biomass per area"/>
+				<aux color="blue" x="1664.43" y="661.916" name="STA squared effect on\naboveground biomass per area"/>
 				<aux color="blue" x="1740.43" y="708.744" name="STA effect on\naboveground biomass per area"/>
 				<connector uid="68" angle="252.425">
 					<from>
@@ -4880,8 +4950,8 @@ Limits for extreme conditions in no feedback cases</doc>
 					<from>tolerance_for_minimum_fraction_of_normal_mature_forest_aboveground_biomass_per_area</from>
 					<to>Maximum_mature_forest_aboveground_biomass_per_area</to>
 				</connector>
-				<aux x="715.17" y="824.714" name="minimum fraction of 1980 tree primary production"/>
-				<aux x="676.083" y="743" name="tolerance for net primary production"/>
+				<aux x="715.17" y="824.714" name="minimum fraction of 1980\ntree primary production"/>
+				<aux x="676.083" y="743" name="tolerance for net\nprimary production"/>
 				<connector uid="81" angle="1.91445">
 					<from>tolerance_for_net_primary_production</from>
 					<to>tree_net_primary_production</to>
@@ -4932,6 +5002,7 @@ Irrigation effects crop yield, but does not set it to 0 when the available water
 The available water supply is recharged at a natural constant rate (safe assumption re: Lan).  It can also be supplemented by humans who &quot;drill deeper&quot; via technological water discovery, and the pressure to increase that, as water supplies dwindle.</doc>
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>initial_available_water_supply</eqn>
 				<inflow>natural_water_recharge_flow</inflow>
@@ -4944,8 +5015,9 @@ The available water supply is recharged at a natural constant rate (safe assumpt
 </doc>
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<eqn>non_agricultural_water_withdrawl+agricultural_water_withdrawal</eqn>
+				<eqn>non_agricultural_water_withdrawl+agricultural_water_withdrawal[Run]</eqn>
 				<non_negative/>
 				<units>m^3/year</units>
 			</flow>
@@ -4954,8 +5026,12 @@ The available water supply is recharged at a natural constant rate (safe assumpt
 Calibration Parameter: fertilizer use &amp; crop production</doc>
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<element subscript="1">
+				<element subscript="1, World">
+					<eqn>0.0108421901817229</eqn>
+				</element>
+				<element subscript="1, Brazil">
 					<eqn>0.0108421901817229</eqn>
 				</element>
 				<range min="0.01" max="0.5"/>
@@ -4966,8 +5042,12 @@ Calibration Parameter: fertilizer use &amp; crop production</doc>
 Calibration Parameter: fertilizer use &amp; crop production</doc>
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<element subscript="1">
+				<element subscript="1, World">
+					<eqn>170884178.399796</eqn>
+				</element>
+				<element subscript="1, Brazil">
 					<eqn>170884178.399796</eqn>
 				</element>
 				<range min="50000000" max="400000000"/>
@@ -4977,22 +5057,25 @@ Calibration Parameter: fertilizer use &amp; crop production</doc>
 				<doc>Calibration Parameter: fertilizer use &amp; crop production</doc>
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>IF switch_non_agricultural_water_use_policy AND TIME &gt; start_year THEN on_agricultural_water_use_policy
 ELSE
-((real_GDP_per_person[Run]/INIT(real_GDP_per_person[Run]))^elasticity_of_non_agricultural_water_withdrawal_per_capita_to_GDP_per_person)*non_agricultural_water_withdrawal_1980</eqn>
+((real_GDP_per_person[Run]/INIT(real_GDP_per_person[Run]))^elasticity_of_non_agricultural_water_withdrawal_per_capita_to_GDP_per_person[Run,Region])*non_agricultural_water_withdrawal_1980[Run,Region]</eqn>
 				<units>m^3/Mp/year</units>
 			</aux>
 			<aux name="non agricultural\nwater withdrawl">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<eqn>Population_1*non_agricultural_water_withdrawal_per_million_person</eqn>
+				<eqn>Population_1[Run]*non_agricultural_water_withdrawal_per_million_person</eqn>
 				<units>m^3/year</units>
 			</aux>
 			<flow name="natural water\nrecharge flow">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>natural_water_recharge</eqn>
 				<non_negative/>
@@ -5002,7 +5085,7 @@ ELSE
 				<dimensions>
 					<dim name="Run"/>
 				</dimensions>
-				<eqn>water_withdrawal_per_MHa_irrigated*irrigated_cropland</eqn>
+				<eqn>water_withdrawal_per_MHa_irrigated[Run,World]*irrigated_cropland[Run,World]</eqn>
 				<units>m^3/year</units>
 			</aux>
 			<aux name="fraction of water\nwithdrawal for agriculture" access="output">
@@ -5011,7 +5094,7 @@ ELSE
 				<dimensions>
 					<dim name="Run"/>
 				</dimensions>
-				<eqn>agricultural_water_withdrawal/total_water_withdrawal</eqn>
+				<eqn>agricultural_water_withdrawal/total_water_withdrawal[Run,World]</eqn>
 				<units>dmnl</units>
 			</aux>
 			<aux name="rate of change\nin irrigation efficiency">
@@ -5019,8 +5102,12 @@ ELSE
 </doc>
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<element subscript="1">
+				<element subscript="1, World">
+					<eqn>0.00372796642741939</eqn>
+				</element>
+				<element subscript="1, Brazil">
 					<eqn>0.00372796642741939</eqn>
 				</element>
 				<range min="0" max="0.01"/>
@@ -5029,8 +5116,9 @@ ELSE
 			<aux name="effect of technology\non irrigation efficiency">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<eqn>EXP(-(rate_of_change_in_irrigation_efficiency)*(TIME-1980))*policy_multiplier</eqn>
+				<eqn>EXP(-(rate_of_change_in_irrigation_efficiency)*(TIME-1980))*policy_multiplier[Region]</eqn>
 				<units>1</units>
 			</aux>
 			<aux name="sensitivity of surface temperature\nanomaly on water used per\nMtcrop">
@@ -5038,8 +5126,12 @@ ELSE
 </doc>
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<element subscript="1">
+				<element subscript="1, World">
+					<eqn>0.064352435</eqn>
+				</element>
+				<element subscript="1, Brazil">
 					<eqn>0.064352435</eqn>
 				</element>
 				<range min="0.02" max="0.1"/>
@@ -5048,11 +5140,12 @@ ELSE
 			<aux name="effect of surface\ntemperature anomaly\non water lost to\nevapotranspiration">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>IF (switch_landuse_damage = 0) AND TIME &gt; today THEN PREVIOUS
-(SELF,1 )ELSE
+(SELF[Run,Region],1 )ELSE
 1
-+ sensitivity_of_surface_temperature_anomaly_on_water_used_per_Mtcrop *Surface_Temperature_Anomaly</eqn>
++ sensitivity_of_surface_temperature_anomaly_on_water_used_per_Mtcrop *Surface_Temperature_Anomaly[Run]</eqn>
 				<units>1</units>
 			</aux>
 			<aux name="water withdrawal per\nMHa irrigated 1980" access="output" isee:autocreated="true">
@@ -5060,8 +5153,12 @@ ELSE
 </doc>
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<element subscript="1">
+				<element subscript="1, World">
+					<eqn>9447671449.83665</eqn>
+				</element>
+				<element subscript="1, Brazil">
 					<eqn>9447671449.83665</eqn>
 				</element>
 				<range min="1000000000" max="100000000000"/>
@@ -5070,6 +5167,7 @@ ELSE
 			<aux name="water withdrawal per\nMHa irrigated">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>water_withdrawal_per_MHa_irrigated_1980*effect_of_technology_on_irrigation_efficiency*effect_of_surface_temperature_anomaly_on_water_lost_to_evapotranspiration</eqn>
 				<units>m^3/MHa/year</units>
@@ -5078,6 +5176,7 @@ ELSE
 				<doc>Dieter data differ, but a current estimate says 20% of cropland are irrigated, accounting for 70% of withdrawals: https://www.nature.com/articles/s43017-023-00438-5</doc>
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>IF switch_irrigation_fraction_policy AND TIME &gt; start_year THEN irrigation_fraction_policy
 ELSE
@@ -5087,6 +5186,7 @@ fraction_of_cropland_irrigated_indicated_by_GDP_per_person*effect_of_available_w
 			<aux name="effect of available\nwater supply on land\nirrigated">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>MAX(0, (available_water_supply/INIT(available_water_supply)))^sensitivity_of_effect_of_available_water_supply_on_land_irrigated</eqn>
 				<units>dmnl</units>
@@ -5096,8 +5196,12 @@ fraction_of_cropland_irrigated_indicated_by_GDP_per_person*effect_of_available_w
 </doc>
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<element subscript="1">
+				<element subscript="1, World">
+					<eqn>1.03717417070288</eqn>
+				</element>
+				<element subscript="1, Brazil">
 					<eqn>1.03717417070288</eqn>
 				</element>
 				<range min="0.5" max="1.5"/>
@@ -5106,6 +5210,7 @@ fraction_of_cropland_irrigated_indicated_by_GDP_per_person*effect_of_available_w
 			<flow name="technological\nwater discovery" access="output" isee:autocreated="true">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>MAX(0,  technological_water_discovery_1980*effect_of_technology_on_available_water_supply*pressure_to_expand_available_water_supply)</eqn>
 				<non_negative/>
@@ -5116,8 +5221,12 @@ fraction_of_cropland_irrigated_indicated_by_GDP_per_person*effect_of_available_w
 Old value from calibration: 164600402563.243</doc>
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<element subscript="1">
+				<element subscript="1, World">
+					<eqn>30519841631.7115</eqn>
+				</element>
+				<element subscript="1, Brazil">
 					<eqn>30519841631.7115</eqn>
 				</element>
 				<range min="10000000000" max="1000000000000"/>
@@ -5128,8 +5237,12 @@ Old value from calibration: 164600402563.243</doc>
 </doc>
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<element subscript="1">
+				<element subscript="1, World">
+					<eqn>-0.0162923325605105</eqn>
+				</element>
+				<element subscript="1, Brazil">
 					<eqn>-0.0162923325605105</eqn>
 				</element>
 				<range min="-0.02" max="0"/>
@@ -5138,6 +5251,7 @@ Old value from calibration: 164600402563.243</doc>
 			<aux name="effect of technology\non available water supply">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>EXP(-(rate_of_change_in_technological_water_discovery)*(TIME-1980))</eqn>
 				<units>1</units>
@@ -5145,6 +5259,7 @@ Old value from calibration: 164600402563.243</doc>
 			<aux name="pressure to expand\navailable water supply">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>1+(sensitivity_of_pressure_to_expand_water_supply_to_available_water_supply*(available_water_supply/INIT(available_water_supply) - 1))</eqn>
 				<units>dmnl</units>
@@ -5154,8 +5269,12 @@ Old value from calibration: 164600402563.243</doc>
 </doc>
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<element subscript="1">
+				<element subscript="1, World">
+					<eqn>-2.94827673721631</eqn>
+				</element>
+				<element subscript="1, Brazil">
 					<eqn>-2.94827673721631</eqn>
 				</element>
 				<range min="-3" max="0"/>
@@ -5166,8 +5285,12 @@ Old value from calibration: 164600402563.243</doc>
 </doc>
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<element subscript="1">
+				<element subscript="1, World">
+					<eqn>48246098907318.8</eqn>
+				</element>
+				<element subscript="1, Brazil">
 					<eqn>48246098907318.8</eqn>
 				</element>
 				<range min="30000000000000" max="120000000000000"/>
@@ -5192,13 +5315,15 @@ Old value from calibration: 164600402563.243</doc>
 </doc>
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<eqn>Cropland*fraction_of_cropland_irrigated</eqn>
+				<eqn>Cropland[Run]*fraction_of_cropland_irrigated</eqn>
 				<units>Mha</units>
 			</aux>
 			<aux name="fraction of cropland irrigated\nindicated by GDP per person">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>LN(average_relative_real_GDP_per_person) * sensitivity_of_fraction_of_cropland_irrigated_indicated_to_GDP_per_person + base_fraction_of_cropland_irrigated</eqn>
 				<units>dmnl</units>
@@ -5208,20 +5333,28 @@ Old value from calibration: 164600402563.243</doc>
 </doc>
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<element subscript="1">
+				<element subscript="1, World">
+					<eqn>0.139661067358513</eqn>
+				</element>
+				<element subscript="1, Brazil">
 					<eqn>0.139661067358513</eqn>
 				</element>
 				<range min="0.01" max="1"/>
 				<units>dmnl</units>
 			</aux>
-			<aux name="base fraction of cropland irrigated">
+			<aux name="base fraction of\ncropland irrigated">
 				<doc>${Internal Calibration Parameter}
 </doc>
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<element subscript="1">
+				<element subscript="1, World">
+					<eqn>0.185580542606732</eqn>
+				</element>
+				<element subscript="1, Brazil">
 					<eqn>0.185580542606732</eqn>
 				</element>
 				<range min="0" max="0.3"/>
@@ -5240,7 +5373,7 @@ Old value from calibration: 164600402563.243</doc>
 				<dimensions>
 					<dim name="Run"/>
 				</dimensions>
-				<eqn>MAX(0,total_water_withdrawal) * unsustainable_fraction_of_water_withdrawal</eqn>
+				<eqn>MAX(0,total_water_withdrawal[Run,World]) * unsustainable_fraction_of_water_withdrawal[Run,World]</eqn>
 				<units>m^3/year</units>
 			</flow>
 			<flow name="deep groundwater refill">
@@ -5265,13 +5398,15 @@ The range is amply wide to account for reasonable possibilities</doc>
 			<aux name="natural water recharge">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<eqn>deep_groundwater_refill + (total_water_withdrawal - unsustainable_groundwater_withdrawal)</eqn>
+				<eqn>deep_groundwater_refill[Run] + (total_water_withdrawal - unsustainable_groundwater_withdrawal[Run])</eqn>
 				<units>m^3/year</units>
 			</aux>
 			<aux name="unsustainable fraction of\nwater withdrawal">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>technological_water_discovery/total_water_withdrawal + initial_fraction_of_unsustainable_water_withdrawal</eqn>
 				<units>dmnl</units>
@@ -5281,8 +5416,12 @@ The range is amply wide to account for reasonable possibilities</doc>
 </doc>
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<element subscript="1">
+				<element subscript="1, World">
+					<eqn>0.0505261471847029</eqn>
+				</element>
+				<element subscript="1, Brazil">
 					<eqn>0.0505261471847029</eqn>
 				</element>
 				<range min="0" max="0.3"/>
@@ -5349,21 +5488,26 @@ The range is amply wide to account for reasonable possibilities</doc>
 				<units>dmnl</units>
 			</aux>
 			<aux name="policy multiplier">
+				<dimensions>
+					<dim name="Region"/>
+				</dimensions>
 				<eqn>IF TIME &gt; start_year THEN 1/irrigation_efficiency_multiplier
 ELSE
 1</eqn>
 				<units>dmnl</units>
 			</aux>
-			<aux name="technological water per unit of water used">
+			<aux name="technological water\nper unit of water used">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<eqn>technological_water_discovery/total_water_withdrawal</eqn>
+				<eqn>technological_water_discovery[Run,World]/total_water_withdrawal[Run, World]</eqn>
 				<units>dmnl</units>
 			</aux>
 			<aux name="relative technological water\nper unit of water used">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>technological_water_per_unit_of_water_used/INIT(technological_water_per_unit_of_water_used)</eqn>
 				<units>dmnl</units>
@@ -5386,16 +5530,18 @@ ELSE
 			<aux name="average relative real\nGDP per person">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<eqn>SMTH1(real_GDP_per_person[Run]/INIT(real_GDP_per_person[Run]), time_for_GDP_to_impact_irrigation, initial_average_relative_real_gdp_per_person)</eqn>
+				<eqn>SMTH1(real_GDP_per_person[Run]/INIT(real_GDP_per_person[Run]), time_for_GDP_to_impact_irrigation[Run,Region], initial_average_relative_real_gdp_per_person[Run,Region])</eqn>
 				<isee:delay_aux/>
 				<units>dmnl</units>
 			</aux>
-			<aux name="time for GDP to impact irrigation">
+			<aux name="time for GDP to\nimpact irrigation">
 				<doc>${Internal Calibration Parameter}
 </doc>
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>7.01821871951311</eqn>
 				<range min="3" max="15"/>
@@ -5406,6 +5552,7 @@ ELSE
 </doc>
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>0.833626372509192</eqn>
 				<range min="0.5" max="1"/>
@@ -5460,7 +5607,7 @@ ELSE
 				<isee:iframe color="black" background="white" text_align="left" vertical_text_align="top" font_size="12pt" border_width="thin" border_style="solid"/>
 				<isee:financial_table color="black" background="#E0E0E0" text_align="right" font_size="12pt" hide_border="false" auto_fit="true" first_column_width="250" other_column_width="100" header_font_style="normal" header_font_weight="bold" header_text_decoration="none" header_text_align="center" header_vertical_text_align="center" header_font_color="black" header_font_family="Arial" header_font_size="14pt" header_text_padding="2" header_text_border_color="black" header_text_border_width="thin" header_text_border_style="none"/>
 			</style>
-			<view isee:show_pages="false" background="white" page_width="1122" page_height="793" isee:page_cols="2" isee:page_rows="3" isee:scroll_x="148" isee:scroll_y="605" isee:popup_graphs_are_comparative="true" isee:enable_non_negative_highlights="false" type="stock_flow">
+			<view isee:show_pages="false" background="white" page_width="1122" page_height="793" isee:page_cols="2" isee:page_rows="3" zoom="80" isee:popup_graphs_are_comparative="true" isee:enable_non_negative_highlights="false" type="stock_flow">
 				<style color="black" background="white" font_style="normal" font_weight="normal" text_decoration="none" text_align="center" vertical_text_align="center" font_color="black" font_family="Arial" font_size="10pt" padding="2" border_color="black" border_width="thin" border_style="none">
 					<stock color="blue" background="white" font_color="blue" font_size="11pt" label_side="top">
 						<shape type="rectangle" width="45" height="35"/>
@@ -5648,7 +5795,7 @@ ELSE
 					<from>sensitivity_of_fraction_of_cropland_irrigated_indicated_to_GDP_per_person</from>
 					<to>fraction_of_cropland_irrigated_indicated_by_GDP_per_person</to>
 				</connector>
-				<aux x="288.778" y="90" name="base fraction of cropland irrigated"/>
+				<aux x="288.778" y="90" name="base fraction of\ncropland irrigated"/>
 				<connector uid="31" angle="265.223">
 					<from>base_fraction_of_cropland_irrigated</from>
 					<to>fraction_of_cropland_irrigated_indicated_by_GDP_per_person</to>
@@ -5721,7 +5868,7 @@ the less future investment due to crowding out of more profitable forms of inves
 					<from>unsustainable_fraction_of_water_withdrawal</from>
 					<to>unsustainable_groundwater_withdrawal</to>
 				</connector>
-				<connector uid="46" angle="3.27049">
+				<connector uid="46" angle="3.27037">
 					<from>
 						<alias uid="47"/>
 					</from>
@@ -5785,7 +5932,7 @@ the less future investment due to crowding out of more profitable forms of inves
 					<from>policy_multiplier</from>
 					<to>effect_of_technology_on_irrigation_efficiency</to>
 				</connector>
-				<aux x="202" y="1336.53" name="technological water per unit of water used"/>
+				<aux x="202" y="1336.53" name="technological water\nper unit of water used"/>
 				<connector uid="61" angle="305.538">
 					<from>
 						<alias uid="62"/>
@@ -5825,7 +5972,7 @@ the less future investment due to crowding out of more profitable forms of inves
 					<to>effect_of_surface_temperature_anomaly_on_water_lost_to_evapotranspiration</to>
 				</connector>
 				<aux x="165.111" y="292.47" name="average relative real\nGDP per person"/>
-				<aux x="147.111" y="388.5" name="time for GDP to impact irrigation"/>
+				<aux x="147.111" y="388.5" name="time for GDP to\nimpact irrigation"/>
 				<connector uid="75" angle="90.1898">
 					<from>time_for_GDP_to_impact_irrigation</from>
 					<to>average_relative_real_GDP_per_person</to>
@@ -5869,34 +6016,35 @@ the less future investment due to crowding out of more profitable forms of inves
 				<dimensions>
 					<dim name="Run"/>
 				</dimensions>
-				<eqn>MAXSOFT(grass_net_primary_production_in_1980 + change_in_grass_net_primary_production_from_CO2+change_in_grass_net_primary_production_from_STA+change_in_grass_net_primary_production_from_STA_squared, grass_net_primary_production_in_1980*minimum_fraction_of_1980_grass_primary_production, tolerance_for_net_primary_production)</eqn>
+				<eqn>MAXSOFT(grass_net_primary_production_in_1980[Run,World] + change_in_grass_net_primary_production_from_CO2[Run,World]+change_in_grass_net_primary_production_from_STA[Run,World]+change_in_grass_net_primary_production_from_STA_squared[Run,World], grass_net_primary_production_in_1980[Run,World]*minimum_fraction_of_1980_grass_primary_production[World], tolerance_for_net_primary_production[World])</eqn>
 				<units>GtC/(Mha*year)</units>
 			</aux>
-			<aux name="CO2 grass net primary production parameter">
+			<aux name="CO2 grass net primary\nproduction parameter">
 				<doc>${Internal Calibration Parameter}
 </doc>
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<element subscript="1">
-					<eqn>0.000963654</eqn>
-				</element>
+				<eqn>0.000963654</eqn>
 				<range min="0.0005" max="0.001"/>
 				<units>1/ppm</units>
 			</aux>
 			<aux name="effect of CO2 on\ngrass net primary production">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>IF (switch_land_carbon_impact =0) AND TIME &gt; today THEN PREVIOUS
-(SELF,0 )ELSE
+(SELF[Run,Region],0 )ELSE
 (
-Atmospheric_CO2_Concentration- INIT (Atmospheric_CO2_Concentration))*CO2_grass_net_primary_production_parameter</eqn>
+Atmospheric_CO2_Concentration[Run]- INIT (Atmospheric_CO2_Concentration[Run]))*CO2_grass_net_primary_production_parameter</eqn>
 				<units>dmnl</units>
 			</aux>
-			<aux name="change in grass net primary production from CO2">
+			<aux name="change in grass net\nprimary production from CO2">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>grass_net_primary_production_in_1980*effect_of_CO2_on_grass_net_primary_production</eqn>
 				<units>GtC/(Mha*year)</units>
@@ -5904,6 +6052,7 @@ Atmospheric_CO2_Concentration- INIT (Atmospheric_CO2_Concentration))*CO2_grass_n
 			<aux name="change in grass net\nprimary production from STA">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>grass_net_primary_production_in_1980*effect_of_STA_on_grass_net_primary_production</eqn>
 				<units>GtC/(Mha*year)</units>
@@ -5911,20 +6060,25 @@ Atmospheric_CO2_Concentration- INIT (Atmospheric_CO2_Concentration))*CO2_grass_n
 			<aux name="effect of STA on\ngrass net primary production">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>IF (switch_land_carbon_impact =0) AND TIME &gt; today THEN PREVIOUS
-(SELF,0 )ELSE
+(SELF[Run,Region],0 )ELSE
 (
-Surface_Temperature_Anomaly-INIT(Surface_Temperature_Anomaly))*STA_grass_net_primary_production_parameter</eqn>
+Surface_Temperature_Anomaly[Run]-INIT(Surface_Temperature_Anomaly[Run]))*STA_grass_net_primary_production_parameter</eqn>
 				<units>dmnl</units>
 			</aux>
-			<aux name="STA grass net primary production parameter">
+			<aux name="STA grass net primary\nproduction parameter">
 				<doc>${Internal Calibration Parameter}
 </doc>
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<element subscript="1">
+				<element subscript="1, World">
+					<eqn>0.126281692</eqn>
+				</element>
+				<element subscript="1, Brazil">
 					<eqn>0.126281692</eqn>
 				</element>
 				<range min="0.01" max="0.13"/>
@@ -5933,6 +6087,7 @@ Surface_Temperature_Anomaly-INIT(Surface_Temperature_Anomaly))*STA_grass_net_pri
 			<aux name="change in grass net primary production\nfrom STA squared">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>grass_net_primary_production_in_1980*effect_of_STA_squared_on_grass_net_primary_production</eqn>
 				<units>GtC/(Mha*year)</units>
@@ -5940,20 +6095,25 @@ Surface_Temperature_Anomaly-INIT(Surface_Temperature_Anomaly))*STA_grass_net_pri
 			<aux name="effect of STA squared on\ngrass net primary production">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>IF (switch_land_carbon_impact =0) AND TIME &gt; today THEN PREVIOUS
-(SELF,0 )ELSE
+(SELF[Run,Region],0 )ELSE
 (
-(Surface_Temperature_Anomaly-INIT(Surface_Temperature_Anomaly))^2)*STA_squared_grass_net_primary_production_parameter</eqn>
+(Surface_Temperature_Anomaly[Run]-INIT(Surface_Temperature_Anomaly[Run]))^2)*STA_squared_grass_net_primary_production_parameter</eqn>
 				<units>dmnl</units>
 			</aux>
-			<aux name="STA squared grass net primary production parameter">
+			<aux name="STA squared grass net\nprimary production parameter">
 				<doc>${Internal Calibration Parameter}
 </doc>
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<element subscript="1">
+				<element subscript="1, World">
+					<eqn>-0.034654395</eqn>
+				</element>
+				<element subscript="1, Brazil">
 					<eqn>-0.034654395</eqn>
 				</element>
 				<range min="-0.05" max="-0.01"/>
@@ -5962,6 +6122,7 @@ Surface_Temperature_Anomaly-INIT(Surface_Temperature_Anomaly))*STA_grass_net_pri
 			<aux name="combined change in grass net primary production\nfrom STA">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>change_in_grass_net_primary_production_from_STA+change_in_grass_net_primary_production_from_STA_squared</eqn>
 				<units>GtC/(Mha*year)</units>
@@ -5977,7 +6138,7 @@ Surface_Temperature_Anomaly-INIT(Surface_Temperature_Anomaly))*STA_grass_net_pri
 				<dimensions>
 					<dim name="Run"/>
 				</dimensions>
-				<eqn>animal_products_calorie_requirements_met_via_grazing*effective_GtC_per_PCal_animal_grazing</eqn>
+				<eqn>animal_products_calorie_requirements_met_via_grazing*effective_GtC_per_PCal_animal_grazing[Run,World]</eqn>
 				<units>GtC/Year</units>
 			</aux>
 			<aux name="grass net primary production\nin 1980">
@@ -5985,8 +6146,12 @@ Surface_Temperature_Anomaly-INIT(Surface_Temperature_Anomaly))*STA_grass_net_pri
 https://doi.org/10.1007/s11769-019-1063-x 0.0046283</doc>
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<element subscript="1">
+				<element subscript="1, World">
+					<eqn>0.005</eqn>
+				</element>
+				<element subscript="1, Brazil">
 					<eqn>0.005</eqn>
 				</element>
 				<range min="0.0025" max="0.005"/>
@@ -5996,12 +6161,13 @@ https://doi.org/10.1007/s11769-019-1063-x 0.0046283</doc>
 				<dimensions>
 					<dim name="Run"/>
 				</dimensions>
-				<eqn>Grassland_1*grass_net_primary_production</eqn>
+				<eqn>Grassland_1[Run,World]*grass_net_primary_production</eqn>
 				<units>GtC/Year</units>
 			</aux>
 			<stock name="Grassland 1" access="input">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>{Enter equation for use when not hooked up to other models}</eqn>
 				<units>Mha</units>
@@ -6039,18 +6205,23 @@ https://doi.org/10.1007/s11769-019-1063-x 0.0046283</doc>
 </doc>
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<element subscript="1">
+				<element subscript="1, World">
+					<eqn>0.315778805 {grass has 50% of the carbon per PCal}</eqn>
+				</element>
+				<element subscript="1, Brazil">
 					<eqn>0.315778805 {grass has 50% of the carbon per PCal}</eqn>
 				</element>
 				<range min="0.2" max="0.6"/>
 				<units>dmnl</units>
 			</aux>
-			<aux name="effective GtC per PCal animal grazing">
+			<aux name="effective GtC per\nPCal animal grazing">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<eqn>UNIT_GtC_per_PCal[Run]*GtC_per_PCal_of_grazing_multiplier[Run]</eqn>
+				<eqn>UNIT_GtC_per_PCal[Run]*GtC_per_PCal_of_grazing_multiplier[Run,Region]</eqn>
 				<units>GtC/PCal</units>
 			</aux>
 			<aux name="switch land carbon\nimpact" access="input">
@@ -6064,12 +6235,18 @@ https://doi.org/10.1007/s11769-019-1063-x 0.0046283</doc>
 			<aux name="minimum fraction of 1980\ngrass primary production">
 				<doc>${Assumption}
 Limits for extreme conditions in no feedback cases</doc>
+				<dimensions>
+					<dim name="Region"/>
+				</dimensions>
 				<eqn>.2</eqn>
 				<units>dmnl</units>
 			</aux>
-			<aux name="tolerance for net primary production">
+			<aux name="tolerance for net\nprimary production">
 				<doc>${Assumption}
 Limits for extreme conditions in no feedback cases</doc>
+				<dimensions>
+					<dim name="Region"/>
+				</dimensions>
 				<eqn>.001</eqn>
 				<units>GtC/(Mha*year)</units>
 			</aux>
@@ -6122,7 +6299,7 @@ Limits for extreme conditions in no feedback cases</doc>
 				<isee:iframe color="black" background="white" text_align="left" vertical_text_align="top" font_size="12pt" border_width="thin" border_style="solid"/>
 				<isee:financial_table color="black" background="#E0E0E0" text_align="right" font_size="12pt" hide_border="false" auto_fit="true" first_column_width="250" other_column_width="100" header_font_style="normal" header_font_weight="bold" header_text_decoration="none" header_text_align="center" header_vertical_text_align="center" header_font_color="black" header_font_family="Arial" header_font_size="14pt" header_text_padding="2" header_text_border_color="black" header_text_border_width="thin" header_text_border_style="none"/>
 			</style>
-			<view isee:show_pages="false" background="white" page_width="1027" page_height="787" isee:page_cols="2" isee:page_rows="2" isee:scroll_x="618" isee:scroll_y="326" isee:popup_graphs_are_comparative="true" isee:enable_non_negative_highlights="false" type="stock_flow">
+			<view isee:show_pages="false" background="white" page_width="1122" page_height="793" isee:page_cols="2" isee:page_rows="2" isee:scroll_y="300" isee:popup_graphs_are_comparative="true" isee:enable_non_negative_highlights="false" type="stock_flow">
 				<style color="black" background="white" font_style="normal" font_weight="normal" text_decoration="none" text_align="center" vertical_text_align="center" font_color="black" font_family="Arial" font_size="10pt" padding="2" border_color="black" border_width="thin" border_style="none">
 					<stock color="blue" background="white" font_color="blue" font_size="11pt" label_side="top">
 						<shape type="rectangle" width="45" height="35"/>
@@ -6162,13 +6339,13 @@ Limits for extreme conditions in no feedback cases</doc>
 					<table color="black" background="#E0E0E0" text_align="right" font_size="12pt" orientation="vertical" wrap_text="false" isee:auto_fit="true" isee:use_alternate_row_colors="false" isee:unlimited_table_length="false" blank_column_width="80" column_width="160" interval="1" report_balances="beginning" report_flows="instantaneous" header_font_style="normal" header_font_weight="normal" header_text_decoration="none" header_text_align="center" header_vertical_text_align="center" header_font_color="black" header_font_family="Arial" header_font_size="12pt" header_text_padding="2" header_text_border_color="black" header_text_border_width="thin" header_text_border_style="none"/>
 				</style>
 				<aux label_side="left" label_angle="225" x="624.14" y="352" name="grass net primary production"/>
-				<aux x="1067.88" y="624.125" name="CO2 grass net primary production parameter"/>
+				<aux x="1067.88" y="624.125" name="CO2 grass net primary\nproduction parameter"/>
 				<aux x="915.25" y="635" name="effect of CO2 on\ngrass net primary production"/>
 				<connector uid="1" angle="184.076">
 					<from>CO2_grass_net_primary_production_parameter</from>
 					<to>effect_of_CO2_on_grass_net_primary_production</to>
 				</connector>
-				<aux x="823.25" y="475" name="change in grass net primary production from CO2"/>
+				<aux x="823.25" y="475" name="change in grass net\nprimary production from CO2"/>
 				<connector uid="2" angle="157.557">
 					<from>effect_of_CO2_on_grass_net_primary_production</from>
 					<to>change_in_grass_net_primary_production_from_CO2</to>
@@ -6179,7 +6356,7 @@ Limits for extreme conditions in no feedback cases</doc>
 				</connector>
 				<aux x="369" y="468" name="change in grass net\nprimary production from STA"/>
 				<aux x="291.42" y="732" name="effect of STA on\ngrass net primary production"/>
-				<aux label_side="left" label_angle="225" x="209.57" y="823.86" name="STA grass net primary production parameter"/>
+				<aux label_side="left" label_angle="225" x="209.57" y="823.86" name="STA grass net primary\nproduction parameter"/>
 				<connector uid="4" angle="81.0979">
 					<from>STA_grass_net_primary_production_parameter</from>
 					<to>effect_of_STA_on_grass_net_primary_production</to>
@@ -6190,7 +6367,7 @@ Limits for extreme conditions in no feedback cases</doc>
 				</connector>
 				<aux x="606.14" y="540.43" name="change in grass net primary production\nfrom STA squared"/>
 				<aux x="606.14" y="758.57" name="effect of STA squared on\ngrass net primary production"/>
-				<aux x="699.25" y="857.86" name="STA squared grass net primary production parameter"/>
+				<aux x="699.25" y="857.86" name="STA squared grass net\nprimary production parameter"/>
 				<connector uid="6" angle="82.673">
 					<from>STA_squared_grass_net_primary_production_parameter</from>
 					<to>effect_of_STA_squared_on_grass_net_primary_production</to>
@@ -6280,7 +6457,7 @@ Limits for extreme conditions in no feedback cases</doc>
 					<to>grassland_litter</to>
 				</connector>
 				<aux x="1049.88" y="174.821" name="GtC per PCal of grazing\nmultiplier"/>
-				<aux x="933.25" y="174.821" name="effective GtC per PCal animal grazing"/>
+				<aux x="933.25" y="174.821" name="effective GtC per\nPCal animal grazing"/>
 				<connector uid="27" angle="124.875">
 					<from>UNIT_GtC_per_PCal</from>
 					<to>effective_GtC_per_PCal_animal_grazing</to>
@@ -6324,7 +6501,7 @@ Limits for extreme conditions in no feedback cases</doc>
 					<to>effect_of_CO2_on_grass_net_primary_production</to>
 				</connector>
 				<aux x="352.17" y="290.714" name="minimum fraction of 1980\ngrass primary production"/>
-				<aux x="313.083" y="209" name="tolerance for net primary production"/>
+				<aux x="313.083" y="209" name="tolerance for net\nprimary production"/>
 				<connector uid="38" angle="4.91068">
 					<from>tolerance_for_net_primary_production</from>
 					<to>grass_net_primary_production</to>
@@ -6580,7 +6757,7 @@ An external reference point - this can be converted to the initial value for fer
 				<isee:iframe color="black" background="white" text_align="left" vertical_text_align="top" font_size="12pt" border_width="thin" border_style="solid"/>
 				<isee:financial_table color="black" background="#E0E0E0" text_align="right" font_size="12pt" hide_border="false" auto_fit="true" first_column_width="250" other_column_width="100" header_font_style="normal" header_font_weight="bold" header_text_decoration="none" header_text_align="center" header_vertical_text_align="center" header_font_color="black" header_font_family="Arial" header_font_size="14pt" header_text_padding="2" header_text_border_color="black" header_text_border_width="thin" header_text_border_style="none"/>
 			</style>
-			<view isee:show_pages="false" background="white" page_width="768" page_height="588" isee:page_cols="2" isee:page_rows="2" isee:scroll_x="116" isee:popup_graphs_are_comparative="true" isee:enable_non_negative_highlights="false" type="stock_flow">
+			<view isee:show_pages="false" background="white" page_width="1122" page_height="793" isee:page_cols="2" isee:page_rows="2" isee:scroll_x="116" isee:popup_graphs_are_comparative="true" isee:enable_non_negative_highlights="false" type="stock_flow">
 				<style color="black" background="white" font_style="normal" font_weight="normal" text_decoration="none" text_align="center" vertical_text_align="center" font_color="black" font_family="Arial" font_size="10pt" padding="2" border_color="black" border_width="thin" border_style="none">
 					<stock color="blue" background="white" font_color="blue" font_size="11pt" label_side="top">
 						<shape type="rectangle" width="45" height="35"/>
@@ -6734,7 +6911,7 @@ An external reference point - this can be converted to the initial value for fer
 				<dimensions>
 					<dim name="Run"/>
 				</dimensions>
-				<eqn>Cropland + Mature_Forest + Grassland + Young_Forest</eqn>
+				<eqn>Cropland + Mature_Forest + Grassland[Run,Region] + Young_Forest</eqn>
 				<isee:summing/>
 				<units>Mha</units>
 			</aux>
@@ -6790,6 +6967,7 @@ Food and Agriculture Organization of the United Nations (2023)</doc>
 			<stock name="Grassland" access="output" isee:autocreated="true">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>Grassland_1980</eqn>
 				<inflow>fallowing_cropland</inflow>
@@ -6810,8 +6988,9 @@ Lambin EF, Meyfroidt P. 2011. Global land use change, economic globalization, an
 </doc>
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<eqn>MIN(Grassland/DT,  new_land_for_crops*(1-fraction_of_new_cropland_from_forests))</eqn>
+				<eqn>MIN(Grassland[*,*]/DT,  new_land_for_crops*(1-fraction_of_new_cropland_from_forests))</eqn>
 				<non_negative/>
 				<units>Mha/year</units>
 			</flow>
@@ -6845,8 +7024,9 @@ Calibration Parameter: forest land &amp; CO2 emissions from land cover change &a
 			<flow name="fallowing cropland" access="output" isee:autocreated="true">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<eqn>(cropland_depleting)*fraction_of_depleting_cropland_to_grassland</eqn>
+				<eqn>(cropland_depleting[Run])*fraction_of_depleting_cropland_to_grassland[Run]</eqn>
 				<non_negative/>
 				<units>Mha/year</units>
 			</flow>
@@ -6884,16 +7064,18 @@ Calibration Parameter: forest land &amp; CO2 emissions from land cover change &a
 			<flow name="foresting grassland" access="output" isee:autocreated="true">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<eqn>IF TIME &lt; Policy_Start_Year THEN 0 ELSE Grassland/forrestible_land * land_to_forest</eqn>
+				<eqn>IF TIME &lt; Policy_Start_Year THEN 0 ELSE Grassland/forrestible_land[Run] * land_to_forest[Run]</eqn>
 				<non_negative/>
 				<units>Mha/year</units>
 			</flow>
 			<flow name="clearing forest\nfor grassland" access="output">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<eqn>MAX(0, grassland_gap)/time_to_close_grassland_gap</eqn>
+				<eqn>MAX(0, grassland_gap[Run])/time_to_close_grassland_gap[Run]</eqn>
 				<non_negative/>
 				<units>Mha/year</units>
 			</flow>
@@ -6914,7 +7096,7 @@ Calibration Parameter: forest land &amp; CO2 emissions from land cover change &a
 				<dimensions>
 					<dim name="Run"/>
 				</dimensions>
-				<eqn>Grassland*fraction_of_grassland_for_grazing</eqn>
+				<eqn>Grassland[Run,Region]*fraction_of_grassland_for_grazing</eqn>
 				<units>Mha</units>
 			</aux>
 			<aux name="indicated grazing land">
@@ -6992,14 +7174,15 @@ Calibration Parameter: forest land &amp; CO2 emissions from land cover change &a
 				<dimensions>
 					<dim name="Run"/>
 				</dimensions>
-				<eqn>indicated_grassland-Grassland</eqn>
+				<eqn>indicated_grassland-Grassland[Run,Region]</eqn>
 				<units>Mha</units>
 			</aux>
 			<flow name="reforesting\ngrassland" access="output" isee:autocreated="true">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<eqn>MAX(grassland_gap*-1, 0)/time_to_close_grassland_gap</eqn>
+				<eqn>MAX(grassland_gap[Run]*-1, 0)/time_to_close_grassland_gap[Run]</eqn>
 				<non_negative/>
 				<units>Mha/year</units>
 			</flow>
@@ -7068,6 +7251,7 @@ Calibration Parameter: forest land &amp; CO2 emissions from land cover change &a
 			<flow name="degraded\nland from grassland" access="output" isee:autocreated="true">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>Grassland*fraction_of_grassland_degrading</eqn>
 				<non_negative/>
@@ -7214,7 +7398,7 @@ Calibration Parameter: forest land &amp; CO2 emissions from land cover change &a
 				<dimensions>
 					<dim name="Run"/>
 				</dimensions>
-				<eqn>Degraded_Land + Grassland + Cropland</eqn>
+				<eqn>Degraded_Land + Grassland[Run,Region] + Cropland</eqn>
 				<isee:summing/>
 				<units>Mha</units>
 			</aux>
@@ -7418,7 +7602,7 @@ Used for policy implementation only.</doc>
 				<isee:iframe color="black" background="white" text_align="left" vertical_text_align="top" font_size="12pt" border_width="thin" border_style="solid"/>
 				<isee:financial_table color="black" background="#E0E0E0" text_align="right" font_size="12pt" hide_border="false" auto_fit="true" first_column_width="250" other_column_width="100" header_font_style="normal" header_font_weight="bold" header_text_decoration="none" header_text_align="center" header_vertical_text_align="center" header_font_color="black" header_font_family="Arial" header_font_size="14pt" header_text_padding="2" header_text_border_color="black" header_text_border_width="thin" header_text_border_style="none"/>
 			</style>
-			<view isee:show_pages="false" background="white" page_width="768" page_height="588" isee:page_cols="3" isee:page_rows="2" isee:scroll_x="810" isee:scroll_y="342" isee:popup_graphs_are_comparative="true" isee:enable_non_negative_highlights="false" type="stock_flow">
+			<view isee:show_pages="false" background="white" page_width="1122" page_height="793" isee:page_cols="3" isee:page_rows="2" isee:scroll_x="810" isee:scroll_y="342" isee:popup_graphs_are_comparative="true" isee:enable_non_negative_highlights="false" type="stock_flow">
 				<style color="black" background="white" font_style="normal" font_weight="normal" text_decoration="none" text_align="center" vertical_text_align="center" font_color="black" font_family="Arial" font_size="10pt" padding="2" border_color="black" border_width="thin" border_style="none">
 					<stock color="blue" background="white" font_color="blue" font_size="11pt" label_side="top">
 						<shape type="rectangle" width="45" height="35"/>
@@ -7937,10 +8121,7 @@ Used for policy implementation only.</doc>
 						<plot color="fuchsia" isee:keep_zero_visible="true" pen_width="1" index="2" show_y_axis="true">
 							<entity name="Cropland[1]"/>
 						</plot>
-						<plot color="#008F44" isee:keep_zero_visible="true" pen_width="1" index="3" show_y_axis="true">
-							<entity name="Grassland[1]"/>
-						</plot>
-						<plot color="#FF7F00" isee:keep_zero_visible="true" pen_width="1" index="4" show_y_axis="true">
+						<plot color="#FF7F00" isee:keep_zero_visible="true" pen_width="1" index="3" show_y_axis="true">
 							<entity name="Mature_Forest[1]"/>
 						</plot>
 					</graph>
@@ -8433,7 +8614,7 @@ Used for policy implementation only.</doc>
 				<isee:iframe color="black" background="white" text_align="left" vertical_text_align="top" font_size="12pt" border_width="thin" border_style="solid"/>
 				<isee:financial_table color="black" background="#E0E0E0" text_align="right" font_size="12pt" hide_border="false" auto_fit="true" first_column_width="250" other_column_width="100" header_font_style="normal" header_font_weight="bold" header_text_decoration="none" header_text_align="center" header_vertical_text_align="center" header_font_color="black" header_font_family="Arial" header_font_size="14pt" header_text_padding="2" header_text_border_color="black" header_text_border_width="thin" header_text_border_style="none"/>
 			</style>
-			<view isee:show_pages="false" background="white" page_width="768" page_height="576" isee:page_cols="2" isee:page_rows="2" isee:popup_graphs_are_comparative="true" isee:enable_non_negative_highlights="false" type="stock_flow">
+			<view isee:show_pages="false" background="white" page_width="1122" page_height="793" isee:page_cols="2" isee:page_rows="2" isee:scroll_x="683" isee:popup_graphs_are_comparative="true" isee:enable_non_negative_highlights="false" type="stock_flow">
 				<style color="black" background="white" font_style="normal" font_weight="normal" text_decoration="none" text_align="center" vertical_text_align="center" font_color="black" font_family="Arial" font_size="10pt" padding="2" border_color="black" border_width="thin" border_style="none">
 					<stock color="blue" background="white" font_color="blue" font_size="11pt" label_side="top">
 						<shape type="rectangle" width="45" height="35"/>
@@ -8683,6 +8864,7 @@ Used for policy implementation only.</doc>
 			<aux name="fallowing cropland 1" access="input">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>{Enter equation for use when not hooked up to other models}</eqn>
 				<units>Mha/year</units>
@@ -10092,6 +10274,7 @@ https://doi.org/10.1126/science.1201609</doc>
 			<aux name="clearing forest\nfor grassland" access="input">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>{Enter equation for use when not hooked up to other models}</eqn>
 				<units>Mha/year</units>
@@ -11063,7 +11246,7 @@ https://doi.org/10.1126/science.1201609</doc>
 				<dimensions>
 					<dim name="Run"/>
 				</dimensions>
-				<eqn> clearing_grassland//Grassland</eqn>
+				<eqn> clearing_grassland//Grassland[Run,Region]</eqn>
 				<units>1/year</units>
 			</aux>
 			<aux name="fast soil carbon\ngrassland to cropland" access="output">
@@ -11146,6 +11329,7 @@ https://doi.org/10.1126/science.1201609</doc>
 			<stock name="Grassland" access="input">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>{Enter equation for use when not hooked up to other models}</eqn>
 				<units>Mha</units>
@@ -11153,6 +11337,7 @@ https://doi.org/10.1126/science.1201609</doc>
 			<aux name="clearing grassland" access="input">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>{Enter equation for use when not hooked up to other models}</eqn>
 				<units>Mha/year</units>
@@ -11188,6 +11373,7 @@ https://doi.org/10.1126/science.1201609</doc>
 			<aux name="reforesting\ngrassland" access="input">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>{Enter equation for use when not hooked up to other models}</eqn>
 				<units>Mha/year</units>
@@ -11195,6 +11381,7 @@ https://doi.org/10.1126/science.1201609</doc>
 			<aux name="forresting grassland" access="input">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>{Enter equation for use when not hooked up to other models}</eqn>
 				<units>Mha/year</units>
@@ -11203,7 +11390,7 @@ https://doi.org/10.1126/science.1201609</doc>
 				<dimensions>
 					<dim name="Run"/>
 				</dimensions>
-				<eqn> (reforesting_grassland+forresting_grassland)//Grassland</eqn>
+				<eqn> (reforesting_grassland+forresting_grassland)//Grassland[Run,Region]</eqn>
 				<units>1/year</units>
 			</aux>
 			<aux name="fast soil carbon grassland to forest" access="output" isee:autocreated="true">
@@ -11224,12 +11411,13 @@ https://doi.org/10.1126/science.1201609</doc>
 				<dimensions>
 					<dim name="Run"/>
 				</dimensions>
-				<eqn> degraded_land_from_grassland//Grassland</eqn>
+				<eqn> degraded_land_from_grassland//Grassland[Run,Region]</eqn>
 				<units>1/year</units>
 			</aux>
 			<aux name="degraded\nland from grassland" access="input">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>{Enter equation for use when not hooked up to other models}</eqn>
 				<units>Mha/year</units>
@@ -11351,7 +11539,7 @@ https://doi.org/10.1126/science.1201609</doc>
 				<isee:iframe color="black" background="white" text_align="left" vertical_text_align="top" font_size="12pt" border_width="thin" border_style="solid"/>
 				<isee:financial_table color="black" background="#E0E0E0" text_align="right" font_size="12pt" hide_border="false" auto_fit="true" first_column_width="250" other_column_width="100" header_font_style="normal" header_font_weight="bold" header_text_decoration="none" header_text_align="center" header_vertical_text_align="center" header_font_color="black" header_font_family="Arial" header_font_size="14pt" header_text_padding="2" header_text_border_color="black" header_text_border_width="thin" header_text_border_style="none"/>
 			</style>
-			<view isee:show_pages="false" background="white" page_width="768" page_height="576" isee:page_cols="3" isee:page_rows="2" isee:popup_graphs_are_comparative="true" isee:enable_non_negative_highlights="false" type="stock_flow">
+			<view isee:show_pages="false" background="white" page_width="1122" page_height="793" isee:page_cols="3" isee:page_rows="2" isee:scroll_x="102" isee:popup_graphs_are_comparative="true" isee:enable_non_negative_highlights="false" type="stock_flow">
 				<style color="black" background="white" font_style="normal" font_weight="normal" text_decoration="none" text_align="center" vertical_text_align="center" font_color="black" font_family="Arial" font_size="10pt" padding="2" border_color="black" border_width="thin" border_style="none">
 					<stock color="blue" background="white" font_color="blue" font_size="11pt" label_side="top">
 						<shape type="rectangle" width="45" height="35"/>
@@ -12257,7 +12445,7 @@ litter_to_soil_carbon_mature_forest + litter_to_soil_carbon_young_forest + grass
 				<isee:iframe color="black" background="white" text_align="left" vertical_text_align="top" font_size="12pt" border_width="thin" border_style="solid"/>
 				<isee:financial_table color="black" background="#E0E0E0" text_align="right" font_size="12pt" hide_border="false" auto_fit="true" first_column_width="250" other_column_width="100" header_font_style="normal" header_font_weight="bold" header_text_decoration="none" header_text_align="center" header_vertical_text_align="center" header_font_color="black" header_font_family="Arial" header_font_size="14pt" header_text_padding="2" header_text_border_color="black" header_text_border_width="thin" header_text_border_style="none"/>
 			</style>
-			<view isee:show_pages="false" background="white" page_width="768" page_height="576" isee:page_cols="2" isee:page_rows="2" isee:popup_graphs_are_comparative="true" isee:enable_non_negative_highlights="false" type="stock_flow">
+			<view isee:show_pages="false" background="white" page_width="1122" page_height="793" isee:page_cols="2" isee:page_rows="2" isee:popup_graphs_are_comparative="true" isee:enable_non_negative_highlights="false" type="stock_flow">
 				<style color="black" background="white" font_style="normal" font_weight="normal" text_decoration="none" text_align="center" vertical_text_align="center" font_color="black" font_family="Arial" font_size="10pt" padding="2" border_color="black" border_width="thin" border_style="none">
 					<stock color="blue" background="white" font_color="blue" font_size="11pt" label_side="top">
 						<shape type="rectangle" width="45" height="35"/>
