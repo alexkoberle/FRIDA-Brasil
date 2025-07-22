@@ -381,6 +381,7 @@ Source: Richardson et al., 2023 (https://www.science.org/doi/10.1126/sciadv.adh2
 			<stock name="Mature Forest" access="input">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>{Enter equation for use when not hooked up to other models}</eqn>
 				<units>Mha</units>
@@ -388,6 +389,7 @@ Source: Richardson et al., 2023 (https://www.science.org/doi/10.1126/sciadv.adh2
 			<stock name="Young Forest" access="input">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>{Enter equation for use when not hooked up to other models}</eqn>
 				<non_negative/>
@@ -398,7 +400,7 @@ Source: Richardson et al., 2023 (https://www.science.org/doi/10.1126/sciadv.adh2
 				<dimensions>
 					<dim name="Run"/>
 				</dimensions>
-				<eqn>Mature_Forest + Young_Forest</eqn>
+				<eqn>Mature_Forest[Run,World] + Young_Forest[Run,World]</eqn>
 				<units>Mha</units>
 			</aux>
 			<aux name="Holocene forested area">
@@ -421,7 +423,7 @@ Source: Richardson et al., 2023 (https://www.science.org/doi/10.1126/sciadv.adh2
 				<eqn>(Holocene_forested_area - Forested_area) / Holocene_forested_area * UNIT_Percent_to_decimal</eqn>
 				<units>%</units>
 			</aux>
-			<aux name="HANPP as fraction of\nHolocene net primary production Boundary value">
+			<aux name="HANPP as fraction of\nHolocene net primary\nproduction Boundary value">
 				<doc>${No Sensi}
 Boundary value of the control variable for the functional Biosphere Integrity planetary boundary.
 
@@ -692,6 +694,7 @@ Source: Richardson et al., 2023 (https://www.science.org/doi/10.1126/sciadv.adh2
 			<aux name="Habitable Land Area" access="input">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>{Enter equation for use when not hooked up to other models}</eqn>
 				<units>Mha</units>
@@ -724,7 +727,7 @@ Source: Richardson et al., 2023 (https://www.science.org/doi/10.1126/sciadv.adh2
 				<dimensions>
 					<dim name="Run"/>
 				</dimensions>
-				<eqn>INIT(Habitable_Land_Area) - Holocene_forested_area</eqn>
+				<eqn>INIT(Habitable_Land_Area[Run,World]) - Holocene_forested_area</eqn>
 				<units>Mha</units>
 			</aux>
 			<aux name="Potential net primary production">
@@ -747,7 +750,7 @@ Source: Haberl et al., 2007 (https://www.pnas.org/doi/full/10.1073/pnas.07042431
 				<eqn>Potential_net_primary_production - Terrestrial_net_primary_production</eqn>
 				<units>GtC/Year</units>
 			</aux>
-			<aux name="HANPP as fraction of\nHolocene net primary production Holocene value">
+			<aux name="HANPP as fraction of\nHolocene net primary\nproduction Holocene value">
 				<doc>${No Sensi}
 Holocene value of the control variable for the functional Biosphere Integrity planetary boundary.
 
@@ -1112,7 +1115,7 @@ Value: 100</doc>
 				<isee:iframe color="black" background="white" text_align="left" vertical_text_align="top" font_size="12pt" border_width="thin" border_style="solid"/>
 				<isee:financial_table color="black" background="#E0E0E0" text_align="right" font_size="12pt" hide_border="false" auto_fit="true" first_column_width="250" other_column_width="100" header_font_style="normal" header_font_weight="bold" header_text_decoration="none" header_text_align="center" header_vertical_text_align="center" header_font_color="black" header_font_family="Arial" header_font_size="14pt" header_text_padding="2" header_text_border_color="black" header_text_border_width="thin" header_text_border_style="none"/>
 			</style>
-			<view isee:show_pages="false" background="white" page_width="1122" page_height="793" isee:page_cols="6" isee:page_rows="2" isee:scroll_x="1125" isee:popup_graphs_are_comparative="true" isee:enable_non_negative_highlights="false" type="stock_flow">
+			<view isee:show_pages="false" background="white" page_width="1122" page_height="793" isee:page_cols="6" isee:page_rows="2" isee:popup_graphs_are_comparative="true" isee:enable_non_negative_highlights="false" type="stock_flow">
 				<style color="black" background="white" font_style="normal" font_weight="normal" text_decoration="none" text_align="center" vertical_text_align="center" font_color="black" font_family="Arial" font_size="10pt" padding="2" border_color="black" border_width="thin" border_style="none">
 					<stock color="black" background="white" label_side="top">
 						<shape type="rectangle" width="45" height="35"/>
@@ -1203,7 +1206,7 @@ Value: 100</doc>
 					<from>Forested_area</from>
 					<to>Fraction_forest_removed</to>
 				</connector>
-				<aux label_side="top" x="559" y="518.084" name="HANPP as fraction of\nHolocene net primary production Boundary value"/>
+				<aux label_side="top" x="559" y="518.084" name="HANPP as fraction of\nHolocene net primary\nproduction Boundary value"/>
 				<aux x="559" y="579.334" name="HANPP as fraction of\nHolocene net primary production High risk\nboundary value"/>
 				<aux label_side="bottom" x="1086.77" y="258.166" name="Fraction\nforest removed Boundary value"/>
 				<aux label_side="bottom" x="192.083" y="946.084" name="Fraction of NPP consumed\nby human-induced fires"/>
@@ -1307,7 +1310,7 @@ Value: 100</doc>
 					</from>
 					<to>Potential_net_primary_production_Forest</to>
 				</connector>
-				<aux x="545.833" y="296.416" name="HANPP as fraction of\nHolocene net primary production Holocene value"/>
+				<aux x="545.833" y="296.416" name="HANPP as fraction of\nHolocene net primary\nproduction Holocene value"/>
 				<aux x="627.333" y="403.584" name="HANPP as fraction of\nHolocene net primary production Normalised\ncontrol variable"/>
 				<connector uid="28" angle="340.465">
 					<from>HANPP_as_fraction_of_Holocene_net_primary_production_Holocene_value</from>

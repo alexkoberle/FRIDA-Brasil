@@ -236,6 +236,9 @@
 Range from Jannes: 0.12-0.18
 
 This isn&apos;t in the uncertainty analysis b/c it needs to be integrated with the climate calibration</doc>
+				<dimensions>
+					<dim name="Region"/>
+				</dimensions>
 				<eqn>0.15</eqn>
 				<units>dmnl</units>
 			</aux>
@@ -244,6 +247,9 @@ This isn&apos;t in the uncertainty analysis b/c it needs to be integrated with t
 Range from Jannes: 0.15-0.2.
 
 This isn&apos;t in the uncertainty analysis b/c it needs to be integrated with the climate calibration</doc>
+				<dimensions>
+					<dim name="Region"/>
+				</dimensions>
 				<eqn>0.22</eqn>
 				<units>dmnl</units>
 			</aux>
@@ -252,6 +258,9 @@ This isn&apos;t in the uncertainty analysis b/c it needs to be integrated with t
 Range from Jannes: 0.18-0.21
 
 This isn&apos;t in the uncertainty analysis b/c it needs to be integrated with the climate calibration</doc>
+				<dimensions>
+					<dim name="Region"/>
+				</dimensions>
 				<eqn>0.21</eqn>
 				<units>dmnl</units>
 			</aux>
@@ -259,11 +268,14 @@ This isn&apos;t in the uncertainty analysis b/c it needs to be integrated with t
 				<dimensions>
 					<dim name="Run"/>
 				</dimensions>
-				<eqn>(Mature_Forest * Albedo_forest_land + Grassland[Run,Region] * Albedo_grassland + Cropland * Albedo_cropland + Recovering_Forest *albedo_recovering_forest )
-/ (Mature_Forest + Cropland + Grassland[Run,Region] + Recovering_Forest)</eqn>
+				<eqn>(Mature_Forest[Run,World] * Albedo_forest_land[World] + Grassland[Run,World] * Albedo_grassland[World] + Cropland[Run,World] * Albedo_cropland[World] + Recovering_Forest[Run,World] *albedo_recovering_forest[World] )
+/ (Mature_Forest[Run,World] + Cropland[Run,World] + Grassland[Run,World] + Recovering_Forest[Run,World])</eqn>
 				<units>dmnl</units>
 			</aux>
 			<aux name="albedo recovering forest">
+				<dimensions>
+					<dim name="Region"/>
+				</dimensions>
 				<eqn>(Albedo_grassland+Albedo_forest_land)/2</eqn>
 				<units>dmnl</units>
 			</aux>
@@ -396,12 +408,14 @@ This isn&apos;t in the uncertainty analysis b/c it needs to be integrated with t
 			<stock name="Mature Forest" isee:display_name="Mature_Forest" access="input">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<units>Mha</units>
 			</stock>
 			<stock name="Recovering Forest" isee:display_name="Recovering_Forest" access="input">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<units>Mha</units>
 			</stock>
@@ -598,6 +612,7 @@ This isn&apos;t in the uncertainty analysis b/c it needs to be integrated with t
 			<stock name="Cropland" access="output" throughput="true">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<units>Mha</units>
 			</stock>
@@ -734,10 +749,10 @@ This isn&apos;t in the uncertainty analysis b/c it needs to be integrated with t
 				<connect2 to="degraded_land_soil_carbon.forresting_degraded_land" from="Land_Use.foresting_degraded_land"/>
 				<connect to="degraded_land_soil_carbon.grass_net_primary_production" from="Grass.grass_net_primary_production"/>
 				<connect2 to="degraded_land_soil_carbon.grass_net_primary_production" from="Grass.grass_net_primary_production"/>
-				<connect to="Forest_carbon_balance.fast_soil_carbon_forest_to_cropland" from="forest_soil_carbon.fast_soil_carbon_forest_to_cropland"/>
-				<connect2 to="Forest_carbon_balance.fast_soil_carbon_forest_to_cropland" from="forest_soil_carbon.fast_soil_carbon_forest_to_cropland"/>
 				<connect to="Terrestrial_Carbon_Balance.fast_soil_carbon_emissions_young_forest" from="forest_soil_carbon.fast_soil_carbon_emissions_young_forest"/>
 				<connect2 to="Terrestrial_Carbon_Balance.fast_soil_carbon_emissions_young_forest" from="forest_soil_carbon.fast_soil_carbon_emissions_young_forest"/>
+				<connect to="Forest_carbon_balance.fast_soil_carbon_forest_to_cropland" from="forest_soil_carbon.fast_soil_carbon_forest_to_cropland"/>
+				<connect2 to="Forest_carbon_balance.fast_soil_carbon_forest_to_cropland" from="forest_soil_carbon.fast_soil_carbon_forest_to_cropland"/>
 				<connect to="Forest_carbon_balance.fast_soil_carbon_forest_to_grassland" from="forest_soil_carbon.fast_soil_carbon_forest_to_grassland"/>
 				<connect2 to="Forest_carbon_balance.fast_soil_carbon_forest_to_grassland" from="forest_soil_carbon.fast_soil_carbon_forest_to_grassland"/>
 				<connect to="Forest_carbon_balance.forest_landuse_fast_soil_carbon_input" from="forest_soil_carbon.forest_landuse_fast_soil_carbon_input"/>
@@ -1502,6 +1517,7 @@ average_animal_product_growth_efficiency[Run]</eqn>
 			<aux name="Forest Land" access="input">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>{Enter equation for use when not hooked up to other models}</eqn>
 				<units>Mha</units>
@@ -1509,6 +1525,7 @@ average_animal_product_growth_efficiency[Run]</eqn>
 			<aux name="initial crop yield" access="input">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>5.77950488705918</eqn>
 				<units>PCal/(Mha*year)</units>
@@ -1516,6 +1533,7 @@ average_animal_product_growth_efficiency[Run]</eqn>
 			<aux name="crop production" access="input">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>{Enter equation for use when not hooked up to other models}</eqn>
 				<units>PCal/year</units>
@@ -1857,14 +1875,14 @@ Not in sensi analysis because this is so far outside the range of where calibrat
 				<dimensions>
 					<dim name="Run"/>
 				</dimensions>
-				<eqn>crop_production/crop_demand_1</eqn>
+				<eqn>crop_production[Run,World]/crop_demand_1</eqn>
 				<units>dmnl</units>
 			</aux>
 			<aux name="crop balance\nwith reserves" access="output">
 				<dimensions>
 					<dim name="Run"/>
 				</dimensions>
-				<eqn>crop_balance/(1+desired_crop_reserve_capacity)</eqn>
+				<eqn>crop_balance/(1+desired_crop_reserve_capacity[Run,World])</eqn>
 				<units>1</units>
 			</aux>
 			<aux name="harvest index for food crops">
@@ -1872,14 +1890,15 @@ Not in sensi analysis because this is so far outside the range of where calibrat
 				<dimensions>
 					<dim name="Run"/>
 				</dimensions>
-				<eqn>MINSOFT(normal_harvest_index_for_food_crops*effect_of_crop_yield_on_harvest_index,max_harvest_index_for_food_crops, tolerance_of_the_cap_on_harvest_index_and_residue_on_field_fraction)</eqn>
+				<eqn>MINSOFT(normal_harvest_index_for_food_crops[Run,World]*effect_of_crop_yield_on_harvest_index,max_harvest_index_for_food_crops[World], tolerance_of_the_cap_on_harvest_index_and_residue_on_field_fraction[Run,World])</eqn>
 				<units>dmnl</units>
 			</aux>
 			<aux name="crop residue production">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<eqn>(crop_production/Total_average_harvest_index)*(1-Total_average_harvest_index)*UNIT_GtC_per_PCal_crop</eqn>
+				<eqn>(crop_production/Total_average_harvest_index)*(1-Total_average_harvest_index)*UNIT_GtC_per_PCal_crop[Run]</eqn>
 				<units>GtC/Year</units>
 			</aux>
 			<aux name="UNIT GtC per PCal crop" access="output" isee:autocreated="true">
@@ -1898,22 +1917,24 @@ Calibration data from:
 Food and Agriculture Organization of the United Nations (2023)</doc>
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<eqn>crop_yield*Cropland</eqn>
+				<eqn>crop_yield[Run]*Cropland[Run,Region]</eqn>
 				<units>PCal/year</units>
 			</aux>
 			<aux name="crop residue litter" access="output">
 				<dimensions>
 					<dim name="Run"/>
 				</dimensions>
-				<eqn>crop_residue_production*crop_residue_on_field_fraction</eqn>
+				<eqn>crop_residue_production[Run,World]*crop_residue_on_field_fraction[Run,World]</eqn>
 				<units>GtC/Year</units>
 			</aux>
 			<aux name="crop residue on field fraction">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<eqn>MINSOFT(normal_crop_residue_on_field_fraction*effect_of_crop_residue_production_on_field_fraction, max_crop_residue_on_field_fraction, tolerance_of_the_cap_on_harvest_index_and_residue_on_field_fraction)</eqn>
+				<eqn>MINSOFT(normal_crop_residue_on_field_fraction[Region]*effect_of_crop_residue_production_on_field_fraction, max_crop_residue_on_field_fraction[Region], tolerance_of_the_cap_on_harvest_index_and_residue_on_field_fraction)</eqn>
 				<units>dmnl</units>
 			</aux>
 			<aux name="crop demand 1" access="input">
@@ -1928,8 +1949,12 @@ Food and Agriculture Organization of the United Nations (2023)</doc>
 </doc>
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<element subscript="1">
+				<element subscript="1, World">
+					<eqn>0.00578654384682234</eqn>
+				</element>
+				<element subscript="1, Brazil">
 					<eqn>0.00578654384682234</eqn>
 				</element>
 				<range min="0" max="0.1"/>
@@ -1938,6 +1963,7 @@ Food and Agriculture Organization of the United Nations (2023)</doc>
 			<stock name="Cropland" access="output" throughput="true" isee:autocreated="true">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>{Enter equation for use when not hooked up to other models}</eqn>
 				<units>Mha</units>
@@ -1962,7 +1988,7 @@ Food and Agriculture Organization of the United Nations (2023)</doc>
 				<dimensions>
 					<dim name="Run"/>
 				</dimensions>
-				<eqn>initial_crop_yield + change_in_crop_yield_from_fertilizer_use+change_in_crop_yield_from_soil_carbon+change_in_crop_yield_from_irrigation + change_in_crop_yield_from_climate</eqn>
+				<eqn>initial_crop_yield[Run,World] + change_in_crop_yield_from_fertilizer_use[Run,World]+change_in_crop_yield_from_soil_carbon[Run,World]+change_in_crop_yield_from_irrigation[Run,World] + change_in_crop_yield_from_climate[Run,World]</eqn>
 				<units>PCal/(Mha*year)</units>
 			</aux>
 			<aux name="soil carbon cropland 1" access="input">
@@ -1978,23 +2004,27 @@ Food and Agriculture Organization of the United Nations (2023)</doc>
 				<dimensions>
 					<dim name="Run"/>
 				</dimensions>
-				<eqn>crop_production*UNIT_GtC_per_PCal_crop+crop_residue_production</eqn>
+				<eqn>crop_production[Run,World]*UNIT_GtC_per_PCal_crop+crop_residue_production[Run,World]</eqn>
 				<units>GtC/Year</units>
 			</aux>
 			<aux name="crop residue other use" access="output" isee:autocreated="true">
 				<dimensions>
 					<dim name="Run"/>
 				</dimensions>
-				<eqn>crop_residue_production*(1-crop_residue_on_field_fraction)</eqn>
+				<eqn>crop_residue_production[Run,World]*(1-crop_residue_on_field_fraction[Run,World])</eqn>
 				<units>GtC/Year</units>
 			</aux>
-			<aux name="normal harvest index for food crops">
+			<aux name="normal harvest\nindex for food crops">
 				<doc>${Internal Calibration Parameter}
 </doc>
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<element subscript="1">
+				<element subscript="1, World">
+					<eqn>0.44990066007591</eqn>
+				</element>
+				<element subscript="1, Brazil">
 					<eqn>0.44990066007591</eqn>
 				</element>
 				<range min="0.4" max="0.45"/>
@@ -2004,7 +2034,7 @@ Food and Agriculture Organization of the United Nations (2023)</doc>
 				<dimensions>
 					<dim name="Run"/>
 				</dimensions>
-				<eqn>(crop_yield/initial_crop_yield)^sensitivity_of_effect_of_crop_yield_on_harvest_index</eqn>
+				<eqn>(crop_yield/initial_crop_yield[Run,World])^sensitivity_of_effect_of_crop_yield_on_harvest_index[Run,World]</eqn>
 				<units>dmnl</units>
 			</aux>
 			<aux name="sensitivity of effect of crop\nyield on harvest index">
@@ -2012,20 +2042,28 @@ Food and Agriculture Organization of the United Nations (2023)</doc>
 </doc>
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<element subscript="1">
+				<element subscript="1, World">
+					<eqn>0.0989407396381699</eqn>
+				</element>
+				<element subscript="1, Brazil">
 					<eqn>0.0989407396381699</eqn>
 				</element>
 				<range min="0.05" max="0.1"/>
 				<units>dmnl</units>
 			</aux>
-			<aux name="sensitivity of effect of crop\nresidue production on field fraction">
+			<aux name="sensitivity of effect of crop\nresidue production\non field fraction">
 				<doc>${Internal Calibration Parameter}
 </doc>
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<element subscript="1">
+				<element subscript="1, World">
+					<eqn>0.559909570253009</eqn>
+				</element>
+				<element subscript="1, Brazil">
 					<eqn>0.559909570253009</eqn>
 				</element>
 				<range min="0" max="0.75"/>
@@ -2034,13 +2072,17 @@ Food and Agriculture Organization of the United Nations (2023)</doc>
 			<aux name="effect of crop residue\nproduction on field fraction">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>(crop_residue_production/INIT(crop_residue_production))^sensitivity_of_effect_of_crop_residue_production_on_field_fraction</eqn>
 				<units>dmnl</units>
 			</aux>
-			<aux name="normal crop residue on field fraction">
+			<aux name="normal crop residue\non field fraction">
 				<doc>${External Parameter}
 Karstens, K., Bodirsky, B. L., Dietrich, J. P., Dondini, M., Heinke, J., Kuhnert, M., ... &amp; Popp, A. (2022). Management-induced changes in soil organic carbon on global croplands. Biogeosciences, 19(21), 5125-5149. https://doi.org/10.5194/bg-19-5125-2022</doc>
+				<dimensions>
+					<dim name="Region"/>
+				</dimensions>
 				<eqn>0.44</eqn>
 				<units>dmnl</units>
 			</aux>
@@ -2048,7 +2090,7 @@ Karstens, K., Bodirsky, B. L., Dietrich, J. P., Dondini, M., Heinke, J., Kuhnert
 				<dimensions>
 					<dim name="Run"/>
 				</dimensions>
-				<eqn>fertilizer_use[Run,Region]/crop_production</eqn>
+				<eqn>fertilizer_use[Run,World]/crop_production[Run,World]</eqn>
 				<units>Million*tN/PCal</units>
 			</aux>
 			<aux name="agricultural water\nwithdrawal" access="input">
@@ -2062,7 +2104,7 @@ Karstens, K., Bodirsky, B. L., Dietrich, J. P., Dondini, M., Heinke, J., Kuhnert
 				<dimensions>
 					<dim name="Run"/>
 				</dimensions>
-				<eqn>agricultural_water_withdrawal/crop_production</eqn>
+				<eqn>agricultural_water_withdrawal/crop_production[Run,World]</eqn>
 				<units>Million^3/PCal</units>
 			</aux>
 			<aux name="today" access="input">
@@ -2090,15 +2132,17 @@ Karstens, K., Bodirsky, B. L., Dietrich, J. P., Dondini, M., Heinke, J., Kuhnert
 			<aux name="rel change in crop\nproductivity from CO2">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<eqn>crop_prod_linear_CO2_effect[selected_crops_damages_case]*Atmospheric_CO2_Concentration_1</eqn>
+				<eqn>crop_prod_linear_CO2_effect[selected_crops_damages_case[Run],  World]*Atmospheric_CO2_Concentration_1[Run]</eqn>
 				<units>pct</units>
 			</aux>
 			<aux name="rel change in crop productivity\nfrom temperature squared">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<eqn>crop_prod_squared_temp_effect[selected_crops_damages_case]*Absolute_Surface_Temperature^2</eqn>
+				<eqn>crop_prod_squared_temp_effect[selected_crops_damages_case[Run], World]*Absolute_Surface_Temperature[Run]^2</eqn>
 				<units>pct</units>
 			</aux>
 			<aux name="crop prod linear temp effect">
@@ -2106,39 +2150,73 @@ Karstens, K., Bodirsky, B. L., Dietrich, J. P., Dondini, M., Heinke, J., Kuhnert
 Multimodel fit based on data from Franke et al. 2020</doc>
 				<dimensions>
 					<dim name="CropImpactsCase"/>
+					<dim name="Region"/>
 				</dimensions>
-				<element subscript="1">
-					<eqn>8.24707675975515</eqn>
+				<element subscript="1, World">
+					<eqn>8.24707676</eqn>
 				</element>
-				<element subscript="2">
-					<eqn>21.2849154946598</eqn>
+				<element subscript="1, Brazil">
+					<eqn>8.24707676</eqn>
 				</element>
-				<element subscript="3">
-					<eqn>26.7127155884555</eqn>
+				<element subscript="2, World">
+					<eqn>21.28491549</eqn>
 				</element>
-				<element subscript="4">
-					<eqn>30.0200299558637</eqn>
+				<element subscript="2, Brazil">
+					<eqn>21.28491549</eqn>
 				</element>
-				<element subscript="5">
-					<eqn>32.1104385865547</eqn>
+				<element subscript="3, World">
+					<eqn>26.71271559</eqn>
 				</element>
-				<element subscript="6">
-					<eqn>34.487656197387</eqn>
+				<element subscript="3, Brazil">
+					<eqn>26.71271559</eqn>
 				</element>
-				<element subscript="7">
-					<eqn>36.533878375827</eqn>
+				<element subscript="4, World">
+					<eqn>30.02002996</eqn>
 				</element>
-				<element subscript="8">
-					<eqn>38.1214441429256</eqn>
+				<element subscript="4, Brazil">
+					<eqn>30.02002996</eqn>
 				</element>
-				<element subscript="9">
-					<eqn>39.1230933641382</eqn>
+				<element subscript="5, World">
+					<eqn>32.11043859</eqn>
 				</element>
-				<element subscript="10">
-					<eqn>38.0948711646961</eqn>
+				<element subscript="5, Brazil">
+					<eqn>32.11043859</eqn>
 				</element>
-				<element subscript="11">
-					<eqn>30.838278249008</eqn>
+				<element subscript="6, World">
+					<eqn>34.4876562</eqn>
+				</element>
+				<element subscript="6, Brazil">
+					<eqn>34.4876562</eqn>
+				</element>
+				<element subscript="7, World">
+					<eqn>36.53387838</eqn>
+				</element>
+				<element subscript="7, Brazil">
+					<eqn>36.53387838</eqn>
+				</element>
+				<element subscript="8, World">
+					<eqn>38.12144414</eqn>
+				</element>
+				<element subscript="8, Brazil">
+					<eqn>38.12144414</eqn>
+				</element>
+				<element subscript="9, World">
+					<eqn>39.12309336</eqn>
+				</element>
+				<element subscript="9, Brazil">
+					<eqn>39.12309336</eqn>
+				</element>
+				<element subscript="10, World">
+					<eqn>38.09487116</eqn>
+				</element>
+				<element subscript="10, Brazil">
+					<eqn>38.09487116</eqn>
+				</element>
+				<element subscript="11, World">
+					<eqn>30.83827825</eqn>
+				</element>
+				<element subscript="11, Brazil">
+					<eqn>30.83827825</eqn>
 				</element>
 				<units>pct/deg C</units>
 			</aux>
@@ -2147,39 +2225,73 @@ Multimodel fit based on data from Franke et al. 2020</doc>
 Multimodel fit based on data from Franke et al. 2020</doc>
 				<dimensions>
 					<dim name="CropImpactsCase"/>
+					<dim name="Region"/>
 				</dimensions>
-				<element subscript="1">
-					<eqn>-0.446146538462472</eqn>
+				<element subscript="1, World">
+					<eqn>-0.446146538</eqn>
 				</element>
-				<element subscript="2">
-					<eqn>-0.83363050626167</eqn>
+				<element subscript="1, Brazil">
+					<eqn>-0.446146538</eqn>
 				</element>
-				<element subscript="3">
-					<eqn>-0.993691170899865</eqn>
+				<element subscript="2, World">
+					<eqn>-0.833630506</eqn>
 				</element>
-				<element subscript="4">
-					<eqn>-1.09265994111411</eqn>
+				<element subscript="2, Brazil">
+					<eqn>-0.833630506</eqn>
 				</element>
-				<element subscript="5">
-					<eqn>-1.15305598923851</eqn>
+				<element subscript="3, World">
+					<eqn>-0.993691171</eqn>
 				</element>
-				<element subscript="6">
-					<eqn>-1.22239686663079</eqn>
+				<element subscript="3, Brazil">
+					<eqn>-0.993691171</eqn>
 				</element>
-				<element subscript="7">
-					<eqn>-1.27983851452177</eqn>
+				<element subscript="4, World">
+					<eqn>-1.092659941</eqn>
 				</element>
-				<element subscript="8">
-					<eqn>-1.3215302226738</eqn>
+				<element subscript="4, Brazil">
+					<eqn>-1.092659941</eqn>
 				</element>
-				<element subscript="9">
-					<eqn>-1.34328390473576</eqn>
+				<element subscript="5, World">
+					<eqn>-1.153055989</eqn>
 				</element>
-				<element subscript="10">
-					<eqn>-1.29674760154933</eqn>
+				<element subscript="5, Brazil">
+					<eqn>-1.153055989</eqn>
 				</element>
-				<element subscript="11">
-					<eqn>-1.05013117540489</eqn>
+				<element subscript="6, World">
+					<eqn>-1.222396867</eqn>
+				</element>
+				<element subscript="6, Brazil">
+					<eqn>-1.222396867</eqn>
+				</element>
+				<element subscript="7, World">
+					<eqn>-1.279838515</eqn>
+				</element>
+				<element subscript="7, Brazil">
+					<eqn>-1.279838515</eqn>
+				</element>
+				<element subscript="8, World">
+					<eqn>-1.321530223</eqn>
+				</element>
+				<element subscript="8, Brazil">
+					<eqn>-1.321530223</eqn>
+				</element>
+				<element subscript="9, World">
+					<eqn>-1.343283905</eqn>
+				</element>
+				<element subscript="9, Brazil">
+					<eqn>-1.343283905</eqn>
+				</element>
+				<element subscript="10, World">
+					<eqn>-1.296747602</eqn>
+				</element>
+				<element subscript="10, Brazil">
+					<eqn>-1.296747602</eqn>
+				</element>
+				<element subscript="11, World">
+					<eqn>-1.050131175</eqn>
+				</element>
+				<element subscript="11, Brazil">
+					<eqn>-1.050131175</eqn>
 				</element>
 				<units>pct/(deg C^2)</units>
 			</aux>
@@ -2188,112 +2300,184 @@ Multimodel fit based on data from Franke et al. 2020</doc>
 Multimodel fit based on data from Franke et al. 2020</doc>
 				<dimensions>
 					<dim name="CropImpactsCase"/>
+					<dim name="Region"/>
 				</dimensions>
-				<element subscript="1">
-					<eqn>0.0307693066956696</eqn>
+				<element subscript="1, World">
+					<eqn>0.030769307</eqn>
 				</element>
-				<element subscript="2">
-					<eqn>0.0356557854478314</eqn>
+				<element subscript="1, Brazil">
+					<eqn>0.030769307</eqn>
 				</element>
-				<element subscript="3">
-					<eqn>0.0401383151177166</eqn>
+				<element subscript="2, World">
+					<eqn>0.035655785</eqn>
 				</element>
-				<element subscript="4">
-					<eqn>0.0448748894073674</eqn>
+				<element subscript="2, Brazil">
+					<eqn>0.035655785</eqn>
 				</element>
-				<element subscript="5">
-					<eqn>0.0500656822330292</eqn>
+				<element subscript="3, World">
+					<eqn>0.040138315</eqn>
 				</element>
-				<element subscript="6">
-					<eqn>0.0552638814808653</eqn>
+				<element subscript="3, Brazil">
+					<eqn>0.040138315</eqn>
 				</element>
-				<element subscript="7">
-					<eqn>0.0604055262693635</eqn>
+				<element subscript="4, World">
+					<eqn>0.044874889</eqn>
 				</element>
-				<element subscript="8">
-					<eqn>0.0669990154322608</eqn>
+				<element subscript="4, Brazil">
+					<eqn>0.044874889</eqn>
 				</element>
-				<element subscript="9">
-					<eqn>0.0758110550248348</eqn>
+				<element subscript="5, World">
+					<eqn>0.050065682</eqn>
 				</element>
-				<element subscript="10">
-					<eqn>0.0854542896088439</eqn>
+				<element subscript="5, Brazil">
+					<eqn>0.050065682</eqn>
 				</element>
-				<element subscript="11">
-					<eqn>0.0903943716449405</eqn>
+				<element subscript="6, World">
+					<eqn>0.055263881</eqn>
+				</element>
+				<element subscript="6, Brazil">
+					<eqn>0.055263881</eqn>
+				</element>
+				<element subscript="7, World">
+					<eqn>0.060405526</eqn>
+				</element>
+				<element subscript="7, Brazil">
+					<eqn>0.060405526</eqn>
+				</element>
+				<element subscript="8, World">
+					<eqn>0.066999015</eqn>
+				</element>
+				<element subscript="8, Brazil">
+					<eqn>0.066999015</eqn>
+				</element>
+				<element subscript="9, World">
+					<eqn>0.075811055</eqn>
+				</element>
+				<element subscript="9, Brazil">
+					<eqn>0.075811055</eqn>
+				</element>
+				<element subscript="10, World">
+					<eqn>0.08545429</eqn>
+				</element>
+				<element subscript="10, Brazil">
+					<eqn>0.08545429</eqn>
+				</element>
+				<element subscript="11, World">
+					<eqn>0.090394372</eqn>
+				</element>
+				<element subscript="11, Brazil">
+					<eqn>0.090394372</eqn>
 				</element>
 				<units>pct/ppm</units>
 			</aux>
 			<aux name="rel change in crop productivity\nfrom temperature linear">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<eqn>crop_prod_linear_temp_effect[selected_crops_damages_case]*Absolute_Surface_Temperature</eqn>
+				<eqn>crop_prod_linear_temp_effect[selected_crops_damages_case[Run], World]*Absolute_Surface_Temperature[Run]</eqn>
 				<units>pct</units>
 			</aux>
 			<aux name="rel change in crop productivity\nfrom temperature">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>rel_change_in_crop_productivity_from_temperature_squared + rel_change_in_crop_productivity_from_temperature_linear</eqn>
 				<units>pct</units>
 			</aux>
-			<aux name="rel change in crop productivity from climate">
+			<aux name="rel change in crop\nproductivity from climate">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<eqn>(rel_change_in_crop_productivity_intercept[selected_crops_damages_case] +
-rel_change_in_crop_productivity_from_CO2 +
-rel_change_in_crop_productivity_from_temperature)/UNIT_pct_conversion</eqn>
+				<eqn>(rel_change_in_crop_productivity_intercept[selected_crops_damages_case[Run], World] +
+rel_change_in_crop_productivity_from_CO2[Run,  World] +
+rel_change_in_crop_productivity_from_temperature[Run, World])/UNIT_pct_conversion[World]</eqn>
 				<units>dmnl</units>
 			</aux>
-			<aux name="rel change in crop productivity intercept">
+			<aux name="rel change in crop\nproductivity intercept">
 				<doc>${Climate Impact Parameter,External Parameter}
 Multimodel fit based on data from Franke et al. 2020</doc>
 				<dimensions>
 					<dim name="CropImpactsCase"/>
+					<dim name="Region"/>
 				</dimensions>
-				<element subscript="1">
-					<eqn>-43.3208994431</eqn>
+				<element subscript="1, World">
+					<eqn>-43.32089944</eqn>
 				</element>
-				<element subscript="2">
-					<eqn>-150.682911603</eqn>
+				<element subscript="1, Brazil">
+					<eqn>-43.32089944</eqn>
 				</element>
-				<element subscript="3">
-					<eqn>-196.475026563</eqn>
+				<element subscript="2, World">
+					<eqn>-150.6829116</eqn>
 				</element>
-				<element subscript="4">
-					<eqn>-224.749951858</eqn>
+				<element subscript="2, Brazil">
+					<eqn>-150.6829116</eqn>
 				</element>
-				<element subscript="5">
-					<eqn>-243.875853386</eqn>
+				<element subscript="3, World">
+					<eqn>-196.4750266</eqn>
 				</element>
-				<element subscript="6">
-					<eqn>-265.390415869</eqn>
+				<element subscript="3, Brazil">
+					<eqn>-196.4750266</eqn>
 				</element>
-				<element subscript="7">
-					<eqn>-284.636819367</eqn>
+				<element subscript="4, World">
+					<eqn>-224.7499519</eqn>
 				</element>
-				<element subscript="8">
-					<eqn>-301.090746067</eqn>
+				<element subscript="4, Brazil">
+					<eqn>-224.7499519</eqn>
 				</element>
-				<element subscript="9">
-					<eqn>-314.063202369</eqn>
+				<element subscript="5, World">
+					<eqn>-243.8758534</eqn>
 				</element>
-				<element subscript="10">
-					<eqn>-312.173679066</eqn>
+				<element subscript="5, Brazil">
+					<eqn>-243.8758534</eqn>
 				</element>
-				<element subscript="11">
-					<eqn>-258.051915453</eqn>
+				<element subscript="6, World">
+					<eqn>-265.3904159</eqn>
+				</element>
+				<element subscript="6, Brazil">
+					<eqn>-265.3904159</eqn>
+				</element>
+				<element subscript="7, World">
+					<eqn>-284.6368194</eqn>
+				</element>
+				<element subscript="7, Brazil">
+					<eqn>-284.6368194</eqn>
+				</element>
+				<element subscript="8, World">
+					<eqn>-301.0907461</eqn>
+				</element>
+				<element subscript="8, Brazil">
+					<eqn>-301.0907461</eqn>
+				</element>
+				<element subscript="9, World">
+					<eqn>-314.0632024</eqn>
+				</element>
+				<element subscript="9, Brazil">
+					<eqn>-314.0632024</eqn>
+				</element>
+				<element subscript="10, World">
+					<eqn>-312.1736791</eqn>
+				</element>
+				<element subscript="10, Brazil">
+					<eqn>-312.1736791</eqn>
+				</element>
+				<element subscript="11, World">
+					<eqn>-258.0519155</eqn>
+				</element>
+				<element subscript="11, Brazil">
+					<eqn>-258.0519155</eqn>
 				</element>
 				<units>pct</units>
 			</aux>
-			<aux name="change in crop yield from climate">
+			<aux name="change in crop\nyield from climate">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>IF (switch_landuse_damage =0) AND TIME &gt; today THEN PREVIOUS
-(SELF,0 )ELSE
+(SELF[Run,Region],0 )ELSE
 rel_change_in_crop_productivity_from_climate
 * initial_crop_yield</eqn>
 				<units>PCal/(Mha*year)</units>
@@ -2301,6 +2485,7 @@ rel_change_in_crop_productivity_from_climate
 			<aux name="change in crop yield\nfrom soil carbon">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>initial_crop_yield*effect_of_soil_carbon_on_crop_yield</eqn>
 				<units>PCal/(Mha*year)</units>
@@ -2308,17 +2493,22 @@ rel_change_in_crop_productivity_from_climate
 			<aux name="effect of soil carbon\non crop yield">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<eqn>(soil_carbon_cropland_1-INIT(soil_carbon_cropland_1))*soil_carbon_crop_yield_parameter</eqn>
+				<eqn>(soil_carbon_cropland_1[Run]-INIT(soil_carbon_cropland_1[Run]))*soil_carbon_crop_yield_parameter</eqn>
 				<units>dmnl</units>
 			</aux>
-			<aux name="soil carbon crop yield parameter">
+			<aux name="soil carbon crop\nyield parameter">
 				<doc>${Internal Calibration Parameter}
 </doc>
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<element subscript="1">
+				<element subscript="1, World">
+					<eqn>0.0191871944846803</eqn>
+				</element>
+				<element subscript="1, Brazil">
 					<eqn>0.0191871944846803</eqn>
 				</element>
 				<range min="1e-8" max="0.2"/>
@@ -2327,8 +2517,9 @@ rel_change_in_crop_productivity_from_climate
 			<aux name="effect of irrigation\non crop yield">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<eqn>(fraction_of_cropland_irrigated[Run,World]-INIT(fraction_of_cropland_irrigated[Run,World]))*irrigation_crop_yield_parameter</eqn>
+				<eqn>(fraction_of_cropland_irrigated[Run,World]-INIT(fraction_of_cropland_irrigated[Run,World]))*irrigation_crop_yield_parameter[Run,Region]</eqn>
 				<units>dmnl</units>
 			</aux>
 			<aux name="irrigation crop yield parameter">
@@ -2336,8 +2527,12 @@ rel_change_in_crop_productivity_from_climate
 </doc>
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<element subscript="1">
+				<element subscript="1, World">
+					<eqn>2.50055038934869</eqn>
+				</element>
+				<element subscript="1, Brazil">
 					<eqn>2.50055038934869</eqn>
 				</element>
 				<range min="2.5" max="9"/>
@@ -2346,6 +2541,7 @@ rel_change_in_crop_productivity_from_climate
 			<aux name="change in\ncrop yield from irrigation">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>initial_crop_yield*effect_of_irrigation_on_crop_yield</eqn>
 				<units>PCal/(Mha*year)</units>
@@ -2353,6 +2549,7 @@ rel_change_in_crop_productivity_from_climate
 			<aux name="change in crop yield\nfrom fertilizer use">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>initial_crop_yield*effect_of_fertilizer_use_on_crop_yield</eqn>
 				<units>PCal/(Mha*year)</units>
@@ -2360,17 +2557,22 @@ rel_change_in_crop_productivity_from_climate
 			<aux name="effect of fertilizer use\non crop yield">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<eqn>(fertilizer_use[Run,Region]-INIT(fertilizer_use[Run,Region]))*fertilizer_use_crop_yield_parameter</eqn>
+				<eqn>(fertilizer_use-INIT(fertilizer_use))*fertilizer_use_crop_yield_parameter</eqn>
 				<units>dmnl</units>
 			</aux>
-			<aux name="fertilizer use crop yield parameter">
+			<aux name="fertilizer use crop\nyield parameter">
 				<doc>${Internal Calibration Parameter}
 </doc>
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<element subscript="1">
+				<element subscript="1, World">
+					<eqn>0.0163103521043001</eqn>
+				</element>
+				<element subscript="1, Brazil">
 					<eqn>0.0163103521043001</eqn>
 				</element>
 				<range min="0.00001" max="0.1"/>
@@ -2381,8 +2583,12 @@ rel_change_in_crop_productivity_from_climate
 </doc>
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<element subscript="1">
+				<element subscript="1, World">
+					<eqn>5.90574472508119</eqn>
+				</element>
+				<element subscript="1, Brazil">
 					<eqn>5.90574472508119</eqn>
 				</element>
 				<format precision="0.01"/>
@@ -2392,31 +2598,44 @@ rel_change_in_crop_productivity_from_climate
 			<aux name="UNIT pct conversion">
 				<doc>${Unit}
 </doc>
+				<dimensions>
+					<dim name="Region"/>
+				</dimensions>
 				<eqn>100</eqn>
 				<units>pct</units>
 			</aux>
-			<aux name="max harvest index for food crops">
+			<aux name="max harvest index\nfor food crops">
 				<doc>${External Parameter}
 Hay RKM. Harvest index: a review of its use in plant breeding and crop physiology. The Annals of Applied Biology. 1995 Feb;126(1):197-216. DOI: 10.1111/j.1744-7348.1995.tb05015.x.
 </doc>
+				<dimensions>
+					<dim name="Region"/>
+				</dimensions>
 				<eqn>0.6</eqn>
 				<units>dmnl</units>
 			</aux>
-			<aux name="tolerance of the cap on harvest index and residue on field fraction">
+			<aux name="tolerance of the cap on harvest\nindex and residue\non field fraction">
 				<doc>${Internal Calibration Parameter}
 </doc>
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<element subscript="1">
+				<element subscript="1, World">
+					<eqn>0.0488017706603499</eqn>
+				</element>
+				<element subscript="1, Brazil">
 					<eqn>0.0488017706603499</eqn>
 				</element>
 				<range min="0.03" max="0.08"/>
 				<units>dmnl</units>
 			</aux>
-			<aux name="max crop residue on field fraction">
+			<aux name="max crop residue\non field fraction">
 				<doc>${External Parameter}
 Karstens, K., Bodirsky, B. L., Dietrich, J. P., Dondini, M., Heinke, J., Kuhnert, M., ... &amp; Popp, A. (2022). Management-induced changes in soil organic carbon on global croplands. Biogeosciences, 19(21), 5125-5149. https://doi.org/10.5194/bg-19-5125-2022</doc>
+				<dimensions>
+					<dim name="Region"/>
+				</dimensions>
 				<eqn>.6</eqn>
 				<units>dmnl</units>
 			</aux>
@@ -2434,18 +2653,20 @@ Karstens, K., Bodirsky, B. L., Dietrich, J. P., Dondini, M., Heinke, J., Kuhnert
 				<eqn>{Enter equation for use when not hooked up to other models}</eqn>
 				<units>PCal/Year</units>
 			</aux>
-			<aux name="Fraction of crop production for feed">
+			<aux name="Fraction of crop\nproduction for feed">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<eqn>feed_production/crop_production</eqn>
+				<eqn>feed_production[Run]/crop_production</eqn>
 				<units>1</units>
 			</aux>
 			<aux name="Fraction of crop\nproduction for energy">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<eqn>crops_for_energy/crop_production</eqn>
+				<eqn>crops_for_energy[Run]/crop_production</eqn>
 				<units>1</units>
 			</aux>
 			<aux name="harvest index\nfor energy crops">
@@ -2453,8 +2674,12 @@ Karstens, K., Bodirsky, B. L., Dietrich, J. P., Dondini, M., Heinke, J., Kuhnert
 </doc>
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<element subscript="1">
+				<element subscript="1, World">
+					<eqn>0.946146343585683</eqn>
+				</element>
+				<element subscript="1, Brazil">
 					<eqn>0.946146343585683</eqn>
 				</element>
 				<range min="0.6" max="0.95"/>
@@ -2465,8 +2690,12 @@ Karstens, K., Bodirsky, B. L., Dietrich, J. P., Dondini, M., Heinke, J., Kuhnert
 </doc>
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<element subscript="1">
+				<element subscript="1, World">
+					<eqn>0.799444218938155</eqn>
+				</element>
+				<element subscript="1, Brazil">
 					<eqn>0.799444218938155</eqn>
 				</element>
 				<range min="0.5" max="0.8"/>
@@ -2475,12 +2704,13 @@ Karstens, K., Bodirsky, B. L., Dietrich, J. P., Dondini, M., Heinke, J., Kuhnert
 			<aux name="Total average harvest index">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>harvest_index_for_feed_crops*Fraction_of_crop_production_for_feed 
 + 
 harvest_index_for_energy_crops * Fraction_of_crop_production_for_energy
 +
-harvest_index_for_food_crops * (1 - Fraction_of_crop_production_for_energy - Fraction_of_crop_production_for_feed)</eqn>
+harvest_index_for_food_crops[Run] * (1 - Fraction_of_crop_production_for_energy - Fraction_of_crop_production_for_feed)</eqn>
 				<units>1</units>
 			</aux>
 			<aux name="selected crops\ndamages case" access="input">
@@ -2539,7 +2769,7 @@ harvest_index_for_food_crops * (1 - Fraction_of_crop_production_for_energy - Fra
 				<isee:iframe color="black" background="white" text_align="left" vertical_text_align="top" font_size="12pt" border_width="thin" border_style="solid"/>
 				<isee:financial_table color="black" background="#E0E0E0" text_align="right" font_size="12pt" hide_border="false" auto_fit="true" first_column_width="250" other_column_width="100" header_font_style="normal" header_font_weight="bold" header_text_decoration="none" header_text_align="center" header_vertical_text_align="center" header_font_color="black" header_font_family="Arial" header_font_size="14pt" header_text_padding="2" header_text_border_color="black" header_text_border_width="thin" header_text_border_style="none"/>
 			</style>
-			<view isee:show_pages="false" background="white" page_width="1122" page_height="793" isee:page_cols="5" isee:page_rows="6" isee:scroll_x="622" isee:scroll_y="1185" isee:popup_graphs_are_comparative="true" isee:enable_non_negative_highlights="false" type="stock_flow">
+			<view isee:show_pages="false" background="white" page_width="1122" page_height="793" isee:page_cols="5" isee:page_rows="6" isee:scroll_x="1000" isee:scroll_y="1241.67" zoom="120" isee:popup_graphs_are_comparative="true" isee:enable_non_negative_highlights="false" type="stock_flow">
 				<style color="black" background="white" font_style="normal" font_weight="normal" text_decoration="none" text_align="center" vertical_text_align="center" font_color="black" font_family="Arial" font_size="10pt" padding="2" border_color="black" border_width="thin" border_style="none">
 					<stock color="blue" background="white" font_color="blue" font_size="11pt" label_side="top">
 						<shape type="rectangle" width="45" height="35"/>
@@ -2655,7 +2885,7 @@ harvest_index_for_food_crops * (1 - Fraction_of_crop_production_for_energy - Fra
 					<from>crop_residue_on_field_fraction</from>
 					<to>crop_residue_other_use</to>
 				</connector>
-				<aux x="1636.75" y="1216.84" name="normal harvest index for food crops"/>
+				<aux x="1636.75" y="1216.84" name="normal harvest\nindex for food crops"/>
 				<connector uid="62" angle="319.832">
 					<from>normal_harvest_index_for_food_crops</from>
 					<to>harvest_index_for_food_crops</to>
@@ -2674,7 +2904,7 @@ harvest_index_for_food_crops * (1 - Fraction_of_crop_production_for_energy - Fra
 					<from>sensitivity_of_effect_of_crop_yield_on_harvest_index</from>
 					<to>effect_of_crop_yield_on_harvest_index</to>
 				</connector>
-				<aux x="2480.93" y="1068.84" name="sensitivity of effect of crop\nresidue production on field fraction"/>
+				<aux x="2480.93" y="1068.84" name="sensitivity of effect of crop\nresidue production\non field fraction"/>
 				<aux label_side="right" label_angle="315" x="2282.25" y="1133.84" name="effect of crop residue\nproduction on field fraction"/>
 				<connector uid="67" angle="340.067">
 					<from>crop_residue_production</from>
@@ -2688,7 +2918,7 @@ harvest_index_for_food_crops * (1 - Fraction_of_crop_production_for_energy - Fra
 					<from>effect_of_crop_residue_production_on_field_fraction</from>
 					<to>crop_residue_on_field_fraction</to>
 				</connector>
-				<aux x="2370.43" y="972.14" name="normal crop residue on field fraction"/>
+				<aux x="2370.43" y="972.14" name="normal crop residue\non field fraction"/>
 				<connector uid="70" angle="199.502">
 					<from>normal_crop_residue_on_field_fraction</from>
 					<to>crop_residue_on_field_fraction</to>
@@ -2761,7 +2991,7 @@ harvest_index_for_food_crops * (1 - Fraction_of_crop_production_for_energy - Fra
 					<from>rel_change_in_crop_productivity_from_temperature_squared</from>
 					<to>rel_change_in_crop_productivity_from_temperature</to>
 				</connector>
-				<aux x="1509.14" y="1909.14" name="rel change in crop productivity from climate"/>
+				<aux x="1509.14" y="1909.14" name="rel change in crop\nproductivity from climate"/>
 				<connector uid="95" angle="39.096">
 					<from>rel_change_in_crop_productivity_from_temperature</from>
 					<to>rel_change_in_crop_productivity_from_climate</to>
@@ -2770,19 +3000,19 @@ harvest_index_for_food_crops * (1 - Fraction_of_crop_production_for_energy - Fra
 					<from>rel_change_in_crop_productivity_from_CO2</from>
 					<to>rel_change_in_crop_productivity_from_climate</to>
 				</connector>
-				<aux x="1705.43" y="1959.43" name="rel change in crop productivity intercept"/>
+				<aux x="1705.43" y="1959.43" name="rel change in crop\nproductivity intercept"/>
 				<connector uid="97" angle="163.621">
 					<from>rel_change_in_crop_productivity_intercept</from>
 					<to>rel_change_in_crop_productivity_from_climate</to>
 				</connector>
-				<aux x="1519.97" y="1729.26" name="change in crop yield from climate"/>
+				<aux x="1519.97" y="1729.26" name="change in crop\nyield from climate"/>
 				<connector uid="100" angle="86.5534">
 					<from>rel_change_in_crop_productivity_from_climate</from>
 					<to>change_in_crop_yield_from_climate</to>
 				</connector>
 				<aux x="1367" y="1466.7" name="change in crop yield\nfrom soil carbon"/>
 				<aux x="1261" y="1456.03" name="effect of soil carbon\non crop yield"/>
-				<aux x="1128.43" y="1361.84" name="soil carbon crop yield parameter"/>
+				<aux x="1128.43" y="1361.84" name="soil carbon crop\nyield parameter"/>
 				<connector uid="108" angle="324.606">
 					<from>soil_carbon_crop_yield_parameter</from>
 					<to>effect_of_soil_carbon_on_crop_yield</to>
@@ -2804,7 +3034,7 @@ harvest_index_for_food_crops * (1 - Fraction_of_crop_production_for_energy - Fra
 				</connector>
 				<aux label_side="bottom" x="1707" y="1645.77" name="change in crop yield\nfrom fertilizer use"/>
 				<aux x="1821" y="1668.77" name="effect of fertilizer use\non crop yield"/>
-				<aux x="1924" y="1771.77" name="fertilizer use crop yield parameter"/>
+				<aux x="1924" y="1771.77" name="fertilizer use crop\nyield parameter"/>
 				<connector uid="116" angle="135">
 					<from>fertilizer_use_crop_yield_parameter</from>
 					<to>effect_of_fertilizer_use_on_crop_yield</to>
@@ -2851,20 +3081,7 @@ harvest_index_for_food_crops * (1 - Fraction_of_crop_production_for_energy - Fra
 					<to>change_in_crop_yield_from_fertilizer_use</to>
 				</connector>
 				<stacked_container uid="143" x="2519" y="1226.71" width="405.714" height="350.857">
-					<graph width="405.714" height="350.857" type="time_series" show_grid="false" isee:tick_type="none" include_units_in_legend="false" plot_numbers="false" isee:label_pie_slices="false" isee:show_pie_borders="true" num_x_grid_lines="0" num_y_grid_lines="0" num_x_labels="5" num_y_labels="3" isee:fill_intensity="0.1" isee:allow_zero_axis="true" left_axis_multi_scale="false" left_axis_auto_scale="true" left_include_units="true" right_axis_multi_scale="false" right_axis_auto_scale="true" right_include_units="true">
-						<plot color="blue" isee:keep_zero_visible="true" pen_width="1" index="0" show_y_axis="true">
-							<entity name="change_in_crop_yield_from_fertilizer_use[1]"/>
-						</plot>
-						<plot color="red" isee:keep_zero_visible="true" pen_width="1" index="1" show_y_axis="true">
-							<entity name="change_in_crop_yield_from_irrigation[1]"/>
-						</plot>
-						<plot color="fuchsia" isee:keep_zero_visible="true" pen_width="1" index="2" show_y_axis="true">
-							<entity name="change_in_crop_yield_from_soil_carbon[1]"/>
-						</plot>
-						<plot color="#008F44" isee:keep_zero_visible="true" pen_width="1" index="3" show_y_axis="true">
-							<entity name="change_in_crop_yield_from_climate[1]"/>
-						</plot>
-					</graph>
+					<graph width="405.714" height="350.857" type="time_series" isee:points_only="true" show_grid="false" isee:tick_type="none" include_units_in_legend="false" plot_numbers="false" isee:label_pie_slices="false" isee:show_pie_borders="true" num_x_grid_lines="0" num_y_grid_lines="0" num_x_labels="5" num_y_labels="3" isee:fill_intensity="0.1" isee:allow_zero_axis="true" left_axis_multi_scale="false" left_axis_auto_scale="true" left_include_units="true" right_axis_multi_scale="false" right_axis_auto_scale="true" right_include_units="true"/>
 				</stacked_container>
 				<aux x="1666" y="1891.14" name="UNIT pct conversion"/>
 				<connector uid="146" angle="186.669">
@@ -2893,12 +3110,12 @@ harvest_index_for_food_crops * (1 - Fraction_of_crop_production_for_energy - Fra
 					</from>
 					<to>effect_of_crop_yield_on_harvest_index</to>
 				</connector>
-				<aux x="1728" y="1371.12" name="max harvest index for food crops"/>
+				<aux x="1728" y="1371.12" name="max harvest index\nfor food crops"/>
 				<connector uid="187" angle="92.1532">
 					<from>max_harvest_index_for_food_crops</from>
 					<to>harvest_index_for_food_crops</to>
 				</connector>
-				<aux x="1840.67" y="1321.83" name="tolerance of the cap on harvest index and residue on field fraction"/>
+				<aux x="1840.67" y="1321.83" name="tolerance of the cap on harvest\nindex and residue\non field fraction"/>
 				<connector uid="188" angle="165.228">
 					<from>tolerance_of_the_cap_on_harvest_index_and_residue_on_field_fraction</from>
 					<to>harvest_index_for_food_crops</to>
@@ -2907,7 +3124,7 @@ harvest_index_for_food_crops * (1 - Fraction_of_crop_production_for_energy - Fra
 					<from>tolerance_of_the_cap_on_harvest_index_and_residue_on_field_fraction</from>
 					<to>crop_residue_on_field_fraction</to>
 				</connector>
-				<aux x="2275.71" y="915.667" name="max crop residue on field fraction"/>
+				<aux x="2275.71" y="915.667" name="max crop residue\non field fraction"/>
 				<connector uid="190" angle="251.524">
 					<from>max_crop_residue_on_field_fraction</from>
 					<to>crop_residue_on_field_fraction</to>
@@ -2926,7 +3143,7 @@ harvest_index_for_food_crops * (1 - Fraction_of_crop_production_for_energy - Fra
 				</connector>
 				<aux font_style="italic" font_weight="bold" x="2250.93" y="1401.7" name="feed production"/>
 				<aux font_style="italic" font_weight="bold" x="2001.67" y="1485.83" name="crops for energy"/>
-				<aux x="2114.43" y="1365.01" name="Fraction of crop production for feed"/>
+				<aux x="2114.43" y="1365.01" name="Fraction of crop\nproduction for feed"/>
 				<connector uid="194" angle="164.954">
 					<from>feed_production</from>
 					<to>Fraction_of_crop_production_for_feed</to>
@@ -3263,6 +3480,7 @@ ELSE average_yearly_demand_per_capita[Run]</eqn>
 			<aux name="crop production" access="input">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>{Enter equation for use when not hooked up to other models}</eqn>
 				<units>PCal/year</units>
@@ -3293,7 +3511,7 @@ ELSE average_yearly_demand_per_capita[Run]</eqn>
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>crop_production[Run] - (crop_demand_for_food + Crops_used_for_Seed_or_Lost + crop_used_for_non_energy_other)</eqn>
+				<eqn>crop_production - (crop_demand_for_food + Crops_used_for_Seed_or_Lost + crop_used_for_non_energy_other)</eqn>
 				<units>PCal/Year</units>
 			</aux>
 			<aux name="crops for energy" access="output">
@@ -4206,12 +4424,13 @@ https://doi.org/10.1073/pnas.0704243104 (0.0072)</doc>
 				<dimensions>
 					<dim name="Run"/>
 				</dimensions>
-				<eqn>Young_Forest*tree_net_primary_production</eqn>
+				<eqn>Young_Forest[Run,World]*tree_net_primary_production</eqn>
 				<units>GtC/Year</units>
 			</aux>
 			<stock name="Young Forest" access="input">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>{Enter equation for use when not hooked up to other models}</eqn>
 				<non_negative/>
@@ -4253,12 +4472,13 @@ https://doi.org/10.1073/pnas.0704243104 (0.0072)</doc>
 				<dimensions>
 					<dim name="Run"/>
 				</dimensions>
-				<eqn>Mature_Forest*tree_net_primary_production</eqn>
+				<eqn>Mature_Forest[Run,World]*tree_net_primary_production</eqn>
 				<units>GtC/Year</units>
 			</aux>
 			<stock name="Mature Forest" access="input">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>{Enter equation for use when not hooked up to other models}</eqn>
 				<units>Mha</units>
@@ -4281,7 +4501,7 @@ https://doi.org/10.1073/pnas.0704243104 (0.0072)</doc>
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>forest_completing_recovery[Run]*Mature_forest_aboveground_biomass_per_area</eqn>
+				<eqn>forest_completing_recovery[Run, World]*Mature_forest_aboveground_biomass_per_area</eqn>
 				<format precision="full"/>
 				<non_negative/>
 				<units>GtC/Year</units>
@@ -4290,7 +4510,7 @@ https://doi.org/10.1073/pnas.0704243104 (0.0072)</doc>
 				<dimensions>
 					<dim name="Run"/>
 				</dimensions>
-				<eqn>(clearing_forest_for_grassland[Run,World]+clearing_forests_for_crops_1) * Mature_forest_aboveground_biomass_per_area[Run,World]</eqn>
+				<eqn>(clearing_forest_for_grassland[Run,World]+clearing_forests_for_crops_1[Run,World]) * Mature_forest_aboveground_biomass_per_area[Run,World]</eqn>
 				<format precision="full"/>
 				<non_negative/>
 				<units>GtC/Year</units>
@@ -4380,6 +4600,7 @@ https://doi.org/10.1016/j.foreco.2021.119507</doc>
 			<aux name="cutting 1" access="input">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>{Enter equation for use when not hooked up to other models}</eqn>
 				<units>Mha/Year</units>
@@ -4388,7 +4609,7 @@ https://doi.org/10.1016/j.foreco.2021.119507</doc>
 				<dimensions>
 					<dim name="Run"/>
 				</dimensions>
-				<eqn>cutting_1*Mature_forest_aboveground_biomass_per_area[Run,World]</eqn>
+				<eqn>cutting_1[Run,World]*Mature_forest_aboveground_biomass_per_area[Run,World]</eqn>
 				<non_negative/>
 				<units>GtC/Year</units>
 			</flow>
@@ -4410,6 +4631,7 @@ https://doi.org/10.1016/j.foreco.2021.119507</doc>
 			<aux name="clearing forests\nfor crops 1" access="input">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>{Enter equation for use when not hooked up to other models}</eqn>
 				<units>Mha/Year</units>
@@ -4419,7 +4641,7 @@ https://doi.org/10.1016/j.foreco.2021.119507</doc>
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>Mature_forest_aboveground_biomass[Run]/Mature_Forest[Run]</eqn>
+				<eqn>Mature_forest_aboveground_biomass[Run]/Mature_Forest[Run,Region]</eqn>
 				<units>GtC/Mha</units>
 			</aux>
 			<aux name="Young forest aboveground\nbiomass per area">
@@ -4427,12 +4649,13 @@ https://doi.org/10.1016/j.foreco.2021.119507</doc>
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>Young_forest_aboveground_biomass/Young_Forest[Run]</eqn>
+				<eqn>Young_forest_aboveground_biomass/Young_Forest[Run,Region]</eqn>
 				<units>GtC/Mha</units>
 			</aux>
 			<aux name="forest completing\nrecovery" access="input">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>{Enter equation for use when not hooked up to other models}</eqn>
 				<units>Mha/year</units>
@@ -4630,7 +4853,7 @@ Limits for extreme conditions in no feedback cases</doc>
 				<isee:iframe color="black" background="white" text_align="left" vertical_text_align="top" font_size="12pt" border_width="thin" border_style="solid"/>
 				<isee:financial_table color="black" background="#E0E0E0" text_align="right" font_size="12pt" hide_border="false" auto_fit="true" first_column_width="250" other_column_width="100" header_font_style="normal" header_font_weight="bold" header_text_decoration="none" header_text_align="center" header_vertical_text_align="center" header_font_color="black" header_font_family="Arial" header_font_size="14pt" header_text_padding="2" header_text_border_color="black" header_text_border_width="thin" header_text_border_style="none"/>
 			</style>
-			<view isee:show_pages="false" background="white" page_width="1122" page_height="793" isee:page_cols="3" isee:page_rows="3" isee:scroll_x="685" zoom="80" isee:popup_graphs_are_comparative="true" isee:enable_non_negative_highlights="false" type="stock_flow">
+			<view isee:show_pages="false" background="white" page_width="1122" page_height="793" isee:page_cols="3" isee:page_rows="3" isee:scroll_x="420" isee:scroll_y="75" zoom="80" isee:popup_graphs_are_comparative="true" isee:enable_non_negative_highlights="false" type="stock_flow">
 				<style color="black" background="white" font_style="normal" font_weight="normal" text_decoration="none" text_align="center" vertical_text_align="center" font_color="black" font_family="Arial" font_size="10pt" padding="2" border_color="black" border_width="thin" border_style="none">
 					<stock color="blue" background="white" font_color="blue" font_size="11pt" label_side="top">
 						<shape type="rectangle" width="45" height="35"/>
@@ -4855,7 +5078,7 @@ Limits for extreme conditions in no feedback cases</doc>
 					<to>forest_aboveground_biomass</to>
 				</connector>
 				<aux font_style="italic" font_weight="bold" x="1178.57" y="315" name="cutting 1"/>
-				<connector uid="37" angle="26.9398">
+				<connector uid="37" angle="26.9402">
 					<from>cutting_1</from>
 					<to>cutting</to>
 				</connector>
@@ -4865,7 +5088,7 @@ Limits for extreme conditions in no feedback cases</doc>
 						<pt x="1256" y="190"/>
 					</pts>
 				</flow>
-				<connector uid="38" angle="59.3326">
+				<connector uid="38" angle="59.3325">
 					<from>cutting</from>
 					<to>timber</to>
 				</connector>
@@ -5412,6 +5635,7 @@ Old value from calibration: 164600402563.243</doc>
 			<stock name="Cropland" access="input">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>{Enter equation for use when not hooked up to other models}</eqn>
 				<units>Mha</units>
@@ -5423,7 +5647,7 @@ Old value from calibration: 164600402563.243</doc>
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>Cropland[Run]*fraction_of_cropland_irrigated</eqn>
+				<eqn>Cropland[Run,Region]*fraction_of_cropland_irrigated</eqn>
 				<units>Mha</units>
 			</aux>
 			<aux name="fraction of cropland irrigated\nindicated by GDP per person">
@@ -7036,26 +7260,36 @@ An external reference point - this can be converted to the initial value for fer
 			<aux name="Crop Land 1980">
 				<doc>${External Parameter}
 </doc>
+				<dimensions>
+					<dim name="Region"/>
+				</dimensions>
 				<eqn>1420.025354 {FAOSTAT,  Land Use/Land Cover}</eqn>
 				<units>Mha</units>
 			</aux>
 			<aux name="Habitable Land Area" access="output">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<eqn>Cropland + Mature_Forest + Grassland[Run,Region] + Young_Forest</eqn>
+				<eqn>Cropland[Run,Region] + Mature_Forest[Run,Region] + Grassland[Run,Region] + Young_Forest[Run,Region]</eqn>
 				<isee:summing/>
 				<units>Mha</units>
 			</aux>
 			<aux name="Grassland 1980">
 				<doc>${External Parameter}
 </doc>
+				<dimensions>
+					<dim name="Region"/>
+				</dimensions>
 				<eqn>3200 {FAOSTAT,  Land Use/Land Cover}</eqn>
 				<units>MHa</units>
 			</aux>
 			<aux name="Forest Land 1980">
 				<doc>${External Parameter}
 </doc>
+				<dimensions>
+					<dim name="Region"/>
+				</dimensions>
 				<eqn>4274.164902 {FAOSTAT,  Land Use/Land Cover}</eqn>
 				<units>Mha</units>
 			</aux>
@@ -7065,8 +7299,9 @@ Calibration data from:
 Food and Agriculture Organization of the United Nations (2023)</doc>
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<eqn>Crop_Land_1980</eqn>
+				<eqn>Crop_Land_1980[Region]</eqn>
 				<inflow>clearing_forests_for_crops</inflow>
 				<inflow>clearing_grassland</inflow>
 				<outflow>reforesting_cropland</outflow>
@@ -7080,8 +7315,9 @@ Food and Agriculture Organization of the United Nations (2023)</doc>
 Food and Agriculture Organization of the United Nations (2023)</doc>
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<eqn>Forest_Land_1980*(1-percent_of_forest_recovering_in_1980)</eqn>
+				<eqn>Forest_Land_1980[Region]*(1-percent_of_forest_recovering_in_1980)</eqn>
 				<inflow>forest_completing_recovery</inflow>
 				<outflow>clearing_forests_for_crops</outflow>
 				<outflow>clearing_forest_for_grassland</outflow>
@@ -7091,6 +7327,7 @@ Food and Agriculture Organization of the United Nations (2023)</doc>
 			<flow name="clearing forests\nfor crops" access="output">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>MIN(Mature_Forest/DT,  new_land_for_crops*fraction_of_new_cropland_from_forests)</eqn>
 				<non_negative/>
@@ -7101,7 +7338,7 @@ Food and Agriculture Organization of the United Nations (2023)</doc>
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>Grassland_1980</eqn>
+				<eqn>Grassland_1980[Region]</eqn>
 				<inflow>fallowing_cropland</inflow>
 				<inflow>clearing_forest_for_grassland</inflow>
 				<outflow>clearing_grassland</outflow>
@@ -7122,13 +7359,14 @@ Lambin EF, Meyfroidt P. 2011. Global land use change, economic globalization, an
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>MIN(Grassland[*,*]/DT,  new_land_for_crops*(1-fraction_of_new_cropland_from_forests))</eqn>
+				<eqn>MIN(Grassland/DT,  new_land_for_crops*(1-fraction_of_new_cropland_from_forests))</eqn>
 				<non_negative/>
 				<units>Mha/year</units>
 			</flow>
 			<aux name="new land\nfor crops">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>MAX(0, (indicated_cropland-Cropland)/cropland_expansion_time + cropland_depleting)</eqn>
 				<units>Mha/year</units>
@@ -7138,8 +7376,12 @@ Lambin EF, Meyfroidt P. 2011. Global land use change, economic globalization, an
 Calibration Parameter: forest land &amp; CO2 emissions from land cover change &amp; agricultural land</doc>
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<element subscript="1">
+				<element subscript="1, World">
+					<eqn>0.510511456217934</eqn>
+				</element>
+				<element subscript="1, Brazil">
 					<eqn>0.510511456217934</eqn>
 				</element>
 				<range min="0.2" max="0.8"/>
@@ -7148,8 +7390,9 @@ Calibration Parameter: forest land &amp; CO2 emissions from land cover change &a
 			<flow name="reforesting cropland" access="output" isee:autocreated="true">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<eqn>(cropland_depleting)*(1-fraction_of_depleting_cropland_to_grassland)</eqn>
+				<eqn>(cropland_depleting[Run,Region])*(1-fraction_of_depleting_cropland_to_grassland[Run,Region])</eqn>
 				<non_negative/>
 				<units>Mha/year</units>
 			</flow>
@@ -7158,7 +7401,7 @@ Calibration Parameter: forest land &amp; CO2 emissions from land cover change &a
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>(cropland_depleting[Run])*fraction_of_depleting_cropland_to_grassland[Run]</eqn>
+				<eqn>(cropland_depleting[Run,Region])*fraction_of_depleting_cropland_to_grassland[Run,Region]</eqn>
 				<non_negative/>
 				<units>Mha/year</units>
 			</flow>
@@ -7167,8 +7410,12 @@ Calibration Parameter: forest land &amp; CO2 emissions from land cover change &a
 </doc>
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<element subscript="1">
+				<element subscript="1, World">
+					<eqn>966.048326007073</eqn>
+				</element>
+				<element subscript="1, Brazil">
 					<eqn>966.048326007073</eqn>
 				</element>
 				<range min="100" max="1000"/>
@@ -7177,6 +7424,7 @@ Calibration Parameter: forest land &amp; CO2 emissions from land cover change &a
 			<aux name="cropland depleting">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>Cropland/average_time_cropland_in_use</eqn>
 				<units>Mha/year</units>
@@ -7186,8 +7434,12 @@ Calibration Parameter: forest land &amp; CO2 emissions from land cover change &a
 </doc>
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<element subscript="1">
+				<element subscript="1, World">
+					<eqn>0.412578004548668</eqn>
+				</element>
+				<element subscript="1, Brazil">
 					<eqn>0.412578004548668</eqn>
 				</element>
 				<range min="0.2" max="0.8"/>
@@ -7198,7 +7450,7 @@ Calibration Parameter: forest land &amp; CO2 emissions from land cover change &a
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>IF TIME &lt; Policy_Start_Year THEN 0 ELSE Grassland/forrestible_land[Run] * land_to_forest[Run]</eqn>
+				<eqn>IF TIME &lt; Policy_Start_Year THEN 0 ELSE Grassland/forrestible_land[Run,Region] * land_to_forest[Run,Region]</eqn>
 				<non_negative/>
 				<units>Mha/year</units>
 			</flow>
@@ -7207,17 +7459,21 @@ Calibration Parameter: forest land &amp; CO2 emissions from land cover change &a
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>MAX(0, grassland_gap[Run])/time_to_close_grassland_gap[Run]</eqn>
+				<eqn>MAX(0, grassland_gap[Run,Region])/time_to_close_grassland_gap[Run,Region]</eqn>
 				<non_negative/>
 				<units>Mha/year</units>
 			</flow>
-			<aux name="fraction of grassland for grazing">
+			<aux name="fraction of\ngrassland for grazing">
 				<doc>${Internal Calibration Parameter}
 </doc>
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<element subscript="1">
+				<element subscript="1, World">
+					<eqn>0.672311080417832</eqn>
+				</element>
+				<element subscript="1, Brazil">
 					<eqn>0.672311080417832</eqn>
 				</element>
 				<range min="0.6" max="0.8"/>
@@ -7228,19 +7484,21 @@ Calibration Parameter: forest land &amp; CO2 emissions from land cover change &a
 				<dimensions>
 					<dim name="Run"/>
 				</dimensions>
-				<eqn>Grassland[Run,World]*fraction_of_grassland_for_grazing</eqn>
+				<eqn>Grassland[Run,World]*fraction_of_grassland_for_grazing[Run,World]</eqn>
 				<units>Mha</units>
 			</aux>
 			<aux name="indicated grazing land">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<eqn>grazing_land*effect_of_animal_products_balance_on_grazing_land</eqn>
+				<eqn>grazing_land[Run]*effect_of_animal_products_balance_on_grazing_land</eqn>
 				<units>MHa</units>
 			</aux>
 			<aux name="indicated grassland">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>indicated_grazing_land*1/fraction_of_grassland_for_grazing</eqn>
 				<units>MHa</units>
@@ -7250,8 +7508,12 @@ Calibration Parameter: forest land &amp; CO2 emissions from land cover change &a
 </doc>
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<element subscript="1">
+				<element subscript="1, World">
+					<eqn>8.51420168264695</eqn>
+				</element>
+				<element subscript="1, Brazil">
 					<eqn>8.51420168264695</eqn>
 				</element>
 				<range min="2" max="10"/>
@@ -7260,8 +7522,9 @@ Calibration Parameter: forest land &amp; CO2 emissions from land cover change &a
 			<stock name="Young Forest" access="output" isee:autocreated="true">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<eqn>Forest_Land_1980*percent_of_forest_recovering_in_1980</eqn>
+				<eqn>Forest_Land_1980[Region]*percent_of_forest_recovering_in_1980</eqn>
 				<inflow>foresting_grassland</inflow>
 				<inflow>reforesting_cropland</inflow>
 				<inflow>reforesting_grassland</inflow>
@@ -7275,6 +7538,7 @@ Calibration Parameter: forest land &amp; CO2 emissions from land cover change &a
 			<flow name="forest completing\nrecovery" access="output" isee:autocreated="true">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>Young_Forest/forest_recovery_time</eqn>
 				<non_negative/>
@@ -7285,8 +7549,12 @@ Calibration Parameter: forest land &amp; CO2 emissions from land cover change &a
 </doc>
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<element subscript="1">
+				<element subscript="1, World">
+					<eqn>64.15611703</eqn>
+				</element>
+				<element subscript="1, Brazil">
 					<eqn>64.15611703</eqn>
 				</element>
 				<range min="50" max="70"/>
@@ -7297,6 +7565,7 @@ Calibration Parameter: forest land &amp; CO2 emissions from land cover change &a
 </doc>
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>Mature_Forest + Young_Forest</eqn>
 				<isee:summing/>
@@ -7305,8 +7574,9 @@ Calibration Parameter: forest land &amp; CO2 emissions from land cover change &a
 			<aux name="grassland gap">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<eqn>indicated_grassland-Grassland[Run,Region]</eqn>
+				<eqn>indicated_grassland[Run,Region]-Grassland[Run,Region]</eqn>
 				<units>Mha</units>
 			</aux>
 			<flow name="reforesting\ngrassland" access="output" isee:autocreated="true">
@@ -7314,7 +7584,7 @@ Calibration Parameter: forest land &amp; CO2 emissions from land cover change &a
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>MAX(grassland_gap[Run]*-1, 0)/time_to_close_grassland_gap[Run]</eqn>
+				<eqn>MAX(grassland_gap[Run,Region]*-1, 0)/time_to_close_grassland_gap[Run,Region]</eqn>
 				<non_negative/>
 				<units>Mha/year</units>
 			</flow>
@@ -7323,8 +7593,12 @@ Calibration Parameter: forest land &amp; CO2 emissions from land cover change &a
 </doc>
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<element subscript="1">
+				<element subscript="1, World">
+					<eqn>0.0863642445555122</eqn>
+				</element>
+				<element subscript="1, Brazil">
 					<eqn>0.0863642445555122</eqn>
 				</element>
 				<range min="0.01" max="0.5"/>
@@ -7333,6 +7607,7 @@ Calibration Parameter: forest land &amp; CO2 emissions from land cover change &a
 			<aux name="indicated cropland">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>Cropland*effect_of_crop_balance_on_crop_land_expansion</eqn>
 				<units>Mha</units>
@@ -7342,8 +7617,12 @@ Calibration Parameter: forest land &amp; CO2 emissions from land cover change &a
 </doc>
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<element subscript="1">
+				<element subscript="1, World">
+					<eqn>2.85632402447486</eqn>
+				</element>
+				<element subscript="1, Brazil">
 					<eqn>2.85632402447486</eqn>
 				</element>
 				<range min="1" max="10"/>
@@ -7352,6 +7631,7 @@ Calibration Parameter: forest land &amp; CO2 emissions from land cover change &a
 			<stock name="Degraded\nLand" access="output" isee:autocreated="true">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>0</eqn>
 				<inflow>degraded_land_from_crops</inflow>
@@ -7363,6 +7643,7 @@ Calibration Parameter: forest land &amp; CO2 emissions from land cover change &a
 			<flow name="degraded\nland from crops" access="output" isee:autocreated="true">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>Cropland*fraction_cropland_degrading</eqn>
 				<non_negative/>
@@ -7373,8 +7654,12 @@ Calibration Parameter: forest land &amp; CO2 emissions from land cover change &a
 </doc>
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<element subscript="1">
+				<element subscript="1, World">
+					<eqn>0.00005</eqn>
+				</element>
+				<element subscript="1, Brazil">
 					<eqn>0.00005</eqn>
 				</element>
 				<range min="0" max="0.0001"/>
@@ -7394,8 +7679,12 @@ Calibration Parameter: forest land &amp; CO2 emissions from land cover change &a
 </doc>
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<element subscript="1">
+				<element subscript="1, World">
+					<eqn>0.00001</eqn>
+				</element>
+				<element subscript="1, Brazil">
 					<eqn>0.00001</eqn>
 				</element>
 				<range min="0" max="0.0001"/>
@@ -7404,6 +7693,7 @@ Calibration Parameter: forest land &amp; CO2 emissions from land cover change &a
 			<aux name="fraction of grassland\ndegrading">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>fraction_of_grassland_degrading_1980*effect_of_animal_products_yield_on_fraction_of_grassland_degrading</eqn>
 				<units>1/year</units>
@@ -7411,8 +7701,9 @@ Calibration Parameter: forest land &amp; CO2 emissions from land cover change &a
 			<aux name="effect of animal products\nyield on fraction\nof grassland degrading">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<eqn>(Livestock_Yield[Run,Region]/INIT(Livestock_Yield[Run,Region]))^elasticity_of_effect_of_animal_products_yield_on_fraction_of_grassland_degrading</eqn>
+				<eqn>(Livestock_Yield[Run,Region]/INIT(Livestock_Yield[Run,Region]))^elasticity_of_effect_of_animal_products_yield_on_fraction_of_grassland_degrading[Run,Region]</eqn>
 				<units>dmnl</units>
 			</aux>
 			<aux name="elasticity of effect of animal products\nyield on fraction\nof grassland degrading">
@@ -7420,14 +7711,21 @@ Calibration Parameter: forest land &amp; CO2 emissions from land cover change &a
 </doc>
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<eqn>0.708983972802554</eqn>
+				<element subscript="1, World">
+					<eqn>0.708983972802554</eqn>
+				</element>
+				<element subscript="1, Brazil">
+					<eqn>0.708983972802554</eqn>
+				</element>
 				<range min="0.2" max="2"/>
 				<units>dmnl</units>
 			</aux>
 			<aux name="fraction cropland\ndegrading">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>fraction_cropland_degrading_1980*effect_of_crop_yield_on_fraction_cropland_degrading</eqn>
 				<units>1/year</units>
@@ -7435,8 +7733,9 @@ Calibration Parameter: forest land &amp; CO2 emissions from land cover change &a
 			<aux name="effect of crop yield\non fraction cropland\ndegrading">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<eqn>(crop_yield/INIT(crop_yield))^elasticity_of_effect_of_crop_yield_on_fraction_cropland_degrading</eqn>
+				<eqn>(crop_yield[Run]/INIT(crop_yield[Run]))^elasticity_of_effect_of_crop_yield_on_fraction_cropland_degrading</eqn>
 				<units>dmnl</units>
 			</aux>
 			<aux name="elasticity of effect of crop yield\non fraction cropland\ndegrading">
@@ -7444,14 +7743,21 @@ Calibration Parameter: forest land &amp; CO2 emissions from land cover change &a
 </doc>
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<eqn>0.866410252363501</eqn>
+				<element subscript="1, World">
+					<eqn>0.866410252363501</eqn>
+				</element>
+				<element subscript="1, Brazil">
+					<eqn>0.866410252363501</eqn>
+				</element>
 				<range min="0.2" max="2"/>
 				<units>dmnl</units>
 			</aux>
 			<aux name="fraction degraded">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>1-(Habitable_Land_Area/INIT(Habitable_Land_Area))</eqn>
 				<units>dmnl</units>
@@ -7473,8 +7779,12 @@ Calibration Parameter: forest land &amp; CO2 emissions from land cover change &a
 Calibration Parameter: forest land &amp; CO2 emissions from land cover change &amp; agricultural land &amp; crop production &amp; fertilizer use</doc>
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<element subscript="1">
+				<element subscript="1, World">
+					<eqn>-0.314437630068299</eqn>
+				</element>
+				<element subscript="1, Brazil">
 					<eqn>-0.314437630068299</eqn>
 				</element>
 				<range min="-1" max="0"/>
@@ -7483,8 +7793,9 @@ Calibration Parameter: forest land &amp; CO2 emissions from land cover change &a
 			<aux name="effect of crop balance on\ncrop land expansion">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<eqn>1+sensitivity_of_effect_of_crop_balance_on_crop_land_expansion_rate*(crop_balance_with_reserves-1)</eqn>
+				<eqn>1+sensitivity_of_effect_of_crop_balance_on_crop_land_expansion_rate*(crop_balance_with_reserves[Run]-1)</eqn>
 				<units>dmnl</units>
 			</aux>
 			<aux name="crop balance\nwith reserves" access="input">
@@ -7497,8 +7808,9 @@ Calibration Parameter: forest land &amp; CO2 emissions from land cover change &a
 			<aux name="effect of animal products balance\non grazing land">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<eqn>1+sensitivity_of_effect_of_animal_products_balance_on_grassland_expansion_rate*(livestock_balance_with_reserves-1)</eqn>
+				<eqn>1+sensitivity_of_effect_of_animal_products_balance_on_grassland_expansion_rate*(livestock_balance_with_reserves[Run]-1)</eqn>
 				<units>dmnl</units>
 			</aux>
 			<aux name="sensitivity of effect of animal products\nbalance on grassland\nexpansion rate">
@@ -7506,8 +7818,12 @@ Calibration Parameter: forest land &amp; CO2 emissions from land cover change &a
 Calibration Parameter: forest land &amp; CO2 emissions from land cover change &amp; agricultural land &amp; crop production &amp; fertilizer use</doc>
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<element subscript="1">
+				<element subscript="1, World">
+					<eqn>-0.152244737461254</eqn>
+				</element>
+				<element subscript="1, Brazil">
 					<eqn>-0.152244737461254</eqn>
 				</element>
 				<range min="-1" max="0"/>
@@ -7530,14 +7846,16 @@ Calibration Parameter: forest land &amp; CO2 emissions from land cover change &a
 			<aux name="forrestible land">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<eqn>Degraded_Land + Grassland[Run,Region] + Cropland</eqn>
+				<eqn>Degraded_Land[Run,Region] + Grassland[Run,Region] + Cropland[Run,Region]</eqn>
 				<isee:summing/>
 				<units>Mha</units>
 			</aux>
 			<aux name="land to forest">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>MIN(forestation_policy_1, max_land_to_forest)</eqn>
 				<units>Mha/year</units>
@@ -7545,6 +7863,7 @@ Calibration Parameter: forest land &amp; CO2 emissions from land cover change &a
 			<flow name="foresting\ndegraded land" access="output" isee:autocreated="true">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>IF TIME &lt; Policy_Start_Year THEN 0 ELSE Degraded_Land/forrestible_land * land_to_forest</eqn>
 				<non_negative/>
@@ -7553,6 +7872,7 @@ Calibration Parameter: forest land &amp; CO2 emissions from land cover change &a
 			<flow name="forresting cropland" access="output" isee:autocreated="true">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>IF TIME &lt; Policy_Start_Year THEN 0 ELSE Cropland/forrestible_land * land_to_forest</eqn>
 				<non_negative/>
@@ -7561,19 +7881,26 @@ Calibration Parameter: forest land &amp; CO2 emissions from land cover change &a
 			<aux name="Forrest Land 1750">
 				<doc>${Assumption}
 https://ourworldindata.org/world-lost-one-third-forests</doc>
+				<dimensions>
+					<dim name="Region"/>
+				</dimensions>
 				<eqn>6000</eqn>
 				<units>Mha</units>
 			</aux>
 			<aux name="max land to forest">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<eqn>MAX(0,  Forrest_Land_1750-Forest_Land)/timespan_for_forresting</eqn>
+				<eqn>MAX(0,  Forrest_Land_1750[World]-Forest_Land)/timespan_for_forresting[Region]</eqn>
 				<units>Mha/year</units>
 			</aux>
 			<aux name="timespan for forresting">
 				<doc>${Assumption}
 Used for policy implementation only.</doc>
+				<dimensions>
+					<dim name="Region"/>
+				</dimensions>
 				<eqn>1</eqn>
 				<units>year</units>
 			</aux>
@@ -7590,19 +7917,20 @@ Used for policy implementation only.</doc>
 				<dimensions>
 					<dim name="Run"/>
 				</dimensions>
-				<eqn>RUNCUM(clearing_forest_for_grassland+clearing_forests_for_crops)</eqn>
+				<eqn>RUNCUM(clearing_forest_for_grassland[Run,World]+clearing_forests_for_crops[Run,World])</eqn>
 				<units>Mha</units>
 			</aux>
 			<aux name="gross grassland land use loss" access="output" isee:autocreated="true">
 				<dimensions>
 					<dim name="Run"/>
 				</dimensions>
-				<eqn>RUNCUM(reforesting_grassland+clearing_grassland+foresting_grassland+degraded_land_from_grassland)</eqn>
+				<eqn>RUNCUM(reforesting_grassland[Run,World]+clearing_grassland[Run,World]+foresting_grassland[Run,World]+degraded_land_from_grassland[Run,World])</eqn>
 				<units>Mha</units>
 			</aux>
 			<flow name="cutting" access="output" isee:autocreated="true">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>Mature_Forest/cutting_time</eqn>
 				<non_negative/>
@@ -7613,8 +7941,12 @@ Used for policy implementation only.</doc>
 </doc>
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<element subscript="1">
+				<element subscript="1, World">
+					<eqn>599.441148339866</eqn>
+				</element>
+				<element subscript="1, Brazil">
 					<eqn>599.441148339866</eqn>
 				</element>
 				<range min="100" max="1000"/>
@@ -7624,12 +7956,13 @@ Used for policy implementation only.</doc>
 				<dimensions>
 					<dim name="Run"/>
 				</dimensions>
-				<eqn>Young_Forest/(Mature_Forest+Young_Forest)</eqn>
+				<eqn>Young_Forest[Run,World]/(Mature_Forest[Run,World]+Young_Forest[Run,World])</eqn>
 				<units>dmnl</units>
 			</aux>
 			<aux name="cutting time">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>MAXSOFT(normal_average_cutting_time*effect_of_forest_size_on_cutting_time, normal_average_cutting_time/2, normal_average_cutting_time/10)</eqn>
 				<units>year</units>
@@ -7637,17 +7970,22 @@ Used for policy implementation only.</doc>
 			<aux name="effect of\nforest size on cutting time">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>1+ sensitivity_of_cutting_time_to_forest_size * (Mature_Forest/INIT(Mature_Forest) - 1)</eqn>
 				<units>dmnl</units>
 			</aux>
-			<aux name="sensitivity of cutting time to forest size">
+			<aux name="sensitivity of cutting\ntime to forest size">
 				<doc>${Internal Calibration Parameter}
 </doc>
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<element subscript="1">
+				<element subscript="1, World">
+					<eqn>1.61188503044571</eqn>
+				</element>
+				<element subscript="1, Brazil">
 					<eqn>1.61188503044571</eqn>
 				</element>
 				<range min="0" max="5"/>
@@ -7656,6 +7994,7 @@ Used for policy implementation only.</doc>
 			<aux name="effect of\ncropland size on time in use">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>1+ sensitivity_of_crop_land_use_time_to_cropland_size * (Cropland/INIT(Cropland) - 1)</eqn>
 				<units>dmnl</units>
@@ -7663,17 +8002,22 @@ Used for policy implementation only.</doc>
 			<aux name="average time\ncropland in use">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>normal_average_time_cropland_in_use*effect_of_cropland_size_on_time_in_use</eqn>
 				<units>years</units>
 			</aux>
-			<aux name="sensitivity of crop land use time to cropland size">
+			<aux name="sensitivity of crop land\nuse time to cropland size">
 				<doc>${Internal Calibration Parameter}
 </doc>
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<element subscript="1">
+				<element subscript="1, World">
+					<eqn>0.613486442667746</eqn>
+				</element>
+				<element subscript="1, Brazil">
 					<eqn>0.613486442667746</eqn>
 				</element>
 				<range min="0" max="10"/>
@@ -7682,6 +8026,7 @@ Used for policy implementation only.</doc>
 			<aux name="initial crop yield" access="input">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>2.49242261286435</eqn>
 				<units>PCal/(Mha*year)</units>
@@ -7735,7 +8080,7 @@ Used for policy implementation only.</doc>
 				<isee:iframe color="black" background="white" text_align="left" vertical_text_align="top" font_size="12pt" border_width="thin" border_style="solid"/>
 				<isee:financial_table color="black" background="#E0E0E0" text_align="right" font_size="12pt" hide_border="false" auto_fit="true" first_column_width="250" other_column_width="100" header_font_style="normal" header_font_weight="bold" header_text_decoration="none" header_text_align="center" header_vertical_text_align="center" header_font_color="black" header_font_family="Arial" header_font_size="14pt" header_text_padding="2" header_text_border_color="black" header_text_border_width="thin" header_text_border_style="none"/>
 			</style>
-			<view isee:show_pages="false" background="white" page_width="1122" page_height="793" isee:page_cols="3" isee:page_rows="2" isee:scroll_x="810" isee:scroll_y="342" isee:popup_graphs_are_comparative="true" isee:enable_non_negative_highlights="false" type="stock_flow">
+			<view isee:show_pages="false" background="white" page_width="1122" page_height="793" isee:page_cols="3" isee:page_rows="2" isee:popup_graphs_are_comparative="true" isee:enable_non_negative_highlights="false" type="stock_flow">
 				<style color="black" background="white" font_style="normal" font_weight="normal" text_decoration="none" text_align="center" vertical_text_align="center" font_color="black" font_family="Arial" font_size="10pt" padding="2" border_color="black" border_width="thin" border_style="none">
 					<stock color="blue" background="white" font_color="blue" font_size="11pt" label_side="top">
 						<shape type="rectangle" width="45" height="35"/>
@@ -7861,7 +8206,7 @@ Used for policy implementation only.</doc>
 						<pt x="691.25" y="745.5"/>
 					</pts>
 				</flow>
-				<aux x="632.25" y="962.5" name="fraction of grassland for grazing"/>
+				<aux x="632.25" y="962.5" name="fraction of\ngrassland for grazing"/>
 				<aux x="614.25" y="880.75" name="grazing land"/>
 				<connector uid="11" angle="251.301">
 					<from>Grassland</from>
@@ -8238,26 +8583,13 @@ Used for policy implementation only.</doc>
 					<from>effect_of_forest_size_on_cutting_time</from>
 					<to>cutting_time</to>
 				</connector>
-				<aux x="865" y="53" name="sensitivity of cutting time to forest size"/>
+				<aux x="865" y="53" name="sensitivity of cutting\ntime to forest size"/>
 				<connector uid="87" angle="315.807">
 					<from>sensitivity_of_cutting_time_to_forest_size</from>
 					<to>effect_of_forest_size_on_cutting_time</to>
 				</connector>
 				<stacked_container uid="88" x="1567" y="455" width="465" height="498.5">
-					<graph width="465" height="498.5" type="area" isee:sum_stacked_legend="true" isee:stacked_show_hover_values="true" show_grid="false" isee:tick_type="none" include_units_in_legend="false" plot_numbers="false" isee:label_pie_slices="false" isee:show_pie_borders="true" num_x_grid_lines="0" num_y_grid_lines="0" num_x_labels="5" num_y_labels="3" isee:fill_intensity="0.1" isee:allow_zero_axis="true" left_axis_multi_scale="false" left_axis_auto_scale="true" left_include_units="true" right_axis_multi_scale="false" right_axis_auto_scale="true" right_include_units="true">
-						<plot color="blue" isee:keep_zero_visible="true" pen_width="1" index="0" show_y_axis="true">
-							<entity name="Young_Forest[1]"/>
-						</plot>
-						<plot color="red" isee:keep_zero_visible="true" pen_width="1" index="1" show_y_axis="true">
-							<entity name="Degraded_Land[1]"/>
-						</plot>
-						<plot color="fuchsia" isee:keep_zero_visible="true" pen_width="1" index="2" show_y_axis="true">
-							<entity name="Cropland[1]"/>
-						</plot>
-						<plot color="#FF7F00" isee:keep_zero_visible="true" pen_width="1" index="3" show_y_axis="true">
-							<entity name="Mature_Forest[1]"/>
-						</plot>
-					</graph>
+					<graph width="465" height="498.5" type="area" isee:sum_stacked_legend="true" isee:stacked_show_hover_values="true" show_grid="false" isee:tick_type="none" include_units_in_legend="false" plot_numbers="false" isee:label_pie_slices="false" isee:show_pie_borders="true" num_x_grid_lines="0" num_y_grid_lines="0" num_x_labels="5" num_y_labels="3" isee:fill_intensity="0.1" isee:allow_zero_axis="true" left_axis_multi_scale="false" left_axis_auto_scale="true" left_include_units="true" right_axis_multi_scale="false" right_axis_auto_scale="true" right_include_units="true"/>
 				</stacked_container>
 				<aux x="1016" y="283.25" name="effect of\ncropland size on time in use"/>
 				<connector uid="89" angle="35.7293">
@@ -8277,7 +8609,7 @@ Used for policy implementation only.</doc>
 					<from>average_time_cropland_in_use</from>
 					<to>cropland_depleting</to>
 				</connector>
-				<aux x="994.5" y="220" name="sensitivity of crop land use time to cropland size"/>
+				<aux x="994.5" y="220" name="sensitivity of crop land\nuse time to cropland size"/>
 				<connector uid="93" angle="291.092">
 					<from>sensitivity_of_crop_land_use_time_to_cropland_size</from>
 					<to>effect_of_cropland_size_on_time_in_use</to>
@@ -8552,12 +8884,12 @@ Used for policy implementation only.</doc>
 			</module>
 			<module name="forest soil carbon" isee:label="">
 				<format scale_by="auto"/>
+				<connect to="Terrestrial_Carbon_Balance.fast_soil_carbon_emissions_young_forest" from="forest_soil_carbon.fast_soil_carbon_emissions_young_forest"/>
+				<connect2 to="Terrestrial_Carbon_Balance.fast_soil_carbon_emissions_young_forest" from="forest_soil_carbon.fast_soil_carbon_emissions_young_forest"/>
 				<connect to="cropland_soil_carbon.fast_soil_carbon_forest_to_cropland" from="forest_soil_carbon.fast_soil_carbon_forest_to_cropland"/>
 				<connect2 to="cropland_soil_carbon.fast_soil_carbon_forest_to_cropland" from="forest_soil_carbon.fast_soil_carbon_forest_to_cropland"/>
 				<connect to="Forest_carbon_balance.fast_soil_carbon_forest_to_cropland" from="forest_soil_carbon.fast_soil_carbon_forest_to_cropland"/>
 				<connect2 to="Forest_carbon_balance.fast_soil_carbon_forest_to_cropland" from="forest_soil_carbon.fast_soil_carbon_forest_to_cropland"/>
-				<connect to="Terrestrial_Carbon_Balance.fast_soil_carbon_emissions_young_forest" from="forest_soil_carbon.fast_soil_carbon_emissions_young_forest"/>
-				<connect2 to="Terrestrial_Carbon_Balance.fast_soil_carbon_emissions_young_forest" from="forest_soil_carbon.fast_soil_carbon_emissions_young_forest"/>
 				<connect to="Forest_carbon_balance.fast_soil_carbon_forest_to_grassland" from="forest_soil_carbon.fast_soil_carbon_forest_to_grassland"/>
 				<connect2 to="Forest_carbon_balance.fast_soil_carbon_forest_to_grassland" from="forest_soil_carbon.fast_soil_carbon_forest_to_grassland"/>
 				<connect to="grassland_soil_carbon.fast_soil_carbon_forest_to_grassland" from="forest_soil_carbon.fast_soil_carbon_forest_to_grassland"/>
@@ -8747,7 +9079,7 @@ Used for policy implementation only.</doc>
 				<isee:iframe color="black" background="white" text_align="left" vertical_text_align="top" font_size="12pt" border_width="thin" border_style="solid"/>
 				<isee:financial_table color="black" background="#E0E0E0" text_align="right" font_size="12pt" hide_border="false" auto_fit="true" first_column_width="250" other_column_width="100" header_font_style="normal" header_font_weight="bold" header_text_decoration="none" header_text_align="center" header_vertical_text_align="center" header_font_color="black" header_font_family="Arial" header_font_size="14pt" header_text_padding="2" header_text_border_color="black" header_text_border_width="thin" header_text_border_style="none"/>
 			</style>
-			<view isee:show_pages="false" background="white" page_width="1122" page_height="793" isee:page_cols="2" isee:page_rows="2" isee:scroll_x="683" isee:popup_graphs_are_comparative="true" isee:enable_non_negative_highlights="false" type="stock_flow">
+			<view isee:show_pages="false" background="white" page_width="1122" page_height="793" isee:page_cols="2" isee:page_rows="2" isee:scroll_x="701" isee:popup_graphs_are_comparative="true" isee:enable_non_negative_highlights="false" type="stock_flow">
 				<style color="black" background="white" font_style="normal" font_weight="normal" text_decoration="none" text_align="center" vertical_text_align="center" font_color="black" font_family="Arial" font_size="10pt" padding="2" border_color="black" border_width="thin" border_style="none">
 					<stock color="blue" background="white" font_color="blue" font_size="11pt" label_side="top">
 						<shape type="rectangle" width="45" height="35"/>
@@ -8865,43 +9197,48 @@ Used for policy implementation only.</doc>
 	</model>
 	<model name="cropland_soil_carbon">
 		<variables>
-			<flow name="litter input slow soil carbon cropland">
+			<flow name="litter input slow\nsoil carbon cropland">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<eqn>cropland_litter_to_soil_carbon*litter_input_share_slow_soil_carbon</eqn>
+				<eqn>cropland_litter_to_soil_carbon[Run]*litter_input_share_slow_soil_carbon[Run]</eqn>
 				<non_negative/>
 				<units>GtC/Year</units>
 			</flow>
 			<flow name="slow soil carbon\nloss cropland">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<eqn>slow_soil_carbon_cropland_to_grassland+slow_soil_carbon_cropland_to_forest+slow_soil_carbon_cropland_to_degraded_land</eqn>
+				<eqn>slow_soil_carbon_cropland_to_grassland[Run]+slow_soil_carbon_cropland_to_forest[Run]+slow_soil_carbon_cropland_to_degraded_land[Run]</eqn>
 				<non_negative/>
 				<units>GtC/Year</units>
 			</flow>
 			<flow name="fast soil carbon\nloss cropland">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<eqn>fast_soil_carbon_cropland_to_grassland+fast_soil_carbon_cropland_to_forest+fast_soil_carbon_cropland_to_degraded_land</eqn>
+				<eqn>fast_soil_carbon_cropland_to_grassland[Run]+fast_soil_carbon_cropland_to_forest[Run]+fast_soil_carbon_cropland_to_degraded_land[Run]</eqn>
 				<non_negative/>
 				<units>GtC/Year</units>
 			</flow>
-			<flow name="litter input fast soil carbon cropland">
+			<flow name="litter input fast\nsoil carbon cropland">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<eqn>cropland_litter_to_soil_carbon*(1-litter_input_share_slow_soil_carbon)</eqn>
+				<eqn>cropland_litter_to_soil_carbon[Run]*(1-litter_input_share_slow_soil_carbon[Run])</eqn>
 				<non_negative/>
 				<units>GtC/Year</units>
 			</flow>
 			<stock name="fast soil carbon cropland">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<eqn>cropland_soil_carbon_1980*(1-slow_soil_carbon_historic_share)</eqn>
+				<eqn>cropland_soil_carbon_1980[Run]*(1-slow_soil_carbon_historic_share[Run])</eqn>
 				<inflow>litter_input_fast_soil_carbon_cropland</inflow>
 				<inflow>Fast_soil_cropland_carbon_input_from_land_use_transitions</inflow>
 				<outflow>fast_soil_carbon_loss_cropland</outflow>
@@ -8911,8 +9248,9 @@ Used for policy implementation only.</doc>
 			<stock name="slow soil carbon cropland">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<eqn>cropland_soil_carbon_1980*slow_soil_carbon_historic_share</eqn>
+				<eqn>cropland_soil_carbon_1980[Run]*slow_soil_carbon_historic_share[Run]</eqn>
 				<inflow>litter_input_slow_soil_carbon_cropland</inflow>
 				<inflow>Slow_soil_cropland_carbon_input_from_land_use_transitions</inflow>
 				<outflow>slow_soil_carbon_loss_cropland</outflow>
@@ -8930,7 +9268,7 @@ Used for policy implementation only.</doc>
 				<dimensions>
 					<dim name="Run"/>
 				</dimensions>
-				<eqn>slow_soil_carbon_cropland*fraction_cropland_to_grassland</eqn>
+				<eqn>slow_soil_carbon_cropland[Run,World]*fraction_cropland_to_grassland[Run,World]</eqn>
 				<units>GtC/Year</units>
 			</aux>
 			<aux name="cropland landuse\nslow soil carbon input" access="output" isee:autocreated="true">
@@ -8944,12 +9282,13 @@ Used for policy implementation only.</doc>
 				<dimensions>
 					<dim name="Run"/>
 				</dimensions>
-				<eqn>fast_soil_carbon_cropland*fraction_cropland_to_grassland</eqn>
+				<eqn>fast_soil_carbon_cropland[Run,World]*fraction_cropland_to_grassland[Run,World]</eqn>
 				<units>GtC/Year</units>
 			</aux>
 			<aux name="fraction cropland to grassland">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn> fallowing_cropland_1//Cropland</eqn>
 				<units>1/year</units>
@@ -8958,14 +9297,14 @@ Used for policy implementation only.</doc>
 				<dimensions>
 					<dim name="Run"/>
 				</dimensions>
-				<eqn>fast_soil_carbon_cropland+slow_soil_carbon_cropland</eqn>
+				<eqn>fast_soil_carbon_cropland[Run,World]+slow_soil_carbon_cropland[Run,World]</eqn>
 				<units>GtC</units>
 			</aux>
 			<aux name="soil carbon emissions\ncropland GtC" access="output">
 				<dimensions>
 					<dim name="Run"/>
 				</dimensions>
-				<eqn>Fast_soil_cropland_carbon_emissions+Slow_soil_cropland_carbon_emissions</eqn>
+				<eqn>Fast_soil_cropland_carbon_emissions[Run,World]+Slow_soil_cropland_carbon_emissions[Run,World]</eqn>
 				<units>GtC/Year</units>
 			</aux>
 			<aux name="cropland litter to soil carbon" access="output" isee:autocreated="true">
@@ -9005,6 +9344,7 @@ Used for policy implementation only.</doc>
 			<stock name="Cropland" access="input">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>{Enter equation for use when not hooked up to other models}</eqn>
 				<units>Mha</units>
@@ -9089,6 +9429,7 @@ Used for policy implementation only.</doc>
 			<aux name="fraction cropland to forest">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn> (forresting_cropland+reforesting_cropland)//Cropland</eqn>
 				<units>1/year</units>
@@ -9096,6 +9437,7 @@ Used for policy implementation only.</doc>
 			<aux name="forresting cropland" access="input">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>{Enter equation for use when not hooked up to other models}</eqn>
 				<units>Mha/year</units>
@@ -9104,12 +9446,13 @@ Used for policy implementation only.</doc>
 				<dimensions>
 					<dim name="Run"/>
 				</dimensions>
-				<eqn>fast_soil_carbon_cropland*fraction_cropland_to_forest</eqn>
+				<eqn>fast_soil_carbon_cropland[Run,World]*fraction_cropland_to_forest[Run,World]</eqn>
 				<units>GtC/Year</units>
 			</aux>
 			<aux name="reforesting cropland" access="input">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>{Enter equation for use when not hooked up to other models}</eqn>
 				<units>Mha/year</units>
@@ -9118,12 +9461,13 @@ Used for policy implementation only.</doc>
 				<dimensions>
 					<dim name="Run"/>
 				</dimensions>
-				<eqn>slow_soil_carbon_cropland*fraction_cropland_to_forest</eqn>
+				<eqn>slow_soil_carbon_cropland[Run,World]*fraction_cropland_to_forest[Run,World]</eqn>
 				<units>GtC/Year</units>
 			</aux>
-			<aux name="fraction cropland to degraded land">
+			<aux name="fraction cropland\nto degraded land">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn> degraded_land_from_crops//Cropland</eqn>
 				<units>1/year</units>
@@ -9131,50 +9475,55 @@ Used for policy implementation only.</doc>
 			<aux name="degraded\nland from crops" access="input">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>{Enter equation for use when not hooked up to other models}</eqn>
 				<units>Mha/year</units>
 			</aux>
-			<aux name="fast soil carbon cropland to degraded land" access="output" isee:autocreated="true">
+			<aux name="fast soil carbon cropland\nto degraded land" access="output" isee:autocreated="true">
 				<dimensions>
 					<dim name="Run"/>
 				</dimensions>
-				<eqn>fast_soil_carbon_cropland*fraction_cropland_to_degraded_land</eqn>
+				<eqn>fast_soil_carbon_cropland[Run,World]*fraction_cropland_to_degraded_land[Run,World]</eqn>
 				<units>GtC/Year</units>
 			</aux>
 			<aux name="slow soil carbon cropland\nto degraded land" access="output" isee:autocreated="true">
 				<dimensions>
 					<dim name="Run"/>
 				</dimensions>
-				<eqn>slow_soil_carbon_cropland*fraction_cropland_to_degraded_land</eqn>
+				<eqn>slow_soil_carbon_cropland[Run,World]*fraction_cropland_to_degraded_land[Run,World]</eqn>
 				<units>GtC/Year</units>
 			</aux>
-			<flow name="Slow soil cropland carbon input from land use transitions">
+			<flow name="Slow soil cropland carbon\ninput from land use transitions">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<eqn>cropland_landuse_slow_soil_carbon_input</eqn>
+				<eqn>cropland_landuse_slow_soil_carbon_input[Run]</eqn>
 				<units>GtC/Year</units>
 			</flow>
-			<flow name="Fast soil cropland carbon input from land use transitions">
+			<flow name="Fast soil cropland carbon\ninput from land use transitions">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<eqn>cropland_landuse_fast_soil_carbon_input</eqn>
+				<eqn>cropland_landuse_fast_soil_carbon_input[Run]</eqn>
 				<units>GtC/Year</units>
 			</flow>
-			<flow name="Fast soil cropland carbon emissions">
+			<flow name="Fast soil cropland\ncarbon emissions">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<eqn>fast_soil_carbon_cropland*decay_rate_fast_soil_carbon</eqn>
+				<eqn>fast_soil_carbon_cropland*decay_rate_fast_soil_carbon[Run]</eqn>
 				<units>GtC/Year</units>
 			</flow>
-			<flow name="Slow soil cropland carbon emissions">
+			<flow name="Slow soil cropland\ncarbon emissions">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<eqn>slow_soil_carbon_cropland*decay_rate_slow_soil_carbon</eqn>
+				<eqn>slow_soil_carbon_cropland*decay_rate_slow_soil_carbon[Run]</eqn>
 				<units>GtC/Year</units>
 			</flow>
 		</variables>
@@ -9226,7 +9575,7 @@ Used for policy implementation only.</doc>
 				<isee:iframe color="black" background="white" text_align="left" vertical_text_align="top" font_size="12pt" border_width="thin" border_style="solid"/>
 				<isee:financial_table color="black" background="#E0E0E0" text_align="right" font_size="12pt" hide_border="false" auto_fit="true" first_column_width="250" other_column_width="100" header_font_style="normal" header_font_weight="bold" header_text_decoration="none" header_text_align="center" header_vertical_text_align="center" header_font_color="black" header_font_family="Arial" header_font_size="14pt" header_text_padding="2" header_text_border_color="black" header_text_border_width="thin" header_text_border_style="none"/>
 			</style>
-			<view isee:show_pages="false" background="white" page_width="1122" page_height="793" isee:page_cols="3" isee:page_rows="2" isee:popup_graphs_are_comparative="true" isee:enable_non_negative_highlights="false" type="stock_flow">
+			<view isee:show_pages="false" background="white" page_width="1122" page_height="793" isee:page_cols="3" isee:page_rows="2" isee:scroll_y="540" isee:popup_graphs_are_comparative="true" isee:enable_non_negative_highlights="false" type="stock_flow">
 				<style color="black" background="white" font_style="normal" font_weight="normal" text_decoration="none" text_align="center" vertical_text_align="center" font_color="black" font_family="Arial" font_size="10pt" padding="2" border_color="black" border_width="thin" border_style="none">
 					<stock color="blue" background="white" font_color="blue" font_size="11pt" label_side="top">
 						<shape type="rectangle" width="45" height="35"/>
@@ -9265,7 +9614,7 @@ Used for policy implementation only.</doc>
 					</graph>
 					<table color="black" background="#E0E0E0" text_align="right" font_size="12pt" orientation="vertical" wrap_text="false" isee:auto_fit="true" isee:use_alternate_row_colors="false" isee:unlimited_table_length="false" blank_column_width="80" column_width="160" interval="1" report_balances="beginning" report_flows="instantaneous" header_font_style="normal" header_font_weight="normal" header_text_decoration="none" header_text_align="center" header_vertical_text_align="center" header_font_color="black" header_font_family="Arial" header_font_size="12pt" header_text_padding="2" header_text_border_color="black" header_text_border_width="thin" header_text_border_style="none"/>
 				</style>
-				<flow x="539.143" y="721.236" name="litter input slow soil carbon cropland">
+				<flow x="539.143" y="721.236" name="litter input slow\nsoil carbon cropland">
 					<pts>
 						<pt x="539.143" y="639.714"/>
 						<pt x="539.143" y="802.757"/>
@@ -9283,7 +9632,7 @@ Used for policy implementation only.</doc>
 						<pt x="374.417" y="394.25"/>
 					</pts>
 				</flow>
-				<flow label_side="bottom" x="540" y="489.875" name="litter input fast soil carbon cropland">
+				<flow label_side="bottom" x="540" y="489.875" name="litter input fast\nsoil carbon cropland">
 					<pts>
 						<pt x="540" y="568"/>
 						<pt x="540" y="411.75"/>
@@ -9470,13 +9819,13 @@ Used for policy implementation only.</doc>
 					<from>slow_soil_carbon_cropland</from>
 					<to>slow_soil_carbon_cropland_to_forest</to>
 				</connector>
-				<aux x="290.041" y="245.916" name="fraction cropland to degraded land"/>
+				<aux x="290.041" y="245.916" name="fraction cropland\nto degraded land"/>
 				<connector uid="41" angle="195.392">
 					<from>Cropland</from>
 					<to>fraction_cropland_to_degraded_land</to>
 				</connector>
 				<aux font_style="italic" font_weight="bold" x="245.044" y="169.833" name="degraded\nland from crops"/>
-				<aux x="335" y="303.167" name="fast soil carbon cropland to degraded land"/>
+				<aux x="335" y="303.167" name="fast soil carbon cropland\nto degraded land"/>
 				<connector uid="42" angle="322.247">
 					<from>fraction_cropland_to_degraded_land</from>
 					<to>fast_soil_carbon_cropland_to_degraded_land</to>
@@ -9522,25 +9871,25 @@ Used for policy implementation only.</doc>
 					<from>fast_soil_carbon_cropland_to_grassland</from>
 					<to>fast_soil_carbon_loss_cropland</to>
 				</connector>
-				<flow x="639.252" y="820.257" name="Slow soil cropland carbon input from land use transitions">
+				<flow x="639.252" y="820.257" name="Slow soil cropland carbon\ninput from land use transitions">
 					<pts>
 						<pt x="729.667" y="820.257"/>
 						<pt x="560.837" y="820.257"/>
 					</pts>
 				</flow>
-				<flow x="617.728" y="392.143" name="Fast soil cropland carbon input from land use transitions">
+				<flow x="617.728" y="392.143" name="Fast soil cropland carbon\ninput from land use transitions">
 					<pts>
 						<pt x="689.286" y="392.143"/>
 						<pt x="558.17" y="392.143"/>
 					</pts>
 				</flow>
-				<flow x="536.667" y="290.792" name="Fast soil cropland carbon emissions">
+				<flow x="536.667" y="290.792" name="Fast soil cropland\ncarbon emissions">
 					<pts>
 						<pt x="536.667" y="376.75"/>
 						<pt x="536.667" y="195.833"/>
 					</pts>
 				</flow>
-				<flow x="536.667" y="928.964" name="Slow soil cropland carbon emissions">
+				<flow x="536.667" y="928.964" name="Slow soil cropland\ncarbon emissions">
 					<pts>
 						<pt x="536.667" y="837.757"/>
 						<pt x="536.667" y="1029.17"/>
@@ -9586,25 +9935,28 @@ Used for policy implementation only.</doc>
 	</model>
 	<model name="degraded_land_soil_carbon">
 		<variables>
-			<flow name="litter input fast soil carbon degraded land">
+			<flow name="litter input fast soil\ncarbon degraded land">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<eqn>degraded_land_litter_to_soil_carbon*(1-litter_input_share_slow_soil_carbon)+degraded_land_landuse_fast_soil_carbon_input</eqn>
+				<eqn>degraded_land_litter_to_soil_carbon[Run]*(1-litter_input_share_slow_soil_carbon[Run])+degraded_land_landuse_fast_soil_carbon_input[Run,Region]</eqn>
 				<non_negative/>
 				<units>GtC/Year</units>
 			</flow>
 			<flow name="fast soil carbon\nloss degraded land">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<eqn>fast_soil_carbon_degraded_land*decay_rate_fast_soil_carbon+fast_soil_carbon_degraded_land_to_forest</eqn>
+				<eqn>fast_soil_carbon_degraded_land*decay_rate_fast_soil_carbon[Run]+fast_soil_carbon_degraded_land_to_forest[Run]</eqn>
 				<non_negative/>
 				<units>GtC/Year</units>
 			</flow>
 			<stock name="fast soil carbon degraded land">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>0</eqn>
 				<inflow>litter_input_fast_soil_carbon_degraded_land</inflow>
@@ -9615,35 +9967,38 @@ Used for policy implementation only.</doc>
 				<dimensions>
 					<dim name="Run"/>
 				</dimensions>
-				<eqn>fast_soil_carbon_degraded_land+slow_soil_carbon_degraded_land</eqn>
+				<eqn>fast_soil_carbon_degraded_land[Run,World]+slow_soil_carbon_degraded_land[Run,World]</eqn>
 				<units>GtC</units>
 			</aux>
 			<aux name="soil carbon emissions\ndegraded land GtC" access="output">
 				<dimensions>
 					<dim name="Run"/>
 				</dimensions>
-				<eqn>(fast_soil_carbon_loss_degraded_land+ slow_soil_carbon_loss_degraded_land)-(fast_soil_carbon_degraded_land_to_forest + slow_soil_carbon_degraded_land_to_forest)</eqn>
+				<eqn>(fast_soil_carbon_loss_degraded_land[Run,World]+ slow_soil_carbon_loss_degraded_land[Run,World])-(fast_soil_carbon_degraded_land_to_forest + slow_soil_carbon_degraded_land_to_forest)</eqn>
 				<units>GtC/Year</units>
 			</aux>
 			<flow name="litter input slow\nsoil carbon degraded land">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<eqn>degraded_land_litter_to_soil_carbon*litter_input_share_slow_soil_carbon+degraded_land_landuse_slow_soil_carbon_input</eqn>
+				<eqn>degraded_land_litter_to_soil_carbon[Run]*litter_input_share_slow_soil_carbon[Run]+degraded_land_landuse_slow_soil_carbon_input</eqn>
 				<non_negative/>
 				<units>GtC/Year</units>
 			</flow>
 			<flow name="slow soil carbon\nloss degraded land">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<eqn>slow_soil_carbon_degraded_land*decay_rate_slow_soil_carbon+slow_soil_carbon_degraded_land_to_forest</eqn>
+				<eqn>slow_soil_carbon_degraded_land*decay_rate_slow_soil_carbon[Run]+slow_soil_carbon_degraded_land_to_forest[Run]</eqn>
 				<non_negative/>
 				<units>GtC/Year</units>
 			</flow>
 			<stock name="slow soil carbon degraded land">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>0</eqn>
 				<inflow>litter_input_slow_soil_carbon_degraded_land</inflow>
@@ -9657,9 +10012,10 @@ Used for policy implementation only.</doc>
 				<eqn>degraded_land_litter*(1-decay_rate_litter_carbon)</eqn>
 				<units>GtC/Year</units>
 			</aux>
-			<aux name="fraction degraded land to forest" access="output" isee:autocreated="true">
+			<aux name="fraction degraded\nland to forest" access="output" isee:autocreated="true">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>
 forresting_degraded_land//Degraded_Land</eqn>
@@ -9669,28 +10025,30 @@ forresting_degraded_land//Degraded_Land</eqn>
 				<dimensions>
 					<dim name="Run"/>
 				</dimensions>
-				<eqn>fast_soil_carbon_degraded_land*fraction_degraded_land_to_forest</eqn>
+				<eqn>fast_soil_carbon_degraded_land[Run,World]*fraction_degraded_land_to_forest[Run,World]</eqn>
 				<units>GtC/Year</units>
 			</aux>
 			<aux name="slow soil carbon\ndegraded land to forest" access="output">
 				<dimensions>
 					<dim name="Run"/>
 				</dimensions>
-				<eqn>slow_soil_carbon_degraded_land*fraction_degraded_land_to_forest</eqn>
+				<eqn>slow_soil_carbon_degraded_land[Run,World]*fraction_degraded_land_to_forest[Run,World]</eqn>
 				<units>GtC/Year</units>
 			</aux>
 			<aux name="degraded land landuse\nfast soil carbon input">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<eqn>fast_soil_carbon_cropland_to_degraded_land+fast_soil_carbon_grassland_to_degraded_land</eqn>
+				<eqn>fast_soil_carbon_cropland_to_degraded_land[Run]+fast_soil_carbon_grassland_to_degraded_land[Run]</eqn>
 				<units>GtC/Year</units>
 			</aux>
 			<aux name="degraded land landuse\nslow soil carbon input">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<eqn>slow_soil_carbon_cropland_to_degraded_land+slow_soil_carbon_grassland_to_degraded_land</eqn>
+				<eqn>slow_soil_carbon_cropland_to_degraded_land[Run]+slow_soil_carbon_grassland_to_degraded_land[Run]</eqn>
 				<units>GtC/Year</units>
 			</aux>
 			<aux name="litter emissions degraded land GtC" access="output" isee:autocreated="true">
@@ -9703,6 +10061,7 @@ forresting_degraded_land//Degraded_Land</eqn>
 			<stock name="Degraded\nLand" access="input">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>0</eqn>
 				<non_negative/>
@@ -9711,6 +10070,7 @@ forresting_degraded_land//Degraded_Land</eqn>
 			<aux name="forresting\ndegraded land" access="input">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>{Enter equation for use when not hooked up to other models}</eqn>
 				<units>Mha/year</units>
@@ -9747,16 +10107,20 @@ forresting_degraded_land//Degraded_Land</eqn>
 				<dimensions>
 					<dim name="Run"/>
 				</dimensions>
-				<eqn>Degraded_Land*grass_net_primary_production*degraded_land_productivity_reduction_factor</eqn>
+				<eqn>Degraded_Land[Run,World]*grass_net_primary_production*degraded_land_productivity_reduction_factor[Run,World]</eqn>
 				<units>GtC/Year</units>
 			</aux>
-			<aux name="degraded land productivity reduction factor">
+			<aux name="degraded land productivity\nreduction factor">
 				<doc>${External Parameter}
 Jannes - degraded land productivity reduction is just a factor to use grassland productivity together with reduction factor to at least have some productivity on the land, having no productivity is unrealistic</doc>
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<element subscript="1">
+				<element subscript="1, World">
+					<eqn>0.05</eqn>
+				</element>
+				<element subscript="1, Brazil">
 					<eqn>0.05</eqn>
 				</element>
 				<range min="0.01" max="0.1"/>
@@ -9808,7 +10172,7 @@ Jannes - degraded land productivity reduction is just a factor to use grassland 
 				<dimensions>
 					<dim name="Run"/>
 				</dimensions>
-				<eqn>fast_soil_carbon_degraded_land*decay_rate_fast_soil_carbon + slow_soil_carbon_degraded_land*decay_rate_slow_soil_carbon - degraded_land_litter_to_soil_carbon</eqn>
+				<eqn>fast_soil_carbon_degraded_land[Run,World]*decay_rate_fast_soil_carbon + slow_soil_carbon_degraded_land[Run,World]*decay_rate_slow_soil_carbon - degraded_land_litter_to_soil_carbon</eqn>
 				<units>GtC/year</units>
 			</aux>
 		</variables>
@@ -9860,7 +10224,7 @@ Jannes - degraded land productivity reduction is just a factor to use grassland 
 				<isee:iframe color="black" background="white" text_align="left" vertical_text_align="top" font_size="12pt" border_width="thin" border_style="solid"/>
 				<isee:financial_table color="black" background="#E0E0E0" text_align="right" font_size="12pt" hide_border="false" auto_fit="true" first_column_width="250" other_column_width="100" header_font_style="normal" header_font_weight="bold" header_text_decoration="none" header_text_align="center" header_vertical_text_align="center" header_font_color="black" header_font_family="Arial" header_font_size="14pt" header_text_padding="2" header_text_border_color="black" header_text_border_width="thin" header_text_border_style="none"/>
 			</style>
-			<view isee:show_pages="false" background="white" page_width="768" page_height="576" isee:page_cols="3" isee:page_rows="2" isee:popup_graphs_are_comparative="true" isee:enable_non_negative_highlights="false" type="stock_flow">
+			<view isee:show_pages="false" background="white" page_width="1122" page_height="793" isee:page_cols="3" isee:page_rows="2" isee:scroll_x="602" isee:scroll_y="240" isee:popup_graphs_are_comparative="true" isee:enable_non_negative_highlights="false" type="stock_flow">
 				<style color="black" background="white" font_style="normal" font_weight="normal" text_decoration="none" text_align="center" vertical_text_align="center" font_color="black" font_family="Arial" font_size="10pt" padding="2" border_color="black" border_width="thin" border_style="none">
 					<stock color="blue" background="white" font_color="blue" font_size="11pt" label_side="top">
 						<shape type="rectangle" width="45" height="35"/>
@@ -9899,7 +10263,7 @@ Jannes - degraded land productivity reduction is just a factor to use grassland 
 					</graph>
 					<table color="black" background="#E0E0E0" text_align="right" font_size="12pt" orientation="vertical" wrap_text="false" isee:auto_fit="true" isee:use_alternate_row_colors="false" isee:unlimited_table_length="false" blank_column_width="80" column_width="160" interval="1" report_balances="beginning" report_flows="instantaneous" header_font_style="normal" header_font_weight="normal" header_text_decoration="none" header_text_align="center" header_vertical_text_align="center" header_font_color="black" header_font_family="Arial" header_font_size="12pt" header_text_padding="2" header_text_border_color="black" header_text_border_width="thin" header_text_border_style="none"/>
 				</style>
-				<flow label_side="bottom" x="1106.34" y="400.75" name="litter input fast soil carbon degraded land">
+				<flow label_side="bottom" x="1106.34" y="400.75" name="litter input fast soil\ncarbon degraded land">
 					<pts>
 						<pt x="1182" y="400.75"/>
 						<pt x="1030.67" y="400.75"/>
@@ -9956,15 +10320,15 @@ Jannes - degraded land productivity reduction is just a factor to use grassland 
 					<to>slow_soil_carbon_loss_degraded_land</to>
 				</connector>
 				<aux x="1313.5" y="505.25" name="degraded land litter to soil\ncarbon"/>
-				<connector uid="9" angle="140.34">
+				<connector uid="9" angle="140.341">
 					<from>degraded_land_litter_to_soil_carbon</from>
 					<to>litter_input_fast_soil_carbon_degraded_land</to>
 				</connector>
-				<connector uid="10" angle="221.605">
+				<connector uid="10" angle="221.604">
 					<from>degraded_land_litter_to_soil_carbon</from>
 					<to>litter_input_slow_soil_carbon_degraded_land</to>
 				</connector>
-				<aux x="872.25" y="209.5" name="fraction degraded land to forest"/>
+				<aux x="872.25" y="209.5" name="fraction degraded\nland to forest"/>
 				<aux x="937.045" y="287" name="fast soil carbon\ndegraded land to forest"/>
 				<connector uid="11" angle="86.2423">
 					<from>fast_soil_carbon_degraded_land</from>
@@ -9999,7 +10363,7 @@ Jannes - degraded land productivity reduction is just a factor to use grassland 
 					<to>litter_input_fast_soil_carbon_degraded_land</to>
 				</connector>
 				<aux x="1193.75" y="716" name="degraded land landuse\nslow soil carbon input"/>
-				<connector uid="19" angle="172.113">
+				<connector uid="19" angle="172.115">
 					<from>degraded_land_landuse_slow_soil_carbon_input</from>
 					<to>litter_input_slow_soil_carbon_degraded_land</to>
 				</connector>
@@ -10045,7 +10409,7 @@ Jannes - degraded land productivity reduction is just a factor to use grassland 
 					<from>grass_net_primary_production</from>
 					<to>degraded_land_litter</to>
 				</connector>
-				<aux x="1736" y="305" name="degraded land productivity reduction factor"/>
+				<aux x="1736" y="305" name="degraded land productivity\nreduction factor"/>
 				<connector uid="29" angle="215.91">
 					<from>degraded_land_productivity_reduction_factor</from>
 					<to>degraded_land_litter</to>
@@ -10070,11 +10434,11 @@ Jannes - degraded land productivity reduction is just a factor to use grassland 
 					<to>degraded_land_landuse_slow_soil_carbon_input</to>
 				</connector>
 				<aux font_style="italic" font_weight="bold" x="1129.3" y="523.25" name="litter input share slow soil\ncarbon"/>
-				<connector uid="34" angle="85.6531">
+				<connector uid="34" angle="85.6554">
 					<from>litter_input_share_slow_soil_carbon</from>
 					<to>litter_input_fast_soil_carbon_degraded_land</to>
 				</connector>
-				<connector uid="35" angle="274.591">
+				<connector uid="35" angle="274.588">
 					<from>litter_input_share_slow_soil_carbon</from>
 					<to>litter_input_slow_soil_carbon_degraded_land</to>
 				</connector>
@@ -10149,24 +10513,27 @@ https://doi.org/10.1126/science.1201609</doc>
 			<flow name="litter input fast\nsoil carbon mature forest">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<eqn>litter_to_soil_carbon_mature_forest*(1-litter_input_share_slow_soil_carbon_1)</eqn>
+				<eqn>litter_to_soil_carbon_mature_forest[Run]*(1-litter_input_share_slow_soil_carbon_1[Run])</eqn>
 				<non_negative/>
 				<units>GtC/Year</units>
 			</flow>
-			<flow name="fast soil carbon\nout of mature forest from land use transitions">
+			<flow name="fast soil carbon\nout of mature forest from\nland use transitions">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<eqn>fast_soil_carbon_forest_to_cropland+fast_soil_carbon_forest_to_grassland+fast_soil_carbon_forest_to_young_forest</eqn>
+				<eqn>fast_soil_carbon_forest_to_cropland[Run]+fast_soil_carbon_forest_to_grassland[Run]+fast_soil_carbon_forest_to_young_forest[Run,Region]</eqn>
 				<non_negative/>
 				<units>GtC/Year</units>
 			</flow>
 			<stock name="fast soil carbon mature forest">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<eqn>forest_soil_carbon_initialisation*(1-slow_soil_carbon_historic_share)*(1-young_forest_soil_carbon_historic_share)</eqn>
+				<eqn>forest_soil_carbon_initialisation[Run]*(1-slow_soil_carbon_historic_share[Run])*(1-young_forest_soil_carbon_historic_share)</eqn>
 				<inflow>maturing_fast_soil_carbon</inflow>
 				<inflow>litter_input_fast_soil_carbon_mature_forest</inflow>
 				<outflow>fast_soil_carbon_out_of_mature_forest_from_land_use_transitions</outflow>
@@ -10176,38 +10543,42 @@ https://doi.org/10.1126/science.1201609</doc>
 			<aux name="soil carbon forest">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<eqn>soil_carbon_young_forest+soil_carbon_mature_forest</eqn>
+				<eqn>soil_carbon_young_forest[Run]+soil_carbon_mature_forest[Run]</eqn>
 				<units>GtC</units>
 			</aux>
 			<aux name="soil carbon emissions\nmature forest GtC" access="output">
 				<dimensions>
 					<dim name="Run"/>
 				</dimensions>
-				<eqn>fast_soil_carbon_emissions_mature_forest+slow_soil_carbon_emissions_mature_forest</eqn>
+				<eqn>fast_soil_carbon_emissions_mature_forest[Run,World]+slow_soil_carbon_emissions_mature_forest[Run,World]</eqn>
 				<units>GtC/Year</units>
 			</aux>
 			<flow name="litter input slow\nsoil carbon mature forest">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<eqn>litter_to_soil_carbon_mature_forest*litter_input_share_slow_soil_carbon_1</eqn>
+				<eqn>litter_to_soil_carbon_mature_forest[Run]*litter_input_share_slow_soil_carbon_1[Run]</eqn>
 				<non_negative/>
 				<units>GtC/Year</units>
 			</flow>
-			<flow name="slow soil carbon\nout of mature forest from land use transitions">
+			<flow name="slow soil carbon\nout of mature forest from\nland use transitions">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<eqn>slow_soil_carbon_forest_to_cropland+slow_soil_carbon_forest_to_grassland+slow_soil_carbon_forest_to_young_forest</eqn>
+				<eqn>slow_soil_carbon_forest_to_cropland[Run]+slow_soil_carbon_forest_to_grassland[Run]+slow_soil_carbon_forest_to_young_forest</eqn>
 				<non_negative/>
 				<units>GtC/Year</units>
 			</flow>
 			<stock name="slow soil carbon mature forest">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<eqn>forest_soil_carbon_initialisation*slow_soil_carbon_historic_share*(1-young_forest_soil_carbon_historic_share)</eqn>
+				<eqn>forest_soil_carbon_initialisation[Run]*slow_soil_carbon_historic_share[Run]*(1-young_forest_soil_carbon_historic_share)</eqn>
 				<inflow>maturing_slow_soil_carbon</inflow>
 				<inflow>litter_input_slow_soil_carbon_mature_forest</inflow>
 				<outflow>slow_soil_carbon_out_of_mature_forest_from_land_use_transitions</outflow>
@@ -10218,7 +10589,7 @@ https://doi.org/10.1126/science.1201609</doc>
 				<dimensions>
 					<dim name="Run"/>
 				</dimensions>
-				<eqn>soil_carbon_forest - Forest_soil_carbon_1980</eqn>
+				<eqn>soil_carbon_forest[Run,World] - Forest_soil_carbon_1980</eqn>
 				<units>GtC</units>
 			</aux>
 			<aux name="litter to soil carbon mature forest" access="output" isee:autocreated="true">
@@ -10231,6 +10602,7 @@ https://doi.org/10.1126/science.1201609</doc>
 			<aux name="fraction forest to cropland">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>clearing_forests_for_crops/Mature_Forest</eqn>
 				<units>1/year</units>
@@ -10239,28 +10611,28 @@ https://doi.org/10.1126/science.1201609</doc>
 				<dimensions>
 					<dim name="Run"/>
 				</dimensions>
-				<eqn>fast_soil_carbon_mature_forest*fraction_forest_to_cropland</eqn>
+				<eqn>fast_soil_carbon_mature_forest[Run,World]*fraction_forest_to_cropland[Run,World]</eqn>
 				<units>GtC/Year</units>
 			</aux>
 			<aux name="slow soil carbon\nforest to cropland" access="output">
 				<dimensions>
 					<dim name="Run"/>
 				</dimensions>
-				<eqn>slow_soil_carbon_mature_forest*fraction_forest_to_cropland</eqn>
+				<eqn>slow_soil_carbon_mature_forest[Run,World]*fraction_forest_to_cropland[Run,World]</eqn>
 				<units>GtC/Year</units>
 			</aux>
 			<aux name="forest landuse\nfast soil carbon input" access="output" isee:autocreated="true">
 				<dimensions>
 					<dim name="Run"/>
 				</dimensions>
-				<eqn>fast_soil_carbon_cropland_to_forest+fast_soil_carbon_grassland_to_forest+fast_soil_carbon_degraded_land_to_forest+fast_soil_carbon_forest_to_young_forest</eqn>
+				<eqn>fast_soil_carbon_cropland_to_forest+fast_soil_carbon_grassland_to_forest+fast_soil_carbon_degraded_land_to_forest+fast_soil_carbon_forest_to_young_forest[Run,World]</eqn>
 				<units>GtC/Year</units>
 			</aux>
 			<aux name="forest landuse\nslow soil carbon input" access="output" isee:autocreated="true">
 				<dimensions>
 					<dim name="Run"/>
 				</dimensions>
-				<eqn>slow_soil_carbon_cropland_to_forest+slow_soil_carbon_grassland_to_forest+slow_soil_carbon_degraded_land_to_forest+slow_soil_carbon_forest_to_young_forest</eqn>
+				<eqn>slow_soil_carbon_cropland_to_forest+slow_soil_carbon_grassland_to_forest+slow_soil_carbon_degraded_land_to_forest+slow_soil_carbon_forest_to_young_forest[Run,World]</eqn>
 				<units>GtC/Year</units>
 			</aux>
 			<aux name="mature forest litter" access="input">
@@ -10294,8 +10666,9 @@ https://doi.org/10.1126/science.1201609</doc>
 			<stock name="fast soil carbon young forest">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<eqn>forest_soil_carbon_initialisation*(1-young_forest_slow_soil_carbon_historic_share)*young_forest_soil_carbon_historic_share*Young_forest_soil_carbon_reduction_factor</eqn>
+				<eqn>forest_soil_carbon_initialisation[Run]*(1-young_forest_slow_soil_carbon_historic_share[Run])*young_forest_soil_carbon_historic_share*Young_forest_soil_carbon_reduction_factor</eqn>
 				<inflow>litter_input_fast_soil_carbon_young_forest</inflow>
 				<inflow>Fast_soil_carbon_to_young_forests_from_land_use_transitions</inflow>
 				<outflow>maturing_fast_soil_carbon</outflow>
@@ -10303,27 +10676,30 @@ https://doi.org/10.1126/science.1201609</doc>
 				<non_negative/>
 				<units>GtC</units>
 			</stock>
-			<flow name="litter input fast soil carbon young forest" access="output" isee:autocreated="true">
+			<flow name="litter input fast soil\ncarbon young forest" access="output" isee:autocreated="true">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<eqn>litter_to_soil_carbon_young_forest*(1-young_forest_litter_input_share_slow_soil_carbon)</eqn>
+				<eqn>litter_to_soil_carbon_young_forest[Run]*(1-young_forest_litter_input_share_slow_soil_carbon[Run])</eqn>
 				<non_negative/>
 				<units>GtC/Year</units>
 			</flow>
 			<flow name="maturing fast soil carbon">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>forest_completing_recovery*Mature_Forest_fast_soil_carbon_per_area</eqn>
 				<non_negative/>
 				<units>GtC/Year</units>
 			</flow>
-			<flow name="fast soil carbon emissions young forest" access="output" isee:autocreated="true">
+			<flow name="fast soil carbon\nemissions young forest" access="output" isee:autocreated="true">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<eqn>fast_soil_carbon_young_forest*decay_rate_fast_soil_carbon_1</eqn>
+				<eqn>fast_soil_carbon_young_forest*decay_rate_fast_soil_carbon_1[Run]</eqn>
 				<non_negative/>
 				<units>GtC/Year</units>
 			</flow>
@@ -10365,8 +10741,9 @@ https://doi.org/10.1126/science.1201609</doc>
 			<stock name="slow soil carbon young forest">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<eqn>forest_soil_carbon_initialisation*young_forest_slow_soil_carbon_historic_share*young_forest_soil_carbon_historic_share*Young_forest_soil_carbon_reduction_factor</eqn>
+				<eqn>forest_soil_carbon_initialisation[Run]*young_forest_slow_soil_carbon_historic_share[Run]*young_forest_soil_carbon_historic_share*Young_forest_soil_carbon_reduction_factor</eqn>
 				<inflow>litter_input_slow_soil_carbon_young_forest</inflow>
 				<inflow>Slow_soil_carbon_to_young_forests_from_land_use_transitions</inflow>
 				<outflow>maturing_slow_soil_carbon</outflow>
@@ -10377,6 +10754,7 @@ https://doi.org/10.1126/science.1201609</doc>
 			<flow name="maturing slow soil carbon">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>forest_completing_recovery*Mature_Forest_slow_soil_carbon_per_area</eqn>
 				<non_negative/>
@@ -10385,21 +10763,24 @@ https://doi.org/10.1126/science.1201609</doc>
 			<flow name="litter input slow soil\ncarbon young forest" access="output" isee:autocreated="true">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<eqn>litter_to_soil_carbon_young_forest*young_forest_litter_input_share_slow_soil_carbon</eqn>
+				<eqn>litter_to_soil_carbon_young_forest[Run]*young_forest_litter_input_share_slow_soil_carbon[Run]</eqn>
 				<non_negative/>
 				<units>GtC/Year</units>
 			</flow>
-			<aux name="young forest soil carbon historic share">
+			<aux name="young forest soil\ncarbon historic share">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<eqn>young_forest_share</eqn>
+				<eqn>young_forest_share[Run]</eqn>
 				<units>dmnl</units>
 			</aux>
 			<stock name="Mature Forest" access="input">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>{Enter equation for use when not hooked up to other models}</eqn>
 				<units>Mha</units>
@@ -10415,6 +10796,7 @@ https://doi.org/10.1126/science.1201609</doc>
 			<aux name="clearing forests\nfor crops" access="input">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>{Enter equation for use when not hooked up to other models}</eqn>
 				<units>Mha/Year</units>
@@ -10422,22 +10804,24 @@ https://doi.org/10.1126/science.1201609</doc>
 			<aux name="fraction forest to grassland">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>clearing_forest_for_grassland/Mature_Forest</eqn>
 				<units>1/year</units>
 			</aux>
-			<aux name="fast soil carbon forest to grassland" access="output" isee:autocreated="true">
+			<aux name="fast soil carbon\nforest to grassland" access="output" isee:autocreated="true">
 				<dimensions>
 					<dim name="Run"/>
 				</dimensions>
-				<eqn>fast_soil_carbon_mature_forest*fraction_forest_to_grassland</eqn>
+				<eqn>fast_soil_carbon_mature_forest[Run,World]*fraction_forest_to_grassland[Run,World]</eqn>
 				<units>GtC/Year</units>
 			</aux>
 			<flow name="slow soil carbon\nemissions young forest" access="output" isee:autocreated="true">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<eqn>slow_soil_carbon_young_forest*decay_rate_slow_soil_carbon_1</eqn>
+				<eqn>slow_soil_carbon_young_forest*decay_rate_slow_soil_carbon_1[Run]</eqn>
 				<non_negative/>
 				<units>GtC/Year</units>
 			</flow>
@@ -10445,7 +10829,7 @@ https://doi.org/10.1126/science.1201609</doc>
 				<dimensions>
 					<dim name="Run"/>
 				</dimensions>
-				<eqn>slow_soil_carbon_mature_forest*fraction_forest_to_grassland</eqn>
+				<eqn>slow_soil_carbon_mature_forest[Run,World]*fraction_forest_to_grassland[Run,World]</eqn>
 				<units>GtC/Year</units>
 			</aux>
 			<aux name="fast soil carbon\ncropland to forest" access="input">
@@ -10487,7 +10871,7 @@ https://doi.org/10.1126/science.1201609</doc>
 				<dimensions>
 					<dim name="Run"/>
 				</dimensions>
-				<eqn>(fast_soil_carbon_emissions_young_forest + slow_soil_carbon_emissions_young_forest)</eqn>
+				<eqn>(fast_soil_carbon_emissions_young_forest[Run,World] + slow_soil_carbon_emissions_young_forest[Run,World])</eqn>
 				<units>GtC/Year</units>
 			</aux>
 			<aux name="fast soil carbon\ndegraded land to forest" access="input">
@@ -10507,6 +10891,7 @@ https://doi.org/10.1126/science.1201609</doc>
 			<aux name="fraction forest to young forest">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>cutting/Mature_Forest</eqn>
 				<units>1/year</units>
@@ -10514,6 +10899,7 @@ https://doi.org/10.1126/science.1201609</doc>
 			<aux name="fast soil carbon\nforest to young forest">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>fast_soil_carbon_mature_forest*fraction_forest_to_young_forest</eqn>
 				<units>GtC/Year</units>
@@ -10521,6 +10907,7 @@ https://doi.org/10.1126/science.1201609</doc>
 			<aux name="slow soil carbon\nforest to young forest">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>slow_soil_carbon_mature_forest*fraction_forest_to_young_forest</eqn>
 				<units>GtC/Year</units>
@@ -10528,6 +10915,7 @@ https://doi.org/10.1126/science.1201609</doc>
 			<aux name="cutting" access="input">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>{Enter equation for use when not hooked up to other models}</eqn>
 				<units>Mha/Year</units>
@@ -10543,23 +10931,27 @@ https://doi.org/10.1126/science.1201609</doc>
 				<dimensions>
 					<dim name="Run"/>
 				</dimensions>
-				<eqn>fast_soil_carbon_young_forest + slow_soil_carbon_young_forest</eqn>
+				<eqn>fast_soil_carbon_young_forest[Run,World] + slow_soil_carbon_young_forest[Run,World]</eqn>
 				<units>GtC</units>
 			</aux>
 			<aux name="soil carbon mature forest" access="output" isee:autocreated="true">
 				<dimensions>
 					<dim name="Run"/>
 				</dimensions>
-				<eqn>fast_soil_carbon_mature_forest + slow_soil_carbon_mature_forest</eqn>
+				<eqn>fast_soil_carbon_mature_forest[Run,World] + slow_soil_carbon_mature_forest[Run,World]</eqn>
 				<units>GtC</units>
 			</aux>
-			<aux name="Young forest soil carbon reduction factor">
+			<aux name="Young forest soil\ncarbon reduction factor">
 				<doc>${Internal Calibration Parameter}
 </doc>
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<element subscript="1">
+				<element subscript="1, World">
+					<eqn>0.862530531</eqn>
+				</element>
+				<element subscript="1, Brazil">
 					<eqn>0.862530531</eqn>
 				</element>
 				<range min="0.5" max="1"/>
@@ -10589,13 +10981,15 @@ https://doi.org/10.1126/science.1201609</doc>
 			<aux name="forest completing\nrecovery" access="input">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>{Enter equation for use when not hooked up to other models}</eqn>
 				<units>Mha/year</units>
 			</aux>
-			<aux name="Mature Forest fast soil carbon per area">
+			<aux name="Mature Forest fast\nsoil carbon per area">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>fast_soil_carbon_mature_forest/Mature_Forest</eqn>
 				<units>GtC/Mha</units>
@@ -10603,6 +10997,7 @@ https://doi.org/10.1126/science.1201609</doc>
 			<aux name="Mature Forest slow\nsoil carbon per area">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>slow_soil_carbon_mature_forest/Mature_Forest</eqn>
 				<units>GtC/Mha</units>
@@ -10610,6 +11005,7 @@ https://doi.org/10.1126/science.1201609</doc>
 			<aux name="Young Forest fast\nsoil carbon per area">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>fast_soil_carbon_young_forest/Young_Forest</eqn>
 				<units>GtC/Mha</units>
@@ -10617,41 +11013,47 @@ https://doi.org/10.1126/science.1201609</doc>
 			<aux name="Young Forest slow\nsoil carbon per area">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>slow_soil_carbon_young_forest/Young_Forest</eqn>
 				<units>GtC/Mha</units>
 			</aux>
-			<flow name="Slow soil carbon to young forests from land use transitions">
+			<flow name="Slow soil carbon to young\nforests from land\nuse transitions">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<eqn>forest_landuse_slow_soil_carbon_input</eqn>
+				<eqn>forest_landuse_slow_soil_carbon_input[Run]</eqn>
 				<units>GtC/Year</units>
 			</flow>
 			<flow name="slow soil carbon\nemissions mature forest">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<eqn>slow_soil_carbon_mature_forest*decay_rate_slow_soil_carbon_1</eqn>
+				<eqn>slow_soil_carbon_mature_forest*decay_rate_slow_soil_carbon_1[Run]</eqn>
 				<units>GtC/Year</units>
 			</flow>
-			<flow name="Fast soil carbon to young forests from land use transitions">
+			<flow name="Fast soil carbon to young\nforests from land\nuse transitions">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<eqn>forest_landuse_fast_soil_carbon_input</eqn>
+				<eqn>forest_landuse_fast_soil_carbon_input[Run]</eqn>
 				<units>GtC/Year</units>
 			</flow>
-			<flow name="fast soil carbon emissions mature forest">
+			<flow name="fast soil carbon\nemissions mature forest">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<eqn>fast_soil_carbon_mature_forest*decay_rate_fast_soil_carbon_1</eqn>
+				<eqn>fast_soil_carbon_mature_forest*decay_rate_fast_soil_carbon_1[Run]</eqn>
 				<units>GtC/Year</units>
 			</flow>
 			<stock name="Young Forest" access="input">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>{Enter equation for use when not hooked up to other models}</eqn>
 				<non_negative/>
@@ -10706,7 +11108,7 @@ https://doi.org/10.1126/science.1201609</doc>
 				<isee:iframe color="black" background="white" text_align="left" vertical_text_align="top" font_size="12pt" border_width="thin" border_style="solid"/>
 				<isee:financial_table color="black" background="#E0E0E0" text_align="right" font_size="12pt" hide_border="false" auto_fit="true" first_column_width="250" other_column_width="100" header_font_style="normal" header_font_weight="bold" header_text_decoration="none" header_text_align="center" header_vertical_text_align="center" header_font_color="black" header_font_family="Arial" header_font_size="14pt" header_text_padding="2" header_text_border_color="black" header_text_border_width="thin" header_text_border_style="none"/>
 			</style>
-			<view isee:show_pages="false" background="white" page_width="1122" page_height="793" isee:page_cols="4" isee:page_rows="3" isee:scroll_x="205" isee:popup_graphs_are_comparative="true" isee:enable_non_negative_highlights="false" type="stock_flow">
+			<view isee:show_pages="false" background="white" page_width="1122" page_height="793" isee:page_cols="4" isee:page_rows="3" isee:scroll_y="531" isee:popup_graphs_are_comparative="true" isee:enable_non_negative_highlights="false" type="stock_flow">
 				<style color="black" background="white" font_style="normal" font_weight="normal" text_decoration="none" text_align="center" vertical_text_align="center" font_color="black" font_family="Arial" font_size="10pt" padding="2" border_color="black" border_width="thin" border_style="none">
 					<stock color="blue" background="white" font_color="blue" font_size="11pt" label_side="top">
 						<shape type="rectangle" width="45" height="35"/>
@@ -10752,7 +11154,7 @@ https://doi.org/10.1126/science.1201609</doc>
 						<pt x="1006.67" y="513.25"/>
 					</pts>
 				</flow>
-				<flow x="899.5" y="494" name="fast soil carbon\nout of mature forest from land use transitions">
+				<flow x="899.5" y="494" name="fast soil carbon\nout of mature forest from\nland use transitions">
 					<pts>
 						<pt x="984" y="494"/>
 						<pt x="791" y="494"/>
@@ -10771,7 +11173,7 @@ https://doi.org/10.1126/science.1201609</doc>
 						<pt x="982.17" y="1240.76"/>
 					</pts>
 				</flow>
-				<flow x="880.335" y="1260" name="slow soil carbon\nout of mature forest from land use transitions">
+				<flow x="880.335" y="1260" name="slow soil carbon\nout of mature forest from\nland use transitions">
 					<pts>
 						<pt x="959.67" y="1260"/>
 						<pt x="777" y="1260"/>
@@ -10834,7 +11236,7 @@ https://doi.org/10.1126/science.1201609</doc>
 				</connector>
 				<aux font_style="italic" font_weight="bold" x="2190.58" y="34.9167" name="slow soil carbon historic share"/>
 				<aux font_style="italic" font_weight="bold" x="1084.09" y="1390.21" name="decay rate slow\nsoil carbon 1"/>
-				<connector uid="14" angle="138.483">
+				<connector uid="14" angle="138.48">
 					<from>decay_rate_slow_soil_carbon_1</from>
 					<to>slow_soil_carbon_emissions_mature_forest</to>
 				</connector>
@@ -10844,7 +11246,7 @@ https://doi.org/10.1126/science.1201609</doc>
 					<to>fast_soil_carbon_emissions_mature_forest</to>
 				</connector>
 				<stock x="1212.33" y="495.75" name="fast soil carbon young forest"/>
-				<flow x="1218.75" y="586.125" name="litter input fast soil carbon young forest">
+				<flow x="1218.75" y="586.125" name="litter input fast soil\ncarbon young forest">
 					<pts>
 						<pt x="1218.75" y="659"/>
 						<pt x="1218.75" y="513.25"/>
@@ -10856,7 +11258,7 @@ https://doi.org/10.1126/science.1201609</doc>
 						<pt x="1029" y="495.75"/>
 					</pts>
 				</flow>
-				<flow x="1211" y="380.125" name="fast soil carbon emissions young forest">
+				<flow x="1211" y="380.125" name="fast soil carbon\nemissions young forest">
 					<pts>
 						<pt x="1211" y="478.25"/>
 						<pt x="1211" y="261"/>
@@ -10916,7 +11318,7 @@ https://doi.org/10.1126/science.1201609</doc>
 					<from>litter_to_soil_carbon_young_forest</from>
 					<to>litter_input_slow_soil_carbon_young_forest</to>
 				</connector>
-				<aux x="1823.25" y="48.0837" name="young forest soil carbon historic share"/>
+				<aux x="1823.25" y="48.0837" name="young forest soil\ncarbon historic share"/>
 				<connector uid="25" angle="136.898">
 					<from>fast_soil_carbon_young_forest</from>
 					<to>fast_soil_carbon_emissions_young_forest</to>
@@ -10941,7 +11343,7 @@ https://doi.org/10.1126/science.1201609</doc>
 					<from>clearing_forest_for_grassland</from>
 					<to>fraction_forest_to_grassland</to>
 				</connector>
-				<aux x="860.333" y="317.667" name="fast soil carbon forest to grassland"/>
+				<aux x="860.333" y="317.667" name="fast soil carbon\nforest to grassland"/>
 				<connector uid="30" angle="328.715">
 					<from>fraction_forest_to_grassland</from>
 					<to>fast_soil_carbon_forest_to_grassland</to>
@@ -10964,7 +11366,7 @@ https://doi.org/10.1126/science.1201609</doc>
 						<pt x="1199" y="1463.75"/>
 					</pts>
 				</flow>
-				<connector uid="34" angle="47.2718">
+				<connector uid="34" angle="47.2741">
 					<from>decay_rate_slow_soil_carbon_1</from>
 					<to>slow_soil_carbon_emissions_young_forest</to>
 				</connector>
@@ -11016,7 +11418,7 @@ https://doi.org/10.1126/science.1201609</doc>
 					<from>litter_input_share_slow_soil_carbon_1</from>
 					<to>litter_input_slow_soil_carbon_mature_forest</to>
 				</connector>
-				<connector uid="46" angle="269.108">
+				<connector uid="46" angle="269.107">
 					<from>forest_landuse_fast_soil_carbon_input</from>
 					<to>Fast_soil_carbon_to_young_forests_from_land_use_transitions</to>
 				</connector>
@@ -11136,7 +11538,7 @@ https://doi.org/10.1126/science.1201609</doc>
 					<from>soil_carbon_mature_forest</from>
 					<to>soil_carbon_forest</to>
 				</connector>
-				<aux x="1952.5" y="48.0837" name="Young forest soil carbon reduction factor"/>
+				<aux x="1952.5" y="48.0837" name="Young forest soil\ncarbon reduction factor"/>
 				<aux font_style="italic" font_weight="bold" x="1446.59" y="864.25" name="young forest litter input share slow soil\ncarbon"/>
 				<connector uid="78" angle="129.324">
 					<from>young_forest_litter_input_share_slow_soil_carbon</from>
@@ -11161,7 +11563,7 @@ https://doi.org/10.1126/science.1201609</doc>
 					<to>soil_carbon_balance_forest</to>
 				</connector>
 				<aux font_style="italic" font_weight="bold" label_side="top" x="1093.25" y="1205" name="forest completing\nrecovery"/>
-				<aux x="854.833" y="579.167" name="Mature Forest fast soil carbon per area"/>
+				<aux x="854.833" y="579.167" name="Mature Forest fast\nsoil carbon per area"/>
 				<connector uid="83" angle="65.6913">
 					<from>
 						<alias uid="84"/>
@@ -11191,7 +11593,7 @@ https://doi.org/10.1126/science.1201609</doc>
 					<from>Mature_Forest_slow_soil_carbon_per_area</from>
 					<to>maturing_slow_soil_carbon</to>
 				</connector>
-				<connector uid="90" angle="78.8163">
+				<connector uid="90" angle="78.8221">
 					<from>
 						<alias uid="91"/>
 					</from>
@@ -11211,7 +11613,7 @@ https://doi.org/10.1126/science.1201609</doc>
 					<from>fast_soil_carbon_young_forest</from>
 					<to>Young_Forest_fast_soil_carbon_per_area</to>
 				</connector>
-				<flow x="1313.92" y="1258.26" name="Slow soil carbon to young forests from land use transitions">
+				<flow x="1313.92" y="1258.26" name="Slow soil carbon to young\nforests from land\nuse transitions">
 					<pts>
 						<pt x="1418.33" y="1258.26"/>
 						<pt x="1221.5" y="1258.26"/>
@@ -11223,13 +11625,13 @@ https://doi.org/10.1126/science.1201609</doc>
 						<pt x="982.17" y="1458.33"/>
 					</pts>
 				</flow>
-				<flow x="1318.42" y="502" name="Fast soil carbon to young forests from land use transitions">
+				<flow x="1318.42" y="502" name="Fast soil carbon to young\nforests from land\nuse transitions">
 					<pts>
 						<pt x="1414" y="502"/>
 						<pt x="1234.83" y="502"/>
 					</pts>
 				</flow>
-				<flow x="1009" y="376.125" name="fast soil carbon emissions mature forest">
+				<flow x="1009" y="376.125" name="fast soil carbon\nemissions mature forest">
 					<pts>
 						<pt x="1009" y="478.25"/>
 						<pt x="1009" y="265"/>
@@ -11310,24 +11712,27 @@ https://doi.org/10.1126/science.1201609</doc>
 			<flow name="litter input fast\nsoil carbon grassland">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<eqn>grassland_litter_to_soil_carbon_grassland*(1-litter_input_share_slow_soil_carbon)</eqn>
+				<eqn>grassland_litter_to_soil_carbon_grassland[Run]*(1-litter_input_share_slow_soil_carbon[Run])</eqn>
 				<non_negative/>
 				<units>GtC/Year</units>
 			</flow>
-			<flow name="Fast soil out of grassland from land use transitions">
+			<flow name="Fast soil out of grassland\nfrom land use transitions">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<eqn>fast_soil_carbon_grassland_to_cropland+fast_soil_carbon_grassland_to_forest+fast_soil_carbon_grassland_to_degraded_land</eqn>
+				<eqn>fast_soil_carbon_grassland_to_cropland[Run]+fast_soil_carbon_grassland_to_forest[Run]+fast_soil_carbon_grassland_to_degraded_land[Run]</eqn>
 				<non_negative/>
 				<units>GtC/Year</units>
 			</flow>
 			<stock name="fast soil carbon grassland">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<eqn>grassland_soil_carbon_1980*(1-slow_soil_carbon_historic_share_1)</eqn>
+				<eqn>grassland_soil_carbon_1980[Run]*(1-slow_soil_carbon_historic_share_1[Run])</eqn>
 				<inflow>litter_input_fast_soil_carbon_grassland</inflow>
 				<inflow>fast_soil_grassland_carbon_input_from_land_use_transitions</inflow>
 				<outflow>Fast_soil_out_of_grassland_from_land_use_transitions</outflow>
@@ -11338,10 +11743,10 @@ https://doi.org/10.1126/science.1201609</doc>
 				<dimensions>
 					<dim name="Run"/>
 				</dimensions>
-				<eqn>Fast_soil_carbon_emissions_grassland+Slow_soil_carbon_emissions_grassland</eqn>
+				<eqn>Fast_soil_carbon_emissions_grassland[Run,World]+Slow_soil_carbon_emissions_grassland</eqn>
 				<units>GtC/Year</units>
 			</aux>
-			<flow name="litter input slow soil carbon grassland">
+			<flow name="litter input slow\nsoil carbon grassland">
 				<dimensions>
 					<dim name="Run"/>
 				</dimensions>
@@ -11368,7 +11773,7 @@ https://doi.org/10.1126/science.1201609</doc>
 				<outflow>Slow_soil_carbon_emissions_grassland</outflow>
 				<units>GtC</units>
 			</stock>
-			<aux name="grassland litter to soil carbon grassland" access="output" isee:autocreated="true">
+			<aux name="grassland litter to\nsoil carbon grassland" access="output" isee:autocreated="true">
 				<dimensions>
 					<dim name="Run"/>
 				</dimensions>
@@ -11378,22 +11783,23 @@ https://doi.org/10.1126/science.1201609</doc>
 			<aux name="fraction grassland to cropland">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<eqn> clearing_grassland//Grassland[Run,Region]</eqn>
+				<eqn> clearing_grassland[Run,Region]//Grassland[Run,Region]</eqn>
 				<units>1/year</units>
 			</aux>
 			<aux name="fast soil carbon\ngrassland to cropland" access="output">
 				<dimensions>
 					<dim name="Run"/>
 				</dimensions>
-				<eqn>fast_soil_carbon_grassland*fraction_grassland_to_cropland</eqn>
+				<eqn>fast_soil_carbon_grassland[Run,World]*fraction_grassland_to_cropland[Run,World]</eqn>
 				<units>GtC/Year</units>
 			</aux>
 			<aux name="slow soil carbon\ngrassland to cropland" access="output">
 				<dimensions>
 					<dim name="Run"/>
 				</dimensions>
-				<eqn>slow_soil_carbon_grassland*fraction_grassland_to_cropland</eqn>
+				<eqn>slow_soil_carbon_grassland*fraction_grassland_to_cropland[Run,World]</eqn>
 				<units>GtC/Year</units>
 			</aux>
 			<aux name="grassland landuse\nfast soil carbon input" access="output" isee:autocreated="true">
@@ -11522,29 +11928,31 @@ https://doi.org/10.1126/science.1201609</doc>
 			<aux name="fraction grassland to forest">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<eqn> (reforesting_grassland+forresting_grassland)//Grassland[Run,Region]</eqn>
+				<eqn> (reforesting_grassland[Run,Region]+forresting_grassland[Run,Region])//Grassland[Run,Region]</eqn>
 				<units>1/year</units>
 			</aux>
-			<aux name="fast soil carbon grassland to forest" access="output" isee:autocreated="true">
+			<aux name="fast soil carbon\ngrassland to forest" access="output" isee:autocreated="true">
 				<dimensions>
 					<dim name="Run"/>
 				</dimensions>
-				<eqn>fast_soil_carbon_grassland*fraction_grassland_to_forest</eqn>
+				<eqn>fast_soil_carbon_grassland[Run,World]*fraction_grassland_to_forest[Run,World]</eqn>
 				<units>GtC/Year</units>
 			</aux>
-			<aux name="slow soil carbon grassland to forest" access="output" isee:autocreated="true">
+			<aux name="slow soil carbon\ngrassland to forest" access="output" isee:autocreated="true">
 				<dimensions>
 					<dim name="Run"/>
 				</dimensions>
-				<eqn>slow_soil_carbon_grassland*fraction_grassland_to_forest</eqn>
+				<eqn>slow_soil_carbon_grassland*fraction_grassland_to_forest[Run,World]</eqn>
 				<units>GtC/Year</units>
 			</aux>
-			<aux name="fraction grassland to degraded land">
+			<aux name="fraction grassland\nto degraded land">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<eqn> degraded_land_from_grassland//Grassland[Run,Region]</eqn>
+				<eqn> degraded_land_from_grassland[Run,Region]//Grassland[Run,Region]</eqn>
 				<units>1/year</units>
 			</aux>
 			<aux name="degraded\nland from grassland" access="input">
@@ -11559,14 +11967,14 @@ https://doi.org/10.1126/science.1201609</doc>
 				<dimensions>
 					<dim name="Run"/>
 				</dimensions>
-				<eqn>fast_soil_carbon_grassland*fraction_grassland_to_degraded_land</eqn>
+				<eqn>fast_soil_carbon_grassland[Run,World]*fraction_grassland_to_degraded_land[Run,World]</eqn>
 				<units>GtC/Year</units>
 			</aux>
-			<aux name="slow soil carbon grassland to degraded land" access="output" isee:autocreated="true">
+			<aux name="slow soil carbon\ngrassland to degraded land" access="output" isee:autocreated="true">
 				<dimensions>
 					<dim name="Run"/>
 				</dimensions>
-				<eqn>slow_soil_carbon_grassland*fraction_grassland_to_degraded_land</eqn>
+				<eqn>slow_soil_carbon_grassland*fraction_grassland_to_degraded_land[Run,World]</eqn>
 				<units>GtC/Year</units>
 			</aux>
 			<flow name="slow soil grassland carbon input\nfrom land use transitions">
@@ -11576,18 +11984,20 @@ https://doi.org/10.1126/science.1201609</doc>
 				<eqn>grassland_landuse_slow_soil_carbon_input</eqn>
 				<units>GtC/Year</units>
 			</flow>
-			<flow name="fast soil grassland carbon input from land use transitions">
+			<flow name="fast soil grassland carbon\ninput from land use transitions">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<eqn>grassland_landuse_fast_soil_carbon_input</eqn>
+				<eqn>grassland_landuse_fast_soil_carbon_input[Run]</eqn>
 				<units>GtC/Year</units>
 			</flow>
-			<flow name="Fast soil carbon emissions grassland">
+			<flow name="Fast soil carbon\nemissions grassland">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<eqn>fast_soil_carbon_grassland*decay_rate_fast_soil_carbon</eqn>
+				<eqn>fast_soil_carbon_grassland*decay_rate_fast_soil_carbon[Run]</eqn>
 				<units>GtC/Year</units>
 			</flow>
 			<aux name="soil carbon balance grassland" access="output">
@@ -11601,7 +12011,7 @@ https://doi.org/10.1126/science.1201609</doc>
 				<dimensions>
 					<dim name="Run"/>
 				</dimensions>
-				<eqn>fast_soil_carbon_grassland+slow_soil_carbon_grassland</eqn>
+				<eqn>fast_soil_carbon_grassland[Run,World]+slow_soil_carbon_grassland</eqn>
 				<units>GtC</units>
 			</aux>
 			<aux name="grassland soil carbon 1980" access="output" isee:autocreated="true">
@@ -11616,7 +12026,7 @@ https://doi.org/10.1126/science.1201609</doc>
 				<range min="330" max="500"/>
 				<units>GtC</units>
 			</aux>
-			<flow name="Slow soil carbon emissions grassland">
+			<flow name="Slow soil carbon\nemissions grassland">
 				<dimensions>
 					<dim name="Run"/>
 				</dimensions>
@@ -11672,7 +12082,7 @@ https://doi.org/10.1126/science.1201609</doc>
 				<isee:iframe color="black" background="white" text_align="left" vertical_text_align="top" font_size="12pt" border_width="thin" border_style="solid"/>
 				<isee:financial_table color="black" background="#E0E0E0" text_align="right" font_size="12pt" hide_border="false" auto_fit="true" first_column_width="250" other_column_width="100" header_font_style="normal" header_font_weight="bold" header_text_decoration="none" header_text_align="center" header_vertical_text_align="center" header_font_color="black" header_font_family="Arial" header_font_size="14pt" header_text_padding="2" header_text_border_color="black" header_text_border_width="thin" header_text_border_style="none"/>
 			</style>
-			<view isee:show_pages="false" background="white" page_width="1122" page_height="793" isee:page_cols="3" isee:page_rows="2" isee:scroll_x="102" isee:popup_graphs_are_comparative="true" isee:enable_non_negative_highlights="false" type="stock_flow">
+			<view isee:show_pages="false" background="white" page_width="1122" page_height="793" isee:page_cols="3" isee:page_rows="2" isee:scroll_x="117" isee:scroll_y="60" isee:popup_graphs_are_comparative="true" isee:enable_non_negative_highlights="false" type="stock_flow">
 				<style color="black" background="white" font_style="normal" font_weight="normal" text_decoration="none" text_align="center" vertical_text_align="center" font_color="black" font_family="Arial" font_size="10pt" padding="2" border_color="black" border_width="thin" border_style="none">
 					<stock color="blue" background="white" font_color="blue" font_size="11pt" label_side="top">
 						<shape type="rectangle" width="45" height="35"/>
@@ -11717,7 +12127,7 @@ https://doi.org/10.1126/science.1201609</doc>
 						<pt x="1007" y="421.25"/>
 					</pts>
 				</flow>
-				<flow x="928.295" y="400.75" name="Fast soil out of grassland from land use transitions">
+				<flow x="928.295" y="400.75" name="Fast soil out of grassland\nfrom land use transitions">
 					<pts>
 						<pt x="985.67" y="400.75"/>
 						<pt x="846.92" y="400.75"/>
@@ -11725,7 +12135,7 @@ https://doi.org/10.1126/science.1201609</doc>
 				</flow>
 				<stock label_side="top" x="1008.17" y="403.75" name="fast soil carbon grassland"/>
 				<aux x="426.241" y="652.054" name="soil carbon emissions\ngrassland GtC"/>
-				<flow x="1007" y="745.795" name="litter input slow soil carbon grassland">
+				<flow x="1007" y="745.795" name="litter input slow\nsoil carbon grassland">
 					<pts>
 						<pt x="1007" y="654"/>
 						<pt x="1007" y="837.59"/>
@@ -11742,7 +12152,7 @@ https://doi.org/10.1126/science.1201609</doc>
 					<from>slow_soil_carbon_grassland</from>
 					<to>Slow_soil_carbon_emissions_grassland</to>
 				</connector>
-				<aux x="1118.34" y="622.5" name="grassland litter to soil carbon grassland"/>
+				<aux x="1118.34" y="622.5" name="grassland litter to\nsoil carbon grassland"/>
 				<connector uid="2" angle="134.734">
 					<from>grassland_litter_to_soil_carbon_grassland</from>
 					<to>litter_input_fast_soil_carbon_grassland</to>
@@ -11870,7 +12280,7 @@ https://doi.org/10.1126/science.1201609</doc>
 					<from>forresting_grassland</from>
 					<to>fraction_grassland_to_forest</to>
 				</connector>
-				<aux x="878.628" y="263" name="fast soil carbon grassland to forest"/>
+				<aux x="878.628" y="263" name="fast soil carbon\ngrassland to forest"/>
 				<connector uid="29" angle="132.625">
 					<from>fast_soil_carbon_grassland</from>
 					<to>fast_soil_carbon_grassland_to_forest</to>
@@ -11879,7 +12289,7 @@ https://doi.org/10.1126/science.1201609</doc>
 					<from>fast_soil_carbon_grassland_to_forest</from>
 					<to>Fast_soil_out_of_grassland_from_land_use_transitions</to>
 				</connector>
-				<aux x="877.467" y="940.5" name="slow soil carbon grassland to forest"/>
+				<aux x="877.467" y="940.5" name="slow soil carbon\ngrassland to forest"/>
 				<connector uid="31" angle="223.092">
 					<from>slow_soil_carbon_grassland</from>
 					<to>slow_soil_carbon_grassland_to_forest</to>
@@ -11894,7 +12304,7 @@ https://doi.org/10.1126/science.1201609</doc>
 					</from>
 					<to>slow_soil_carbon_grassland_to_forest</to>
 				</connector>
-				<aux x="757.17" y="266" name="fraction grassland to degraded land"/>
+				<aux x="757.17" y="266" name="fraction grassland\nto degraded land"/>
 				<connector uid="35" angle="199.598">
 					<from>Grassland</from>
 					<to>fraction_grassland_to_degraded_land</to>
@@ -11921,7 +12331,7 @@ https://doi.org/10.1126/science.1201609</doc>
 					<from>fast_soil_carbon_grassland_to_degraded_land</from>
 					<to>Fast_soil_out_of_grassland_from_land_use_transitions</to>
 				</connector>
-				<aux x="769.337" y="940.5" name="slow soil carbon grassland to degraded land"/>
+				<aux x="769.337" y="940.5" name="slow soil carbon\ngrassland to degraded land"/>
 				<connector uid="41" angle="209.554">
 					<from>slow_soil_carbon_grassland</from>
 					<to>slow_soil_carbon_grassland_to_degraded_land</to>
@@ -11942,7 +12352,7 @@ https://doi.org/10.1126/science.1201609</doc>
 						<pt x="1029.5" y="855"/>
 					</pts>
 				</flow>
-				<flow x="1114.34" y="407.75" name="fast soil grassland carbon input from land use transitions">
+				<flow x="1114.34" y="407.75" name="fast soil grassland carbon\ninput from land use transitions">
 					<pts>
 						<pt x="1210" y="407.75"/>
 						<pt x="1030.67" y="407.75"/>
@@ -11952,7 +12362,7 @@ https://doi.org/10.1126/science.1201609</doc>
 					<from>grassland_landuse_fast_soil_carbon_input</from>
 					<to>fast_soil_grassland_carbon_input_from_land_use_transitions</to>
 				</connector>
-				<flow x="1007" y="314.625" name="Fast soil carbon emissions grassland">
+				<flow x="1007" y="314.625" name="Fast soil carbon\nemissions grassland">
 					<pts>
 						<pt x="1007" y="386.25"/>
 						<pt x="1007" y="234"/>
@@ -11985,7 +12395,7 @@ https://doi.org/10.1126/science.1201609</doc>
 					<from>grassland_soil_carbon_1980</from>
 					<to>soil_carbon_balance_grassland</to>
 				</connector>
-				<flow x="1011" y="963.795" name="Slow soil carbon emissions grassland">
+				<flow x="1011" y="963.795" name="Slow soil carbon\nemissions grassland">
 					<pts>
 						<pt x="1011" y="872.59"/>
 						<pt x="1011" y="1064"/>
@@ -12031,13 +12441,17 @@ https://doi.org/10.1126/science.1201609</doc>
 	</model>
 	<model name="soil_carbon_decay">
 		<variables>
-			<aux name="natural decay rate litter carbon">
+			<aux name="natural decay rate\nlitter carbon">
 				<doc>${Internal Calibration Parameter}
 </doc>
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<element subscript="1">
+				<element subscript="1, World">
+					<eqn>0.600513407</eqn>
+				</element>
+				<element subscript="1, Brazil">
 					<eqn>0.600513407</eqn>
 				</element>
 				<range min="0.6" max="0.8"/>
@@ -12048,8 +12462,12 @@ https://doi.org/10.1126/science.1201609</doc>
 </doc>
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<element subscript="1">
+				<element subscript="1, World">
+					<eqn>0.025</eqn>
+				</element>
+				<element subscript="1, Brazil">
 					<eqn>0.025</eqn>
 				</element>
 				<range min="0.025" max="0.035"/>
@@ -12059,16 +12477,20 @@ https://doi.org/10.1126/science.1201609</doc>
 				<dimensions>
 					<dim name="Run"/>
 				</dimensions>
-				<eqn>(1-EXP(-(natural_decay_rate_fast_soil_carbon*climate_response_term_lpjml)))</eqn>
+				<eqn>(1-EXP(-(natural_decay_rate_fast_soil_carbon[Run,World]*climate_response_term_lpjml[Run,World])))</eqn>
 				<units>1/year</units>
 			</aux>
-			<aux name="natural decay rate slow soil carbon">
+			<aux name="natural decay rate\nslow soil carbon">
 				<doc>${Internal Calibration Parameter}
 </doc>
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<element subscript="1">
+				<element subscript="1, World">
+					<eqn>0.000808824</eqn>
+				</element>
+				<element subscript="1, Brazil">
 					<eqn>0.000808824</eqn>
 				</element>
 				<range min="0.0008" max="0.0012"/>
@@ -12078,14 +12500,14 @@ https://doi.org/10.1126/science.1201609</doc>
 				<dimensions>
 					<dim name="Run"/>
 				</dimensions>
-				<eqn>(1-EXP(-(natural_decay_rate_slow_soil_carbon*climate_response_term_lpjml)))</eqn>
+				<eqn>(1-EXP(-(natural_decay_rate_slow_soil_carbon[Run,World]*climate_response_term_lpjml[Run,World])))</eqn>
 				<units>1/year</units>
 			</aux>
 			<aux name="decay rate litter carbon" access="output">
 				<dimensions>
 					<dim name="Run"/>
 				</dimensions>
-				<eqn>1-EXP(-(natural_decay_rate_litter_carbon*climate_response_term_lpjml))</eqn>
+				<eqn>1-EXP(-(natural_decay_rate_litter_carbon[Run,World]*climate_response_term_lpjml[Run,World]))</eqn>
 				<units>dmnl</units>
 			</aux>
 			<aux name="grassland litter input share\nslow soil carbon" access="output">
@@ -12116,11 +12538,12 @@ https://doi.org/10.1126/science.1201609</doc>
 				<doc>Schaphoff, S., von Bloh, W., Rammig, A., Thonicke, K., Biemans, H., Forkel, M., ... &amp; Waha, K. (2018). LPJmL4–a dynamic global vegetation model with managed land–Part 1: Model description. Geoscientific Model Development, 11(4), 1343-1375. https://doi.org/10.5194/gmd-11-429-2018</doc>
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>IF (switch_land_carbon_impact =0) AND TIME &gt; today THEN PREVIOUS
-(SELF,1 )ELSE
+(SELF[Run,Region],1 )ELSE
 EXP
-(e0*(1.0/(temp_response+10)-1.0/(Absolute_Surface_Temperature*UNIT_per_deg_C+temp_response)))</eqn>
+(e0*(1.0/(temp_response+10)-1.0/(Absolute_Surface_Temperature[Run]*UNIT_per_deg_C[Region]+temp_response)))</eqn>
 				<units>dmnl</units>
 			</aux>
 			<aux name="e0">
@@ -12128,8 +12551,12 @@ EXP
 Schaphoff, S., von Bloh, W., Rammig, A., Thonicke, K., Biemans, H., Forkel, M., ... &amp; Waha, K. (2018). LPJmL4–a dynamic global vegetation model with managed land–Part 1: Model description. Geoscientific Model Development, 11(4), 1343-1375. https://doi.org/10.5194/gmd-11-429-2018</doc>
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<element subscript="1">
+				<element subscript="1, World">
+					<eqn>290.0287445</eqn>
+				</element>
+				<element subscript="1, Brazil">
 					<eqn>290.0287445</eqn>
 				</element>
 				<range min="290" max="320"/>
@@ -12140,8 +12567,12 @@ Schaphoff, S., von Bloh, W., Rammig, A., Thonicke, K., Biemans, H., Forkel, M., 
 Schaphoff, S., von Bloh, W., Rammig, A., Thonicke, K., Biemans, H., Forkel, M., ... &amp; Waha, K. (2018). LPJmL4–a dynamic global vegetation model with managed land–Part 1: Model description. Geoscientific Model Development, 11(4), 1343-1375. https://doi.org/10.5194/gmd-11-429-2018</doc>
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<element subscript="1">
+				<element subscript="1, World">
+					<eqn>60</eqn>
+				</element>
+				<element subscript="1, Brazil">
 					<eqn>60</eqn>
 				</element>
 				<range min="40" max="60"/>
@@ -12157,6 +12588,9 @@ Schaphoff, S., von Bloh, W., Rammig, A., Thonicke, K., Biemans, H., Forkel, M., 
 			<aux name="UNIT per deg C">
 				<doc>${Unit}
 </doc>
+				<dimensions>
+					<dim name="Region"/>
+				</dimensions>
 				<eqn>1</eqn>
 				<units>1/deg C</units>
 			</aux>
@@ -12289,7 +12723,7 @@ Schaphoff, S., von Bloh, W., Rammig, A., Thonicke, K., Biemans, H., Forkel, M., 
 				<isee:iframe color="black" background="white" text_align="left" vertical_text_align="top" font_size="12pt" border_width="thin" border_style="solid"/>
 				<isee:financial_table color="black" background="#E0E0E0" text_align="right" font_size="12pt" hide_border="false" auto_fit="true" first_column_width="250" other_column_width="100" header_font_style="normal" header_font_weight="bold" header_text_decoration="none" header_text_align="center" header_vertical_text_align="center" header_font_color="black" header_font_family="Arial" header_font_size="14pt" header_text_padding="2" header_text_border_color="black" header_text_border_width="thin" header_text_border_style="none"/>
 			</style>
-			<view isee:show_pages="false" background="white" page_width="1026" page_height="786" isee:page_cols="3" isee:page_rows="2" isee:scroll_x="159" isee:scroll_y="71" isee:popup_graphs_are_comparative="true" isee:enable_non_negative_highlights="false" type="stock_flow">
+			<view isee:show_pages="false" background="white" page_width="1122" page_height="793" isee:page_cols="3" isee:page_rows="2" isee:popup_graphs_are_comparative="true" isee:enable_non_negative_highlights="false" type="stock_flow">
 				<style color="black" background="white" font_style="normal" font_weight="normal" text_decoration="none" text_align="center" vertical_text_align="center" font_color="black" font_family="Arial" font_size="10pt" padding="2" border_color="black" border_width="thin" border_style="none">
 					<stock color="blue" background="white" font_color="blue" font_size="11pt" label_side="top">
 						<shape type="rectangle" width="45" height="35"/>
@@ -12328,7 +12762,7 @@ Schaphoff, S., von Bloh, W., Rammig, A., Thonicke, K., Biemans, H., Forkel, M., 
 					</graph>
 					<table color="black" background="#E0E0E0" text_align="right" font_size="12pt" orientation="vertical" wrap_text="false" isee:auto_fit="true" isee:use_alternate_row_colors="false" isee:unlimited_table_length="false" blank_column_width="80" column_width="160" interval="1" report_balances="beginning" report_flows="instantaneous" header_font_style="normal" header_font_weight="normal" header_text_decoration="none" header_text_align="center" header_vertical_text_align="center" header_font_color="black" header_font_family="Arial" header_font_size="12pt" header_text_padding="2" header_text_border_color="black" header_text_border_width="thin" header_text_border_style="none"/>
 				</style>
-				<aux x="738.5" y="94.25" width="15.5" height="15.5" name="natural decay rate litter carbon"/>
+				<aux x="738.5" y="94.25" width="15.5" height="15.5" name="natural decay rate\nlitter carbon"/>
 				<connector uid="1" angle="159.66">
 					<from>natural_decay_rate_litter_carbon</from>
 					<to>decay_rate_litter_carbon</to>
@@ -12339,7 +12773,7 @@ Schaphoff, S., von Bloh, W., Rammig, A., Thonicke, K., Biemans, H., Forkel, M., 
 					<from>natural_decay_rate_fast_soil_carbon</from>
 					<to>decay_rate_fast_soil_carbon</to>
 				</connector>
-				<aux label_side="bottom" x="249.09" y="275.5" name="natural decay rate slow soil carbon"/>
+				<aux label_side="bottom" x="249.09" y="275.5" name="natural decay rate\nslow soil carbon"/>
 				<aux x="296.09" y="125" name="decay rate slow\nsoil carbon"/>
 				<connector uid="3" angle="72.6574">
 					<from>natural_decay_rate_slow_soil_carbon</from>

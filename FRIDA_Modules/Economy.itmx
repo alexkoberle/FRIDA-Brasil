@@ -884,7 +884,7 @@
 				<connect to="Innovation.Firms_Checking_Accounts_1" from="Circular_Flow.Firms_Checking_Accounts"/>
 				<connect2 to="Innovation.Firms_Checking_Accounts_1" from="Circular_Flow.Firms_Checking_Accounts"/>
 			</module>
-			<module name="Sea level rise Impacts\nand Adaptation" isee:label="" url="C:/Users/cy/OneDrive/Documents/GitHub/FRIDA-Brasil/FRIDA_Modules/Sea level rise Impacts and Adaptation.itmx">
+			<module name="Sea level rise Impacts\nand Adaptation" isee:label="" url="C:/Users/barbara.zimbres/FRIDA-Brasil/FRIDA_Modules/Sea level rise Impacts and Adaptation.itmx">
 				<format scale_by="auto"/>
 				<connect to="Sea_level_rise_Impacts_and_Adaptation.No_SLR_adaptation_strategy" from="Government_Regulations.No_SLR_adaptation_strategy"/>
 				<connect2 to="Sea_level_rise_Impacts_and_Adaptation.No_SLR_adaptation_strategy" from="Government_Regulations.No_SLR_adaptation_strategy"/>
@@ -14136,6 +14136,7 @@ In massive inflation spikes prevents the government from not doing any consumpti
 			<aux name="crop production" access="input">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>{Enter equation for use when not hooked up to other models}</eqn>
 				<units>PCal/year</units>
@@ -14159,7 +14160,7 @@ In massive inflation spikes prevents the government from not doing any consumpti
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>INFLATION_IMPACT_GROWTH_RATE(crop_production[Run], 1, initial_crop_supply_growth_rate[Run,World])</eqn>
+				<eqn>INFLATION_IMPACT_GROWTH_RATE(crop_production[Run, World], 1, initial_crop_supply_growth_rate[Run,World])</eqn>
 				<units>dmnl/year</units>
 			</aux>
 			<aux name="initial crop supply\ngrowth rate">
@@ -14211,6 +14212,7 @@ In massive inflation spikes prevents the government from not doing any consumpti
 			<aux name="animal products production" access="input">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>{Enter equation for use when not hooked up to other models}</eqn>
 				<units>PCal/Year</units>
@@ -14220,7 +14222,7 @@ In massive inflation spikes prevents the government from not doing any consumpti
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>INFLATION_IMPACT_GROWTH_RATE(animal_products_production[Run], 1, initial_animal_products_production_growth_rate[Run,World])</eqn>
+				<eqn>INFLATION_IMPACT_GROWTH_RATE(animal_products_production[Run, World], 1, initial_animal_products_production_growth_rate[Run,World])</eqn>
 				<units>dmnl/year</units>
 			</aux>
 			<aux name="initial animal\nproducts production\ngrowth rate">
@@ -14456,6 +14458,7 @@ agriculture_share_of_GDP_starting_point_determinant[Run,World]*EXP(agriculture_s
 			<stock name="Cropland" access="input">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>{Enter equation for use when not hooked up to other models}</eqn>
 				<units>Mha</units>
@@ -14465,7 +14468,7 @@ agriculture_share_of_GDP_starting_point_determinant[Run,World]*EXP(agriculture_s
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>INFLATION_IMPACT_GROWTH_RATE(Cropland[Run], time_to_measure_growth_rate[Run,World], initial_growth_rate_in_cropland[Run,World])</eqn>
+				<eqn>INFLATION_IMPACT_GROWTH_RATE(Cropland[Run,Region], time_to_measure_growth_rate[Run,World], initial_growth_rate_in_cropland[Run,World])</eqn>
 				<units>dmnl/year</units>
 			</aux>
 			<aux name="cropland inflation contribution">
@@ -14856,7 +14859,7 @@ ELSE
 				<isee:iframe color="black" background="white" text_align="left" vertical_text_align="top" font_size="12pt" border_width="thin" border_style="solid"/>
 				<isee:financial_table color="black" background="#E0E0E0" text_align="right" font_size="12pt" hide_border="false" auto_fit="true" first_column_width="250" other_column_width="100" header_font_style="normal" header_font_weight="bold" header_text_decoration="none" header_text_align="center" header_vertical_text_align="center" header_font_color="black" header_font_family="Arial" header_font_size="14pt" header_text_padding="2" header_text_border_color="black" header_text_border_width="thin" header_text_border_style="none"/>
 			</style>
-			<view isee:show_pages="false" background="white" page_width="1026" page_height="786" isee:page_cols="3" isee:page_rows="3" isee:scroll_x="980" isee:scroll_y="824" isee:popup_graphs_are_comparative="true" isee:enable_non_negative_highlights="false" type="stock_flow">
+			<view isee:show_pages="false" background="white" page_width="1122" page_height="793" isee:page_cols="3" isee:page_rows="3" isee:scroll_x="1172" isee:scroll_y="640" isee:popup_graphs_are_comparative="true" isee:enable_non_negative_highlights="false" type="stock_flow">
 				<style color="black" background="white" font_style="normal" font_weight="normal" text_decoration="none" text_align="center" vertical_text_align="center" font_color="black" font_family="Arial" font_size="10pt" padding="2" border_color="black" border_width="thin" border_style="none">
 					<stock color="blue" background="white" font_color="blue" font_size="11pt" label_side="top">
 						<shape type="rectangle" width="45" height="35"/>

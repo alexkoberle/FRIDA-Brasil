@@ -6008,6 +6008,7 @@ N = -k1T1 + (1-epsilon)*k3*(T2-T3)</doc>
 			<aux name="crop production 1" access="input">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>{Enter equation for use when not hooked up to other models}</eqn>
 				<units>PCal/year</units>
@@ -6016,7 +6017,7 @@ N = -k1T1 + (1-epsilon)*k3*(T2-T3)</doc>
 				<dimensions>
 					<dim name="Run"/>
 				</dimensions>
-				<eqn>crop_production_1*UNIT_GtC_per_PCal</eqn>
+				<eqn>crop_production_1[Run,World]*UNIT_GtC_per_PCal</eqn>
 				<units>GtC/Year</units>
 			</aux>
 			<flow name="Terrestrial carbon balance" access="output" isee:autocreated="true">
@@ -6241,6 +6242,7 @@ N = -k1T1 + (1-epsilon)*k3*(T2-T3)</doc>
 			<stock name="Cropland" access="input">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>{Enter equation for use when not hooked up to other models}</eqn>
 				<units>Mha</units>
@@ -6248,6 +6250,7 @@ N = -k1T1 + (1-epsilon)*k3*(T2-T3)</doc>
 			<aux name="Forest Land" access="input">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>{Enter equation for use when not hooked up to other models}</eqn>
 				<units>Mha</units>
@@ -6302,6 +6305,7 @@ N = -k1T1 + (1-epsilon)*k3*(T2-T3)</doc>
 			<aux name="fast soil carbon emissions young forest" access="input">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>{Enter equation for use when not hooked up to other models}</eqn>
 				<units>GtC/Year</units>
@@ -6309,15 +6313,16 @@ N = -k1T1 + (1-epsilon)*k3*(T2-T3)</doc>
 			<aux name="slow soil carbon\nemissions young forest" access="input">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>{Enter equation for use when not hooked up to other models}</eqn>
 				<units>GtC/Year</units>
 			</aux>
-			<aux name="Net carbon balance of young forest soils">
+			<aux name="Net carbon balance of\nyoung forest soils">
 				<dimensions>
 					<dim name="Run"/>
 				</dimensions>
-				<eqn>litter_to_soil_carbon_young_forest- fast_soil_carbon_emissions_young_forest - slow_soil_carbon_emissions_young_forest</eqn>
+				<eqn>litter_to_soil_carbon_young_forest- fast_soil_carbon_emissions_young_forest[Run,World] - slow_soil_carbon_emissions_young_forest[Run,World]</eqn>
 				<units>gtC/Year</units>
 			</aux>
 			<aux name="litter to soil carbon\nyoung forest" access="input">
@@ -6359,7 +6364,7 @@ N = -k1T1 + (1-epsilon)*k3*(T2-T3)</doc>
 				<dimensions>
 					<dim name="Run"/>
 				</dimensions>
-				<eqn>soil_carbon_cropland/Cropland</eqn>
+				<eqn>soil_carbon_cropland/Cropland[Run,World]</eqn>
 				<units>GtC/Mha</units>
 			</aux>
 			<aux name="soil carbon young forest" access="input">
@@ -6379,6 +6384,7 @@ N = -k1T1 + (1-epsilon)*k3*(T2-T3)</doc>
 			<stock name="Young Forest" access="input">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>{Enter equation for use when not hooked up to other models}</eqn>
 				<non_negative/>
@@ -6387,6 +6393,7 @@ N = -k1T1 + (1-epsilon)*k3*(T2-T3)</doc>
 			<stock name="Mature Forest" access="input">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>{Enter equation for use when not hooked up to other models}</eqn>
 				<units>Mha</units>
@@ -6395,14 +6402,14 @@ N = -k1T1 + (1-epsilon)*k3*(T2-T3)</doc>
 				<dimensions>
 					<dim name="Run"/>
 				</dimensions>
-				<eqn>soil_carbon_young_forest//Young_Forest</eqn>
+				<eqn>soil_carbon_young_forest//Young_Forest[Run,World]</eqn>
 				<units>GtC/Mha</units>
 			</aux>
 			<aux name="Mature forest soil\ncarbon per area">
 				<dimensions>
 					<dim name="Run"/>
 				</dimensions>
-				<eqn>soil_carbon_mature_forest/Mature_Forest</eqn>
+				<eqn>soil_carbon_mature_forest/Mature_Forest[Run,World]</eqn>
 				<units>GtC/Mha</units>
 			</aux>
 			<aux name="clearing forest\nfor grassland" access="input">
@@ -6416,6 +6423,7 @@ N = -k1T1 + (1-epsilon)*k3*(T2-T3)</doc>
 			<aux name="clearing forests\nfor crops" access="input">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>{Enter equation for use when not hooked up to other models}</eqn>
 				<units>Mha/Year</units>
@@ -6423,6 +6431,7 @@ N = -k1T1 + (1-epsilon)*k3*(T2-T3)</doc>
 			<aux name="reforesting cropland" access="input">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>{Enter equation for use when not hooked up to other models}</eqn>
 				<units>Mha/year</units>
@@ -6454,6 +6463,7 @@ N = -k1T1 + (1-epsilon)*k3*(T2-T3)</doc>
 			<aux name="forresting cropland" access="input">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>{Enter equation for use when not hooked up to other models}</eqn>
 				<units>Mha/year</units>
@@ -6479,7 +6489,7 @@ clearing_grassland[Run,World]*(Grassland_soil_carbon_per_area-Cropland_soil_carb
 				<dimensions>
 					<dim name="Run"/>
 				</dimensions>
-				<eqn>(reforesting_cropland+forresting_cropland)*(Cropland_soil_carbon_per_area-Young_forest_soil_carbon_per_area)
+				<eqn>(reforesting_cropland[Run,World]+forresting_cropland[Run,World])*(Cropland_soil_carbon_per_area-Young_forest_soil_carbon_per_area)
 +
 fallowing_cropland[Run,World]*(Cropland_soil_carbon_per_area-Grassland_soil_carbon_per_area)</eqn>
 				<units>GtC/Year</units>
@@ -6490,7 +6500,7 @@ fallowing_cropland[Run,World]*(Cropland_soil_carbon_per_area-Grassland_soil_carb
 				</dimensions>
 				<eqn>clearing_forest_for_grassland[Run,World]*(Mature_forest_soil_carbon_per_area-Grassland_soil_carbon_per_area)
 +
-clearing_forests_for_crops*(Mature_forest_soil_carbon_per_area-Cropland_soil_carbon_per_area)</eqn>
+clearing_forests_for_crops[Run,World]*(Mature_forest_soil_carbon_per_area-Cropland_soil_carbon_per_area)</eqn>
 				<units>GtC/Year</units>
 			</aux>
 			<flow name="Annual committed CO2 emissions from\nland use transitions">
@@ -6667,7 +6677,7 @@ Should only ever be varied with Initial Committed Soil Carbon Emissions from Lan
 				<isee:iframe color="black" background="white" text_align="left" vertical_text_align="top" font_size="12pt" border_width="thin" border_style="solid"/>
 				<isee:financial_table color="black" background="#E0E0E0" text_align="right" font_size="12pt" hide_border="false" auto_fit="true" first_column_width="250" other_column_width="100" header_font_style="normal" header_font_weight="bold" header_text_decoration="none" header_text_align="center" header_vertical_text_align="center" header_font_color="black" header_font_family="Arial" header_font_size="14pt" header_text_padding="2" header_text_border_color="black" header_text_border_width="thin" header_text_border_style="none"/>
 			</style>
-			<view isee:show_pages="false" background="white" page_width="1122" page_height="793" isee:page_cols="5" isee:page_rows="3" isee:scroll_x="1662" isee:scroll_y="412" isee:popup_graphs_are_comparative="true" isee:enable_non_negative_highlights="false" type="stock_flow">
+			<view isee:show_pages="false" background="white" page_width="1122" page_height="793" isee:page_cols="5" isee:page_rows="3" isee:scroll_x="1912" isee:scroll_y="540" isee:popup_graphs_are_comparative="true" isee:enable_non_negative_highlights="false" type="stock_flow">
 				<style color="black" background="white" font_style="normal" font_weight="normal" text_decoration="none" text_align="center" vertical_text_align="center" font_color="black" font_family="Arial" font_size="10pt" padding="2" border_color="black" border_width="thin" border_style="none">
 					<stock color="blue" background="white" font_color="blue" font_size="11pt" label_side="top">
 						<shape type="rectangle" width="45" height="35"/>
@@ -6829,13 +6839,13 @@ Should only ever be varied with Initial Committed Soil Carbon Emissions from Lan
 				<stacked_container uid="23" x="1352" y="236.542" width="448.75" height="336.25">
 					<graph legend_position="bottom" width="448.75" height="336.25" type="time_series" show_grid="false" isee:tick_type="none" include_units_in_legend="false" plot_numbers="false" isee:label_pie_slices="false" isee:show_pie_borders="true" num_x_grid_lines="0" num_y_grid_lines="0" num_x_labels="5" num_y_labels="3" title="Land Use" isee:fill_intensity="0.1" isee:allow_zero_axis="true" left_axis_multi_scale="false" left_axis_auto_scale="true" left_include_units="true" right_axis_multi_scale="false" right_axis_auto_scale="true" right_include_units="true">
 						<plot color="blue" isee:keep_zero_visible="true" pen_width="1" index="0" show_y_axis="true">
-							<entity name="Land_Use.Cropland[*]"/>
+							<entity name="Land_Use.Cropland[*, World]"/>
 						</plot>
 						<plot color="red" isee:keep_zero_visible="true" pen_width="1" index="1" show_y_axis="true">
 							<entity name="Land_Use.Grassland[*, World]"/>
 						</plot>
 						<plot color="fuchsia" isee:keep_zero_visible="true" pen_width="1" index="2" show_y_axis="true">
-							<entity name="Land_Use.Forest_Land[*]"/>
+							<entity name="Land_Use.Forest_Land[*, World]"/>
 						</plot>
 						<plot color="#FF7F00" isee:keep_zero_visible="true" pen_width="1" index="3" show_y_axis="true">
 							<entity name="Land_Use.gross_forest_land_use_loss[*]"/>
@@ -6875,7 +6885,7 @@ Should only ever be varied with Initial Committed Soil Carbon Emissions from Lan
 				</connector>
 				<aux label_side="top" x="2551.43" y="92.4167" name="fast soil carbon emissions young forest"/>
 				<aux x="2673.67" y="191.667" name="slow soil carbon\nemissions young forest"/>
-				<aux x="2483" y="184.524" name="Net carbon balance of young forest soils"/>
+				<aux x="2483" y="184.524" name="Net carbon balance of\nyoung forest soils"/>
 				<connector uid="28" angle="233.39">
 					<from>fast_soil_carbon_emissions_young_forest</from>
 					<to>Net_carbon_balance_of_young_forest_soils</to>
@@ -7158,6 +7168,7 @@ FUTURE: peatland carbon sink should maybe depend on global mean temperature and 
 			<aux name="crop production" access="input">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>{Enter equation for use when not hooked up to other models}</eqn>
 				<units>PCal/year</units>
@@ -7180,7 +7191,7 @@ FUTURE: peatland carbon sink should maybe depend on global mean temperature and 
 				<dimensions>
 					<dim name="Run"/>
 				</dimensions>
-				<eqn>crop_production*UNIT_GtC_per_PCal_1+crop_residue_other_use_1+litter_emissions_cropland_GtC+soil_carbon_emissions_cropland_GtC+fast_soil_carbon_cropland_to_degraded_land+slow_soil_carbon_cropland_to_degraded_land+fast_soil_carbon_cropland_to_forest+slow_soil_carbon_cropland_to_forest+fast_soil_carbon_cropland_to_grassland+slow_soil_carbon_cropland_to_grassland</eqn>
+				<eqn>crop_production[Run,World]*UNIT_GtC_per_PCal_1+crop_residue_other_use_1+litter_emissions_cropland_GtC+soil_carbon_emissions_cropland_GtC+fast_soil_carbon_cropland_to_degraded_land+slow_soil_carbon_cropland_to_degraded_land+fast_soil_carbon_cropland_to_forest+slow_soil_carbon_cropland_to_forest+fast_soil_carbon_cropland_to_grassland+slow_soil_carbon_cropland_to_grassland</eqn>
 				<units>GtC/Year</units>
 			</aux>
 			<flow name="Cropland carbon balance">
@@ -7332,7 +7343,7 @@ FUTURE: peatland carbon sink should maybe depend on global mean temperature and 
 				<isee:iframe color="black" background="white" text_align="left" vertical_text_align="top" font_size="12pt" border_width="thin" border_style="solid"/>
 				<isee:financial_table color="black" background="#E0E0E0" text_align="right" font_size="12pt" hide_border="false" auto_fit="true" first_column_width="250" other_column_width="100" header_font_style="normal" header_font_weight="bold" header_text_decoration="none" header_text_align="center" header_vertical_text_align="center" header_font_color="black" header_font_family="Arial" header_font_size="14pt" header_text_padding="2" header_text_border_color="black" header_text_border_width="thin" header_text_border_style="none"/>
 			</style>
-			<view isee:show_pages="false" background="white" page_width="768" page_height="576" isee:page_cols="2" isee:page_rows="2" isee:popup_graphs_are_comparative="true" isee:enable_non_negative_highlights="false" type="stock_flow">
+			<view isee:show_pages="false" background="white" page_width="1122" page_height="793" isee:page_cols="2" isee:page_rows="2" isee:scroll_x="5" isee:popup_graphs_are_comparative="true" isee:enable_non_negative_highlights="false" type="stock_flow">
 				<style color="black" background="white" font_style="normal" font_weight="normal" text_decoration="none" text_align="center" vertical_text_align="center" font_color="black" font_family="Arial" font_size="10pt" padding="2" border_color="black" border_width="thin" border_style="none">
 					<stock color="blue" background="white" font_color="blue" font_size="11pt" label_side="top">
 						<shape type="rectangle" width="45" height="35"/>
