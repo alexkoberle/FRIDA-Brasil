@@ -154,7 +154,6 @@
 			<isee:parameter name="Concrete.TIME_TO_ADJUST_DESIRED_INFRASTRUCTURE_AREA[1]" scaling="10"/>
 			<isee:parameter name="Concrete.INIT_CONCRETE_IN_NEW_BUILDINGS[1]" scaling="0.01"/>
 			<isee:parameter name="Concrete.INIT_CONCRETE_IN_NEW_INFRASTRUCTURE[1]" scaling="0.01"/>
-			<isee:parameter name="Concrete.GAP_ADJUSTMENT_TIME_FOR_BUILDINGS[1]" scaling="10"/>
 			<isee:parameter name="Concrete.CO2_INTENSITY_OF_RS_BUILDINGS_CONCRETE[1]" scaling="10"/>
 			<isee:parameter name="Concrete.CO2_INTENSITY_OF_INFRASTRUCTURE_CONCRETE[1]" scaling="10"/>
 			<isee:payoff name="Concrete Payoff" action="min"/>
@@ -226,19 +225,10 @@
 			<isee:payoff_element name="Land_Nutrients.manure_fertilizer_use[1]" weight="1.6584043811679">
 				<isee:time_range type="terminal_value"/>
 			</isee:payoff_element>
-			<isee:payoff_element name="Sea_Level.Sea_level_anomaly_from_LWS[1]" weight="410962.47191187">
-				<isee:time_range type="terminal_value"/>
-			</isee:payoff_element>
 			<isee:payoff_element name="Sea_Level.Land_water_storage_from_water_impoundment[1]" weight="8.52684424347111e-24">
 				<isee:time_range type="terminal_value"/>
 			</isee:payoff_element>
 			<isee:payoff_element name="Food_Demand.feed_production[1]" weight="0.000232087884459429">
-				<isee:time_range type="terminal_value"/>
-			</isee:payoff_element>
-			<isee:payoff_element name="Food_Demand.animal_products_demand[1]" weight="0.00625479802338344">
-				<isee:time_range type="terminal_value"/>
-			</isee:payoff_element>
-			<isee:payoff_element name="Emissions.CO2_Emissions_from_Food_and_Land_Use[1]" weight="0.00000192569914060948">
 				<isee:time_range type="terminal_value"/>
 			</isee:payoff_element>
 			<isee:payoff_element name="Emissions.land_carbon_sink[1]" weight="1.72694808671457">
@@ -261,13 +251,7 @@
 			</isee:payoff_element>
 		</isee:payoff_specs>
 		<isee:payoff_specs name="Emissions Payoff" calibration="true" recompute_weights="true" compare_tolerance="0" compare_type="ls" compare_run="Calibration Data">
-			<isee:payoff_element name="Concrete.CO2_emissions[1]" weight="0.00012133">
-				<isee:time_range type="terminal_value"/>
-			</isee:payoff_element>
 			<isee:payoff_element name="Emissions.CO2_emissions_from_Energy[1]" weight="0.00000180784">
-				<isee:time_range type="terminal_value"/>
-			</isee:payoff_element>
-			<isee:payoff_element name="Emissions.CO2_Emissions_from_Food_and_Land_Use[1]" weight="0.00000100943">
 				<isee:time_range type="terminal_value"/>
 			</isee:payoff_element>
 			<isee:payoff_element name="Emissions.N2O_Emissions_from_Food_and_Land_Use[1]" weight="0.00008159">
@@ -314,16 +298,8 @@
 			</isee:payoff_element>
 		</isee:payoff_specs>
 		<isee:payoff_specs name="Literacy Payoff" calibration="true" recompute_weights="true" compare_tolerance="0" compare_type="ls" compare_run="Calibration Data"/>
-		<isee:payoff_specs name="Behavioral Change Payoff" calibration="true" recompute_weights="true" compare_tolerance="0" compare_type="ls" compare_run="Calibration Data">
-			<isee:payoff_element name="Food_Demand.animal_products_demand[1]" weight="0.00155771433583948">
-				<isee:time_range type="terminal_value"/>
-			</isee:payoff_element>
-		</isee:payoff_specs>
-		<isee:payoff_specs name="Energy Demand" calibration="true" recompute_weights="true" compare_tolerance="0" compare_type="ls" compare_run="Calibration Data">
-			<isee:payoff_element name="energy_demand.demand_for_energy[1]" weight="9.31953e-8">
-				<isee:time_range type="full_span"/>
-			</isee:payoff_element>
-		</isee:payoff_specs>
+		<isee:payoff_specs name="Behavioral Change Payoff" calibration="true" recompute_weights="true" compare_tolerance="0" compare_type="ls" compare_run="Calibration Data"/>
+		<isee:payoff_specs name="Energy Demand" calibration="true" recompute_weights="true" compare_tolerance="0" compare_type="ls" compare_run="Calibration Data"/>
 		<isee:payoff_specs name="Ocean C cycle payoff" calibration="true" recompute_weights="true" compare_tolerance="0" compare_type="ls" compare_run="Calibration Data">
 			<isee:payoff_element name="Ocean.Air_sea_co2_flux[1]" weight="40.8029">
 				<isee:time_range type="terminal_value"/>
@@ -342,9 +318,6 @@
 			<isee:payoff_element name="Emissions.land_carbon_sink[1]" weight="1.75776">
 				<isee:time_range type="terminal_value"/>
 			</isee:payoff_element>
-			<isee:payoff_element name="Emissions.CO2_Emissions_from_Food_and_Land_Use[1]" weight="0.0000011523">
-				<isee:time_range type="terminal_value"/>
-			</isee:payoff_element>
 			<isee:payoff_element name="Crop.cropland_net_primary_production[1]" weight="61.0315">
 				<isee:time_range type="terminal_value"/>
 			</isee:payoff_element>
@@ -352,49 +325,18 @@
 				<isee:time_range type="terminal_value"/>
 			</isee:payoff_element>
 		</isee:payoff_specs>
-		<isee:payoff_specs name="Concrete Payoff" calibration="true" recompute_weights="true" compare_tolerance="0" compare_type="ls" compare_run="Calibration Data">
-			<isee:payoff_element name="Concrete.concrete_waste_generation[1]" weight="0.00033323">
-				<isee:time_range type="terminal_value"/>
-			</isee:payoff_element>
-			<isee:payoff_element name="Concrete.In_use_concrete_stock[1]" weight="8.83511e-8">
-				<isee:time_range type="terminal_value"/>
-			</isee:payoff_element>
-			<isee:payoff_element name="Concrete.residential_concrete_stock_in_use[1]" weight="5.6356e-8">
-				<isee:time_range type="terminal_value"/>
-			</isee:payoff_element>
-			<isee:payoff_element name="Concrete.total_yearly_concrete_use[1]" weight="1.85668e-7">
-				<isee:time_range type="terminal_value"/>
-			</isee:payoff_element>
-			<isee:payoff_element name="Concrete.Infrastructure_concrete_stock_in_use[1]" weight="1.32075e-7">
-				<isee:time_range type="terminal_value"/>
-			</isee:payoff_element>
-			<isee:payoff_element name="Concrete.new_RS_construction[1]" weight="0.00000185321">
-				<isee:time_range type="terminal_value"/>
-			</isee:payoff_element>
-			<isee:payoff_element name="Concrete.CO2_emissions[1]" weight="0.000173047">
-				<isee:time_range type="terminal_value"/>
-			</isee:payoff_element>
-		</isee:payoff_specs>
+		<isee:payoff_specs name="Concrete Payoff" calibration="true" recompute_weights="true" compare_tolerance="0" compare_type="ls" compare_run="Calibration Data"/>
 		<isee:payoff_specs name="Economic Payoff" calibration="true" recompute_weights="true" compare_tolerance="0" compare_type="ls" compare_run="Calibration Data">
 			<isee:payoff_element name="Circular_Flow.private_consumption[1]" weight="3.43203911271639e-8">
 				<isee:time_range type="terminal_value"/>
 			</isee:payoff_element>
-			<isee:payoff_element name="Employment.Employed[1]" weight="0.000535373660109046">
-				<isee:time_range type="terminal_value"/>
-			</isee:payoff_element>
 			<isee:payoff_element name="Employment.Unemployed[1]" weight="0.00600650394685531">
-				<isee:time_range type="terminal_value"/>
-			</isee:payoff_element>
-			<isee:payoff_element name="Employment.unemployment_rate[1]" weight="27228.8987056714">
 				<isee:time_range type="terminal_value"/>
 			</isee:payoff_element>
 			<isee:payoff_element name="Finance.total_investment[1]" weight="4.08358026129085e-8">
 				<isee:time_range type="terminal_value"/>
 			</isee:payoff_element>
 			<isee:payoff_element name="Government.government_consumption[1]" weight="2.55800666437005e-7">
-				<isee:time_range type="terminal_value"/>
-			</isee:payoff_element>
-			<isee:payoff_element name="Employment.annual_aggregate_wages[1]" weight="3.93461209633714e-8">
 				<isee:time_range type="terminal_value"/>
 			</isee:payoff_element>
 		</isee:payoff_specs>
@@ -434,9 +376,6 @@
 			<isee:payoff_element name="bio_fuel_energy.bio_fuel_secondary_energy_output[1]" weight="0.00145045384870976">
 				<isee:time_range type="terminal_value"/>
 			</isee:payoff_element>
-			<isee:payoff_element name="energy_supply.Total_Energy_Output[1]" weight="4.66471699236615e-7">
-				<isee:time_range type="terminal_value"/>
-			</isee:payoff_element>
 			<isee:payoff_element name="solar_energy.Solar_Energy_Capacity[1]" weight="0.000107571664019812">
 				<isee:time_range type="terminal_value"/>
 			</isee:payoff_element>
@@ -453,9 +392,6 @@
 				<isee:time_range type="terminal_value"/>
 			</isee:payoff_element>
 			<isee:payoff_element name="fossil_energy_gas.Primary_Fossil_Energy_FUEL[1]" weight="120053.031498506">
-				<isee:time_range type="terminal_value"/>
-			</isee:payoff_element>
-			<isee:payoff_element name="energy_demand.demand_for_energy[1]" weight="4.62572431726619e-7">
 				<isee:time_range type="terminal_value"/>
 			</isee:payoff_element>
 			<isee:payoff_element name="energy_investments.Gross_Investments_in_Fossil_Fuel_Extraction_Capital[1]" weight="2.78754619355004e-23">
@@ -529,22 +465,13 @@
 			<isee:payoff_element name="Circular_Flow.private_consumption[1]" weight="1.30607e-7">
 				<isee:time_range type="terminal_value"/>
 			</isee:payoff_element>
-			<isee:payoff_element name="Employment.Employed[1]" weight="0.000352347">
-				<isee:time_range type="terminal_value"/>
-			</isee:payoff_element>
 			<isee:payoff_element name="Employment.Unemployed[1]" weight="0.0112695">
-				<isee:time_range type="terminal_value"/>
-			</isee:payoff_element>
-			<isee:payoff_element name="Employment.unemployment_rate[1]" weight="81331.5">
 				<isee:time_range type="terminal_value"/>
 			</isee:payoff_element>
 			<isee:payoff_element name="Finance.total_investment[1]" weight="2.5121e-7">
 				<isee:time_range type="terminal_value"/>
 			</isee:payoff_element>
 			<isee:payoff_element name="Government.government_consumption[1]" weight="0.00000482055">
-				<isee:time_range type="terminal_value"/>
-			</isee:payoff_element>
-			<isee:payoff_element name="Employment.annual_aggregate_wages[1]" weight="2.02847e-7">
 				<isee:time_range type="terminal_value"/>
 			</isee:payoff_element>
 			<isee:payoff_element name="fossil_energy.Secondary_Fossil_Energy_Output[1]" weight="3.68595e-7">
@@ -580,9 +507,6 @@
 			<isee:payoff_element name="bio_fuel_energy.bio_fuel_secondary_energy_output[1]" weight="0.00131789">
 				<isee:time_range type="terminal_value"/>
 			</isee:payoff_element>
-			<isee:payoff_element name="energy_supply.Total_Energy_Output[1]" weight="2.46996e-7">
-				<isee:time_range type="terminal_value"/>
-			</isee:payoff_element>
 			<isee:payoff_element name="solar_energy.Solar_Energy_Capacity[1]" weight="0.0000134435">
 				<isee:time_range type="terminal_value"/>
 			</isee:payoff_element>
@@ -599,9 +523,6 @@
 				<isee:time_range type="terminal_value"/>
 			</isee:payoff_element>
 			<isee:payoff_element name="fossil_energy_gas.Primary_Fossil_Energy_FUEL[1]" weight="62684.3">
-				<isee:time_range type="terminal_value"/>
-			</isee:payoff_element>
-			<isee:payoff_element name="energy_demand.demand_for_energy[1]" weight="3.30293e-7">
 				<isee:time_range type="terminal_value"/>
 			</isee:payoff_element>
 			<isee:payoff_element name="energy_investments.Gross_Investments_in_Fossil_Fuel_Extraction_Capital[1]" weight="2.067e-23">
@@ -2693,7 +2614,7 @@ This is what determines when the model stops calculating</doc>
 				<isee:iframe color="black" background="white" text_align="left" vertical_text_align="top" font_size="12pt" border_width="thin" border_style="solid"/>
 				<isee:financial_table color="black" background="#E0E0E0" text_align="right" font_size="12pt" hide_border="false" auto_fit="true" first_column_width="250" other_column_width="100" header_font_style="normal" header_font_weight="bold" header_text_decoration="none" header_text_align="center" header_vertical_text_align="center" header_font_color="black" header_font_family="Arial" header_font_size="14pt" header_text_padding="2" header_text_border_color="black" header_text_border_width="thin" header_text_border_style="none"/>
 			</style>
-			<view isee:show_pages="false" background="white" page_width="1122" page_height="793" isee:page_cols="5" isee:page_rows="8" isee:scroll_x="20" zoom="60" isee:popup_graphs_are_comparative="true" isee:enable_non_negative_highlights="false" type="stock_flow">
+			<view isee:show_pages="false" background="white" page_width="1027" page_height="787" isee:page_cols="5" isee:page_rows="8" isee:scroll_x="20" zoom="60" isee:popup_graphs_are_comparative="true" isee:enable_non_negative_highlights="false" type="stock_flow">
 				<style color="black" background="white" font_style="normal" font_weight="normal" text_decoration="none" text_align="center" vertical_text_align="center" font_color="black" font_family="Arial" font_size="10pt" padding="2" border_color="black" border_width="thin" border_style="none">
 					<stock color="blue" background="white" font_color="blue" font_size="11pt" label_side="top">
 						<shape type="rectangle" width="45" height="35"/>
@@ -2780,10 +2701,6 @@ This is what determines when the model stops calculating</doc>
 				</stacked_container>
 				<stacked_container uid="83" x="28.5" y="1980.5" width="568" height="300">
 					<graph font_size="24pt" legend_position="none" isee:hide_border="true" axis_title_font_size="18pt" axis_label_font_size="14pt" width="568" height="300" comparative="true" type="box" show_grid="true" isee:tick_type="none" include_units_in_legend="false" plot_numbers="false" isee:label_pie_slices="false" isee:show_pie_borders="true" num_x_grid_lines="9" num_y_grid_lines="5" num_x_labels="5" num_y_labels="5" title="d) Energy Production (TWh/Yr)" isee:fill_intensity="0.1" isee:allow_zero_axis="true" left_axis_multi_scale="false" left_axis_auto_scale="true" left_include_units="true" right_axis_multi_scale="false" right_axis_auto_scale="true" right_include_units="true">
-						<plot color="blue" isee:keep_zero_visible="false" pen_width="1" index="0" show_y_axis="true">
-							<format scale_by="1" delimit_000s="true"/>
-							<entity name="energy_supply.Total_Energy_Output[*]"/>
-						</plot>
 						<isee:time_points>
 							<isee:time_point>2030</isee:time_point>
 							<isee:time_point>2040</isee:time_point>
@@ -2826,10 +2743,6 @@ This is what determines when the model stops calculating</doc>
 				</stacked_container>
 				<stacked_container uid="86" x="28.5" y="2280.5" width="568" height="300">
 					<graph font_size="24pt" legend_position="none" isee:hide_border="true" axis_title_font_size="18pt" axis_label_font_size="14pt" width="568" height="300" comparative="true" type="box" show_grid="true" isee:tick_type="none" include_units_in_legend="false" plot_numbers="false" isee:label_pie_slices="false" isee:show_pie_borders="true" num_x_grid_lines="9" num_y_grid_lines="5" num_x_labels="5" num_y_labels="5" title="g) Energy Demand (TWh/Yr)" isee:fill_intensity="0.1" isee:allow_zero_axis="true" left_axis_multi_scale="false" left_axis_auto_scale="true" left_include_units="true" right_axis_multi_scale="false" right_axis_auto_scale="true" right_include_units="true">
-						<plot color="blue" isee:keep_zero_visible="false" pen_width="1" index="0" show_y_axis="true">
-							<format scale_by="1" delimit_000s="true"/>
-							<entity name="energy_demand.demand_for_energy[*]"/>
-						</plot>
 						<isee:time_points>
 							<isee:time_point>2030</isee:time_point>
 							<isee:time_point>2040</isee:time_point>
@@ -2877,12 +2790,7 @@ This is what determines when the model stops calculating</doc>
 					<graph font_size="24pt" legend_position="none" isee:hide_border="true" axis_title_font_size="18pt" axis_label_font_size="14pt" width="568" height="300" comparative="true" type="time_series" isee:points_only="true" show_grid="true" isee:tick_type="none" include_units_in_legend="false" plot_numbers="false" isee:label_pie_slices="false" isee:show_pie_borders="true" num_x_grid_lines="9" num_y_grid_lines="5" num_x_labels="5" num_y_labels="5" title="b) Investments (Bc$/Year)" isee:fill_intensity="0.1" to="2020" isee:allow_zero_axis="true" left_axis_multi_scale="false" left_axis_auto_scale="true" left_include_units="true" right_axis_multi_scale="false" right_axis_auto_scale="true" right_include_units="true"/>
 				</stacked_container>
 				<stacked_container uid="91" x="1181.25" y="2904.5" width="568" height="300">
-					<graph font_size="24pt" legend_position="none" isee:hide_border="true" axis_title_font_size="18pt" axis_label_font_size="14pt" width="568" height="300" comparative="true" type="time_series" show_grid="true" isee:tick_type="none" include_units_in_legend="false" plot_numbers="false" isee:label_pie_slices="false" isee:show_pie_borders="true" num_x_grid_lines="9" num_y_grid_lines="5" num_x_labels="5" num_y_labels="5" title="c) Energy Demand (TWh/Year)" isee:fill_intensity="0.1" to="2020" isee:allow_zero_axis="true" left_axis_multi_scale="false" left_axis_auto_scale="true" left_include_units="true" right_axis_multi_scale="false" right_axis_auto_scale="true" right_include_units="true">
-						<plot color="blue" isee:keep_zero_visible="true" pen_width="1" index="0" show_y_axis="true">
-							<format scale_by="1" delimit_000s="true"/>
-							<entity name="energy_demand.demand_for_energy[1]"/>
-						</plot>
-					</graph>
+					<graph font_size="24pt" legend_position="none" isee:hide_border="true" axis_title_font_size="18pt" axis_label_font_size="14pt" width="568" height="300" comparative="true" type="time_series" isee:points_only="true" show_grid="true" isee:tick_type="none" include_units_in_legend="false" plot_numbers="false" isee:label_pie_slices="false" isee:show_pie_borders="true" num_x_grid_lines="9" num_y_grid_lines="5" num_x_labels="5" num_y_labels="5" title="c) Energy Demand (TWh/Year)" isee:fill_intensity="0.1" to="2020" isee:allow_zero_axis="true" left_axis_multi_scale="false" left_axis_auto_scale="true" left_include_units="true" right_axis_multi_scale="false" right_axis_auto_scale="true" right_include_units="true"/>
 				</stacked_container>
 				<stacked_container uid="92" x="56.9167" y="3199.5" width="568" height="300">
 					<graph font_size="24pt" legend_position="none" isee:hide_border="true" axis_title_font_size="18pt" axis_label_font_size="14pt" width="568" height="300" comparative="true" type="time_series" isee:points_only="true" show_grid="true" isee:tick_type="none" include_units_in_legend="false" plot_numbers="false" isee:label_pie_slices="false" isee:show_pie_borders="true" num_x_grid_lines="9" num_y_grid_lines="5" num_x_labels="5" num_y_labels="5" title="d) Population (Million People)" isee:fill_intensity="0.1" to="2020" isee:allow_zero_axis="true" left_axis_multi_scale="false" left_axis_auto_scale="true" left_include_units="true" right_axis_multi_scale="false" right_axis_auto_scale="true" right_include_units="true"/>
@@ -2923,11 +2831,7 @@ This is what determines when the model stops calculating</doc>
 					<graph font_size="24pt" legend_position="none" isee:hide_border="true" axis_title_font_size="18pt" axis_label_font_size="14pt" width="568" height="300" comparative="true" type="time_series" isee:points_only="true" show_grid="true" isee:tick_type="none" include_units_in_legend="false" plot_numbers="false" isee:label_pie_slices="false" isee:show_pie_borders="true" num_x_grid_lines="9" num_y_grid_lines="5" num_x_labels="5" num_y_labels="5" title="k) Surface Temperature Anomaly (deg C)" isee:fill_intensity="0.1" to="2020" isee:allow_zero_axis="true" left_axis_multi_scale="false" left_axis_auto_scale="true" left_include_units="true" right_axis_multi_scale="false" right_axis_auto_scale="true" right_include_units="true"/>
 				</stacked_container>
 				<stacked_container uid="100" x="659.916" y="4145.5" width="568" height="300">
-					<graph font_size="24pt" legend_position="none" isee:hide_border="true" axis_title_font_size="18pt" axis_label_font_size="14pt" width="568" height="300" comparative="true" type="time_series" show_grid="true" isee:tick_type="none" include_units_in_legend="false" plot_numbers="false" isee:label_pie_slices="false" isee:show_pie_borders="true" num_x_grid_lines="9" num_y_grid_lines="5" num_x_labels="5" num_y_labels="5" title="Renewable Energy Output Share" isee:fill_intensity="0.1" isee:allow_zero_axis="true" left_axis_multi_scale="false" left_axis_auto_scale="true" left_include_units="true" right_axis_multi_scale="false" right_axis_auto_scale="true" right_include_units="true">
-						<plot color="blue" isee:keep_zero_visible="true" pen_width="1" index="0" show_y_axis="true">
-							<entity name="energy_supply.Renewable_Energy_Output_Share[1]"/>
-						</plot>
-					</graph>
+					<graph font_size="24pt" legend_position="none" isee:hide_border="true" axis_title_font_size="18pt" axis_label_font_size="14pt" width="568" height="300" comparative="true" type="time_series" isee:points_only="true" show_grid="true" isee:tick_type="none" include_units_in_legend="false" plot_numbers="false" isee:label_pie_slices="false" isee:show_pie_borders="true" num_x_grid_lines="9" num_y_grid_lines="5" num_x_labels="5" num_y_labels="5" title="Renewable Energy Output Share" isee:fill_intensity="0.1" isee:allow_zero_axis="true" left_axis_multi_scale="false" left_axis_auto_scale="true" left_include_units="true" right_axis_multi_scale="false" right_axis_auto_scale="true" right_include_units="true"/>
 				</stacked_container>
 				<module label_side="center" x="507.5" y="289.5" name="Demographics"/>
 				<connector uid="105" color="#FF007F" isee:thickness="2" angle="294.338" isee:autocreated="true">
@@ -3064,12 +2968,6 @@ This is what determines when the model stops calculating</doc>
 				<stacked_container uid="151" x="1045" y="713.5" width="623" height="250" minimized="true">
 					<table orientation="horizontal" interval="1" report_balances="beginning" report_flows="instantaneous" width="623" height="250" comparative="true" title="Diagnostics of key variables">
 						<item type="time"/>
-						<item>
-							<entity name="energy_demand.demand_for_energy[1]"/>
-						</item>
-						<item>
-							<entity name="energy_supply.Total_Energy_Output[1]"/>
-						</item>
 					</table>
 				</stacked_container>
 				<connector uid="153" isee:thickness="2" angle="289.51" isee:autocreated="true">
@@ -3122,9 +3020,6 @@ This is what determines when the model stops calculating</doc>
 					<graph width="570" height="470" type="area" isee:sum_stacked_legend="true" isee:stacked_show_hover_values="true" show_grid="true" isee:tick_type="none" include_units_in_legend="false" plot_numbers="false" isee:label_pie_slices="false" isee:show_pie_borders="true" num_x_grid_lines="13" num_y_grid_lines="9" num_x_labels="13" num_y_labels="9" title="Income" isee:fill_intensity="0.1" to="2100" isee:allow_zero_axis="true" left_axis_multi_scale="false" left_axis_auto_scale="true" left_include_units="true" right_axis_multi_scale="false" right_axis_auto_scale="true" right_include_units="true">
 						<plot color="blue" isee:keep_zero_visible="true" pen_width="1" index="0" show_y_axis="true"/>
 						<plot color="red" isee:keep_zero_visible="true" pen_width="1" index="1" show_y_axis="true"/>
-						<plot color="fuchsia" isee:keep_zero_visible="true" pen_width="1" index="2" show_y_axis="true">
-							<entity name="Government.total_public_tax_income[1]"/>
-						</plot>
 					</graph>
 					<graph width="570" height="470" type="area" isee:sum_stacked_legend="true" isee:stacked_show_hover_values="false" show_grid="true" isee:tick_type="none" include_units_in_legend="false" plot_numbers="false" isee:label_pie_slices="false" isee:show_pie_borders="true" num_x_grid_lines="13" num_y_grid_lines="8" num_x_labels="13" num_y_labels="8" title="Real GDP" isee:fill_intensity="1" to="2100" isee:allow_zero_axis="true" left_axis_title="Giga$(2021) per Year" left_axis_multi_scale="false" left_axis_auto_scale="true" left_include_units="true" right_axis_multi_scale="false" right_axis_auto_scale="true" right_include_units="true">
 						<plot color="#00008F" title="Owner Consumption" isee:keep_zero_visible="true" pen_width="1" index="0" show_y_axis="true">
@@ -3213,11 +3108,7 @@ This is what determines when the model stops calculating</doc>
 							<entity name="Land_Nutrients.manure_fertilizer_use[1]"/>
 						</plot>
 					</graph>
-					<graph width="570" height="470" comparative="true" type="time_series" show_grid="true" isee:tick_type="none" include_units_in_legend="false" plot_numbers="false" isee:label_pie_slices="false" isee:show_pie_borders="true" num_x_grid_lines="13" num_y_grid_lines="9" num_x_labels="13" num_y_labels="9" isee:fill_intensity="1" to="2100" isee:allow_zero_axis="true" left_axis_multi_scale="false" left_axis_auto_scale="true" left_include_units="true" right_axis_multi_scale="false" right_axis_auto_scale="true" right_include_units="true">
-						<plot color="blue" isee:keep_zero_visible="true" pen_width="1" index="0" show_y_axis="true">
-							<entity name="Emissions.CO2_Emissions_from_Food_and_Land_Use[1]"/>
-						</plot>
-					</graph>
+					<graph width="570" height="470" comparative="true" type="time_series" isee:points_only="true" show_grid="true" isee:tick_type="none" include_units_in_legend="false" plot_numbers="false" isee:label_pie_slices="false" isee:show_pie_borders="true" num_x_grid_lines="13" num_y_grid_lines="9" num_x_labels="13" num_y_labels="9" isee:fill_intensity="1" to="2100" isee:allow_zero_axis="true" left_axis_multi_scale="false" left_axis_auto_scale="true" left_include_units="true" right_axis_multi_scale="false" right_axis_auto_scale="true" right_include_units="true"/>
 					<graph width="570" height="470" comparative="true" type="time_series" show_grid="true" isee:tick_type="none" include_units_in_legend="false" plot_numbers="false" isee:label_pie_slices="false" isee:show_pie_borders="true" num_x_grid_lines="13" num_y_grid_lines="9" num_x_labels="13" num_y_labels="9" isee:fill_intensity="1" to="2100" isee:allow_zero_axis="true" left_axis_multi_scale="false" left_axis_auto_scale="true" left_include_units="true" right_axis_multi_scale="false" right_axis_auto_scale="true" right_include_units="true">
 						<plot color="blue" isee:keep_zero_visible="true" pen_width="1" index="0" show_y_axis="true">
 							<entity name="Emissions.CH4_Emissions_from_Food_and_Land_Use[1]"/>
@@ -3233,12 +3124,7 @@ This is what determines when the model stops calculating</doc>
 							<entity name="Emissions.SO2_Emissions_from_Food_and_Land_Use[1]"/>
 						</plot>
 					</graph>
-					<graph width="570" height="470" comparative="true" type="time_series" show_grid="true" isee:tick_type="none" include_units_in_legend="false" plot_numbers="false" isee:label_pie_slices="false" isee:show_pie_borders="true" num_x_grid_lines="13" num_y_grid_lines="5" num_x_labels="13" num_y_labels="5" title="Energy Balance" isee:fill_intensity="1" to="2100" isee:allow_zero_axis="true" left_axis_multi_scale="false" left_axis_auto_scale="true" left_include_units="true" right_axis_multi_scale="false" right_axis_auto_scale="true" right_include_units="true">
-						<plot color="blue" isee:keep_zero_visible="false" pen_width="1" index="0" show_y_axis="true">
-							<entity name="energy_supply_vs_demand.Energy_Balance[1]"/>
-							<scale min="0.99" max="1.01"/>
-						</plot>
-					</graph>
+					<graph width="570" height="470" comparative="true" type="time_series" isee:points_only="true" show_grid="true" isee:tick_type="none" include_units_in_legend="false" plot_numbers="false" isee:label_pie_slices="false" isee:show_pie_borders="true" num_x_grid_lines="13" num_y_grid_lines="5" num_x_labels="13" num_y_labels="5" title="Energy Balance" isee:fill_intensity="1" to="2100" isee:allow_zero_axis="true" left_axis_multi_scale="false" left_axis_auto_scale="true" left_include_units="true" right_axis_multi_scale="false" right_axis_auto_scale="true" right_include_units="true"/>
 					<graph width="570" height="470" type="area" isee:sum_stacked_legend="true" isee:stacked_show_hover_values="true" show_grid="true" isee:tick_type="none" include_units_in_legend="false" plot_numbers="false" isee:label_pie_slices="false" isee:show_pie_borders="true" num_x_grid_lines="13" num_y_grid_lines="5" num_x_labels="13" num_y_labels="5" title="CO2 Emissions from Energy" isee:fill_intensity="1" to="2100" isee:allow_zero_axis="true" left_axis_multi_scale="false" left_axis_auto_scale="true" left_include_units="true" right_axis_multi_scale="false" right_axis_auto_scale="true" right_include_units="true">
 						<plot color="blue" isee:keep_zero_visible="true" pen_width="1" index="0" show_y_axis="true">
 							<entity name="Emissions.CO2_emissions_from_coal[1]"/>

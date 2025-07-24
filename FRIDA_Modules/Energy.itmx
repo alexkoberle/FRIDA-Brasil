@@ -1023,20 +1023,11 @@
 				</connector>
 				<text_box font_size="72pt" uid="1291" x="440.08" y="1825.84" width="771.667" height="90.5">Energy Supply Balance</text_box>
 				<stacked_container uid="1292" x="374.17" y="1932.67" width="563" height="314.048">
-					<graph width="563" height="314.048" comparative="true" type="time_series" show_grid="false" isee:tick_type="none" include_units_in_legend="false" plot_numbers="false" isee:label_pie_slices="false" isee:show_pie_borders="true" num_x_grid_lines="0" num_y_grid_lines="0" num_x_labels="5" num_y_labels="3" isee:fill_intensity="0.1" isee:allow_zero_axis="true" left_axis_multi_scale="false" left_axis_auto_scale="true" left_include_units="true" right_axis_multi_scale="false" right_axis_auto_scale="true" right_include_units="true">
-						<plot color="red" isee:keep_zero_visible="false" pen_width="1" index="0" show_y_axis="true">
-							<entity name="energy_supply.Total_Energy_Output[1]"/>
-						</plot>
-					</graph>
+					<graph width="563" height="314.048" comparative="true" type="time_series" isee:points_only="true" show_grid="false" isee:tick_type="none" include_units_in_legend="false" plot_numbers="false" isee:label_pie_slices="false" isee:show_pie_borders="true" num_x_grid_lines="0" num_y_grid_lines="0" num_x_labels="5" num_y_labels="3" isee:fill_intensity="0.1" isee:allow_zero_axis="true" left_axis_multi_scale="false" left_axis_auto_scale="true" left_include_units="true" right_axis_multi_scale="false" right_axis_auto_scale="true" right_include_units="true"/>
 				</stacked_container>
 				<text_box font_size="72pt" uid="1293" x="1107.27" y="2239.18" width="841.667" height="99.6667">Investments And Shares</text_box>
 				<stacked_container uid="1295" x="1522.5" y="1932.66" width="554.666" height="314.054">
-					<graph width="554.666" height="314.054" comparative="true" type="time_series" show_grid="false" isee:tick_type="none" include_units_in_legend="false" plot_numbers="false" isee:label_pie_slices="false" isee:show_pie_borders="true" num_x_grid_lines="0" num_y_grid_lines="0" num_x_labels="5" num_y_labels="3" isee:fill_intensity="0.1" isee:allow_zero_axis="true" left_axis_multi_scale="false" left_axis_auto_scale="false" left_include_units="true" right_axis_multi_scale="false" right_axis_auto_scale="true" right_include_units="true">
-						<plot color="blue" isee:keep_zero_visible="false" pen_width="1" index="0" show_y_axis="true">
-							<entity name="energy_supply_vs_demand.Energy_Balance[*]"/>
-							<scale min="0.7" max="1.3"/>
-						</plot>
-					</graph>
+					<graph width="554.666" height="314.054" comparative="true" type="time_series" isee:points_only="true" show_grid="false" isee:tick_type="none" include_units_in_legend="false" plot_numbers="false" isee:label_pie_slices="false" isee:show_pie_borders="true" num_x_grid_lines="0" num_y_grid_lines="0" num_x_labels="5" num_y_labels="3" isee:fill_intensity="0.1" isee:allow_zero_axis="true" left_axis_multi_scale="false" left_axis_auto_scale="false" left_include_units="true" right_axis_multi_scale="false" right_axis_auto_scale="true" right_include_units="true"/>
 				</stacked_container>
 				<stacked_container uid="1296" x="931.67" y="2345.02" width="560" height="617.667">
 					<graph width="560" height="617.667" type="area" isee:sum_stacked_legend="true" isee:stacked_show_hover_values="true" show_grid="false" isee:tick_type="none" include_units_in_legend="false" plot_numbers="false" isee:label_pie_slices="false" isee:show_pie_borders="true" num_x_grid_lines="0" num_y_grid_lines="0" num_x_labels="5" num_y_labels="3" isee:fill_intensity="0.1" isee:stacked_area_max="2200000000000" isee:allow_zero_axis="true" left_axis_multi_scale="false" left_axis_auto_scale="true" left_include_units="true" right_axis_multi_scale="false" right_axis_auto_scale="true" right_include_units="true">
@@ -1105,32 +1096,7 @@
 					</graph>
 				</stacked_container>
 				<stacked_container uid="1300" x="2739.17" y="2345.35" width="560" height="617.667">
-					<graph width="560" height="617.667" type="area" isee:sum_stacked_legend="false" isee:stacked_show_hover_values="true" show_grid="false" isee:tick_type="none" include_units_in_legend="false" plot_numbers="false" isee:label_pie_slices="false" isee:show_pie_borders="true" num_x_grid_lines="0" num_y_grid_lines="0" num_x_labels="5" num_y_labels="3" isee:fill_intensity="0.1" isee:stacked_area_max="1" isee:allow_zero_axis="true" left_axis_multi_scale="false" left_axis_auto_scale="true" left_include_units="true" right_axis_multi_scale="false" right_axis_auto_scale="true" right_include_units="true">
-						<plot color="black" isee:keep_zero_visible="true" pen_width="1" index="0" show_y_axis="true">
-							<entity name='energy_supply."Fossil_Energy_Output_Share,_coal"[1]'/>
-						</plot>
-						<plot color="#552B00" isee:keep_zero_visible="true" pen_width="1" index="1" show_y_axis="true">
-							<entity name='energy_supply."Fossil_Energy_Output_Share,_oil"[1]'/>
-						</plot>
-						<plot color="#9C4E00" isee:keep_zero_visible="true" pen_width="1" index="2" show_y_axis="true">
-							<entity name='energy_supply."Fossil_Energy_Output_Share,_gas"[1]'/>
-						</plot>
-						<plot color="#00AAFF" isee:keep_zero_visible="true" pen_width="1" index="3" show_y_axis="true">
-							<entity name="energy_supply.Hydropower_Output_Share[1]"/>
-						</plot>
-						<plot color="#FF55FF" isee:keep_zero_visible="true" pen_width="1" index="4" show_y_axis="true">
-							<entity name="energy_supply.Nuclear_Energy_Output_Share[1]"/>
-						</plot>
-						<plot color="#00D900" isee:keep_zero_visible="true" pen_width="1" index="5" show_y_axis="true">
-							<entity name="energy_supply.Bio_Energy_Output_Share[1]"/>
-						</plot>
-						<plot color="#FEEA6C" isee:keep_zero_visible="true" pen_width="1" index="6" show_y_axis="true">
-							<entity name="energy_supply.Solar_Energy_Output_Share[1]"/>
-						</plot>
-						<plot color="#AAAAFF" isee:keep_zero_visible="true" pen_width="1" index="7" show_y_axis="true">
-							<entity name="energy_supply.Wind_Energy_Output_Share[1]"/>
-						</plot>
-					</graph>
+					<graph width="560" height="617.667" type="area" isee:sum_stacked_legend="false" isee:stacked_show_hover_values="true" show_grid="false" isee:tick_type="none" include_units_in_legend="false" plot_numbers="false" isee:label_pie_slices="false" isee:show_pie_borders="true" num_x_grid_lines="0" num_y_grid_lines="0" num_x_labels="5" num_y_labels="3" isee:fill_intensity="0.1" isee:stacked_area_max="1" isee:allow_zero_axis="true" left_axis_multi_scale="false" left_axis_auto_scale="true" left_include_units="true" right_axis_multi_scale="false" right_axis_auto_scale="true" right_include_units="true"/>
 				</stacked_container>
 				<stacked_container uid="1301" x="342" y="2342.4" width="553.333" height="618.698">
 					<graph width="553.333" height="618.698" type="time_series" show_grid="false" isee:tick_type="none" include_units_in_legend="false" plot_numbers="false" isee:label_pie_slices="false" isee:show_pie_borders="true" num_x_grid_lines="0" num_y_grid_lines="0" num_x_labels="5" num_y_labels="3" isee:fill_intensity="0.1" isee:allow_zero_axis="true" left_axis_multi_scale="false" left_axis_auto_scale="true" left_include_units="true" right_axis_multi_scale="false" right_axis_auto_scale="true" right_include_units="true">
@@ -1379,7 +1345,7 @@
 				<stacked_container uid="1410" x="960.83" y="1930.83" width="550" height="311.667">
 					<graph width="550" height="311.667" type="time_series" show_grid="false" isee:tick_type="none" include_units_in_legend="false" plot_numbers="false" isee:label_pie_slices="false" isee:show_pie_borders="true" num_x_grid_lines="0" num_y_grid_lines="0" num_x_labels="5" num_y_labels="3" isee:fill_intensity="0.1" isee:allow_zero_axis="true" left_axis_multi_scale="false" left_axis_auto_scale="true" left_include_units="true" right_axis_multi_scale="false" right_axis_auto_scale="true" right_include_units="true">
 						<plot color="blue" isee:keep_zero_visible="false" pen_width="1" index="0" show_y_axis="true">
-							<entity name="energy_supply_vs_demand.Energy_Supply_Missmatch[1]"/>
+							<entity name="energy_supply_vs_demand.Energy_Supply_Missmatch[1, World]"/>
 							<scale min="-4000" max="4000"/>
 						</plot>
 					</graph>
@@ -1476,11 +1442,7 @@
 					<to>energy_demand</to>
 				</connector>
 				<stacked_container uid="1486" x="1345" y="392.5">
-					<graph width="350" height="250" type="time_series" show_grid="false" isee:tick_type="none" include_units_in_legend="false" plot_numbers="false" isee:label_pie_slices="false" isee:show_pie_borders="true" num_x_grid_lines="0" num_y_grid_lines="0" num_x_labels="5" num_y_labels="3" isee:fill_intensity="0.1" isee:allow_zero_axis="true" left_axis_multi_scale="false" left_axis_auto_scale="true" left_include_units="true" right_axis_multi_scale="false" right_axis_auto_scale="true" right_include_units="true">
-						<plot color="blue" isee:keep_zero_visible="true" pen_width="1" index="0" show_y_axis="true">
-							<entity name="energy_supply.per_person_energy_output[1]"/>
-						</plot>
-					</graph>
+					<graph width="350" height="250" type="time_series" isee:points_only="true" show_grid="false" isee:tick_type="none" include_units_in_legend="false" plot_numbers="false" isee:label_pie_slices="false" isee:show_pie_borders="true" num_x_grid_lines="0" num_y_grid_lines="0" num_x_labels="5" num_y_labels="3" isee:fill_intensity="0.1" isee:allow_zero_axis="true" left_axis_multi_scale="false" left_axis_auto_scale="true" left_include_units="true" right_axis_multi_scale="false" right_axis_auto_scale="true" right_include_units="true"/>
 				</stacked_container>
 			</view>
 		</views>
@@ -1559,7 +1521,7 @@ Calibration Parameter
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>real_GDP_per_person[Run]/INIT(real_GDP_per_person[Run])</eqn>
+				<eqn>real_GDP_per_person[Run,Region]/INIT(real_GDP_per_person[Run,Region])</eqn>
 				<units>1</units>
 			</aux>
 			<aux name="per person energy\ndemand">
@@ -1579,9 +1541,10 @@ This is energy demand, so consumption data would be closest. However, real consu
 https://ourworldindata.org/grapher/fossil-fuel-primary-energy?tab=chart&amp;country=~OWID_WRL</doc>
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>
- Population * per_person_energy_demand[Run,World]</eqn>
+ Population[Run,Region] * per_person_energy_demand[Run,World]</eqn>
 				<units>TWh/year</units>
 			</aux>
 			<aux name="switch energy demand policy" access="input">
@@ -1736,10 +1699,10 @@ Based on GCM output of the past</doc>
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>IF (switch_energy_damage=0) AND TIME &gt; today THEN previous_total_change_in_energy_used_for_heating_and_cooling_due_to_climate_change[Run]
-ELSE
+				<eqn>IF (switch_energy_damage=0) AND TIME &gt; todayTHEN previous_total_change_in_energy_used_for_heating_and_cooling_due_to_climate_change [Run]ELSE
 Change_in_energy_used_for_Heating_due_to_climate_change_in_MWh
-+ Change_in_energy_used_for_cooling_due_to_climate_change_in_MWh[Run]</eqn>
++
+Change_in_energy_used_for_cooling_due_to_climate_change_in_MWh [Run]</eqn>
 				<units>MWh/(Person*Year)</units>
 			</aux>
 			<aux name="total change in energy used for\nheating and cooling\ndue to climate change in GJ">
@@ -1760,6 +1723,7 @@ Change_in_energy_used_for_Heating_due_to_climate_change_in_MWh
 			<aux name="Population" access="input">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>{Enter equation for use when not hooked up to other models}</eqn>
 				<units>Mp</units>
@@ -1961,7 +1925,7 @@ Change_in_energy_used_for_Heating_due_to_climate_change_in_MWh
 				<isee:iframe color="black" background="white" text_align="left" vertical_text_align="top" font_size="12pt" border_width="thin" border_style="solid"/>
 				<isee:financial_table color="black" background="#E0E0E0" text_align="right" font_size="12pt" hide_border="false" auto_fit="true" first_column_width="250" other_column_width="100" header_font_style="normal" header_font_weight="bold" header_text_decoration="none" header_text_align="center" header_vertical_text_align="center" header_font_color="black" header_font_family="Arial" header_font_size="14pt" header_text_padding="2" header_text_border_color="black" header_text_border_width="thin" header_text_border_style="none"/>
 			</style>
-			<view isee:show_pages="false" background="white" page_width="1026" page_height="786" isee:page_cols="2" isee:page_rows="3" isee:scroll_y="22.1429" zoom="140" isee:popup_graphs_are_comparative="true" isee:enable_non_negative_highlights="false" type="stock_flow">
+			<view isee:show_pages="false" background="white" page_width="1027" page_height="787" isee:page_cols="2" isee:page_rows="3" isee:scroll_x="580" isee:scroll_y="583.571" zoom="140" isee:popup_graphs_are_comparative="true" isee:enable_non_negative_highlights="false" type="stock_flow">
 				<style color="black" background="white" font_style="normal" font_weight="normal" text_decoration="none" text_align="center" vertical_text_align="center" font_color="black" font_family="Arial" font_size="10pt" padding="2" border_color="black" border_width="thin" border_style="none">
 					<stock color="blue" background="white" font_color="blue" font_size="11pt" label_side="top">
 						<shape type="rectangle" width="45" height="35"/>
@@ -2279,11 +2243,7 @@ This affects the energy use per CCD, energy use per HDD variables. Any change in
 					<to>Change_in_energy_used_for_Heating_due_to_climate_change_in_MWh</to>
 				</connector>
 				<stacked_container uid="133" x="1136.67" y="849.444">
-					<graph width="350" height="250" comparative="true" type="time_series" show_grid="false" isee:tick_type="none" include_units_in_legend="false" plot_numbers="false" isee:label_pie_slices="false" isee:show_pie_borders="true" num_x_grid_lines="0" num_y_grid_lines="0" num_x_labels="5" num_y_labels="3" isee:fill_intensity="0.1" isee:allow_zero_axis="true" left_axis_multi_scale="false" left_axis_auto_scale="true" left_include_units="true" right_axis_multi_scale="false" right_axis_auto_scale="true" right_include_units="true">
-						<plot color="blue" isee:keep_zero_visible="true" pen_width="1" index="0" show_y_axis="true">
-							<entity name="demand_for_energy[1]"/>
-						</plot>
-					</graph>
+					<graph width="350" height="250" comparative="true" type="time_series" isee:points_only="true" show_grid="false" isee:tick_type="none" include_units_in_legend="false" plot_numbers="false" isee:label_pie_slices="false" isee:show_pie_borders="true" num_x_grid_lines="0" num_y_grid_lines="0" num_x_labels="5" num_y_labels="3" isee:fill_intensity="0.1" isee:allow_zero_axis="true" left_axis_multi_scale="false" left_axis_auto_scale="true" left_include_units="true" right_axis_multi_scale="false" right_axis_auto_scale="true" right_include_units="true"/>
 				</stacked_container>
 			</view>
 		</views>
@@ -2325,7 +2285,7 @@ Negative values of P causes compensation of differences, positive values would c
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>&quot;Real_GDP_in_2021c$&quot;[Run]*&quot;UNIT_Bc$_to_c$&quot;</eqn>
+				<eqn>&quot;Real_GDP_in_2021c$&quot;[Run,Region]*&quot;UNIT_Bc$_to_c$&quot;</eqn>
 				<units>c$/Year</units>
 			</aux>
 			<aux name="share of GDP invested in Renewable Energy">
@@ -2462,6 +2422,7 @@ share_of_GDP_invested_in_bio_power</eqn>
 			<aux name="Relative Energy Supply Missmatch" access="input">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>{Enter equation for use when not hooked up to other models}</eqn>
 				<units>dmnl</units>
@@ -3489,7 +3450,7 @@ ELSE
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>Relative_Energy_Supply_Missmatch[Run]-Relative_Energy_Supply_Mismatch_Buffer</eqn>
+				<eqn>Relative_Energy_Supply_Missmatch[Run,Region]-Relative_Energy_Supply_Mismatch_Buffer</eqn>
 				<units>dmnl</units>
 			</aux>
 			<aux name="Relative Energy Supply Mismatch Buffer">
@@ -3592,6 +3553,7 @@ adjusted_cost[Run,Coal_fuel_extraction,World] * Coal_Gross_Investments_in_Fossil
 			<aux name="expenditure on subsidies for investments in\ncoal extraction" access="input">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>{Enter equation for use when not hooked up to other models}</eqn>
 				<units>c$/Year</units>
@@ -3599,6 +3561,7 @@ adjusted_cost[Run,Coal_fuel_extraction,World] * Coal_Gross_Investments_in_Fossil
 			<aux name="tax revenue on investments in\ncoal extraction" access="input">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>{Enter equation for use when not hooked up to other models}</eqn>
 				<units>c$/Year</units>
@@ -3608,12 +3571,13 @@ adjusted_cost[Run,Coal_fuel_extraction,World] * Coal_Gross_Investments_in_Fossil
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>Coal_Gross_Investments_in_Fossil_Fuel_Extraction_Capital[Run] + expenditure_on_subsidies_for_investments_in_coal_extraction[Run] + tax_revenue_on_investments_in_coal_extraction[Run]</eqn>
+				<eqn>Coal_Gross_Investments_in_Fossil_Fuel_Extraction_Capital[Run] + expenditure_on_subsidies_for_investments_in_coal_extraction[Run,Region] + tax_revenue_on_investments_in_coal_extraction[Run,Region]</eqn>
 				<units>c$/Year</units>
 			</aux>
 			<aux name="expenditure on subsidies for investments in\noil extraction" access="input">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>{Enter equation for use when not hooked up to other models}</eqn>
 				<units>c$/Year</units>
@@ -3621,6 +3585,7 @@ adjusted_cost[Run,Coal_fuel_extraction,World] * Coal_Gross_Investments_in_Fossil
 			<aux name="expenditure on subsidies for investments in\ncoal energy conversion" access="input">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>{Enter equation for use when not hooked up to other models}</eqn>
 				<units>c$/Year</units>
@@ -3628,6 +3593,7 @@ adjusted_cost[Run,Coal_fuel_extraction,World] * Coal_Gross_Investments_in_Fossil
 			<aux name="expenditure on subsidies for investments in\noil energy conversion" access="input">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>{Enter equation for use when not hooked up to other models}</eqn>
 				<units>c$/Year</units>
@@ -3635,6 +3601,7 @@ adjusted_cost[Run,Coal_fuel_extraction,World] * Coal_Gross_Investments_in_Fossil
 			<aux name="expenditure on subsidies for investments in\ngas extraction" access="input">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>{Enter equation for use when not hooked up to other models}</eqn>
 				<units>c$/Year</units>
@@ -3642,6 +3609,7 @@ adjusted_cost[Run,Coal_fuel_extraction,World] * Coal_Gross_Investments_in_Fossil
 			<aux name="expenditure on subsidies for investments in\ngas energy conversion" access="input">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>{Enter equation for use when not hooked up to other models}</eqn>
 				<units>c$/Year</units>
@@ -3670,6 +3638,7 @@ adjusted_cost[Run,Coal_fuel_extraction,World] * Coal_Gross_Investments_in_Fossil
 			<aux name="tax revenue on investments in\ngas energy conversion" access="input">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>{Enter equation for use when not hooked up to other models}</eqn>
 				<units>c$/Year</units>
@@ -3677,6 +3646,7 @@ adjusted_cost[Run,Coal_fuel_extraction,World] * Coal_Gross_Investments_in_Fossil
 			<aux name="tax revenue on investments in\noil extraction" access="input">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>{Enter equation for use when not hooked up to other models}</eqn>
 				<units>c$/Year</units>
@@ -3684,6 +3654,7 @@ adjusted_cost[Run,Coal_fuel_extraction,World] * Coal_Gross_Investments_in_Fossil
 			<aux name="tax revenue on investments in\noil energy conversion" access="input">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>{Enter equation for use when not hooked up to other models}</eqn>
 				<units>c$/Year</units>
@@ -3691,6 +3662,7 @@ adjusted_cost[Run,Coal_fuel_extraction,World] * Coal_Gross_Investments_in_Fossil
 			<aux name="tax revenue on investments in\ngas extraction" access="input">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>{Enter equation for use when not hooked up to other models}</eqn>
 				<units>c$/Year</units>
@@ -3698,6 +3670,7 @@ adjusted_cost[Run,Coal_fuel_extraction,World] * Coal_Gross_Investments_in_Fossil
 			<aux name="tax revenue on investments in\ngas energy conversion 1" access="input">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>{Enter equation for use when not hooked up to other models}</eqn>
 				<units>c$/Year</units>
@@ -3728,7 +3701,7 @@ adjusted_cost[Run,Coal_fuel_extraction,World] * Coal_Gross_Investments_in_Fossil
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>Coal_Gross_Investments_in_Fossil_Energy_Capital[Run] + expenditure_on_subsidies_for_investments_in_coal_energy_conversion[Run] + tax_revenue_on_investments_in_gas_energy_conversion[Run]</eqn>
+				<eqn>Coal_Gross_Investments_in_Fossil_Energy_Capital[Run] + expenditure_on_subsidies_for_investments_in_coal_energy_conversion[Run,Region] + tax_revenue_on_investments_in_gas_energy_conversion[Run,Region]</eqn>
 				<units>c$/Year</units>
 			</aux>
 			<aux name="Oil Net Investments in\nEnergy Conversion Capital">
@@ -3736,7 +3709,7 @@ adjusted_cost[Run,Coal_fuel_extraction,World] * Coal_Gross_Investments_in_Fossil
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>expenditure_on_subsidies_for_investments_in_oil_energy_conversion[Run] + tax_revenue_on_investments_in_oil_energy_conversion[Run] + Oil_Gross_Investments_in_Fossil_Energy_Capital[Run]</eqn>
+				<eqn>expenditure_on_subsidies_for_investments_in_oil_energy_conversion[Run,Region] + tax_revenue_on_investments_in_oil_energy_conversion[Run,Region] + Oil_Gross_Investments_in_Fossil_Energy_Capital[Run]</eqn>
 				<units>c$/Year</units>
 			</aux>
 			<aux name="Oil Net Investments in Fossil\nFuel Extraction Capital">
@@ -3744,7 +3717,7 @@ adjusted_cost[Run,Coal_fuel_extraction,World] * Coal_Gross_Investments_in_Fossil
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>expenditure_on_subsidies_for_investments_in_oil_extraction[Run] + tax_revenue_on_investments_in_oil_extraction[Run] + Oil_Gross_Investments_in_Fossil_Fuel_Extraction_Capital[Run]</eqn>
+				<eqn>expenditure_on_subsidies_for_investments_in_oil_extraction[Run,Region] + tax_revenue_on_investments_in_oil_extraction[Run,Region] + Oil_Gross_Investments_in_Fossil_Fuel_Extraction_Capital[Run]</eqn>
 				<units>c$/Year</units>
 			</aux>
 			<aux name="Gas Net Investments in\nEnergy Conversion Capital">
@@ -3752,7 +3725,7 @@ adjusted_cost[Run,Coal_fuel_extraction,World] * Coal_Gross_Investments_in_Fossil
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>expenditure_on_subsidies_for_investments_in_gas_energy_conversion[Run] + tax_revenue_on_investments_in_gas_energy_conversion_1[Run] + Gas_Gross_Investments_in_Fossil_Energy_Capital[Run]</eqn>
+				<eqn>expenditure_on_subsidies_for_investments_in_gas_energy_conversion[Run,Region] + tax_revenue_on_investments_in_gas_energy_conversion_1[Run,Region] + Gas_Gross_Investments_in_Fossil_Energy_Capital[Run]</eqn>
 				<units>c$/Year</units>
 			</aux>
 			<aux name="Gas Net Investments in Fossil\nFuel Extraction Capital">
@@ -3760,7 +3733,7 @@ adjusted_cost[Run,Coal_fuel_extraction,World] * Coal_Gross_Investments_in_Fossil
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>expenditure_on_subsidies_for_investments_in_gas_extraction[Run] + tax_revenue_on_investments_in_gas_extraction[Run] + Gas_Gross_Investments_in_Fossil_Fuel_Extraction_Capital[Run]</eqn>
+				<eqn>expenditure_on_subsidies_for_investments_in_gas_extraction[Run,Region] + tax_revenue_on_investments_in_gas_extraction[Run,Region] + Gas_Gross_Investments_in_Fossil_Fuel_Extraction_Capital[Run]</eqn>
 				<units>c$/Year</units>
 			</aux>
 			<aux name="Net Investments in Hydropower Capacity">
@@ -3790,6 +3763,7 @@ adjusted_cost[Run,Coal_fuel_extraction,World] * Coal_Gross_Investments_in_Fossil
 			<aux name="Real GDP in 2021c$" access="input">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>{Enter equation for use when not hooked up to other models}</eqn>
 				<units>bc$/year</units>
@@ -4304,18 +4278,10 @@ https://en.wikipedia.org/wiki/Proportional%E2%80%93integral%E2%80%93derivative_c
 						<plot color="red" pen_style="dot_dashed" isee:keep_zero_visible="false" pen_width="1" index="0" show_y_axis="true">
 							<scale min="0.7" max="1.3"/>
 						</plot>
-						<plot color="blue" isee:keep_zero_visible="true" pen_width="1" index="1" show_y_axis="true">
-							<entity name="energy_supply_vs_demand.Energy_Balance[*]"/>
-						</plot>
 					</graph>
 				</stacked_container>
 				<stacked_container uid="335" x="1236.33" y="2623.37" width="554.666" height="314.054">
-					<graph width="554.666" height="314.054" comparative="true" type="time_series" show_grid="false" isee:tick_type="none" include_units_in_legend="false" plot_numbers="false" isee:label_pie_slices="false" isee:show_pie_borders="true" num_x_grid_lines="0" num_y_grid_lines="0" num_x_labels="5" num_y_labels="3" isee:fill_intensity="0.1" isee:allow_zero_axis="true" left_axis_multi_scale="false" left_axis_auto_scale="false" left_include_units="true" right_axis_multi_scale="false" right_axis_auto_scale="true" right_include_units="true">
-						<plot color="blue" isee:keep_zero_visible="false" pen_width="1" index="0" show_y_axis="true">
-							<entity name="energy_supply_vs_demand.Energy_Balance[*]"/>
-							<scale min="0.7" max="1.3"/>
-						</plot>
-					</graph>
+					<graph width="554.666" height="314.054" comparative="true" type="time_series" isee:points_only="true" show_grid="false" isee:tick_type="none" include_units_in_legend="false" plot_numbers="false" isee:label_pie_slices="false" isee:show_pie_borders="true" num_x_grid_lines="0" num_y_grid_lines="0" num_x_labels="5" num_y_labels="3" isee:fill_intensity="0.1" isee:allow_zero_axis="true" left_axis_multi_scale="false" left_axis_auto_scale="false" left_include_units="true" right_axis_multi_scale="false" right_axis_auto_scale="true" right_include_units="true"/>
 				</stacked_container>
 				<aux x="1252.67" y="1237.72" name="investment by\nsource"/>
 				<aux x="1284.17" y="1546.98" name="cost to build\nper unit"/>
@@ -4488,7 +4454,7 @@ https://en.wikipedia.org/wiki/Proportional%E2%80%93integral%E2%80%93derivative_c
 				<stacked_container uid="451" x="235.512" y="2322.05">
 					<graph width="350" height="250" comparative="true" type="time_series" show_grid="false" isee:tick_type="none" include_units_in_legend="false" plot_numbers="false" isee:label_pie_slices="false" isee:show_pie_borders="true" num_x_grid_lines="0" num_y_grid_lines="0" num_x_labels="5" num_y_labels="3" isee:fill_intensity="0.1" isee:allow_zero_axis="true" left_axis_multi_scale="false" left_axis_auto_scale="true" left_include_units="true" right_axis_multi_scale="false" right_axis_auto_scale="true" right_include_units="true">
 						<plot color="blue" isee:keep_zero_visible="true" pen_width="1" index="0" show_y_axis="true">
-							<entity name="energy_supply_vs_demand.Relative_Energy_Supply_Missmatch[1]"/>
+							<entity name="energy_supply_vs_demand.Relative_Energy_Supply_Missmatch[1, World]"/>
 						</plot>
 					</graph>
 				</stacked_container>
@@ -5421,15 +5387,17 @@ https://en.wikipedia.org/wiki/Proportional%E2%80%93integral%E2%80%93derivative_c
 			<aux name="Nuclear Energy Output Share">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<eqn>Nuclear_Energy_Output/Total_Energy_Output</eqn>
+				<eqn>Nuclear_Energy_Output[Run]/Total_Energy_Output</eqn>
 				<units>dmnl</units>
 			</aux>
 			<aux name="Fossil Energy Output Share">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<eqn>Secondary_Fossil_Energy_Output/Total_Energy_Output</eqn>
+				<eqn>Secondary_Fossil_Energy_Output[Run]/Total_Energy_Output</eqn>
 				<units>dmnl</units>
 			</aux>
 			<module name="Damages" isee:label="">
@@ -5730,10 +5698,11 @@ https://en.wikipedia.org/wiki/Proportional%E2%80%93integral%E2%80%93derivative_c
 This is total energy production of both fossil and renewable</doc>
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<eqn>Secondary_Fossil_Energy_Output
-+Renewable_Energy_Output
-+Nuclear_Energy_Output</eqn>
+				<eqn>Secondary_Fossil_Energy_Output[Run]
++Renewable_Energy_Output[Run]
++Nuclear_Energy_Output[Run]</eqn>
 				<units>TWh/Year</units>
 			</aux>
 			<aux name="Renewable Energy\nOutput" access="input">
@@ -5746,22 +5715,25 @@ This is total energy production of both fossil and renewable</doc>
 			<aux name="Solar and Wind\nOutput Share">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<eqn>Wind_and_Solar_Energy_Output/Total_Energy_Output</eqn>
+				<eqn>Wind_and_Solar_Energy_Output[Run]/Total_Energy_Output</eqn>
 				<units>dmnl</units>
 			</aux>
 			<aux name="Renewable Energy\nOutput Share" access="output" isee:autocreated="true">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<eqn>Renewable_Energy_Output/Total_Energy_Output</eqn>
+				<eqn>Renewable_Energy_Output[Run]/Total_Energy_Output</eqn>
 				<units>dmnl</units>
 			</aux>
 			<aux name="Hydropower\nOutput Share">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<eqn>Hydropower_Energy_Output/Total_Energy_Output</eqn>
+				<eqn>Hydropower_Energy_Output[Run]/Total_Energy_Output</eqn>
 				<units>dmnl</units>
 			</aux>
 			<aux name="Hydropower Energy Output" access="input">
@@ -5816,22 +5788,25 @@ This is total energy production of both fossil and renewable</doc>
 			<aux name="Fossil Energy Output Share, coal">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<eqn>Secondary_Fossil_Energy_Output_1/Total_Energy_Output</eqn>
+				<eqn>Secondary_Fossil_Energy_Output_1[Run]/Total_Energy_Output</eqn>
 				<units>dmnl</units>
 			</aux>
 			<aux name="Fossil Energy Output\nShare, oil">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<eqn>Secondary_Fossil_Energy_Output_2/Total_Energy_Output</eqn>
+				<eqn>Secondary_Fossil_Energy_Output_2[Run]/Total_Energy_Output</eqn>
 				<units>dmnl</units>
 			</aux>
 			<aux name="Fossil Energy Output\nShare, gas">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<eqn>Secondary_Fossil_Energy_Output_3/Total_Energy_Output</eqn>
+				<eqn>Secondary_Fossil_Energy_Output_3[Run]/Total_Energy_Output</eqn>
 				<units>dmnl</units>
 			</aux>
 			<aux name="deltaEnergy for costs">
@@ -5866,8 +5841,9 @@ Arbitrary unit of energy used to calculate the differentials of cost to produce 
 			<aux name="Bio Energy\nOutput Share">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<eqn>bio_fuel_secondary_energy_output/Total_Energy_Output</eqn>
+				<eqn>bio_fuel_secondary_energy_output[Run]/Total_Energy_Output</eqn>
 				<units>dmnl</units>
 			</aux>
 			<aux name="bio fuel secondary energy output" access="input">
@@ -5901,20 +5877,23 @@ Arbitrary unit of energy used to calculate the differentials of cost to produce 
 			<aux name="Solar Energy\nOutput Share">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<eqn>Solar_Energy_Output/Total_Energy_Output</eqn>
+				<eqn>Solar_Energy_Output[Run]/Total_Energy_Output</eqn>
 				<units>dmnl</units>
 			</aux>
 			<aux name="Wind Energy\nOutput Share">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<eqn>Wind_Energy_Output/Total_Energy_Output</eqn>
+				<eqn>Wind_Energy_Output[Run]/Total_Energy_Output</eqn>
 				<units>dmnl</units>
 			</aux>
 			<aux name="Population" access="input">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>{Enter equation for use when not hooked up to other models}</eqn>
 				<units>Mp</units>
@@ -5922,6 +5901,7 @@ Arbitrary unit of energy used to calculate the differentials of cost to produce 
 			<aux name="per person energy output">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>Total_Energy_Output/Population</eqn>
 				<units>MWh/(p*year)</units>
@@ -5975,7 +5955,7 @@ Arbitrary unit of energy used to calculate the differentials of cost to produce 
 				<isee:iframe color="black" background="white" text_align="left" vertical_text_align="top" font_size="12pt" border_width="thin" border_style="solid"/>
 				<isee:financial_table color="black" background="#E0E0E0" text_align="right" font_size="12pt" hide_border="false" auto_fit="true" first_column_width="250" other_column_width="100" header_font_style="normal" header_font_weight="bold" header_text_decoration="none" header_text_align="center" header_vertical_text_align="center" header_font_color="black" header_font_family="Arial" header_font_size="14pt" header_text_padding="2" header_text_border_color="black" header_text_border_width="thin" header_text_border_style="none"/>
 			</style>
-			<view isee:show_pages="false" background="white" page_width="1026" page_height="786" isee:page_cols="2" isee:page_rows="2" isee:scroll_y="64.1667" zoom="120" isee:popup_graphs_are_comparative="true" isee:enable_non_negative_highlights="false" type="stock_flow">
+			<view isee:show_pages="false" background="white" page_width="1027" page_height="787" isee:page_cols="2" isee:page_rows="2" isee:scroll_x="0.833333" isee:scroll_y="545.833" zoom="120" isee:popup_graphs_are_comparative="true" isee:enable_non_negative_highlights="false" type="stock_flow">
 				<style color="black" background="white" font_style="normal" font_weight="normal" text_decoration="none" text_align="center" vertical_text_align="center" font_color="black" font_family="Arial" font_size="10pt" padding="2" border_color="black" border_width="thin" border_style="none">
 					<stock color="blue" background="white" font_color="blue" font_size="11pt" label_side="top">
 						<shape type="rectangle" width="45" height="35"/>
@@ -6264,11 +6244,12 @@ Arbitrary unit of energy used to calculate the differentials of cost to produce 
 			<aux name="damage rate of energy\ncapital from STA" access="output" isee:autocreated="true">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<eqn>IF (switch_energy_damage = 0) AND TIME &gt; today THEN PREVIOUS
-(SELF,0 )ELSE
-(
-Slope_of_Capital_Damage_Function[Run,World]*(Surface_Temperature_Anomaly_1*UNIT_deg_C_to_dmnl)^Exponent_of_Capital_Damage_Function[Run,World])</eqn>
+				<eqn>IF (switch_energy_damage = 0) AND TIME &gt; todayTHEN PREVIOUS (
+SELF[Run,Region],0) ELSE(
+Slope_of_Capital_Damage_Function
+[Run,World]*(Surface_Temperature_Anomaly_1[Run]*UNIT_deg_C_to_dmnl)^Exponent_of_Capital_Damage_Function[Run,World])</eqn>
 				<units>1/year</units>
 			</aux>
 			<aux name="Slope of Capital Damage Function">
@@ -6361,7 +6342,7 @@ absolute guess</doc>
 				<isee:iframe color="black" background="white" text_align="left" vertical_text_align="top" font_size="12pt" border_width="thin" border_style="solid"/>
 				<isee:financial_table color="black" background="#E0E0E0" text_align="right" font_size="12pt" hide_border="false" auto_fit="true" first_column_width="250" other_column_width="100" header_font_style="normal" header_font_weight="bold" header_text_decoration="none" header_text_align="center" header_vertical_text_align="center" header_font_color="black" header_font_family="Arial" header_font_size="14pt" header_text_padding="2" header_text_border_color="black" header_text_border_width="thin" header_text_border_style="none"/>
 			</style>
-			<view isee:show_pages="false" background="white" page_width="1026" page_height="786" zoom="120" isee:popup_graphs_are_comparative="true" isee:enable_non_negative_highlights="false" type="stock_flow">
+			<view isee:show_pages="false" background="white" page_width="1027" page_height="787" zoom="120" isee:popup_graphs_are_comparative="true" isee:enable_non_negative_highlights="false" type="stock_flow">
 				<style color="black" background="white" font_style="normal" font_weight="normal" text_decoration="none" text_align="center" vertical_text_align="center" font_color="black" font_family="Arial" font_size="10pt" padding="2" border_color="black" border_width="thin" border_style="none">
 					<stock color="blue" background="white" font_color="blue" font_size="11pt" label_side="top">
 						<shape type="rectangle" width="45" height="35"/>
@@ -6439,11 +6420,12 @@ absolute guess</doc>
 			<aux name="effect of STA on river cooled thermal power\nenergy capacity efficiency" access="output" isee:autocreated="true">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<eqn>IF (switch_energy_damage = 0) AND TIME &gt; today THEN previous_effect_of_STA_on_thermal_power_energy_capacity_efficiency[Run,World]
-ELSE
+				<eqn>IF (switch_energy_damage = 0) AND TIME &gt; todayTHEN previous_effect_of_STA_on_thermal_power_energy_capacity_efficiency [Run,World]ELSE
 1
-+( effect_of_STA_on_river_cooled_thermal_powerplant_energy_capacity_efficiency_slope[selected_energy_supply_damages_case,World]*Surface_Temperature_Anomaly[Run]+effect_of_STA_on_river_cooled_thermal_power_energy_capacity_efficiency_quadratic[selected_energy_supply_damages_case,World]*Surface_Temperature_Anomaly[Run]^2)/100</eqn>
++
+(effect_of_STA_on_river_cooled_thermal_powerplant_energy_capacity_efficiency_slope [selected_energy_supply_damages_case[Run],World]*Surface_Temperature_Anomaly[Run]+effect_of_STA_on_river_cooled_thermal_power_energy_capacity_efficiency_quadratic[selected_energy_supply_damages_case[Run],World]*Surface_Temperature_Anomaly[Run]^2)/100</eqn>
 				<units>dmnl</units>
 			</aux>
 			<aux name="effect of STA on river cooled thermal powerplant\nenergy capacity\nefficiency slope">
@@ -6606,11 +6588,12 @@ ELSE
 			<aux name="effect of STA on hydropower\nenergy capacity efficiency" access="output" isee:autocreated="true">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<eqn>IF (switch_energy_damage = 0) AND TIME &gt; today THEN previous_effect_of_STA_on_hydropower_energy_capacity_efficiency[Run,World]
-ELSE
+				<eqn>IF (switch_energy_damage = 0) AND TIME &gt; todayTHEN previous_effect_of_STA_on_hydropower_energy_capacity_efficiency [Run,World]ELSE
 1
-+( effect_of_STA_on_hydropower_energy_capacity_efficiency_slope[selected_energy_supply_hydroelectric_damages_case,World]*Surface_Temperature_Anomaly[Run]+effect_of_STA_on_hydropower_energy_capacity_efficiency_quadratic[selected_energy_supply_hydroelectric_damages_case,World]*Surface_Temperature_Anomaly[Run]^2)/100</eqn>
++
+(effect_of_STA_on_hydropower_energy_capacity_efficiency_slope [selected_energy_supply_hydroelectric_damages_case[Run],World]*Surface_Temperature_Anomaly[Run]+effect_of_STA_on_hydropower_energy_capacity_efficiency_quadratic[selected_energy_supply_hydroelectric_damages_case[Run],World]*Surface_Temperature_Anomaly[Run]^2)/100</eqn>
 				<units>dmnl</units>
 			</aux>
 			<aux name="effect of STA on hydropower\nenergy capacity\nefficiency slope">
@@ -6772,7 +6755,7 @@ ELSE
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>PREVIOUS(effect_of_STA_on_river_cooled_thermal_power_energy_capacity_efficiency[Run], 1)</eqn>
+				<eqn>PREVIOUS(effect_of_STA_on_river_cooled_thermal_power_energy_capacity_efficiency[Run,Region], 1)</eqn>
 				<isee:delay_aux/>
 				<units>dmnl</units>
 			</aux>
@@ -6781,7 +6764,7 @@ ELSE
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>PREVIOUS(effect_of_STA_on_hydropower_energy_capacity_efficiency[Run], 1)</eqn>
+				<eqn>PREVIOUS(effect_of_STA_on_hydropower_energy_capacity_efficiency[Run,Region], 1)</eqn>
 				<isee:delay_aux/>
 				<units>dmnl</units>
 			</aux>
@@ -6852,7 +6835,7 @@ ELSE
 				<isee:iframe color="black" background="white" text_align="left" vertical_text_align="top" font_size="12pt" border_width="thin" border_style="solid"/>
 				<isee:financial_table color="black" background="#E0E0E0" text_align="right" font_size="12pt" hide_border="false" auto_fit="true" first_column_width="250" other_column_width="100" header_font_style="normal" header_font_weight="bold" header_text_decoration="none" header_text_align="center" header_vertical_text_align="center" header_font_color="black" header_font_family="Arial" header_font_size="14pt" header_text_padding="2" header_text_border_color="black" header_text_border_width="thin" header_text_border_style="none"/>
 			</style>
-			<view isee:show_pages="false" background="white" page_width="1026" page_height="786" isee:page_cols="2" isee:page_rows="2" isee:popup_graphs_are_comparative="true" isee:enable_non_negative_highlights="false" type="stock_flow">
+			<view isee:show_pages="false" background="white" page_width="1027" page_height="787" isee:page_cols="2" isee:page_rows="2" isee:popup_graphs_are_comparative="true" isee:enable_non_negative_highlights="false" type="stock_flow">
 				<style color="black" background="white" font_style="normal" font_weight="normal" text_decoration="none" text_align="center" vertical_text_align="center" font_color="black" font_family="Arial" font_size="10pt" padding="2" border_color="black" border_width="thin" border_style="none">
 					<stock color="blue" background="white" font_color="blue" font_size="11pt" label_side="top">
 						<shape type="rectangle" width="45" height="35"/>
@@ -8049,6 +8032,7 @@ following MIND 2004 paper: 0.3
 			<aux name="damage rate of energy\ncapital from STA" access="input">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>{Enter equation for use when not hooked up to other models}</eqn>
 				<units>1/year</units>
@@ -8214,7 +8198,7 @@ extra_CO2_storage_cost_burden[Run,World]</eqn>
 					<dim name="Region"/>
 				</dimensions>
 				<eqn>(share_of_thermal_power_cooled_by_rivers_in_secondary_fossil_energy[Region]*
-effect_of_STA_on_thermal_power_energy_capacity_efficiency[Run] + 
+effect_of_STA_on_thermal_power_energy_capacity_efficiency[Run,Region] + 
 (1-share_of_thermal_power_cooled_by_rivers_in_secondary_fossil_energy[Region]) *1)
 *
 LOGISTICBOUND(TFP_in_1980, TFP_Max, TIME, TFP_Max_Ramp_Year, TFP_Ramp_Speed, TFP_Slope_Start)</eqn>
@@ -8438,6 +8422,7 @@ ELSE
 			<aux name="effect of STA on thermal power\nenergy capacity efficiency" access="input">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>{Enter equation for use when not hooked up to other models}</eqn>
 				<units>dmnl</units>
@@ -8616,7 +8601,7 @@ ELSE
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>Fossil_Fuel_Extraction_Capital*damage_rate_of_energy_capital_from_STA[Run]</eqn>
+				<eqn>Fossil_Fuel_Extraction_Capital*damage_rate_of_energy_capital_from_STA[Run,Region]</eqn>
 				<units>c$/Year</units>
 			</aux>
 			<aux name="Desired Depreciation of Fuel\nExtraction Capital">
@@ -8681,7 +8666,7 @@ ELSE
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>Fossil_Energy_Capital*damage_rate_of_energy_capital_from_STA[Run]</eqn>
+				<eqn>Fossil_Energy_Capital*damage_rate_of_energy_capital_from_STA[Run,Region]</eqn>
 				<units>c$/Year</units>
 			</aux>
 			<aux name="Desired Depreciation of\nFossil Energy Capital">
@@ -10151,6 +10136,7 @@ following MIND 2004 paper: 0.3
 			<aux name="damage rate of energy\ncapital from STA" access="input">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>{Enter equation for use when not hooked up to other models}</eqn>
 				<units>1/year</units>
@@ -10316,7 +10302,7 @@ extra_CO2_storage_cost_burden[Run,World]</eqn>
 					<dim name="Region"/>
 				</dimensions>
 				<eqn>(share_of_thermal_power_cooled_by_rivers_in_secondary_fossil_energy[Region]*
-effect_of_STA_on_thermal_power_energy_capacity_efficiency[Run] + 
+effect_of_STA_on_thermal_power_energy_capacity_efficiency[Run,Region] + 
 (1-share_of_thermal_power_cooled_by_rivers_in_secondary_fossil_energy[Region]) *1)
 *
 LOGISTICBOUND(TFP_in_1980, TFP_Max, TIME, TFP_Max_Ramp_Year, TFP_Ramp_Speed, TFP_Slope_Start)</eqn>
@@ -10563,6 +10549,7 @@ specifies ~6623TWh/year electricity geenereation from oil. Calib data for second
 			<aux name="effect of STA on thermal power\nenergy capacity efficiency" access="input">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>{Enter equation for use when not hooked up to other models}</eqn>
 				<units>dmnl</units>
@@ -10720,7 +10707,7 @@ ELSE
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>Fossil_Fuel_Extraction_Capital*damage_rate_of_energy_capital_from_STA[Run]</eqn>
+				<eqn>Fossil_Fuel_Extraction_Capital*damage_rate_of_energy_capital_from_STA[Run,Region]</eqn>
 				<units>c$/Year</units>
 			</aux>
 			<aux name="Desired Depreciation of Fuel\nExtraction Capital">
@@ -10794,7 +10781,7 @@ ELSE
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>Fossil_Energy_Capital*damage_rate_of_energy_capital_from_STA[Run]</eqn>
+				<eqn>Fossil_Energy_Capital*damage_rate_of_energy_capital_from_STA[Run,Region]</eqn>
 				<units>c$/Year</units>
 			</aux>
 			<aux name="Desired Depreciation of\nFossil Energy Capital">
@@ -12220,6 +12207,7 @@ following MIND 2004 paper: 0.3
 			<aux name="damage rate of energy\ncapital from STA" access="input">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>{Enter equation for use when not hooked up to other models}</eqn>
 				<units>1/year</units>
@@ -12384,7 +12372,7 @@ extra_CO2_storage_cost_burden[Run,World]</eqn>
 					<dim name="Region"/>
 				</dimensions>
 				<eqn>(share_of_thermal_power_cooled_by_rivers_in_secondary_fossil_energy[Region]*
-effect_of_STA_on_thermal_power_energy_capacity_efficiency[Run] + 
+effect_of_STA_on_thermal_power_energy_capacity_efficiency[Run,Region] + 
 (1-share_of_thermal_power_cooled_by_rivers_in_secondary_fossil_energy[Region]) *1)
 *
 LOGISTICBOUND(TFP_in_1980, TFP_Max, TIME, TFP_Max_Ramp_Year, TFP_Ramp_Speed, TFP_Slope_Start)</eqn>
@@ -12632,6 +12620,7 @@ specifies ~800TWh/year electricity geenereation from oil. Calib data for seconda
 			<aux name="effect of STA on thermal power\nenergy capacity efficiency" access="input">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>{Enter equation for use when not hooked up to other models}</eqn>
 				<units>dmnl</units>
@@ -12829,7 +12818,7 @@ ELSE
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>Fossil_Fuel_Extraction_Capital*damage_rate_of_energy_capital_from_STA[Run]</eqn>
+				<eqn>Fossil_Fuel_Extraction_Capital*damage_rate_of_energy_capital_from_STA[Run,Region]</eqn>
 				<units>c$/Year</units>
 			</aux>
 			<aux name="Desired Depreciation of Fuel\nExtraction Capital">
@@ -12903,7 +12892,7 @@ ELSE
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>Fossil_Energy_Capital*damage_rate_of_energy_capital_from_STA[Run]</eqn>
+				<eqn>Fossil_Energy_Capital*damage_rate_of_energy_capital_from_STA[Run,Region]</eqn>
 				<units>c$/Year</units>
 			</aux>
 			<aux name="Desired Depreciation of\nFossil Energy Capital">
@@ -14077,7 +14066,7 @@ World Bank  2020 Minerals for climate action: The mineral intensity of the clean
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>(share_of_thermal_powerplants_that_are_cooled_by_rivers*effect_of_STA_on_thermal_power_energy_capacity_efficiency[Run]
+				<eqn>(share_of_thermal_powerplants_that_are_cooled_by_rivers*effect_of_STA_on_thermal_power_energy_capacity_efficiency[Run,Region]
 +
 (1-share_of_thermal_powerplants_that_are_cooled_by_rivers)*1
 )
@@ -14099,13 +14088,14 @@ baseline_nuclear_energy_capacity_efficiency</eqn>
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>Nuclear_Energy_Capacity*damage_rate_of_energy_capital_from_STA[Run]</eqn>
+				<eqn>Nuclear_Energy_Capacity*damage_rate_of_energy_capital_from_STA[Run,Region]</eqn>
 				<non_negative/>
 				<units>GW/Year</units>
 			</flow>
 			<aux name="damage rate of energy\ncapital from STA" access="input">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>{Enter equation for use when not hooked up to other models}</eqn>
 				<units>1/year</units>
@@ -14164,6 +14154,7 @@ tax_burden_on_installing_capacity[Run,World]</eqn>
 			<aux name="effect of STA on thermal power\nenergy capacity efficiency" access="input">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>{Enter equation for use when not hooked up to other models}</eqn>
 				<units>dmnl</units>
@@ -15177,13 +15168,14 @@ Default 5% rate</doc>
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>bio_fuel_production_Capacity*damage_rate_of_energy_capital_from_STA[Run]</eqn>
+				<eqn>bio_fuel_production_Capacity*damage_rate_of_energy_capital_from_STA[Run,Region]</eqn>
 				<non_negative/>
 				<units>Mt of fuel/year/Year</units>
 			</flow>
 			<aux name="damage rate of energy\ncapital from STA" access="input">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>{Enter equation for use when not hooked up to other models}</eqn>
 				<units>1/year</units>
@@ -16353,7 +16345,7 @@ IRENA 2012  Renewable Energy Technologies: Cost Analysis Series Volume 1: Power 
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>baseline_hydropower_energy_capacity_efficiency*effect_of_STA_on_hydropower_energy_capacity_efficiency[Run]</eqn>
+				<eqn>baseline_hydropower_energy_capacity_efficiency*effect_of_STA_on_hydropower_energy_capacity_efficiency[Run,Region]</eqn>
 				<units>(TWh/year)/GW</units>
 			</aux>
 			<aux name="Hydropower\nInstallation Costs">
@@ -16403,13 +16395,14 @@ Slope_of_Hydropower_Installation_Costs_wrt_Capacity*(Hydropower_Energy_Capacity/
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>Hydropower_Energy_Capacity*damage_rate_of_energy_capital_from_STA[Run]</eqn>
+				<eqn>Hydropower_Energy_Capacity*damage_rate_of_energy_capital_from_STA[Run,Region]</eqn>
 				<non_negative/>
 				<units>GW/Year</units>
 			</flow>
 			<aux name="damage rate of energy\ncapital from STA" access="input">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>{Enter equation for use when not hooked up to other models}</eqn>
 				<units>1/year</units>
@@ -16477,6 +16470,7 @@ tax_burden_on_installing_capacity[Run,World]</eqn>
 			<aux name="effect of STA on hydropower\nenergy capacity efficiency" access="input">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>{Enter equation for use when not hooked up to other models}</eqn>
 				<units>dmnl</units>
@@ -17120,7 +17114,7 @@ Solar_Energy_Capacity * gWh_to_TWh
 					<dim name="Renewable_Age_Group"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>damage_rate_of_energy_capital_from_STA[Run]</eqn>
+				<eqn>damage_rate_of_energy_capital_from_STA[Run,Region]</eqn>
 				<non_negative/>
 				<leak/>
 				<units>gW/Year</units>
@@ -17128,6 +17122,7 @@ Solar_Energy_Capacity * gWh_to_TWh
 			<aux name="damage rate of energy\ncapital from STA" access="input">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>{Enter equation for use when not hooked up to other models}</eqn>
 				<units>1/year</units>
@@ -17227,6 +17222,7 @@ ELSE
 			<aux name="Solar and Wind\nOutput Share" access="input">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>{Enter equation for use when not hooked up to other models}</eqn>
 				<units>dmnl</units>
@@ -17248,9 +17244,9 @@ These parameters are set so that the effect of having to build grid energy stora
 					<dim name="Region"/>
 				</dimensions>
 				<eqn>MAX(1, 
-1 + sensitivity_of_renewable_floor_costs_to_grid_storage_needs[Run,Region] * Solar_and_Wind_Output_Share[Run]
+1 + sensitivity_of_renewable_floor_costs_to_grid_storage_needs[Run,Region] * Solar_and_Wind_Output_Share[Run,Region]
 +
-sensitivity_of_renewable_floor_costs_to_grid_storage_needs_non_linear_part[Run,Region] * Solar_and_Wind_Output_Share[Run]^2)</eqn>
+sensitivity_of_renewable_floor_costs_to_grid_storage_needs_non_linear_part[Run,Region] * Solar_and_Wind_Output_Share[Run,Region]^2)</eqn>
 				<units>dmnl</units>
 			</aux>
 			<aux name="sensitivity of renewable floor costs to grid storage needs non linear part">
@@ -18018,7 +18014,7 @@ from MIND</doc>
 					<dim name="Renewable_Age_Group"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>damage_rate_of_energy_capital_from_STA[Run]</eqn>
+				<eqn>damage_rate_of_energy_capital_from_STA[Run,Region]</eqn>
 				<non_negative/>
 				<leak/>
 				<units>gW/Year</units>
@@ -18026,6 +18022,7 @@ from MIND</doc>
 			<aux name="damage rate of energy\ncapital from STA" access="input">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>{Enter equation for use when not hooked up to other models}</eqn>
 				<units>1/year</units>
@@ -18125,6 +18122,7 @@ ELSE
 			<aux name="Solar and Wind\nOutput Share" access="input">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>{Enter equation for use when not hooked up to other models}</eqn>
 				<units>dmnl</units>
@@ -18146,9 +18144,9 @@ These parameters are set so that the effect of having to build grid energy stora
 					<dim name="Region"/>
 				</dimensions>
 				<eqn>MAX(1, 
-1 + sensitivity_of_renewable_floor_costs_to_grid_storage_needs[Run,Region] * Solar_and_Wind_Output_Share[Run]
+1 + sensitivity_of_renewable_floor_costs_to_grid_storage_needs[Run,Region] * Solar_and_Wind_Output_Share[Run,Region]
 +
-sensitivity_of_renewable_floor_costs_to_grid_storage_needs_non_linear_part[Run,Region] * Solar_and_Wind_Output_Share[Run]^2)
+sensitivity_of_renewable_floor_costs_to_grid_storage_needs_non_linear_part[Run,Region] * Solar_and_Wind_Output_Share[Run,Region]^2)
 {sensitivity_of_renewable_floor_costs_to_grid_storage_needs*LN(energy_supply.Solar_and_Wind_Output_Share + 1) + 1</eqn>
 				<units>dmnl</units>
 			</aux>
@@ -18594,6 +18592,7 @@ Wind_Energy_Capacity * gWh_to_TWh
 </doc>
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>Total_Energy_Output/demand_for_energy_1</eqn>
 				<units>dmnl</units>
@@ -18601,6 +18600,7 @@ Wind_Energy_Capacity * gWh_to_TWh
 			<stock name="Cumulative Deviations of Energy Balance from 1">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>0</eqn>
 				<inflow>Deviations_from_one_in_Energy_Balance</inflow>
@@ -18610,14 +18610,16 @@ Wind_Energy_Capacity * gWh_to_TWh
 			<flow name="Deviations from one in Energy Balance">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<eqn>((1-Energy_Balance)^2)/DT</eqn>
+				<eqn>((1-Energy_Balance[Run,Region])^2)/DT</eqn>
 				<non_negative/>
 				<units>dmnl/year</units>
 			</flow>
 			<aux name="Total Energy Output" access="output" throughput="true">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>{Enter equation for use when not hooked up to other models}</eqn>
 				<units>TWh/Year</units>
@@ -18625,6 +18627,7 @@ Wind_Energy_Capacity * gWh_to_TWh
 			<stock name="Cumulative Energy Supply Missmatch">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>0</eqn>
 				<inflow>Energy_Supply_Missmatch</inflow>
@@ -18633,6 +18636,7 @@ Wind_Energy_Capacity * gWh_to_TWh
 			<flow name="Energy Supply\nMissmatch" access="output" isee:autocreated="true">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>Total_Energy_Output-demand_for_energy_1</eqn>
 				<units>TWh/Year</units>
@@ -18640,6 +18644,7 @@ Wind_Energy_Capacity * gWh_to_TWh
 			<aux name="Relative Energy\nSupply Missmatch" access="output" isee:autocreated="true">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>Energy_Supply_Missmatch/Total_Energy_Output</eqn>
 				<units>dmnl</units>
@@ -18647,6 +18652,7 @@ Wind_Energy_Capacity * gWh_to_TWh
 			<aux name="demand for energy 1" access="input">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>{Enter equation for use when not hooked up to other models}</eqn>
 				<units>TWh/year</units>
@@ -18700,7 +18706,7 @@ Wind_Energy_Capacity * gWh_to_TWh
 				<isee:iframe color="black" background="white" text_align="left" vertical_text_align="top" font_size="12pt" border_width="thin" border_style="solid"/>
 				<isee:financial_table color="black" background="#E0E0E0" text_align="right" font_size="12pt" hide_border="false" auto_fit="true" first_column_width="250" other_column_width="100" header_font_style="normal" header_font_weight="bold" header_text_decoration="none" header_text_align="center" header_vertical_text_align="center" header_font_color="black" header_font_family="Arial" header_font_size="14pt" header_text_padding="2" header_text_border_color="black" header_text_border_width="thin" header_text_border_style="none"/>
 			</style>
-			<view isee:show_pages="false" background="white" page_width="1026" page_height="786" isee:page_cols="2" isee:scroll_x="90.5556" zoom="180" isee:popup_graphs_are_comparative="true" isee:enable_non_negative_highlights="false" type="stock_flow">
+			<view isee:show_pages="false" background="white" page_width="1027" page_height="787" isee:page_cols="2" isee:scroll_x="308.333" isee:scroll_y="2.77778" zoom="180" isee:popup_graphs_are_comparative="true" isee:enable_non_negative_highlights="false" type="stock_flow">
 				<style color="black" background="white" font_style="normal" font_weight="normal" text_decoration="none" text_align="center" vertical_text_align="center" font_color="black" font_family="Arial" font_size="10pt" padding="2" border_color="black" border_width="thin" border_style="none">
 					<stock color="blue" background="white" font_color="blue" font_size="11pt" label_side="top">
 						<shape type="rectangle" width="45" height="35"/>
@@ -18779,10 +18785,10 @@ Wind_Energy_Capacity * gWh_to_TWh
 				<stacked_container uid="15" x="624.353" y="123.223" width="329.444" height="276.888">
 					<graph width="329.444" height="276.888" type="time_series" show_grid="false" isee:tick_type="none" include_units_in_legend="false" plot_numbers="false" isee:label_pie_slices="false" isee:show_pie_borders="true" num_x_grid_lines="0" num_y_grid_lines="0" num_x_labels="5" num_y_labels="3" isee:fill_intensity="0.1" isee:allow_zero_axis="true" left_axis_multi_scale="false" left_axis_auto_scale="true" left_include_units="true" right_axis_multi_scale="false" right_axis_auto_scale="true" right_include_units="true">
 						<plot color="blue" isee:keep_zero_visible="true" pen_width="1" index="0" show_y_axis="true">
-							<entity name="energy_supply.Total_Energy_Output[1]"/>
+							<entity name="energy_supply.Total_Energy_Output[1, World]"/>
 						</plot>
 						<plot color="fuchsia" isee:keep_zero_visible="true" pen_width="1" index="1" show_y_axis="true">
-							<entity name="energy_supply.Total_Energy_Output[1]"/>
+							<entity name="energy_supply.Total_Energy_Output[1, World]"/>
 						</plot>
 					</graph>
 				</stacked_container>

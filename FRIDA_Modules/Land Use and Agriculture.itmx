@@ -948,7 +948,7 @@ This isn&apos;t in the uncertainty analysis b/c it needs to be integrated with t
 				<connect to="Forest.young_forest_share" from="Land_Use.young_forest_share"/>
 				<connect2 to="Forest.young_forest_share" from="Land_Use.young_forest_share"/>
 			</module>
-			<module name="Biosphere\nIndicators" isee:label="" url="C:/Users/barbara.zimbres/FRIDA-Brasil/FRIDA_Modules/Biosphere Indicators.itmx">
+			<module name="Biosphere\nIndicators" isee:label="" url="C:/Users/cy/OneDrive/Documents/GitHub/FRIDA-Brasil/FRIDA_Modules/Biosphere Indicators.itmx">
 				<doc>This module contains quantifications of planetary boundaries (PBs). The PB framework emphasises the many different components of the Earth system that are strongly influenced by human activities. To quantify each PB, one or more control variables are selected, for which a safe operating space, a zone of increasing risk and a high risk zone are defined, delimited by the boundary value (transition from safe operating space to zone of increasing risk) and the high risk value (transition from zone of increasing risk to high risk zone), as defined in the module. Each PB is quantified in a separate sector within the module. For more details, consult the documentation of variables within the module.
 
 Reference: Eriksson, A. (n.d.). Using the FRIDA systems dynamics model to simulate planetary boundary interactions. In Prep.
@@ -1254,8 +1254,9 @@ Corresponding author: Axel Eriksson, ax3635er-s@student.lu.se or j.axel.e.erikss
 			<aux name="animal products balance" access="output" isee:autocreated="true">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<eqn>animal_products_production[Run,World]/livestock_demand</eqn>
+				<eqn>animal_products_production/livestock_demand</eqn>
 				<units>1</units>
 			</aux>
 			<flow name="change in grazing land\nanimal products yield">
@@ -1291,8 +1292,9 @@ Corresponding author: Axel Eriksson, ax3635er-s@student.lu.se or j.axel.e.erikss
 			<aux name="animal products balance\nwith reserves" access="output">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<eqn>animal_products_balance/(1+desired_animal_products_reserve_capacity[Run,World])</eqn>
+				<eqn>animal_products_balance/(1+desired_animal_products_reserve_capacity)</eqn>
 				<units>1</units>
 			</aux>
 			<aux name="desired animal products\nreserve capacity">
@@ -1331,6 +1333,7 @@ Calibration Parameter: forest land &amp; CO2 emissions from land cover change &a
 			<aux name="livestock demand" access="input">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>{Enter equation for use when not hooked up to other models}</eqn>
 				<units>PCal/Year</units>
@@ -1557,7 +1560,7 @@ average_animal_product_growth_efficiency[Run]</eqn>
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>MINSOFT(SMTH1(animal_products_balance[Run], averaging_time), maximum_effective_animal_products_balance[Region], tolerance_of_maximum_effective_animal_products_balance[Region])</eqn>
+				<eqn>MINSOFT(SMTH1(animal_products_balance[Run,Region], averaging_time), maximum_effective_animal_products_balance[Region], tolerance_of_maximum_effective_animal_products_balance[Region])</eqn>
 				<units>1</units>
 			</aux>
 			<aux name="averaging time">
@@ -1643,7 +1646,7 @@ Not in sensi analysis because this is so far outside the range of where calibrat
 				<isee:iframe color="black" background="white" text_align="left" vertical_text_align="top" font_size="12pt" border_width="thin" border_style="solid"/>
 				<isee:financial_table color="black" background="#E0E0E0" text_align="right" font_size="12pt" hide_border="false" auto_fit="true" first_column_width="250" other_column_width="100" header_font_style="normal" header_font_weight="bold" header_text_decoration="none" header_text_align="center" header_vertical_text_align="center" header_font_color="black" header_font_family="Arial" header_font_size="14pt" header_text_padding="2" header_text_border_color="black" header_text_border_width="thin" header_text_border_style="none"/>
 			</style>
-			<view isee:show_pages="false" background="white" page_width="1122" page_height="793" isee:page_cols="2" isee:page_rows="2" isee:scroll_y="196.667" zoom="120" isee:popup_graphs_are_comparative="true" isee:enable_non_negative_highlights="false" type="stock_flow">
+			<view isee:show_pages="false" background="white" page_width="1026" page_height="786" isee:page_cols="2" isee:page_rows="2" isee:scroll_x="529.167" isee:scroll_y="301.667" zoom="120" isee:popup_graphs_are_comparative="true" isee:enable_non_negative_highlights="false" type="stock_flow">
 				<style color="black" background="white" font_style="normal" font_weight="normal" text_decoration="none" text_align="center" vertical_text_align="center" font_color="black" font_family="Arial" font_size="10pt" padding="2" border_color="black" border_width="thin" border_style="none">
 					<stock color="blue" background="white" font_color="blue" font_size="11pt" label_side="top">
 						<shape type="rectangle" width="45" height="35"/>
@@ -3260,6 +3263,7 @@ crop_used_for_non_energy_other[Run,World]</eqn>
 			<aux name="Population" access="output" throughput="true">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>{Enter equation for use when not hooked up to other models}</eqn>
 				<units>Mp</units>
@@ -3269,8 +3273,9 @@ crop_used_for_non_energy_other[Run,World]</eqn>
 </doc>
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<eqn>Population*animal_products_demand_per_capita[Run,World]</eqn>
+				<eqn>Population[Run,Region]*animal_products_demand_per_capita[Run,World]</eqn>
 				<units>PCal/Year</units>
 			</aux>
 			<aux name="crop demand for food">
@@ -3280,7 +3285,7 @@ crop_used_for_non_energy_other[Run,World]</eqn>
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>direct_crop_demand_per_capita*Population[Run]</eqn>
+				<eqn>direct_crop_demand_per_capita*Population[Run,Region]</eqn>
 				<units>PCal/year</units>
 			</aux>
 			<aux name="food demand policy" access="input">
@@ -3321,7 +3326,7 @@ crop_used_for_non_energy_other[Run,World]</eqn>
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>SMTH1(real_GDP_per_person[Run], time_to_change_crop_demand_components[Run,Region])</eqn>
+				<eqn>SMTH1(real_GDP_per_person[Run,Region], time_to_change_crop_demand_components[Run,Region])</eqn>
 				<isee:delay_aux/>
 				<units>bc$/Mp/year</units>
 			</aux>
@@ -3440,7 +3445,7 @@ ELSE average_yearly_demand_per_capita[Run]</eqn>
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>1/actual_animal_product_growth_efficiency[Run] * animal_products_demand[Run]</eqn>
+				<eqn>1/actual_animal_product_growth_efficiency[Run] * animal_products_demand[Run,Region]</eqn>
 				<units>PCal/Year</units>
 			</aux>
 			<aux name="animal products calorie\nrequirements\nmet via grazing" access="output" isee:autocreated="true">
@@ -3502,6 +3507,7 @@ ELSE average_yearly_demand_per_capita[Run]</eqn>
 			<aux name="real GDP per person" access="output" throughput="true" isee:autocreated="true">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>{Enter equation for use when not hooked up to other models}</eqn>
 				<units>bc$/Mp/year</units>
@@ -3568,7 +3574,7 @@ ELSE average_yearly_demand_per_capita[Run]</eqn>
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>Population[Run]*Crops_used_for_Seed_or_Lost_per_capita</eqn>
+				<eqn>Population[Run,Region]*Crops_used_for_Seed_or_Lost_per_capita</eqn>
 				<units>PCal/year</units>
 			</aux>
 			<aux name="elasticity of crops used for\nseed or lost to GDP per person">
@@ -3656,7 +3662,7 @@ This is just for the GDP based demand counterfactual</doc>
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>crops_used_for_non_energy_other_per_capita*Population[Run]</eqn>
+				<eqn>crops_used_for_non_energy_other_per_capita*Population[Run,Region]</eqn>
 				<units>PCal/Year</units>
 			</aux>
 			<aux name="elasticity of crops used for non\nenergy other to GDP per person">
@@ -3751,6 +3757,7 @@ Calibration Parameter: fertilizer use &amp; crop production</doc>
 			<aux name="animal products balance" access="input">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>{Enter equation for use when not hooked up to other models}</eqn>
 				<units>1</units>
@@ -3832,7 +3839,7 @@ Calibration Parameter: fertilizer use &amp; crop production</doc>
 				<isee:iframe color="black" background="white" text_align="left" vertical_text_align="top" font_size="12pt" border_width="thin" border_style="solid"/>
 				<isee:financial_table color="black" background="#E0E0E0" text_align="right" font_size="12pt" hide_border="false" auto_fit="true" first_column_width="250" other_column_width="100" header_font_style="normal" header_font_weight="bold" header_text_decoration="none" header_text_align="center" header_vertical_text_align="center" header_font_color="black" header_font_family="Arial" header_font_size="14pt" header_text_padding="2" header_text_border_color="black" header_text_border_width="thin" header_text_border_style="none"/>
 			</style>
-			<view isee:show_pages="false" background="white" page_width="1122" page_height="793" isee:page_cols="2" isee:page_rows="3" zoom="80" isee:popup_graphs_are_comparative="true" isee:enable_non_negative_highlights="false" type="stock_flow">
+			<view isee:show_pages="false" background="white" page_width="1026" page_height="786" isee:page_cols="2" isee:page_rows="3" isee:scroll_x="393.75" isee:scroll_y="196.25" zoom="80" isee:popup_graphs_are_comparative="true" isee:enable_non_negative_highlights="false" type="stock_flow">
 				<style color="black" background="white" font_style="normal" font_weight="normal" text_decoration="none" text_align="center" vertical_text_align="center" font_color="black" font_family="Arial" font_size="10pt" padding="2" border_color="black" border_width="thin" border_style="none">
 					<stock color="blue" background="white" font_color="blue" font_size="11pt" label_side="top">
 						<shape type="rectangle" width="45" height="35"/>
@@ -5390,7 +5397,7 @@ Calibration Parameter: fertilizer use &amp; crop production</doc>
 				</dimensions>
 				<eqn>IF switch_non_agricultural_water_use_policy AND TIME &gt; start_year THEN on_agricultural_water_use_policy
 ELSE
-((real_GDP_per_person[Run]/INIT(real_GDP_per_person[Run]))^elasticity_of_non_agricultural_water_withdrawal_per_capita_to_GDP_per_person[Run,Region])*non_agricultural_water_withdrawal_1980[Run,Region]</eqn>
+((real_GDP_per_person[Run,Region]/INIT(real_GDP_per_person[Run,Region]))^elasticity_of_non_agricultural_water_withdrawal_per_capita_to_GDP_per_person[Run,Region])*non_agricultural_water_withdrawal_1980[Run,Region]</eqn>
 				<units>m^3/Mp/year</units>
 			</aux>
 			<aux name="non agricultural\nwater withdrawl">
@@ -5398,7 +5405,7 @@ ELSE
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>Population_1[Run]*non_agricultural_water_withdrawal_per_million_person</eqn>
+				<eqn>Population_1[Run,Region]*non_agricultural_water_withdrawal_per_million_person</eqn>
 				<units>m^3/year</units>
 			</aux>
 			<flow name="natural water\nrecharge flow">
@@ -5628,6 +5635,7 @@ Old value from calibration: 164600402563.243</doc>
 			<aux name="Population 1" access="input">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>{Enter equation for use when not hooked up to other models}</eqn>
 				<units>Mp</units>
@@ -5849,6 +5857,7 @@ ELSE
 			<aux name="real GDP per person" access="input">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>{Enter equation for use when not hooked up to other models}</eqn>
 				<units>bc$/Mp/year</units>
@@ -5862,7 +5871,7 @@ ELSE
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>SMTH1(real_GDP_per_person[Run]/INIT(real_GDP_per_person[Run]), time_for_GDP_to_impact_irrigation[Run,Region], initial_average_relative_real_gdp_per_person[Run,Region])</eqn>
+				<eqn>SMTH1(real_GDP_per_person[Run,Region]/INIT(real_GDP_per_person[Run,Region]), time_for_GDP_to_impact_irrigation[Run,Region], initial_average_relative_real_gdp_per_person[Run,Region])</eqn>
 				<isee:delay_aux/>
 				<units>dmnl</units>
 			</aux>
@@ -7810,7 +7819,7 @@ Calibration Parameter: forest land &amp; CO2 emissions from land cover change &a
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>1+sensitivity_of_effect_of_animal_products_balance_on_grassland_expansion_rate*(livestock_balance_with_reserves[Run]-1)</eqn>
+				<eqn>1+sensitivity_of_effect_of_animal_products_balance_on_grassland_expansion_rate*(livestock_balance_with_reserves[Run,Region]-1)</eqn>
 				<units>dmnl</units>
 			</aux>
 			<aux name="sensitivity of effect of animal products\nbalance on grassland\nexpansion rate">
@@ -7832,6 +7841,7 @@ Calibration Parameter: forest land &amp; CO2 emissions from land cover change &a
 			<aux name="livestock balance\nwith reserves" access="input">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>{Enter equation for use when not hooked up to other models}</eqn>
 				<units>1</units>
