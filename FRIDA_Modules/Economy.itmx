@@ -884,7 +884,7 @@
 				<connect to="Innovation.Firms_Checking_Accounts_1" from="Circular_Flow.Firms_Checking_Accounts"/>
 				<connect2 to="Innovation.Firms_Checking_Accounts_1" from="Circular_Flow.Firms_Checking_Accounts"/>
 			</module>
-			<module name="Sea level rise Impacts\nand Adaptation" isee:label="" url="C:/Users/barbara.zimbres/FRIDA-Brasil/FRIDA_Modules/Sea level rise Impacts and Adaptation.itmx">
+			<module name="Sea level rise Impacts\nand Adaptation" isee:label="" url="C:/Users/cy/OneDrive/Documents/GitHub/FRIDA-Brasil/FRIDA_Modules/Sea level rise Impacts and Adaptation.itmx">
 				<format scale_by="auto"/>
 				<connect to="Sea_level_rise_Impacts_and_Adaptation.No_SLR_adaptation_strategy" from="Government_Regulations.No_SLR_adaptation_strategy"/>
 				<connect2 to="Sea_level_rise_Impacts_and_Adaptation.No_SLR_adaptation_strategy" from="Government_Regulations.No_SLR_adaptation_strategy"/>
@@ -7145,7 +7145,7 @@ furthermore. The structure that was previously decided on had the productivity g
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>(Good_Loans[Run,Region] - good_loan_defaults_from_from_interest*DT ) /loan_maturation_time[Run,World]</eqn>
+				<eqn>(Good_Loans - good_loan_defaults_from_from_interest*DT ) /loan_maturation_time</eqn>
 				<non_negative/>
 				<units>b$/year</units>
 			</flow>
@@ -7172,7 +7172,7 @@ furthermore. The structure that was previously decided on had the productivity g
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>initial_good_loans[Run,World]</eqn>
+				<eqn>initial_good_loans</eqn>
 				<inflow>good_investments</inflow>
 				<inflow>converting_to_good_because_of_reduced_interest_rates</inflow>
 				<outflow>loans_turning_safe</outflow>
@@ -7185,7 +7185,7 @@ furthermore. The structure that was previously decided on had the productivity g
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>initial_bad_loans[Run,World]</eqn>
+				<eqn>initial_bad_loans</eqn>
 				<inflow>bad_investments</inflow>
 				<outflow>defaults</outflow>
 				<outflow>converting_to_good_because_of_reduced_interest_rates</outflow>
@@ -7198,8 +7198,8 @@ furthermore. The structure that was previously decided on had the productivity g
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>(Initial_safe_assets[Run,World]-initial_government_debt[Run,Region])
-- (Initial_safe_assets[Run,World]-initial_government_debt[Run,Region]) * initial_fraction_of_safe_loans_financing_innovation[Run,World]- (Initial_safe_assets[Run,World]-initial_government_debt[Run,Region]) * initial_fraction_of_safe_loans_that_are_exploratory[Run,World]
+				<eqn>(Initial_safe_assets-initial_government_debt)
+- (Initial_safe_assets-initial_government_debt) * initial_fraction_of_safe_loans_financing_innovation- (Initial_safe_assets-initial_government_debt) * initial_fraction_of_safe_loans_that_are_exploratory
 
 
 {(Initial_safe_assets-Government.initial_government_debt)*(1-initial_fraction_of_safe_loans_that_will_fail)*(1-initial_fraction_of_safe_loans_that_are_exploratory)</eqn>
@@ -7663,7 +7663,7 @@ furthermore. The structure that was previously decided on had the productivity g
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>(Initial_safe_assets[Run,World]-initial_government_debt[Run,Region])*initial_fraction_of_safe_loans_that_are_exploratory[Run,World]</eqn>
+				<eqn>(Initial_safe_assets-initial_government_debt[Run,Region])*initial_fraction_of_safe_loans_that_are_exploratory</eqn>
 				<inflow>exploratory_bank_investment</inflow>
 				<outflow>exploratory_loan_failure</outflow>
 				<outflow>exploratory_loan_defaults_from_from_interest</outflow>
@@ -7877,7 +7877,7 @@ furthermore. The structure that was previously decided on had the productivity g
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>effect_investment_and_GDP_difference_on_bank_exploration[Run,Region]*(max_bank_exploration_orientation[World]-Bank_Exploration_Orientation[Run,Region])/max_bank_exploration_orientation[World]</eqn>
+				<eqn>effect_investment_and_GDP_difference_on_bank_exploration*(max_bank_exploration_orientation[Region]-Bank_Exploration_Orientation)/max_bank_exploration_orientation[Region]</eqn>
 				<non_negative/>
 				<units>1/year</units>
 			</flow>
@@ -7992,7 +7992,7 @@ furthermore. The structure that was previously decided on had the productivity g
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>government_bailout_assets_to_liabilities_threshold[Run,World]-assets_to_liability_ratio[Run,Region]</eqn>
+				<eqn>government_bailout_assets_to_liabilities_threshold-assets_to_liability_ratio</eqn>
 				<units>dmnl</units>
 			</aux>
 			<aux name="effect profit decline\non bank exploration">
@@ -8982,7 +8982,7 @@ To control extreme policy only</doc>
 				<isee:iframe color="black" background="white" text_align="left" vertical_text_align="top" font_size="12pt" border_width="thin" border_style="solid"/>
 				<isee:financial_table color="black" background="#E0E0E0" text_align="right" font_size="12pt" hide_border="false" auto_fit="true" first_column_width="250" other_column_width="100" header_font_style="normal" header_font_weight="bold" header_text_decoration="none" header_text_align="center" header_vertical_text_align="center" header_font_color="black" header_font_family="Arial" header_font_size="14pt" header_text_padding="2" header_text_border_color="black" header_text_border_width="thin" header_text_border_style="none"/>
 			</style>
-			<view isee:show_pages="false" background="white" page_width="1026" page_height="786" isee:page_cols="6" isee:page_rows="9" isee:scroll_x="2735" isee:scroll_y="1127.14" zoom="140" isee:popup_graphs_are_comparative="true" isee:enable_non_negative_highlights="false" type="stock_flow">
+			<view isee:show_pages="false" background="white" page_width="1368" page_height="1048" isee:page_cols="6" isee:page_rows="9" isee:scroll_x="1000" isee:scroll_y="1729.29" zoom="140" isee:popup_graphs_are_comparative="true" isee:enable_non_negative_highlights="false" type="stock_flow">
 				<style color="black" background="white" font_style="normal" font_weight="normal" text_decoration="none" text_align="center" vertical_text_align="center" font_color="black" font_family="Arial" font_size="10pt" padding="2" border_color="black" border_width="thin" border_style="none">
 					<stock color="blue" background="white" font_color="blue" font_size="11pt" label_side="top">
 						<shape type="rectangle" width="45" height="35"/>
