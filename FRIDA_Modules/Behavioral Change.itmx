@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xmile version="1.0" xmlns="http://docs.oasis-open.org/xmile/ns/XMILE/v1.0" xmlns:isee="http://iseesystems.com/XMILE">
 	<header>
-		<smile version="1.0" namespace="std, isee" uses_arrays="2" uses_submodels=""/>
+		<smile version="1.0" namespace="std, isee" uses_arrays="3" uses_submodels=""/>
 		<name>Behavioral Change</name>
 		<uuid>6b3172a7-ef66-4feb-8f28-f439698b1c18</uuid>
 		<vendor>isee systems, inc.</vendor>
@@ -503,7 +503,7 @@
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>total_yearly_consumption/Population_1[Run]/UNIT_days_per_year[Region]/UNIT_p_per_Mp[Region]*UNIT_cal_per_pcal[Region]</eqn>
+				<eqn>total_yearly_consumption/Population_1[Run,Region]/UNIT_days_per_year[Region]/UNIT_p_per_Mp[Region]*UNIT_cal_per_pcal[Region]</eqn>
 				<units>kcal/person/day</units>
 			</aux>
 			<stock name="Perceived Average\nConsumption">
@@ -768,6 +768,7 @@ Calibration Parameter: fertilizer use &amp; crop production</doc>
 			<aux name="Population 1" access="input">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>{Enter equation for use when not hooked up to other models}</eqn>
 				<units>Mp</units>
@@ -1012,7 +1013,7 @@ Calibration Parameter: fertilizer use &amp; crop production</doc>
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>average_yearly_demand_per_capita[Run]*Population_1[Run]</eqn>
+				<eqn>average_yearly_demand_per_capita[Run]*Population_1[Run,Region]</eqn>
 				<units>PCal/Year</units>
 			</aux>
 			<aux name="average daily\ndemand per capita">
@@ -1073,7 +1074,7 @@ Calibration Parameter: fertilizer use &amp; crop production</doc>
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>real_GDP_per_person_1[Run]*&quot;UNIT_c$_per_billion_c$&quot;[Region]/UNIT_p_per_Mp[Region]</eqn>
+				<eqn>real_GDP_per_person_1[Run,Region]*&quot;UNIT_c$_per_billion_c$&quot;[Region]/UNIT_p_per_Mp[Region]</eqn>
 				<units>c$/person/year</units>
 			</aux>
 			<aux name="relative GDP per person">
@@ -1095,6 +1096,7 @@ Calibration Parameter: fertilizer use &amp; crop production</doc>
 			<aux name="real GDP per person 1" access="input">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>{Enter equation for use when not hooked up to other models}</eqn>
 				<units>bc$/Mp/year</units>
@@ -1878,11 +1880,12 @@ Calibration Parameter: fertilizer use &amp; crop production</doc>
 			<aux name="Perceived Temperature Anomaly">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<eqn>IF (switch_behavioral_impact =0) AND TIME &gt; today THEN PREVIOUS
-(SELF,Surface_Temperature_Anomaly )ELSE
-SMTH3
-(Surface_Temperature_Anomaly,time_to_report_and_perceive_climate_information[Run,World] ,Surface_Temperature_Anomaly )</eqn>
+				<eqn>IF (switch_behavioral_impact =0) AND TIME &gt; today THEN PREVIOUS (
+SELF[Run,Region],Surface_Temperature_Anomaly[Run]) ELSE SMTH3
+(
+Surface_Temperature_Anomaly[Run],time_to_report_and_perceive_climate_information[Run,World], Surface_Temperature_Anomaly[Run])</eqn>
 				<isee:delay_aux/>
 				<units>deg C</units>
 			</aux>
@@ -1907,7 +1910,7 @@ SMTH3
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>Perceived_Temperature_Anomaly[Run]</eqn>
+				<eqn>Perceived_Temperature_Anomaly[Run,Region]</eqn>
 				<inflow>updating_reference_temperature_anomaly</inflow>
 				<units>deg C</units>
 			</stock>
@@ -1916,7 +1919,7 @@ SMTH3
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>(Perceived_Temperature_Anomaly[Run]-Reference_Temperature_Anomaly)/time_horizon_of_reference_temperature_anomaly</eqn>
+				<eqn>(Perceived_Temperature_Anomaly[Run,Region]-Reference_Temperature_Anomaly)/time_horizon_of_reference_temperature_anomaly</eqn>
 				<units>deg C/Year</units>
 			</flow>
 			<aux name="additional time horizon of reference\ntemperature anomaly">
@@ -1944,10 +1947,10 @@ normal_additional_time_horizon_of_reference_temperature_anomaly</eqn>
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>IF (switch_behavioral_impact =0) AND TIME &gt; today THEN PREVIOUS
-(SELF,0 )ELSE
-(
-Climate_indices_with_record_breaking_exposure_per_person_per_year[Run]-Perceived_Climate_Extremes_Exposure)/time_to_perceive_climate_extremes_exposure</eqn>
+				<eqn>IF (switch_behavioral_impact =0) AND TIME &gt; today THEN PREVIOUS (
+SELF,0) ELSE(
+Climate_indices_with_record_breaking_exposure_per_person_per_year
+[Run]-Perceived_Climate_Extremes_Exposure)/time_to_perceive_climate_extremes_exposure</eqn>
 				<units>Indices/person/year/Year</units>
 			</flow>
 			<stock name="Reference Climate\nExtremes Exposure">
@@ -2005,7 +2008,7 @@ Climate_indices_with_record_breaking_exposure_per_person_per_year[Run]-Perceived
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>Perceived_Temperature_Anomaly[Run]/Reference_Temperature_Anomaly</eqn>
+				<eqn>Perceived_Temperature_Anomaly[Run,Region]/Reference_Temperature_Anomaly</eqn>
 				<units>dmnl</units>
 			</aux>
 			<aux name="relative perceived\nclimate extremes exposure">
@@ -2108,6 +2111,7 @@ relative_perceived_SLR_exposure)^sensitivity_to_climatic_events_exposure[Run,Wor
 				<dimensions>
 					<dim name="Run"/>
 					<dim name="Coastal_Protection_level"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>{Enter equation for use when not hooked up to other models}</eqn>
 				<units>Mp/year</units>
@@ -2117,7 +2121,7 @@ relative_perceived_SLR_exposure)^sensitivity_to_climatic_events_exposure[Run,Wor
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>SUM(Number_of_people_flooded_annually_in_storm_surges[Run,*])</eqn>
+				<eqn>SUM(Number_of_people_flooded_annually_in_storm_surges[Run,*,Region])</eqn>
 				<units>Mp/year</units>
 			</aux>
 			<stock name="Perceived SLR\nFlooding Exposure">
@@ -2134,10 +2138,10 @@ relative_perceived_SLR_exposure)^sensitivity_to_climatic_events_exposure[Run,Wor
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>IF ( switch_behavioral_impact =0 OR switch_sea_level_rise_climate_risk_perception=0)  AND TIME &gt; today THEN PREVIOUS
-(SELF,0 )ELSE
-(
-total_people_flooded_annually_from_sea_level_rise-Perceived_SLR_Flooding_Exposure)/time_to_perceive_SLR_flooding_exposure</eqn>
+				<eqn>IF ( switch_behavioral_impact =0 OR switch_sea_level_rise_climate_risk_perception=0)  AND TIME &gt; today THEN PREVIOUS (
+SELF,0) ELSE(
+total_people_flooded_annually_from_sea_level_rise
+-Perceived_SLR_Flooding_Exposure)/time_to_perceive_SLR_flooding_exposure</eqn>
 				<units>Mp/year/Year</units>
 			</flow>
 			<stock name="Reference SLR\nFlooding Exposure">
@@ -2377,7 +2381,7 @@ Magalhães SdS, Miranda DK, Miranda DMd, Malloy-Diniz LF, Romano-Silva MA (2018)
 				<isee:iframe color="black" background="white" text_align="left" vertical_text_align="top" font_size="12pt" border_width="thin" border_style="solid"/>
 				<isee:financial_table color="black" background="#E0E0E0" text_align="right" font_size="12pt" hide_border="false" auto_fit="true" first_column_width="250" other_column_width="100" header_font_style="normal" header_font_weight="bold" header_text_decoration="none" header_text_align="center" header_vertical_text_align="center" header_font_color="black" header_font_family="Arial" header_font_size="14pt" header_text_padding="2" header_text_border_color="black" header_text_border_width="thin" header_text_border_style="none"/>
 			</style>
-			<view isee:show_pages="false" background="white" page_width="1122" page_height="793" isee:page_cols="3" isee:page_rows="3" zoom="80" isee:popup_graphs_are_comparative="true" isee:enable_non_negative_highlights="false" type="stock_flow">
+			<view isee:show_pages="false" background="white" page_width="1027" page_height="787" isee:page_cols="3" isee:page_rows="3" isee:scroll_y="381.25" zoom="80" isee:popup_graphs_are_comparative="true" isee:enable_non_negative_highlights="false" type="stock_flow">
 				<style color="black" background="white" font_style="normal" font_weight="normal" text_decoration="none" text_align="center" vertical_text_align="center" font_color="black" font_family="Arial" font_size="10pt" padding="2" border_color="black" border_width="thin" border_style="none">
 					<stock color="blue" background="white" font_color="blue" font_size="11pt" label_side="top">
 						<shape type="rectangle" width="45" height="35"/>
@@ -2786,9 +2790,6 @@ Magalhães SdS, Miranda DK, Miranda DMd, Malloy-Diniz LF, Romano-Silva MA (2018)
 			<aux name="UNIT cal per pcal">
 				<doc>${Unit}
 </doc>
-				<dimensions>
-					<dim name="Region"/>
-				</dimensions>
 				<eqn>1000000000000</eqn>
 				<units>KCal/PCal</units>
 			</aux>
@@ -2797,24 +2798,18 @@ Magalhães SdS, Miranda DK, Miranda DMd, Malloy-Diniz LF, Romano-Silva MA (2018)
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>average_daily_demand_per_capita[Run]*UNIT_days_per_year[Region]*UNIT_p_per_Mp[Region]/UNIT_cal_per_pcal[Region]</eqn>
+				<eqn>average_daily_demand_per_capita[Run]*UNIT_days_per_year*UNIT_p_per_Mp/UNIT_cal_per_pcal</eqn>
 				<units>PCal/Mp/Year</units>
 			</aux>
 			<aux name="UNIT days per year">
 				<doc>${Unit}
 </doc>
-				<dimensions>
-					<dim name="Region"/>
-				</dimensions>
 				<eqn>365</eqn>
 				<units>days/year</units>
 			</aux>
 			<aux name="UNIT p per Mp">
 				<doc>${Unit}
 </doc>
-				<dimensions>
-					<dim name="Region"/>
-				</dimensions>
 				<eqn>1000000</eqn>
 				<units>person/Mp</units>
 			</aux>
@@ -2840,8 +2835,9 @@ Magalhães SdS, Miranda DK, Miranda DMd, Malloy-Diniz LF, Romano-Silva MA (2018)
 			<aux name="average daily\nconsumption per capita">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<eqn>total_yearly_consumption[Run,World]/Population_1/UNIT_days_per_year[World]/UNIT_p_per_Mp[World]*UNIT_cal_per_pcal[World]</eqn>
+				<eqn>total_yearly_consumption/Population_1/UNIT_days_per_year/UNIT_p_per_Mp*UNIT_cal_per_pcal</eqn>
 				<units>kcal/person/day</units>
 			</aux>
 			<stock name="Perceived Average\nConsumption">
@@ -2849,7 +2845,7 @@ Magalhães SdS, Miranda DK, Miranda DMd, Malloy-Diniz LF, Romano-Silva MA (2018)
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>average_daily_consumption_per_capita[Run]</eqn>
+				<eqn>average_daily_consumption_per_capita[Run,Region]</eqn>
 				<inflow>updating_perceived_consumption</inflow>
 				<units>kcal/person/day</units>
 			</stock>
@@ -2858,7 +2854,7 @@ Magalhães SdS, Miranda DK, Miranda DMd, Malloy-Diniz LF, Romano-Silva MA (2018)
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>(average_daily_consumption_per_capita[Run]-Perceived_Average_Consumption)/time_to_perceive_average_consumption</eqn>
+				<eqn>(average_daily_consumption_per_capita[Run,Region]-Perceived_Average_Consumption)/time_to_perceive_average_consumption</eqn>
 				<units>kcal/person/day/Year</units>
 			</flow>
 			<aux name="time to perceive\naverage consumption">
@@ -3053,7 +3049,7 @@ Planetary health diet from EAT Lancet https://www.thelancet.com/journals/lancet/
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>average_daily_consumption_per_capita[Run]/healthy_reference_daily_consumption_per_capita[Region]</eqn>
+				<eqn>average_daily_consumption_per_capita[Run,Region]/healthy_reference_daily_consumption_per_capita[Region]</eqn>
 				<units>dmnl</units>
 			</aux>
 			<aux name="perceived\nconsumption risk">
@@ -3100,6 +3096,7 @@ Calibration Parameter: fertilizer use &amp; crop production</doc>
 			<aux name="Population 1" access="input">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>{Enter equation for use when not hooked up to other models}</eqn>
 				<units>Mp</units>
@@ -3301,7 +3298,7 @@ Calibration Parameter: fertilizer use &amp; crop production</doc>
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>average_yearly_demand_per_capita*Population_1[Run]</eqn>
+				<eqn>average_yearly_demand_per_capita*Population_1[Run,Region]</eqn>
 				<units>PCal/Year</units>
 			</aux>
 			<aux name="average daily\ndemand per capita" access="output" isee:autocreated="true">
@@ -3345,6 +3342,7 @@ Calibration Parameter: fertilizer use &amp; crop production</doc>
 			<aux name="real GDP per person 1" access="output" throughput="true" isee:autocreated="true">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>{Enter equation for use when not hooked up to other models}</eqn>
 				<units>bc$/Mp/year</units>
@@ -3373,7 +3371,7 @@ Calibration Parameter: fertilizer use &amp; crop production</doc>
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>real_GDP_per_person_1[Run]*&quot;UNIT_c$_per_billion_c$&quot;[Region]/UNIT_p_per_Mp[Region]</eqn>
+				<eqn>real_GDP_per_person_1[Run,Region]*&quot;UNIT_c$_per_billion_c$&quot;[Region]/UNIT_p_per_Mp</eqn>
 				<units>c$/person/year</units>
 			</aux>
 			<aux name="reference GDP per person\nfor socioeconomic effect">
@@ -3552,7 +3550,7 @@ Calibration Parameter: fertilizer use &amp; crop production</doc>
 				<isee:iframe color="black" background="white" text_align="left" vertical_text_align="top" font_size="12pt" border_width="thin" border_style="solid"/>
 				<isee:financial_table color="black" background="#E0E0E0" text_align="right" font_size="12pt" hide_border="false" auto_fit="true" first_column_width="250" other_column_width="100" header_font_style="normal" header_font_weight="bold" header_text_decoration="none" header_text_align="center" header_vertical_text_align="center" header_font_color="black" header_font_family="Arial" header_font_size="14pt" header_text_padding="2" header_text_border_color="black" header_text_border_width="thin" header_text_border_style="none"/>
 			</style>
-			<view isee:show_pages="false" background="white" page_width="1122" page_height="793" isee:page_cols="3" isee:page_rows="3" zoom="60" isee:popup_graphs_are_comparative="true" isee:enable_non_negative_highlights="false" type="stock_flow">
+			<view isee:show_pages="false" background="white" page_width="1026" page_height="786" isee:page_cols="3" isee:page_rows="3" isee:scroll_x="731.667" isee:scroll_y="110" zoom="120" isee:popup_graphs_are_comparative="true" isee:enable_non_negative_highlights="false" type="stock_flow">
 				<style color="black" background="white" font_style="normal" font_weight="normal" text_decoration="none" text_align="center" vertical_text_align="center" font_color="black" font_family="Arial" font_size="10pt" padding="2" border_color="black" border_width="thin" border_style="none">
 					<stock color="blue" background="white" font_color="blue" font_size="11pt" label_side="top">
 						<shape type="rectangle" width="45" height="35"/>

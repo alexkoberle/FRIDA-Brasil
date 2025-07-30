@@ -381,6 +381,7 @@ Proto E, Rustichini A. 2013. A reassessment of the relationship between GDP and 
 			<aux name="population growth rate" access="output" isee:autocreated="true">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>birth_rate[Run, World]-death_rate[Run, World]</eqn>
 				<units>1/year</units>
@@ -390,7 +391,7 @@ Proto E, Rustichini A. 2013. A reassessment of the relationship between GDP and 
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>Births/Population[Run]</eqn>
+				<eqn>Births/Population[Run,Region]</eqn>
 				<units>1/year</units>
 			</aux>
 			<aux name="death rate">
@@ -398,7 +399,7 @@ Proto E, Rustichini A. 2013. A reassessment of the relationship between GDP and 
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>total_deaths/Population[Run]</eqn>
+				<eqn>total_deaths/Population[Run,Region]</eqn>
 				<units>1/year</units>
 			</aux>
 			<stock name="Aged 1 to 20 years" access="output" isee:autocreated="true">
@@ -422,7 +423,7 @@ Proto E, Rustichini A. 2013. A reassessment of the relationship between GDP and 
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>(Population[Run]-working_age_population)/working_age_population</eqn>
+				<eqn>(Population[Run,Region]-working_age_population)/working_age_population</eqn>
 				<units>1</units>
 			</aux>
 			<flow name="deaths\n1 to 20 years" access="output">
@@ -961,8 +962,9 @@ Cohort lengths for Conveyors</doc>
 </doc>
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<eqn>Aged_0_years[Run, World] + Aged_1_to_20_years[Run, World] + Aged_20_to_40_years[Run, World] + Aged_40_to_60_years[Run, World] + Aged_60_to_65_years[Run, World] + Aged_65_to_75_years[Run, World] + Aged_Over_75_years[Run, World]</eqn>
+				<eqn>Aged_0_years + Aged_1_to_20_years + Aged_20_to_40_years + Aged_40_to_60_years + Aged_60_to_65_years + Aged_65_to_75_years + Aged_Over_75_years</eqn>
 				<isee:summing/>
 				<units>Mp</units>
 			</aux>
@@ -1015,7 +1017,7 @@ Calibration Parameter: fertility</doc>
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>real_GDP_per_person[Run]/INIT(real_GDP_per_person[Run])</eqn>
+				<eqn>real_GDP_per_person[Run,Region]/INIT(real_GDP_per_person[Run,Region])</eqn>
 				<units>1</units>
 			</aux>
 			<aux name="sensitivity of fertility\nto inverse\nGDP per person">
@@ -1342,7 +1344,7 @@ initial_fertility+effect_of_GDP_on_change_in_fertility+effect_of_literacy_on_cha
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>real_GDP_per_person[Run]*&quot;UNIT_c$_per_bc$&quot;[Region]/UNIT_p_per_mp[Region]</eqn>
+				<eqn>real_GDP_per_person[Run,Region]*&quot;UNIT_c$_per_bc$&quot;[Region]/UNIT_p_per_mp[Region]</eqn>
 				<units>c$/person/year</units>
 			</aux>
 			<aux name="UNIT c$ per bc$">
@@ -1758,10 +1760,10 @@ DOI: https://doi.org/10.1038/s41598-021-99156-5. </doc>
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>IF (switch_demography_damage= 0 )AND TIME &gt; today THEN PREVIOUS (
-SELF[Run,Region],1) ELSE 1
-+
-( &quot;Factor_for_hot_mortality_0-65&quot; [Region]*Temperature_impact_on_hot_mortality+&quot;Factor_for_cold_mortality_0-65&quot; [ Region]*Temperature_impact_on_cold_mortality)</eqn>
+				<eqn>IF (switch_demography_damage= 0 )AND TIME &gt; today THEN PREVIOUS ( SELF
+[Run,Region],1)ELSE 1 +
+(
+&quot;Factor_for_hot_mortality_0-65&quot; [ Region]*Temperature_impact_on_hot_mortality+&quot;Factor_for_cold_mortality_0-65&quot;[ Region ]*Temperature_impact_on_cold_mortality)</eqn>
 				<units>dmnl</units>
 			</aux>
 			<aux name="Factor for cold\nmortality 0-65">
@@ -1824,10 +1826,10 @@ Factor for scaling the temperature effects for a given population cohort. Values
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>IF (switch_demography_damage= 0 )AND TIME &gt; today THEN PREVIOUS (
-SELF[Run,Region],1) ELSE 1
-+
-( &quot;Factor_for_hot_mortality_65-75&quot; [Region]*Temperature_impact_on_hot_mortality+&quot;Factor_for_cold_mortality_65-75&quot; [ Region]*Temperature_impact_on_cold_mortality)</eqn>
+				<eqn>IF (switch_demography_damage= 0 )AND TIME &gt; today THEN PREVIOUS ( SELF
+[Run,Region],1)ELSE 1 +
+(
+&quot;Factor_for_hot_mortality_65-75&quot; [ Region]*Temperature_impact_on_hot_mortality+&quot;Factor_for_cold_mortality_65-75&quot;[ Region ]*Temperature_impact_on_cold_mortality)</eqn>
 				<units>dmnl</units>
 			</aux>
 			<aux name="Effect of Temperature on\nmortality 75 plus">
@@ -1836,10 +1838,10 @@ SELF[Run,Region],1) ELSE 1
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>IF (switch_demography_damage= 0 )AND TIME &gt; today THEN PREVIOUS (
-SELF[Run,Region],1) ELSE 1
-+
-( Factor_for_hot_mortality_75_plus [Region]*Temperature_impact_on_hot_mortality+Factor_for_cold_mortality_75_plus [ Region]*Temperature_impact_on_cold_mortality)</eqn>
+				<eqn>IF (switch_demography_damage= 0 )AND TIME &gt; today THEN PREVIOUS ( SELF
+[Run,Region],1)ELSE 1 +
+(
+Factor_for_hot_mortality_75_plus [ Region]*Temperature_impact_on_hot_mortality+Factor_for_cold_mortality_75_plus[ Region ]*Temperature_impact_on_cold_mortality)</eqn>
 				<units>dmnl</units>
 			</aux>
 			<aux name="60-65 cohort length">
@@ -1990,6 +1992,7 @@ Miladinov, G. 2020. Socioeconomic development and life expectancy relationship: 
 			<aux name="Real GDP in 2021c$" access="output" throughput="true" isee:autocreated="true">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>{Enter equation for use when not hooked up to other models}</eqn>
 				<units>bc$/year</units>
@@ -1999,8 +2002,9 @@ Miladinov, G. 2020. Socioeconomic development and life expectancy relationship: 
 </doc>
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<eqn>&quot;Real_GDP_in_2021c$&quot;[Run]/Population[Run]</eqn>
+				<eqn>&quot;Real_GDP_in_2021c$&quot;[Run,Region]/Population</eqn>
 				<units>bc$/Mp/year</units>
 			</aux>
 			<aux name="Nominal GDP" access="input">
@@ -2017,7 +2021,7 @@ Miladinov, G. 2020. Socioeconomic development and life expectancy relationship: 
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>Nominal_GDP[Run]/Population[Run]</eqn>
+				<eqn>Nominal_GDP[Run]/Population[Run,Region]</eqn>
 				<units>b$/Mp/year</units>
 			</aux>
 			<aux name="today" access="input">
@@ -2174,7 +2178,7 @@ Miladinov, G. 2020. Socioeconomic development and life expectancy relationship: 
 				<isee:iframe color="black" background="white" text_align="left" vertical_text_align="top" font_size="12pt" border_width="thin" border_style="solid"/>
 				<isee:financial_table color="black" background="#E0E0E0" text_align="right" font_size="12pt" hide_border="false" auto_fit="true" first_column_width="250" other_column_width="100" header_font_style="normal" header_font_weight="bold" header_text_decoration="none" header_text_align="center" header_vertical_text_align="center" header_font_color="black" header_font_family="Arial" header_font_size="14pt" header_text_padding="2" header_text_border_color="black" header_text_border_width="thin" header_text_border_style="none"/>
 			</style>
-			<view isee:show_pages="false" background="white" page_width="1027" page_height="787" isee:page_cols="4" isee:page_rows="5" isee:scroll_x="1357.5" isee:scroll_y="1977.5" zoom="80" isee:popup_graphs_are_comparative="true" isee:enable_non_negative_highlights="false" type="stock_flow">
+			<view isee:show_pages="false" background="white" page_width="1027" page_height="787" isee:page_cols="4" isee:page_rows="5" isee:scroll_x="1208.75" isee:scroll_y="1687.5" zoom="80" isee:popup_graphs_are_comparative="true" isee:enable_non_negative_highlights="false" type="stock_flow">
 				<style color="black" background="white" font_style="normal" font_weight="normal" text_decoration="none" text_align="center" vertical_text_align="center" font_color="black" font_family="Arial" font_size="10pt" padding="2" border_color="black" border_width="thin" border_style="none">
 					<stock color="blue" background="white" font_color="blue" font_size="12.51pt" label_side="top">
 						<shape type="rectangle" width="45" height="35"/>
