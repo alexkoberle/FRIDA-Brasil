@@ -1606,8 +1606,7 @@ SMTH1((net_worker_income[Run,Region]*desired_savings_as_multiple_of_wages[Run,Wo
 					<dim name="Region"/>
 				</dimensions>
 				<eqn>gross_owner_income
--rent_tax[Run, Region]
--profit_tax[Run,  Region]</eqn>
+-rent_tax-profit_tax[Run,  Region]</eqn>
 				<units>b$/year</units>
 			</aux>
 			<aux name="government\nconsumption" access="input">
@@ -4840,7 +4839,7 @@ UNIT_percent [World]* (Temperature_effect_on_low_exposure_productivity[Run,World
 					<dim name="Region"/>
 				</dimensions>
 				<eqn>MAX(0, 
-share_of_employment_in_agriculture_intercept[Run, World]+
+share_of_employment_in_agriculture_intercept+
 EXP(share_of_employment_in_agriculture_slope[Run,World]*real_GDP_per_person[Run,Region])
 )</eqn>
 				<units>dmnl</units>
@@ -5404,7 +5403,7 @@ Fractional exposure levels to temperature for service related labour. Assumption
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>MIN(Unemployed[Run]*max_fraction_hireable[World]+firing, desired_additional_hires*effect_of_labour_supply_on_hiring^sensitivity_of_hiring_to_unemployment_rate[Run, World])</eqn>
+				<eqn>MIN(Unemployed[Run]*max_fraction_hireable[World]+firing, desired_additional_hires*effect_of_labour_supply_on_hiring^sensitivity_of_hiring_to_unemployment_rate)</eqn>
 				<units>Mp/year</units>
 			</aux>
 			<aux name="firing">
@@ -14245,7 +14244,7 @@ In massive inflation spikes prevents the government from not doing any consumpti
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>INFLATION_IMPACT_GROWTH_RATE(crop_production[Run, World], 1, initial_crop_supply_growth_rate[Run,World])</eqn>
+				<eqn>INFLATION_IMPACT_GROWTH_RATE(crop_production, 1, initial_crop_supply_growth_rate[Run,World])</eqn>
 				<units>dmnl/year</units>
 			</aux>
 			<aux name="initial crop supply\ngrowth rate">
@@ -14307,7 +14306,7 @@ In massive inflation spikes prevents the government from not doing any consumpti
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>INFLATION_IMPACT_GROWTH_RATE(animal_products_production[Run, World], 1, initial_animal_products_production_growth_rate[Run,World])</eqn>
+				<eqn>INFLATION_IMPACT_GROWTH_RATE(animal_products_production, 1, initial_animal_products_production_growth_rate[Run,World])</eqn>
 				<units>dmnl/year</units>
 			</aux>
 			<aux name="initial animal\nproducts production\ngrowth rate">
