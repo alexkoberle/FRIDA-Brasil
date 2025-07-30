@@ -3624,6 +3624,7 @@ adjusted_cost[Run,Coal_fuel_extraction,World] * Coal_Gross_Investments_in_Fossil
 			<aux name="expenditure on subsidies for investments in\nbio fuel energy capacity" access="input">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>{Enter equation for use when not hooked up to other models}</eqn>
 				<units>c$/Year</units>
@@ -3685,6 +3686,7 @@ adjusted_cost[Run,Coal_fuel_extraction,World] * Coal_Gross_Investments_in_Fossil
 			<aux name="tax revenue on investments in\nbio fuel energy capacity" access="input">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>{Enter equation for use when not hooked up to other models}</eqn>
 				<units>c$/Year</units>
@@ -3749,7 +3751,7 @@ adjusted_cost[Run,Coal_fuel_extraction,World] * Coal_Gross_Investments_in_Fossil
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>expenditure_on_subsidies_for_investments_in_bio_fuel_energy_capacity[Run] + tax_revenue_on_investments_in_bio_fuel_energy_capacity[Run] + Gross_Investments_in_Biofuel_Capacity[Run]</eqn>
+				<eqn>expenditure_on_subsidies_for_investments_in_bio_fuel_energy_capacity[Run,Region] + tax_revenue_on_investments_in_bio_fuel_energy_capacity[Run,Region] + Gross_Investments_in_Biofuel_Capacity[Run]</eqn>
 				<units>c$/Year</units>
 			</aux>
 			<aux name="Net Investments in\nNuclear Capacity">
@@ -15676,8 +15678,9 @@ ELSE
 			<aux name="tax rate" access="output" isee:autocreated="true">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<eqn>(CO2e_tax_burden_of_extra_energy_output_through_fuel_extraction_per_unit[Run,World]+SO2_tax_burden_of_extra_energy_output_through_fuel_extraction_per_unit+fuel_extraction_installation_tax_burden[Run,World])/Cost_of_Extra_Energy_Output_through_bio_fuel_production_capacity_per_Unit[Run,World]</eqn>
+				<eqn>(CO2e_tax_burden_of_extra_energy_output_through_fuel_extraction_per_unit+SO2_tax_burden_of_extra_energy_output_through_fuel_extraction_per_unit[Run]+fuel_extraction_installation_tax_burden)/Cost_of_Extra_Energy_Output_through_bio_fuel_production_capacity_per_Unit</eqn>
 				<units>dmnl</units>
 			</aux>
 			<aux name="fuel extraction installation tax burden">
@@ -15771,7 +15774,7 @@ ELSE
 				<isee:iframe color="black" background="white" text_align="left" vertical_text_align="top" font_size="12pt" border_width="thin" border_style="solid"/>
 				<isee:financial_table color="black" background="#E0E0E0" text_align="right" font_size="12pt" hide_border="false" auto_fit="true" first_column_width="250" other_column_width="100" header_font_style="normal" header_font_weight="bold" header_text_decoration="none" header_text_align="center" header_vertical_text_align="center" header_font_color="black" header_font_family="Arial" header_font_size="14pt" header_text_padding="2" header_text_border_color="black" header_text_border_width="thin" header_text_border_style="none"/>
 			</style>
-			<view isee:show_pages="false" background="white" page_width="1026" page_height="786" isee:page_cols="3" isee:page_rows="3" isee:popup_graphs_are_comparative="true" isee:enable_non_negative_highlights="false" type="stock_flow">
+			<view isee:show_pages="false" background="white" page_width="1027" page_height="787" isee:page_cols="3" isee:page_rows="3" isee:scroll_x="400" isee:scroll_y="867" isee:popup_graphs_are_comparative="true" isee:enable_non_negative_highlights="false" type="stock_flow">
 				<style color="black" background="white" font_style="normal" font_weight="normal" text_decoration="none" text_align="center" vertical_text_align="center" font_color="black" font_family="Arial" font_size="10pt" padding="2" border_color="black" border_width="thin" border_style="none">
 					<stock color="blue" background="white" font_color="blue" font_size="11pt" label_side="top">
 						<shape type="rectangle" width="45" height="35"/>

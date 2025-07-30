@@ -2010,6 +2010,7 @@ Miladinov, G. 2020. Socioeconomic development and life expectancy relationship: 
 			<aux name="Nominal GDP" access="input">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>{Enter equation for use when not hooked up to other models}</eqn>
 				<units>b$/year</units>
@@ -2021,7 +2022,7 @@ Miladinov, G. 2020. Socioeconomic development and life expectancy relationship: 
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>Nominal_GDP[Run]/Population[Run,Region]</eqn>
+				<eqn>Nominal_GDP[Run,Region]/Population[Run,Region]</eqn>
 				<units>b$/Mp/year</units>
 			</aux>
 			<aux name="today" access="input">
