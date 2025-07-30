@@ -1272,7 +1272,7 @@
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>initial_owner_savings[Run,World]</eqn>
+				<eqn>initial_owner_savings[Run,Region]</eqn>
 				<inflow>non_bank_profits</inflow>
 				<inflow>owner_savings_interest</inflow>
 				<inflow>bank_profits</inflow>
@@ -1309,7 +1309,7 @@
 				</dimensions>
 				<eqn>{SMTH1((net_owner_income*desired_savings_as_multiple_of_profits); time_to_consider_desired_savings)}
 
-SMTH1(net_owner_income[Run,Region]*desired_savings_as_multiple_of_profits[Run,World], time_to_consider_desired_savings[Run,World])</eqn>
+SMTH1(net_owner_income[Run,Region]*desired_savings_as_multiple_of_profits[Run,Region], time_to_consider_desired_savings[Run,Region])</eqn>
 				<isee:delay_aux/>
 				<units>b$</units>
 			</aux>
@@ -1340,7 +1340,7 @@ SMTH1(net_owner_income[Run,Region]*desired_savings_as_multiple_of_profits[Run,Wo
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>owner_savings_goal_shortfall[Run,Region]/time_to_reach_savings_goal[Run,World]</eqn>
+				<eqn>owner_savings_goal_shortfall[Run,Region]/time_to_reach_savings_goal[Run,Region]</eqn>
 				<units>b$/year</units>
 			</aux>
 			<aux name="minimum\nfraction of income\nto consumption">
@@ -1390,7 +1390,7 @@ SMTH1(net_owner_income[Run,Region]*desired_savings_as_multiple_of_profits[Run,Wo
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>worker_savings_goal_shortfall[Run,Region]/time_to_reach_savings_goal[Run,World]</eqn>
+				<eqn>worker_savings_goal_shortfall[Run,Region]/time_to_reach_savings_goal[Run,Region]</eqn>
 				<units>b$/year</units>
 			</aux>
 			<aux name="worker savings\ngoal shortfall">
@@ -1408,7 +1408,7 @@ SMTH1(net_owner_income[Run,Region]*desired_savings_as_multiple_of_profits[Run,Wo
 				</dimensions>
 				<eqn>{SMTH1((net_worker_income*desired_savings_as_multiple_of_wages); time_to_consider_desired_savings)}
 
-SMTH1((net_worker_income[Run,Region]*desired_savings_as_multiple_of_wages[Run,World]), time_to_consider_desired_savings[Run,World])</eqn>
+SMTH1((net_worker_income[Run,Region]*desired_savings_as_multiple_of_wages[Run,Region]), time_to_consider_desired_savings[Run,Region])</eqn>
 				<isee:delay_aux/>
 				<units>b$</units>
 			</aux>
@@ -1708,8 +1708,8 @@ SMTH1((net_worker_income[Run,Region]*desired_savings_as_multiple_of_wages[Run,Wo
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>MAX(net_owner_income[Run,Region]*minimum_fraction_of_income_to_consumption[Run,World],
-net_owner_income[Run,Region]*fraction_of_owner_income_to_consumption[Run,World]-annual_owner_savings_to_reach_goal[Run,Region])</eqn>
+				<eqn>MAX(net_owner_income[Run,Region]*minimum_fraction_of_income_to_consumption[Run,Region],
+net_owner_income[Run,Region]*fraction_of_owner_income_to_consumption[Run,Region]-annual_owner_savings_to_reach_goal[Run,Region])</eqn>
 				<units>b$/year</units>
 			</aux>
 			<aux name="actual owner\nconsumption">
@@ -1743,8 +1743,8 @@ net_owner_income[Run,Region]*fraction_of_owner_income_to_consumption[Run,World]-
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>MAX(net_worker_income*minimum_fraction_of_income_to_consumption[Run,World],
-net_worker_income*fraction_of_income_to_consumption[Run,World]-annual_worker_savings_to_reach_goal)</eqn>
+				<eqn>MAX(net_worker_income*minimum_fraction_of_income_to_consumption[Run,Region],
+net_worker_income*fraction_of_income_to_consumption[Run,Region]-annual_worker_savings_to_reach_goal)</eqn>
 				<units>b$/year</units>
 			</aux>
 			<aux name="actual percentage of worker income to consumption">
@@ -1791,7 +1791,7 @@ net_worker_income*fraction_of_income_to_consumption[Run,World]-annual_worker_sav
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>Inflation_Rate[Run,Region]*time_for_inflation_to_change_consumption[Run,World]</eqn>
+				<eqn>Inflation_Rate[Run,Region]*time_for_inflation_to_change_consumption[Run,Region]</eqn>
 				<units>dmnl</units>
 			</aux>
 			<aux name="time for inflation to change\nconsumption">
@@ -1817,7 +1817,7 @@ net_worker_income*fraction_of_income_to_consumption[Run,World]-annual_worker_sav
 				<dimensions>
 					<dim name="Run"/>
 				</dimensions>
-				<eqn>Firms_cash_inflow[Run,World]-firms_cash_outflow[Run,World]</eqn>
+				<eqn>Firms_cash_inflow[Run,Region]-firms_cash_outflow[Run,Region]</eqn>
 				<units>b$/year</units>
 			</aux>
 			<aux name="firms cash outflow">
@@ -1935,7 +1935,7 @@ Assuming no one is migrating in 1980 b/c of SLR</doc>
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>IF TIME &gt; start_year AND switch_tax_policy = 1 THEN wage_tax_rate[Run,World] + RAMP((wage_tax_policy-wage_tax_rate[Run,World])/time_to_implement_wage_tax_policy, start_year, start_year+ time_to_implement_wage_tax_policy) ELSE wage_tax_rate[Run,World]</eqn>
+				<eqn>IF TIME &gt; start_year AND switch_tax_policy = 1 THEN wage_tax_rate[Run,Region] + RAMP((wage_tax_policy-wage_tax_rate[Run,Region])/time_to_implement_wage_tax_policy, start_year, start_year+ time_to_implement_wage_tax_policy) ELSE wage_tax_rate[Run,Region]</eqn>
 				<units>dmnl</units>
 			</aux>
 			<aux name="switch tax policy" access="input">
@@ -1951,7 +1951,7 @@ Assuming no one is migrating in 1980 b/c of SLR</doc>
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>IF TIME &gt; profit_tax_policy_start_year AND switch_profit_tax_policy = 1 THEN profit_tax_rate[Run,World] + RAMP((profit_tax_rate_policy-profit_tax_rate[Run,World])/time_to_implement_profit_tax_policy, profit_tax_policy_start_year, profit_tax_policy_start_year+ time_to_implement_profit_tax_policy) ELSE profit_tax_rate[Run,World]</eqn>
+				<eqn>IF TIME &gt; profit_tax_policy_start_year AND switch_profit_tax_policy = 1 THEN profit_tax_rate[Run,Region] + RAMP((profit_tax_rate_policy-profit_tax_rate[Run,Region])/time_to_implement_profit_tax_policy, profit_tax_policy_start_year, profit_tax_policy_start_year+ time_to_implement_profit_tax_policy) ELSE profit_tax_rate[Run,Region]</eqn>
 				<units>dmnl</units>
 			</aux>
 			<aux name="profit tax rate">
@@ -2210,7 +2210,7 @@ Assuming no one is migrating in 1980 b/c of SLR</doc>
 				<dimensions>
 					<dim name="Run"/>
 				</dimensions>
-				<eqn>net_owner_income[Run,World]+net_worker_income[Run,World]</eqn>
+				<eqn>net_owner_income[Run,Region]+net_worker_income[Run,Region]</eqn>
 				<units>b$/year</units>
 			</aux>
 			<aux name="worker share of net income">
@@ -2218,7 +2218,7 @@ Assuming no one is migrating in 1980 b/c of SLR</doc>
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>net_worker_income[Run,Region]/net_income[Run]*UNIT_Percent[World]</eqn>
+				<eqn>net_worker_income[Run,Region]/net_income[Run]*UNIT_Percent[Region]</eqn>
 				<units>%</units>
 			</aux>
 			<aux name="UNIT Percent" access="input">
@@ -2280,7 +2280,7 @@ Assuming no one is migrating in 1980 b/c of SLR</doc>
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>SMTH1(normal_bottom_40_wages[Run,World]*effect_of_productivity_growth_on_bottom_40_share_of_wages[Run,Region], time_for_bottom_40_to_be_affected[Run,World])</eqn>
+				<eqn>SMTH1(normal_bottom_40_wages[Run,Region]*effect_of_productivity_growth_on_bottom_40_share_of_wages[Run,Region], time_for_bottom_40_to_be_affected[Run,Region])</eqn>
 				<isee:delay_aux/>
 				<units>dmnl</units>
 			</aux>
@@ -2343,7 +2343,7 @@ Assuming no one is migrating in 1980 b/c of SLR</doc>
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>LOGISTICBOUND(yfrom[Run,World], yto[Run,World], relative_productivity_growth[Run,Region], xmiddle[Run,World],xspeed[Run,World],  xstart[Run,World], xfinish[Run,World])</eqn>
+				<eqn>LOGISTICBOUND(yfrom[Run,Region], yto[Run,Region], relative_productivity_growth[Run,Region], xmiddle[Run,Region],xspeed[Run,Region],  xstart[Run,Region], xfinish[Run,Region])</eqn>
 				<units>dmnl</units>
 			</aux>
 			<aux name="yfrom">
@@ -2426,7 +2426,7 @@ Assuming no one is migrating in 1980 b/c of SLR</doc>
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>Population_1[Run,Region]*UNIT_forty_percent[World]</eqn>
+				<eqn>Population_1[Run,Region]*UNIT_forty_percent[Region]</eqn>
 				<units>Mp</units>
 			</aux>
 			<aux name="bottom 40 income\nper capita">
@@ -2434,7 +2434,7 @@ Assuming no one is migrating in 1980 b/c of SLR</doc>
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>(bottom_40_income[Run,Region]*UNIT_dollars_per_billion[World]/forty_percent_of_population[Run,Region])/UNIT_persons_per_million_people[World]</eqn>
+				<eqn>(bottom_40_income[Run,Region]*UNIT_dollars_per_billion[Region]/forty_percent_of_population[Run,Region])/UNIT_persons_per_million_people[Region]</eqn>
 				<units>c$/person/year</units>
 			</aux>
 			<aux name="growth rates of income per capita\namong the bottom 40 per cent\nof the total population">
@@ -3988,7 +3988,7 @@ Assuming no one is migrating in 1980 b/c of SLR</doc>
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>AGECOUNT(Aged_1_to_20_years[Run,World], 14, 15)</eqn>
+				<eqn>AGECOUNT(Aged_1_to_20_years[Run,Region], 14, 15)</eqn>
 				<units>Mp</units>
 			</aux>
 			<aux name="Initial Wage Rate">
@@ -4012,7 +4012,7 @@ Assuming no one is migrating in 1980 b/c of SLR</doc>
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>firing[Run,World]</eqn>
+				<eqn>firing[Run,Region]</eqn>
 				<non_negative/>
 				<units>Mp/year</units>
 			</flow>
@@ -4029,7 +4029,7 @@ Assuming no one is migrating in 1980 b/c of SLR</doc>
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>hiring[Run,World]
+				<eqn>hiring[Run,Region]
 {desired_additional_hires*effect_of_labour_balance_on_hiring</eqn>
 				<non_negative/>
 				<units>Mp/year</units>
@@ -4039,7 +4039,7 @@ Assuming no one is migrating in 1980 b/c of SLR</doc>
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>aging_out[Run,World]*percentage_of_working_age_that_are_employed[Run,World]/UNIT_one_year</eqn>
+				<eqn>aging_out[Run,Region]*percentage_of_working_age_that_are_employed[Run,Region]/UNIT_one_year</eqn>
 				<non_negative/>
 				<units>Mp/year</units>
 			</flow>
@@ -4048,7 +4048,7 @@ Assuming no one is migrating in 1980 b/c of SLR</doc>
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>working_age_deaths[Run,World]*percentage_of_working_age_that_are_employed[Run,World]</eqn>
+				<eqn>working_age_deaths[Run,Region]*percentage_of_working_age_that_are_employed[Run,Region]</eqn>
 				<non_negative/>
 				<units>Mp/year</units>
 			</flow>
@@ -4056,7 +4056,7 @@ Assuming no one is migrating in 1980 b/c of SLR</doc>
 				<dimensions>
 					<dim name="Run"/>
 				</dimensions>
-				<eqn>working_age_deaths[Run,World]*percentage_of_working_age_that_are_unemployed[Run,World]</eqn>
+				<eqn>working_age_deaths[Run,Region]*percentage_of_working_age_that_are_unemployed[Run,Region]</eqn>
 				<non_negative/>
 				<units>Mp/year</units>
 			</flow>
@@ -4090,7 +4090,7 @@ https://rshiny.ilo.org/dataexplorer15/?id=EMP_2EMP_SEX_AGE_NB_A&amp;ref_area=X01
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>private_safe_bank_assets[Run]*average_private_debt_safe_interest[Run,Region]*profit_threshold_multiplier[Run,World]</eqn>
+				<eqn>private_safe_bank_assets[Run]*average_private_debt_safe_interest[Run,Region]*profit_threshold_multiplier[Run,Region]</eqn>
 				<units>b$/year</units>
 			</aux>
 			<aux name="missed\nprofits">
@@ -4106,7 +4106,7 @@ https://rshiny.ilo.org/dataexplorer15/?id=EMP_2EMP_SEX_AGE_NB_A&amp;ref_area=X01
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>SMTH1(MAX(0, (missed_profits[Run,Region]/wage_rate_in_billions_per_million_people[Run,Region])*effect_of_missed_profits), time_to_fire_from_missed_profits[Run,World])</eqn>
+				<eqn>SMTH1(MAX(0, (missed_profits[Run,Region]/wage_rate_in_billions_per_million_people[Run,Region])*effect_of_missed_profits), time_to_fire_from_missed_profits[Run,Region])</eqn>
 				<isee:delay_aux/>
 				<units>Mp/year</units>
 			</aux>
@@ -4115,7 +4115,7 @@ https://rshiny.ilo.org/dataexplorer15/?id=EMP_2EMP_SEX_AGE_NB_A&amp;ref_area=X01
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>SMTH1(total_defaults[Run,Region]*hiring_to_investment_ratio[Run,World]/wage_rate_in_billions_per_million_people[Run,Region], time_for_defaults_to_affect_firing[Run,World])</eqn>
+				<eqn>SMTH1(total_defaults[Run,Region]*hiring_to_investment_ratio[Run,Region]/wage_rate_in_billions_per_million_people[Run,Region], time_for_defaults_to_affect_firing[Run,Region])</eqn>
 				<units>Mp/year</units>
 			</aux>
 			<aux name="UNIT dollars per billion">
@@ -4132,7 +4132,7 @@ https://rshiny.ilo.org/dataexplorer15/?id=EMP_2EMP_SEX_AGE_NB_A&amp;ref_area=X01
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>Wage_Rate[Run,Region]/UNIT_dollars_per_billion[World]*UNIT_persons_per_million_people[World]</eqn>
+				<eqn>Wage_Rate[Run,Region]/UNIT_dollars_per_billion[Region]*UNIT_persons_per_million_people[Region]</eqn>
 				<units>B$/Mp</units>
 			</aux>
 			<aux name="desired\nadditional hires">
@@ -4140,7 +4140,7 @@ https://rshiny.ilo.org/dataexplorer15/?id=EMP_2EMP_SEX_AGE_NB_A&amp;ref_area=X01
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>(planned_investment[Run,Region]*hiring_to_investment_ratio[Run,World])/wage_rate_in_billions_per_million_people[Run,Region]</eqn>
+				<eqn>(planned_investment[Run,Region]*hiring_to_investment_ratio[Run,Region])/wage_rate_in_billions_per_million_people[Run,Region]</eqn>
 				<units>Mp/year</units>
 			</aux>
 			<aux name="UNIT one year">
@@ -4170,7 +4170,7 @@ https://rshiny.ilo.org/dataexplorer15/?id=EMP_2EMP_SEX_AGE_NB_A&amp;ref_area=X01
 				<dimensions>
 					<dim name="Run"/>
 				</dimensions>
-				<eqn>aging_out[Run,World]*percentage_of_working_age_that_are_unemployed[Run,World]/UNIT_one_year</eqn>
+				<eqn>aging_out[Run,Region]*percentage_of_working_age_that_are_unemployed[Run,Region]/UNIT_one_year</eqn>
 				<non_negative/>
 				<units>Mp/year</units>
 			</flow>
@@ -4178,7 +4178,7 @@ https://rshiny.ilo.org/dataexplorer15/?id=EMP_2EMP_SEX_AGE_NB_A&amp;ref_area=X01
 				<dimensions>
 					<dim name="Run"/>
 				</dimensions>
-				<eqn>aging_in[Run,World]*labour_force_participation_rate[Run]/UNIT_one_year</eqn>
+				<eqn>aging_in[Run,Region]*labour_force_participation_rate[Run]/UNIT_one_year</eqn>
 				<non_negative/>
 				<units>Mp/year</units>
 			</flow>
@@ -4188,7 +4188,7 @@ https://rshiny.ilo.org/dataexplorer16/?id=UNE_2UNE_SEX_AGE_NB_A&amp;ref_area=X01
 				<dimensions>
 					<dim name="Run"/>
 				</dimensions>
-				<eqn>(working_age_population[Run,World]-non_active_working_age[Run,World])*initial_unemployment_rate[Run,World]</eqn>
+				<eqn>(working_age_population[Run,Region]-non_active_working_age[Run,Region])*initial_unemployment_rate[Run,Region]</eqn>
 				<inflow>employment_decline</inflow>
 				<inflow>new_labour_force_entrants</inflow>
 				<inflow>Seeking_work</inflow>
@@ -4202,7 +4202,7 @@ https://rshiny.ilo.org/dataexplorer16/?id=UNE_2UNE_SEX_AGE_NB_A&amp;ref_area=X01
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>max_change_in_fractional_wage_growth[Run,World]*effect_of_labour_balance_on_fractional_wage_growth_rate[Run,Region]
+				<eqn>max_change_in_fractional_wage_growth[Run,Region]*effect_of_labour_balance_on_fractional_wage_growth_rate[Run,Region]
 
 {(max_change_in_fractional_wage_growth*effect_of_labour_balance_on_fractional_wage_growth_rate)</eqn>
 				<units>dmnl/year</units>
@@ -4233,7 +4233,7 @@ https://rshiny.ilo.org/dataexplorer32/?id=UNE_2EAP_SEX_AGE_RT_A&amp;ref_area=X01
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>Aged_15_to_20[Run,Region] / Aged_1_to_20_years_1[Run,World] * deaths_1_to_20_years_1[Run,World]</eqn>
+				<eqn>Aged_15_to_20[Run,Region] / Aged_1_to_20_years_1[Run,Region] * deaths_1_to_20_years_1[Run,Region]</eqn>
 				<units>Mp/year</units>
 			</aux>
 			<aux name="aging in">
@@ -4249,7 +4249,7 @@ https://rshiny.ilo.org/dataexplorer32/?id=UNE_2EAP_SEX_AGE_RT_A&amp;ref_area=X01
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>Passing_66[Run,World]*UNIT_one_year</eqn>
+				<eqn>Passing_66[Run,Region]*UNIT_one_year</eqn>
 				<units>Mp</units>
 			</aux>
 			<aux name="working age\ndeaths">
@@ -4257,7 +4257,7 @@ https://rshiny.ilo.org/dataexplorer32/?id=UNE_2EAP_SEX_AGE_RT_A&amp;ref_area=X01
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>deaths_20_to_40_years[Run,World]+deaths_40_to_60_years[Run,World]+deaths_15_to_20_years[Run,Region]+deaths_60_to_65_years[Run,World]</eqn>
+				<eqn>deaths_20_to_40_years[Run,Region]+deaths_40_to_60_years[Run,Region]+deaths_15_to_20_years[Run,Region]+deaths_60_to_65_years[Run,Region]</eqn>
 				<units>Mp/year</units>
 			</aux>
 			<aux name="Check">
@@ -4298,7 +4298,7 @@ https://rshiny.ilo.org/dataexplorer32/?id=UNE_2EAP_SEX_AGE_RT_A&amp;ref_area=X01
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>Aged_20_to_40_years_1[Run,World]+Aged_40_to_60_years_1[Run,World]+Aged_15_to_20[Run,Region]+Aged_60_to_65_years_1[Run,World]</eqn>
+				<eqn>Aged_20_to_40_years_1[Run,Region]+Aged_40_to_60_years_1[Run,Region]+Aged_15_to_20[Run,Region]+Aged_60_to_65_years_1[Run,Region]</eqn>
 				<units>Mp</units>
 			</aux>
 			<aux name="Aged 15 to 20">
@@ -4306,7 +4306,7 @@ https://rshiny.ilo.org/dataexplorer32/?id=UNE_2EAP_SEX_AGE_RT_A&amp;ref_area=X01
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>AGECOUNT(Aged_1_to_20_years_1[Run,World], 14, 19)</eqn>
+				<eqn>AGECOUNT(Aged_1_to_20_years_1[Run,Region], 14, 19)</eqn>
 				<units>Mp</units>
 			</aux>
 			<aux name="labour force\nparticipation rate" access="output" isee:autocreated="true">
@@ -4314,7 +4314,7 @@ https://rshiny.ilo.org/dataexplorer32/?id=UNE_2EAP_SEX_AGE_RT_A&amp;ref_area=X01
 				<dimensions>
 					<dim name="Run"/>
 				</dimensions>
-				<eqn>labour_force_participation_fixed[Run,World]/100</eqn>
+				<eqn>labour_force_participation_fixed[Run,Region]/100</eqn>
 				<units>dmnl</units>
 			</aux>
 			<stock name="non active working age">
@@ -4361,7 +4361,7 @@ https://rshiny.ilo.org/dataexplorer32/?id=UNE_2EAP_SEX_AGE_RT_A&amp;ref_area=X01
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>participation_gap[Run,Region]/time_for_labour_participation_to_change[Run,World]</eqn>
+				<eqn>participation_gap[Run,Region]/time_for_labour_participation_to_change[Run,Region]</eqn>
 				<units>Mp/year</units>
 			</flow>
 			<aux name="time for labour\nparticipation to change">
@@ -4422,7 +4422,7 @@ https://rshiny.ilo.org/dataexplorer32/?id=UNE_2EAP_SEX_AGE_RT_A&amp;ref_area=X01
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>planned_investment[Run,World]*rent_to_investment_ratio[Run,World]</eqn>
+				<eqn>planned_investment[Run,Region]*rent_to_investment_ratio[Run,Region]</eqn>
 				<units>b$/year</units>
 			</aux>
 			<aux name="labour balance">
@@ -4430,7 +4430,7 @@ https://rshiny.ilo.org/dataexplorer32/?id=UNE_2EAP_SEX_AGE_RT_A&amp;ref_area=X01
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>Unemployed[Run]/desired_additional_hires[Run,Region]/time_seeking_employees[Run,World]</eqn>
+				<eqn>Unemployed[Run]/desired_additional_hires[Run,Region]/time_seeking_employees[Run,Region]</eqn>
 				<units>dmnl</units>
 			</aux>
 			<aux name="time seeking\nemployees">
@@ -4498,7 +4498,7 @@ https://rshiny.ilo.org/dataexplorer20/?id=EAP_2WAP_SEX_AGE_RT_A&amp;ref_area=X01
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>1-rent_to_investment_ratio[Run,World]-hiring_to_investment_ratio[Run,World]</eqn>
+				<eqn>1-rent_to_investment_ratio[Run,Region]-hiring_to_investment_ratio[Run,Region]</eqn>
 				<units>dmnl</units>
 			</aux>
 			<aux name="effect of labour\nbalance on fractional wage growth rate">
@@ -4572,7 +4572,7 @@ https://rshiny.ilo.org/dataexplorer20/?id=EAP_2WAP_SEX_AGE_RT_A&amp;ref_area=X01
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>MAX(wage_growth_rate_gap[Run,Region]/Urgency_with_which_wage_growth_is_demanded[Run,World],  0)</eqn>
+				<eqn>MAX(wage_growth_rate_gap[Run,Region]/Urgency_with_which_wage_growth_is_demanded[Run,Region],  0)</eqn>
 				<units>dmnl/year</units>
 			</aux>
 			<aux name="initial recent\nwage growth rate">
@@ -4590,7 +4590,7 @@ https://rshiny.ilo.org/dataexplorer20/?id=EAP_2WAP_SEX_AGE_RT_A&amp;ref_area=X01
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>INIT(Wage_Rate[Run,Region])*(1-initial_recent_wage_growth_rate[Run,World]*UNIT_one_year)</eqn>
+				<eqn>INIT(Wage_Rate[Run,Region])*(1-initial_recent_wage_growth_rate[Run,Region]*UNIT_one_year)</eqn>
 				<units>$/p</units>
 			</aux>
 			<aux name="working age population 2" access="input">
@@ -4722,7 +4722,7 @@ https://rshiny.ilo.org/dataexplorer20/?id=EAP_2WAP_SEX_AGE_RT_A&amp;ref_area=X01
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>SMTH1(MINSOFT(desired_fractional_wage_growth_from_supply_and_demand[Run,Region]+agreed_wage_growth_from_inflation[Run,Region], cap_on_wage_growth[World], cap_on_wage_growth[World]/10),  wage_adjustment_negotiation_time[Run,World])</eqn>
+				<eqn>SMTH1(MINSOFT(desired_fractional_wage_growth_from_supply_and_demand[Run,Region]+agreed_wage_growth_from_inflation[Run,Region], cap_on_wage_growth[Region], cap_on_wage_growth[Region]/10),  wage_adjustment_negotiation_time[Run,Region])</eqn>
 				<isee:delay_aux/>
 				<units>1/year</units>
 			</aux>
@@ -4753,7 +4753,7 @@ https://rshiny.ilo.org/dataexplorer20/?id=EAP_2WAP_SEX_AGE_RT_A&amp;ref_area=X01
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>desired_fractional_wage_growth_from_inflation[Run,Region]*negotiation_effectiveness[Run,World]</eqn>
+				<eqn>desired_fractional_wage_growth_from_inflation[Run,Region]*negotiation_effectiveness[Run,Region]</eqn>
 				<units>dmnl/year</units>
 			</aux>
 			<aux name="Surface Temperature\n1986 to 2005 offset\nrelative to 1850 to 1900">
@@ -4796,7 +4796,7 @@ Fitted slope for the temperature squared effect on high exposure productivity, b
 				<eqn>IF (switch_labor_damage =0) AND TIME &gt; today THEN previous_effect_of_climate_on_high_exposure_labour [Run,Region]ELSE
 1
 +
-UNIT_percent [World]* (Temperature_effect_on_high_exposure_productivity[Run,World]*(Surface_Temperature_Anomaly_1[Run]-Surface_Temperature_1986_to_2005_offset_relative_to_1850_to_1900 [World]) +Temperature_squared_effect_on_high_exposure_productivity [Run,World]* (Surface_Temperature_Anomaly_1[Run]-Surface_Temperature_1986_to_2005_offset_relative_to_1850_to_1900 [World]) ^2)</eqn>
+UNIT_percent [Region]* (Temperature_effect_on_high_exposure_productivity[Run,Region]*(Surface_Temperature_Anomaly_1[Run]-Surface_Temperature_1986_to_2005_offset_relative_to_1850_to_1900 [Region]) +Temperature_squared_effect_on_high_exposure_productivity [Run,Region]* (Surface_Temperature_Anomaly_1[Run]-Surface_Temperature_1986_to_2005_offset_relative_to_1850_to_1900 [Region]) ^2)</eqn>
 				<units>dmnl</units>
 			</aux>
 			<aux name="Temperature effect on\nlow exposure productivity">
@@ -4830,7 +4830,7 @@ Fitted slope for the temperature squared effect on low exposure productivity, ba
 				<eqn>IF (switch_labor_damage =0) AND TIME &gt; today THEN previous_effect_of_climate_on_low_exposure_labour [Run,Region]ELSE
 1
 +
-UNIT_percent [World]* (Temperature_effect_on_low_exposure_productivity[Run,World]*(Surface_Temperature_Anomaly_1[Run]-Surface_Temperature_1986_to_2005_offset_relative_to_1850_to_1900 [World]) +Temperature_squared_effect_on_low_exposure_productivity [Run,World]* (Surface_Temperature_Anomaly_1[Run]-Surface_Temperature_1986_to_2005_offset_relative_to_1850_to_1900 [World]) ^2)</eqn>
+UNIT_percent [Region]* (Temperature_effect_on_low_exposure_productivity[Run,Region]*(Surface_Temperature_Anomaly_1[Run]-Surface_Temperature_1986_to_2005_offset_relative_to_1850_to_1900 [Region]) +Temperature_squared_effect_on_low_exposure_productivity [Run,Region]* (Surface_Temperature_Anomaly_1[Run]-Surface_Temperature_1986_to_2005_offset_relative_to_1850_to_1900 [Region]) ^2)</eqn>
 				<units>dmnl</units>
 			</aux>
 			<aux name="raw share of\nemployment\nin agriculture">
@@ -4840,7 +4840,7 @@ UNIT_percent [World]* (Temperature_effect_on_low_exposure_productivity[Run,World
 				</dimensions>
 				<eqn>MAX(0, 
 share_of_employment_in_agriculture_intercept+
-EXP(share_of_employment_in_agriculture_slope[Run,World]*real_GDP_per_person[Run,Region])
+EXP(share_of_employment_in_agriculture_slope[Run,Region]*real_GDP_per_person[Run,Region])
 )</eqn>
 				<units>dmnl</units>
 			</aux>
@@ -4850,7 +4850,7 @@ EXP(share_of_employment_in_agriculture_slope[Run,World]*real_GDP_per_person[Run,
 					<dim name="Region"/>
 				</dimensions>
 				<eqn>MAX(0, 
-share_of_employment_in_industry_intercept[Run,World]+share_of_employment_in_industry_slope[Run,World]*real_GDP_per_person[Run,Region]
+share_of_employment_in_industry_intercept[Run,Region]+share_of_employment_in_industry_slope[Run,Region]*real_GDP_per_person[Run,Region]
 )</eqn>
 				<units>dmnl</units>
 			</aux>
@@ -4860,7 +4860,7 @@ share_of_employment_in_industry_intercept[Run,World]+share_of_employment_in_indu
 					<dim name="Region"/>
 				</dimensions>
 				<eqn>MAX(0, 
-share_of_employment_in_services_intercept[Run,World]+share_of_employment_in_services_slope[Run,World]*real_GDP_per_person[Run,Region]
+share_of_employment_in_services_intercept[Run,Region]+share_of_employment_in_services_slope[Run,Region]*real_GDP_per_person[Run,Region]
 )</eqn>
 				<units>dmnl</units>
 			</aux>
@@ -4974,7 +4974,7 @@ share_of_employment_in_services_intercept[Run,World]+share_of_employment_in_serv
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>Employed[Run,Region]*UNIT_Employment_to_Labour_Supply[World]</eqn>
+				<eqn>Employed[Run,Region]*UNIT_Employment_to_Labour_Supply[Region]</eqn>
 				<units>MLabour</units>
 			</aux>
 			<aux name="Raw Labour\nSupply agriculture">
@@ -5010,13 +5010,13 @@ Mapping of raw labour supply into difference exposure levels to climate change, 
 				</dimensions>
 				<eqn>Raw_Labour_Supply_agriculture[Run,Region]*
 (
-labour_exposure_shares_in_agriculture[No_Exposure,World]*
+labour_exposure_shares_in_agriculture[No_Exposure,Region]*
 1
 +
-labour_exposure_shares_in_agriculture[Low_Exposure,World]*
+labour_exposure_shares_in_agriculture[Low_Exposure,Region]*
 effect_of_climate_on_low_exposure_labour[Run,Region]
 +
-labour_exposure_shares_in_agriculture[High_Exposure,World]*
+labour_exposure_shares_in_agriculture[High_Exposure,Region]*
 effect_of_climate_on_high_exposure_labour[Run,Region]
 )</eqn>
 				<units>MLabour</units>
@@ -5030,13 +5030,13 @@ Mapping of raw labour supply into difference exposure levels to climate change, 
 				</dimensions>
 				<eqn>Raw_Labour_Supply_industry[Run,Region]*
 (
-labour_exposure_shares_in_industry[No_Exposure,World]*
+labour_exposure_shares_in_industry[No_Exposure,Region]*
 1
 +
-labour_exposure_shares_in_industry[Low_Exposure,World]*
+labour_exposure_shares_in_industry[Low_Exposure,Region]*
 effect_of_climate_on_low_exposure_labour[Run,Region]
 +
-labour_exposure_shares_in_industry[High_Exposure,World]*
+labour_exposure_shares_in_industry[High_Exposure,Region]*
 effect_of_climate_on_high_exposure_labour[Run,Region]
 )</eqn>
 				<units>MLabour</units>
@@ -5050,13 +5050,13 @@ Mapping of raw labour supply into difference exposure levels to climate change, 
 				</dimensions>
 				<eqn>Raw_Labour_Supply_services[Run,Region]*
 (
-labour_exposure_shares_in_services[No_Exposure,World]*
+labour_exposure_shares_in_services[No_Exposure,Region]*
 1
 +
-labour_exposure_shares_in_services[Low_Exposure,World]*
+labour_exposure_shares_in_services[Low_Exposure,Region]*
 effect_of_climate_on_low_exposure_labour[Run,Region]
 +
-labour_exposure_shares_in_services[High_Exposure,World]*
+labour_exposure_shares_in_services[High_Exposure,Region]*
 effect_of_climate_on_high_exposure_labour[Run,Region]
 )</eqn>
 				<units>MLabour</units>
@@ -5178,7 +5178,7 @@ Fractional exposure levels to temperature for service related labour. Assumption
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>SMTH1(realised_productivity_growth[Run,Region]*fraction_of_productivity_gains_translating_to_firing[Run,World], time_for_productivity_to_affect_firing[Run,World])</eqn>
+				<eqn>SMTH1(realised_productivity_growth[Run,Region]*fraction_of_productivity_gains_translating_to_firing[Run,Region], time_for_productivity_to_affect_firing[Run,Region])</eqn>
 				<isee:delay_aux/>
 				<units>dmnl/year</units>
 			</aux>
@@ -5206,7 +5206,7 @@ Fractional exposure levels to temperature for service related labour. Assumption
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>TREND(realised_productivity[Run,Region], 1, initial_productivity_growth[Run,World])</eqn>
+				<eqn>TREND(realised_productivity[Run,Region], 1, initial_productivity_growth[Run,Region])</eqn>
 				<units>dmnl/Year</units>
 			</aux>
 			<aux name="initial\nproductivity\ngrowth">
@@ -5234,7 +5234,7 @@ Fractional exposure levels to temperature for service related labour. Assumption
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>productivity_under_development[Run,Region]/average_development_completion_time[Run,World]</eqn>
+				<eqn>productivity_under_development[Run,Region]/average_development_completion_time[Run,Region]</eqn>
 				<non_negative/>
 				<units>dmnl/Years</units>
 			</flow>
@@ -5243,7 +5243,7 @@ Fractional exposure levels to temperature for service related labour. Assumption
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>Productivity[Run,Region]*indicated_productivity_growth[Run,Region]*average_development_completion_time[Run,World]</eqn>
+				<eqn>Productivity[Run,Region]*indicated_productivity_growth[Run,Region]*average_development_completion_time[Run,Region]</eqn>
 				<inflow>productivity_starting_development</inflow>
 				<outflow>change_in_productivity</outflow>
 				<units>dmnl</units>
@@ -5284,7 +5284,7 @@ Fractional exposure levels to temperature for service related labour. Assumption
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>MIN(1, unemployment_rate[Run,Region] / threshold_unemployment_rate[Run,World])</eqn>
+				<eqn>MIN(1, unemployment_rate[Run,Region] / threshold_unemployment_rate[Run,Region])</eqn>
 				<units>dmnl</units>
 			</aux>
 			<aux name="sensitivity\nof hiring to\nunemployment\nrate">
@@ -5346,7 +5346,7 @@ Fractional exposure levels to temperature for service related labour. Assumption
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>non_bank_innovation_investment_share_of_GDP[Run,Region]*productivity_yield_of_non_bank_innovation[Run,World]</eqn>
+				<eqn>non_bank_innovation_investment_share_of_GDP[Run,Region]*productivity_yield_of_non_bank_innovation[Run,Region]</eqn>
 				<units>1/year</units>
 			</aux>
 			<aux name="exploratory bank investment share of GDP">
@@ -5362,7 +5362,7 @@ Fractional exposure levels to temperature for service related labour. Assumption
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>exploratory_bank_investment_share_of_GDP[Run,Region]*productivity_yield_of_exploratory_investment[Run,World]</eqn>
+				<eqn>exploratory_bank_investment_share_of_GDP[Run,Region]*productivity_yield_of_exploratory_investment[Run,Region]</eqn>
 				<units>1/year</units>
 			</aux>
 			<aux name="productivity yield of exploratory investment">
@@ -5403,7 +5403,7 @@ Fractional exposure levels to temperature for service related labour. Assumption
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>MIN(Unemployed[Run]*max_fraction_hireable[World]+firing, desired_additional_hires*effect_of_labour_supply_on_hiring^sensitivity_of_hiring_to_unemployment_rate)</eqn>
+				<eqn>MIN(Unemployed[Run]*max_fraction_hireable[Region]+firing, desired_additional_hires*effect_of_labour_supply_on_hiring^sensitivity_of_hiring_to_unemployment_rate)</eqn>
 				<units>Mp/year</units>
 			</aux>
 			<aux name="firing">
@@ -5449,7 +5449,7 @@ Fractional exposure levels to temperature for service related labour. Assumption
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>MIN(1, (ratio_of_missed_profit_to_threshold[Run,Region]^sensitivity_of_firing_to_profit_discrepancy[Run,  World])-1)</eqn>
+				<eqn>MIN(1, (ratio_of_missed_profit_to_threshold[Run,Region]^sensitivity_of_firing_to_profit_discrepancy[Run,  Region])-1)</eqn>
 				<units>dmnl</units>
 			</aux>
 			<aux name="real GDP per person" access="input">
@@ -5530,7 +5530,7 @@ Fractional exposure levels to temperature for service related labour. Assumption
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>unemployment_rate[Run,Region]*UNIT_percent_1[World]</eqn>
+				<eqn>unemployment_rate[Run,Region]*UNIT_percent_1[Region]</eqn>
 				<units>%</units>
 			</aux>
 			<aux name="average private debt safe interest" access="input">
@@ -7296,7 +7296,7 @@ furthermore. The structure that was previously decided on had the productivity g
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>(lending_standards[Run,Region]*effect_of_safe_default_rate_on_lending_standards[Run,Region])+(max_change_in_lending_standards[Run,World]*effect_of_risky_default_rate_on_lending_standards[Run,Region])</eqn>
+				<eqn>(lending_standards[Run,Region]*effect_of_safe_default_rate_on_lending_standards[Run,Region])+(max_change_in_lending_standards[Run,Region]*effect_of_risky_default_rate_on_lending_standards[Run,Region])</eqn>
 				<units>dmnl</units>
 			</aux>
 			<aux name="time to change\nlending standards">
@@ -7323,7 +7323,7 @@ furthermore. The structure that was previously decided on had the productivity g
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>SMTH1(total_risky_asset_defaults[Run,Region], reporting_delay[Run,World])</eqn>
+				<eqn>SMTH1(total_risky_asset_defaults[Run,Region], reporting_delay[Run,Region])</eqn>
 				<isee:delay_aux/>
 				<units>b$/year</units>
 			</aux>
@@ -7351,7 +7351,7 @@ furthermore. The structure that was previously decided on had the productivity g
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>MIN(1, MAX(failure_rate_floor[Run,World],  indicated_failure_rate+(max_change_in_failure_rate[Run,World]*effect_of_lending_standards_on_failure_rate)))</eqn>
+				<eqn>MIN(1, MAX(failure_rate_floor[Run,Region],  indicated_failure_rate+(max_change_in_failure_rate[Run,Region]*effect_of_lending_standards_on_failure_rate)))</eqn>
 				<units>dmnl</units>
 			</aux>
 			<aux name="normal\nfailure rate">
@@ -7370,7 +7370,7 @@ furthermore. The structure that was previously decided on had the productivity g
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>(INIT(lending_standards[Run,Region])/lending_standards[Run,Region])^elasticity_of_desired_bank_growth_rate_to_changes_in_lending_standards[Run,World]</eqn>
+				<eqn>(INIT(lending_standards[Run,Region])/lending_standards[Run,Region])^elasticity_of_desired_bank_growth_rate_to_changes_in_lending_standards[Run,Region]</eqn>
 				<units>dmnl</units>
 			</aux>
 			<aux name="elasticity of\ndesired bank growth\nrate to changes in lending\nstandards">
@@ -7408,7 +7408,7 @@ furthermore. The structure that was previously decided on had the productivity g
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>MINSOFT(initial_risk_premium[Run,World]*effect_of_risky_defaults_rate_on_risk_premium[Run,Region],  max_indicated_risk_premium[Run,Region], tolerance_of_the_cap_on_indicated_risk_premium[Run,World])</eqn>
+				<eqn>MINSOFT(initial_risk_premium[Run,Region]*effect_of_risky_defaults_rate_on_risk_premium[Run,Region],  max_indicated_risk_premium[Run,Region], tolerance_of_the_cap_on_indicated_risk_premium[Run,Region])</eqn>
 				<units>1/year</units>
 			</aux>
 			<aux name="effect of risky defaults\nrate on risk premium">
@@ -7416,7 +7416,7 @@ furthermore. The structure that was previously decided on had the productivity g
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>(measured_default_rate_of_risky_assets[Run,Region]/reference_default_rate[Run,Region])^elasticity_of_bankruptcy_rate_on_risk_premium[Run,World]</eqn>
+				<eqn>(measured_default_rate_of_risky_assets[Run,Region]/reference_default_rate[Run,Region])^elasticity_of_bankruptcy_rate_on_risk_premium[Run,Region]</eqn>
 				<units>dmnl</units>
 			</aux>
 			<aux name="elasticity of bankruptcy\nrate on risk premium">
@@ -7446,7 +7446,7 @@ furthermore. The structure that was previously decided on had the productivity g
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>normal_failure_rate[Run,World]*effect_of_STA_on_failure_rate[Run,Region]</eqn>
+				<eqn>normal_failure_rate[Run,Region]*effect_of_STA_on_failure_rate[Run,Region]</eqn>
 				<units>dmnl</units>
 			</aux>
 			<aux name="initial\nnon energy\nbank investment">
@@ -7497,14 +7497,14 @@ furthermore. The structure that was previously decided on had the productivity g
 				<dimensions>
 					<dim name="Run"/>
 				</dimensions>
-				<eqn>Good_Loans[Run,World]+Bad_Loans[Run,World]</eqn>
+				<eqn>Good_Loans[Run,Region]+Bad_Loans[Run,Region]</eqn>
 				<units>b$</units>
 			</aux>
 			<aux name="private\nsafe bank assets" access="output">
 				<dimensions>
 					<dim name="Run"/>
 				</dimensions>
-				<eqn>Safe_Loans[Run,World]+safe_loans_for_financing_innovation[Run,World]</eqn>
+				<eqn>Safe_Loans[Run,Region]+safe_loans_for_financing_innovation[Run,Region]</eqn>
 				<units>b$</units>
 			</aux>
 			<aux name="Bank\nAssets" isee:derived_units="true" access="output" isee:autocreated="true">
@@ -7533,7 +7533,7 @@ furthermore. The structure that was previously decided on had the productivity g
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>Bank_Assets[Run,Region]-Bank_Liabilities[Run,World]</eqn>
+				<eqn>Bank_Assets[Run,Region]-Bank_Liabilities[Run,Region]</eqn>
 				<units>b$</units>
 			</aux>
 			<aux name="assets to\nliability ratio" access="output" isee:autocreated="true">
@@ -7550,7 +7550,7 @@ furthermore. The structure that was previously decided on had the productivity g
 				<dimensions>
 					<dim name="Run"/>
 				</dimensions>
-				<eqn>private_investment_1[Run,World]+public_investment[Run,World]</eqn>
+				<eqn>private_investment_1[Run,Region]+public_investment[Run,Region]</eqn>
 				<units>b$/year</units>
 			</aux>
 			<aux name="public investment" access="output" throughput="true" isee:autocreated="true">
@@ -7566,7 +7566,7 @@ furthermore. The structure that was previously decided on had the productivity g
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>TREND(Bank_Investment[Run,Region], 1, initial_bank_investment_growth_rate[Run,World])</eqn>
+				<eqn>TREND(Bank_Investment[Run,Region], 1, initial_bank_investment_growth_rate[Run,Region])</eqn>
 				<units>1/year</units>
 			</aux>
 			<aux name="investment to GDP growth ratio">
@@ -7582,7 +7582,7 @@ furthermore. The structure that was previously decided on had the productivity g
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>MAX(0, 1+sensitivity_of_failure_rate_to_investment_to_gdp_ratio[Run,World]*(investment_to_GDP_growth_ratio[Run,Region]/INIT(investment_to_GDP_growth_ratio[Run,Region])-1))</eqn>
+				<eqn>MAX(0, 1+sensitivity_of_failure_rate_to_investment_to_gdp_ratio[Run,Region]*(investment_to_GDP_growth_ratio[Run,Region]/INIT(investment_to_GDP_growth_ratio[Run,Region])-1))</eqn>
 				<units>dmnl</units>
 			</aux>
 			<aux name="sensitivity of failure rate to\ninvestment to gdp ratio">
@@ -7625,7 +7625,7 @@ furthermore. The structure that was previously decided on had the productivity g
 				<eqn>IF (switch_economy_damage=0) AND TIME &gt; today THEN PREVIOUS (
 SELF[Run,Region],1) ELSE 1
 +
-sensitivity_of_effect_of_sta_on_failure_rate[Run,World]*(Surface_Temperature_Anomaly[Run])</eqn>
+sensitivity_of_effect_of_sta_on_failure_rate[Run,Region]*(Surface_Temperature_Anomaly[Run])</eqn>
 				<units>dmnl</units>
 			</aux>
 			<aux name="sensitivity of effect\nof sta on failure rate">
@@ -7738,7 +7738,7 @@ sensitivity_of_effect_of_sta_on_failure_rate[Run,World]*(Surface_Temperature_Ano
 				<dimensions>
 					<dim name="Run"/>
 				</dimensions>
-				<eqn>Exploratory_Loans[Run,World]</eqn>
+				<eqn>Exploratory_Loans[Run,Region]</eqn>
 				<units>b$</units>
 			</aux>
 			<flow name="exploratory\nloan failure" access="output" isee:autocreated="true">
@@ -7763,7 +7763,7 @@ sensitivity_of_effect_of_sta_on_failure_rate[Run,World]*(Surface_Temperature_Ano
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>(-MIN(0, normalised_growth_rate_of_GDP_growht[Run,Region]))^sensitivity_of_exploratory_loan_failure_to_GDP_growth[Run,World]</eqn>
+				<eqn>(-MIN(0, normalised_growth_rate_of_GDP_growht[Run,Region]))^sensitivity_of_exploratory_loan_failure_to_GDP_growth[Run,Region]</eqn>
 				<units>dmnl</units>
 			</aux>
 			<aux name="sensitivity of exploratory\nloan failure to GDP growth">
@@ -7782,7 +7782,7 @@ sensitivity_of_effect_of_sta_on_failure_rate[Run,World]*(Surface_Temperature_Ano
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>effect_of_GDP_growth_on_exploratory_loan_failure[Run,Region]*scale_of_exploratory_loan_failure[Run,World]</eqn>
+				<eqn>effect_of_GDP_growth_on_exploratory_loan_failure[Run,Region]*scale_of_exploratory_loan_failure[Run,Region]</eqn>
 				<units>1/year</units>
 			</aux>
 			<aux name="scale of exploratory loan failure">
@@ -7870,7 +7870,7 @@ sensitivity_of_effect_of_sta_on_failure_rate[Run,World]*(Surface_Temperature_Ano
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>TREND(net_bank_assets_when_positive[Run,Region], 1, initial_net_bank_asset_fractional_growth[Run,World])</eqn>
+				<eqn>TREND(net_bank_assets_when_positive[Run,Region], 1, initial_net_bank_asset_fractional_growth[Run,Region])</eqn>
 				<units>1/year</units>
 			</aux>
 			<aux name="effect of net bank assets\nfractional growth on\nbank profit payment">
@@ -7878,7 +7878,7 @@ sensitivity_of_effect_of_sta_on_failure_rate[Run,World]*(Surface_Temperature_Ano
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>normal_bank_profit_payment_fraction[Run,World]*(SMTH1(MAX(0, net_bank_assets_fractional_growth[Run,Region]), 1)*sensitivity_of_bank_profit_payment_to_net_asset_growth[Run,World])</eqn>
+				<eqn>normal_bank_profit_payment_fraction[Run,Region]*(SMTH1(MAX(0, net_bank_assets_fractional_growth[Run,Region]), 1)*sensitivity_of_bank_profit_payment_to_net_asset_growth[Run,Region])</eqn>
 				<isee:delay_aux/>
 				<units>1/year</units>
 			</aux>
@@ -7927,7 +7927,7 @@ sensitivity_of_effect_of_sta_on_failure_rate[Run,World]*(Surface_Temperature_Ano
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>MAX(0, -TREND(annual_bank_profit_payment[Run,Region], 1, initial_annual_bank_negative_profit_fractional_growth[Run,World]))</eqn>
+				<eqn>MAX(0, -TREND(annual_bank_profit_payment[Run,Region], 1, initial_annual_bank_negative_profit_fractional_growth[Run,Region]))</eqn>
 				<units>1/year</units>
 			</aux>
 			<aux name="initial\nannual bank negative\nprofit fractional growth">
@@ -7987,7 +7987,7 @@ sensitivity_of_effect_of_sta_on_failure_rate[Run,World]*(Surface_Temperature_Ano
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>MAX(0, nominal_investment_and_real_GDP_growth_difference[Run,Region])*sensitivity_of_investment_and_GDP_difference[Run,World]</eqn>
+				<eqn>MAX(0, nominal_investment_and_real_GDP_growth_difference[Run,Region])*sensitivity_of_investment_and_GDP_difference[Run,Region]</eqn>
 				<units>1/year</units>
 			</aux>
 			<aux name="sensitivity of investment and GDP difference">
@@ -8017,7 +8017,7 @@ sensitivity_of_effect_of_sta_on_failure_rate[Run,World]*(Surface_Temperature_Ano
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>MAX(0, bailout_ratio_gap[Run,World]*Bank_Liabilities[Run,World])</eqn>
+				<eqn>MAX(0, bailout_ratio_gap[Run,Region]*Bank_Liabilities[Run,Region])</eqn>
 				<units>b$</units>
 			</aux>
 			<aux name="bailout ratio gap">
@@ -8033,7 +8033,7 @@ sensitivity_of_effect_of_sta_on_failure_rate[Run,World]*(Surface_Temperature_Ano
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>annual_bank_negative_profit_fractional_growth[Run,Region]*sensitivity_of_bank_exploration_to_profit_decline[Run,World]</eqn>
+				<eqn>annual_bank_negative_profit_fractional_growth[Run,Region]*sensitivity_of_bank_exploration_to_profit_decline[Run,Region]</eqn>
 				<units>1/year</units>
 			</aux>
 			<aux name="sensitivity\nof bank exploration\nto profit decline">
@@ -8084,7 +8084,7 @@ sensitivity_of_effect_of_sta_on_failure_rate[Run,World]*(Surface_Temperature_Ano
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>normal_exploration_rate[Run,World]/exploration_effect_midpoint[Run,World]</eqn>
+				<eqn>normal_exploration_rate[Run,Region]/exploration_effect_midpoint[Run,Region]</eqn>
 				<units>dmnl</units>
 			</aux>
 			<aux name="exploration\neffect midpoint">
@@ -8103,7 +8103,7 @@ sensitivity_of_effect_of_sta_on_failure_rate[Run,World]*(Surface_Temperature_Ano
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>growth_rate_of_GDP_growth[Run,Region]/normal_growth_rate_of_GDP_growth_rate[Run,World]</eqn>
+				<eqn>growth_rate_of_GDP_growth[Run,Region]/normal_growth_rate_of_GDP_growth_rate[Run,Region]</eqn>
 				<units>dmnl</units>
 			</aux>
 			<aux name="GDP growth rate over the last year">
@@ -8142,7 +8142,7 @@ sensitivity_of_effect_of_sta_on_failure_rate[Run,World]*(Surface_Temperature_Ano
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>SMTH1(bank_investment_growth_rate[Run,Region], bank_reference_formation_time[Run,World], initial_bank_investment_growth_rate[Run,World])</eqn>
+				<eqn>SMTH1(bank_investment_growth_rate[Run,Region], bank_reference_formation_time[Run,Region], initial_bank_investment_growth_rate[Run,Region])</eqn>
 				<isee:delay_aux/>
 				<units>1/year</units>
 			</aux>
@@ -8245,8 +8245,8 @@ sensitivity_of_effect_of_sta_on_failure_rate[Run,World]*(Surface_Temperature_Ano
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>MINSOFT(((sensitivity_of_defaults_to_changes_in_risky_interest[Run,World]*
-MAX(0,extra_risky_interest_above_interest_at_origination[Run,Region]*time_to_measure_changes_in_risky_interest[Run,World]))^exponential_effect_of_interest_on_defaults[Run,World])/time_to_measure_changes_in_risky_interest[Run,World], maximum_default_rate_from_interest_rate_increases[Run,World], tolerance_of_the_cap_on_default_rate_from_interest_rate_increases[Run,World])</eqn>
+				<eqn>MINSOFT(((sensitivity_of_defaults_to_changes_in_risky_interest[Run,Region]*
+MAX(0,extra_risky_interest_above_interest_at_origination[Run,Region]*time_to_measure_changes_in_risky_interest[Run,Region]))^exponential_effect_of_interest_on_defaults[Run,Region])/time_to_measure_changes_in_risky_interest[Run,Region], maximum_default_rate_from_interest_rate_increases[Run,Region], tolerance_of_the_cap_on_default_rate_from_interest_rate_increases[Run,Region])</eqn>
 				<units>1/year</units>
 			</aux>
 			<aux name="risky interest at loan\norigination time">
@@ -8254,7 +8254,7 @@ MAX(0,extra_risky_interest_above_interest_at_origination[Run,Region]*time_to_mea
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>SMTH1(risky_interest[Run,Region], average_time_private_refinances_debt[Run,World])</eqn>
+				<eqn>SMTH1(risky_interest[Run,Region], average_time_private_refinances_debt[Run,Region])</eqn>
 				<units>1/year</units>
 			</aux>
 			<aux name="extra risky interest above\ninterest at origination">
@@ -8312,9 +8312,9 @@ This is to keep the units consistent with the exponential form of the equation</
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>MINSOFT(((sensitivity_of_defaults_to_changes_in_risky_interest[Run,World]*
-MAX(0,-1*extra_risky_interest_above_interest_at_origination[Run,Region]*time_to_measure_changes_in_risky_interest[Run,World]))^exponential_effect_of_interest_on_defaults[Run,World])
-/time_to_measure_changes_in_risky_interest[Run,World], maximum_default_rate_from_interest_rate_increases[Run,World], tolerance_of_the_cap_on_default_rate_from_interest_rate_increases[Run,World])</eqn>
+				<eqn>MINSOFT(((sensitivity_of_defaults_to_changes_in_risky_interest[Run,Region]*
+MAX(0,-1*extra_risky_interest_above_interest_at_origination[Run,Region]*time_to_measure_changes_in_risky_interest[Run,Region]))^exponential_effect_of_interest_on_defaults[Run,Region])
+/time_to_measure_changes_in_risky_interest[Run,Region], maximum_default_rate_from_interest_rate_increases[Run,Region], tolerance_of_the_cap_on_default_rate_from_interest_rate_increases[Run,Region])</eqn>
 				<units>1/year</units>
 			</aux>
 			<flow name="bad loan\ndefaults from\nfrom interest">
@@ -8365,7 +8365,7 @@ MAX(0,-1*extra_risky_interest_above_interest_at_origination[Run,Region]*time_to_
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>max_risk_premium_increase_rate[Run,World]+Risk_Premium[Run,Region]</eqn>
+				<eqn>max_risk_premium_increase_rate[Run,Region]+Risk_Premium[Run,Region]</eqn>
 				<units>1/year</units>
 			</aux>
 			<aux name="max risk premium increase rate">
@@ -8417,7 +8417,7 @@ MAX(0,-1*extra_risky_interest_above_interest_at_origination[Run,Region]*time_to_
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>All_Energy_Investments[Run]*&quot;inflation_adjustment_b$_per_bc$_2&quot;[Run,Region]/&quot;UNIT_c$_per_Bc$&quot;[World]</eqn>
+				<eqn>All_Energy_Investments[Run,Region]*&quot;inflation_adjustment_b$_per_bc$_2&quot;[Run,Region]/&quot;UNIT_c$_per_Bc$&quot;[Region]</eqn>
 				<units>b$/year</units>
 			</aux>
 			<aux name="inflation adjustment b$ per bc$ 2" access="input">
@@ -8449,13 +8449,14 @@ MAX(0,-1*extra_risky_interest_above_interest_at_origination[Run,Region]*time_to_
 				<dimensions>
 					<dim name="Run"/>
 				</dimensions>
-				<eqn>SMTH1(Bank_Investment[Run,World], 1, initial_non_energy_bank_investment[Run,World])</eqn>
+				<eqn>SMTH1(Bank_Investment[Run,Region], 1, initial_non_energy_bank_investment[Run,Region])</eqn>
 				<isee:delay_aux/>
 				<units>b$/year</units>
 			</aux>
 			<aux name="stranded capital" access="input">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>{Enter equation for use when not hooked up to other models}</eqn>
 				<units>c$/Year</units>
@@ -8463,6 +8464,7 @@ MAX(0,-1*extra_risky_interest_above_interest_at_origination[Run,Region]*time_to_
 			<aux name="All Energy Investments" access="input">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>{Enter equation for use when not hooked up to other models}</eqn>
 				<units>c$/Year</units>
@@ -8472,7 +8474,7 @@ MAX(0,-1*extra_risky_interest_above_interest_at_origination[Run,Region]*time_to_
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>stranded_capital[Run]*&quot;inflation_adjustment_b$_per_bc$_2&quot;[Run,Region]/&quot;UNIT_c$_per_Bc$&quot;[World]</eqn>
+				<eqn>stranded_capital[Run,Region]*&quot;inflation_adjustment_b$_per_bc$_2&quot;[Run,Region]/&quot;UNIT_c$_per_Bc$&quot;[Region]</eqn>
 				<units>b$/year</units>
 			</aux>
 			<aux name="stranded energy\nrelated capital">
@@ -8488,7 +8490,7 @@ MAX(0,-1*extra_risky_interest_above_interest_at_origination[Run,Region]*time_to_
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>relative_stranded_energy_capital[Run,Region]^sensitivity_of_effect_of_stranded_energy_capital_on_other_assets[Run,World]</eqn>
+				<eqn>relative_stranded_energy_capital[Run,Region]^sensitivity_of_effect_of_stranded_energy_capital_on_other_assets[Run,Region]</eqn>
 				<units>dmnl</units>
 			</aux>
 			<aux name="reference stranded\nenergy capital">
@@ -8496,7 +8498,7 @@ MAX(0,-1*extra_risky_interest_above_interest_at_origination[Run,Region]*time_to_
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>SMTH1(MAX(minimum_reference_stranded_energy_capital[Run,World], stranded_energy_capital[Run,Region]), stranded_energy_capital_reference_formation_time[Run,World])</eqn>
+				<eqn>SMTH1(MAX(minimum_reference_stranded_energy_capital[Run,Region], stranded_energy_capital[Run,Region]), stranded_energy_capital_reference_formation_time[Run,Region])</eqn>
 				<isee:delay_aux/>
 				<units>b$/year</units>
 			</aux>
@@ -8594,7 +8596,7 @@ MAX(0,-1*extra_risky_interest_above_interest_at_origination[Run,Region]*time_to_
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>MIN(Safe_Loans*max_safe_loan_defaults_caused_by_stranded_capital[World], stranded_energy_capital + stranded_energy_related_capital)</eqn>
+				<eqn>MIN(Safe_Loans*max_safe_loan_defaults_caused_by_stranded_capital[Region], stranded_energy_capital + stranded_energy_related_capital)</eqn>
 				<units>b$/year</units>
 			</aux>
 			<aux name="Regulatory Tier 1\ncapital to assets">
@@ -8677,7 +8679,7 @@ MAX(0,-1*extra_risky_interest_above_interest_at_origination[Run,Region]*time_to_
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>bank_desired_asset_to_liability_ratio[Run,World]-assets_to_liability_ratio[Run,Region]</eqn>
+				<eqn>bank_desired_asset_to_liability_ratio[Run,Region]-assets_to_liability_ratio[Run,Region]</eqn>
 				<units>dmnl</units>
 			</aux>
 			<aux name="effect of equity ratio gap on investment growth when above target">
@@ -8685,7 +8687,7 @@ MAX(0,-1*extra_risky_interest_above_interest_at_origination[Run,Region]*time_to_
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>EXPBOUND(equity_gap_above_min_effect[Run,World], equity_gap_zero_effect_y[World], equity_ratio_gap[Run,Region], equity_ratio_gap_effect_above_exponent[Run,World], -equity_gap_effect_max_x_magnitude[Run,World],  equity_gap_effect_zero_effect_x[World])</eqn>
+				<eqn>EXPBOUND(equity_gap_above_min_effect[Run,Region], equity_gap_zero_effect_y[Region], equity_ratio_gap[Run,Region], equity_ratio_gap_effect_above_exponent[Run,Region], -equity_gap_effect_max_x_magnitude[Run,Region],  equity_gap_effect_zero_effect_x[Region])</eqn>
 				<units>dmnl</units>
 			</aux>
 			<aux name="equity gap above min effect">
@@ -8715,7 +8717,7 @@ MAX(0,-1*extra_risky_interest_above_interest_at_origination[Run,Region]*time_to_
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>EXPBOUND(equity_gap_zero_effect_y[World], equity_gap_below_max_effect[Run,World], equity_ratio_gap[Run,Region], equity_ratio_gap_effect_below_exponent[Run,World], equity_gap_effect_zero_effect_x[World], equity_gap_effect_max_x_magnitude[Run,World])</eqn>
+				<eqn>EXPBOUND(equity_gap_zero_effect_y[Region], equity_gap_below_max_effect[Run,Region], equity_ratio_gap[Run,Region], equity_ratio_gap_effect_below_exponent[Run,Region], equity_gap_effect_zero_effect_x[Region], equity_gap_effect_max_x_magnitude[Run,Region])</eqn>
 				<units>dmnl</units>
 			</aux>
 			<aux name="equity gap below max effect">
@@ -8791,7 +8793,7 @@ To control extreme policy only</doc>
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>LOGISTICBOUND(effect_of_lending_standards_on_failure_rate_range[Run,World]/2, -effect_of_lending_standards_on_failure_rate_range[Run,World]/2, lending_standards[Run,Region], 1,  effect_of_lending_standards_on_failure_rate_curvature[Run,World])</eqn>
+				<eqn>LOGISTICBOUND(effect_of_lending_standards_on_failure_rate_range[Run,Region]/2, -effect_of_lending_standards_on_failure_rate_range[Run,Region]/2, lending_standards[Run,Region], 1,  effect_of_lending_standards_on_failure_rate_curvature[Run,Region])</eqn>
 				<units>dmnl</units>
 			</aux>
 			<aux name="effect of lending standards on failure rate range">
@@ -8821,7 +8823,7 @@ To control extreme policy only</doc>
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>LOGISTICBOUND(-effect_of_default_rate_on_lending_standards_range[Run,World]/2, effect_of_default_rate_on_lending_standards_range[Run,World]/2, measured_default_rate_of_risky_assets[Run,Region]/INIT(measured_default_rate_of_risky_assets[Run,Region]), 1,  effect_of_default_rate_on_lending_standards_curvature[Run,World])</eqn>
+				<eqn>LOGISTICBOUND(-effect_of_default_rate_on_lending_standards_range[Run,Region]/2, effect_of_default_rate_on_lending_standards_range[Run,Region]/2, measured_default_rate_of_risky_assets[Run,Region]/INIT(measured_default_rate_of_risky_assets[Run,Region]), 1,  effect_of_default_rate_on_lending_standards_curvature[Run,Region])</eqn>
 				<units>dmnl</units>
 			</aux>
 			<aux name="effect of default rate\non lending standards range">
@@ -8877,7 +8879,7 @@ To control extreme policy only</doc>
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>SMTH1(measured_default_rate_of_risky_assets[Run,Region], bank_reference_formation_time[Run,World])</eqn>
+				<eqn>SMTH1(measured_default_rate_of_risky_assets[Run,Region], bank_reference_formation_time[Run,Region])</eqn>
 				<isee:delay_aux/>
 				<units>dmnl/year</units>
 			</aux>
@@ -8886,7 +8888,7 @@ To control extreme policy only</doc>
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>SMTH1(safe_loan_defaults[Run,Region]+actual_safe_investment_failure[Run,Region]-stranded_capital_related_defaults[Run,Region], reporting_delay[Run,World])</eqn>
+				<eqn>SMTH1(safe_loan_defaults[Run,Region]+actual_safe_investment_failure[Run,Region]-stranded_capital_related_defaults[Run,Region], reporting_delay[Run,Region])</eqn>
 				<isee:delay_aux/>
 				<units>b$/year</units>
 			</aux>
@@ -8903,7 +8905,7 @@ To control extreme policy only</doc>
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>1+ sensitivity_of_effect_of_safe_default_rate_on_lending_standards[Run,World]*(measured_default_rate_of_safe_assets[Run,Region]/safe_asset_default_rate_threshold[Run,World]-1)</eqn>
+				<eqn>1+ sensitivity_of_effect_of_safe_default_rate_on_lending_standards[Run,Region]*(measured_default_rate_of_safe_assets[Run,Region]/safe_asset_default_rate_threshold[Run,Region]-1)</eqn>
 				<units>dmnl</units>
 			</aux>
 			<aux name="sensitivity of effect of safe default rate\non lending standards">
@@ -8952,7 +8954,7 @@ To control extreme policy only</doc>
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>MAX(0, normal_rate_of_converting_safe_loans_to_safe_loans_for_financing_innovation[Run,World]*Firms_Innovation_Orientation_2)</eqn>
+				<eqn>MAX(0, normal_rate_of_converting_safe_loans_to_safe_loans_for_financing_innovation[Run,Region]*Firms_Innovation_Orientation_2)</eqn>
 				<units>dmnl/year</units>
 			</aux>
 			<aux name="nominal investment and\nreal GDP growth difference">
@@ -9870,7 +9872,7 @@ To control extreme policy only</doc>
 				<stacked_container uid="332" x="1915.48" y="3660" width="631.451" height="417.5">
 					<graph width="631.451" height="417.5" type="time_series" show_grid="false" isee:tick_type="none" include_units_in_legend="false" plot_numbers="false" isee:label_pie_slices="false" isee:show_pie_borders="true" num_x_grid_lines="0" num_y_grid_lines="0" num_x_labels="5" num_y_labels="3" isee:fill_intensity="0.1" isee:allow_zero_axis="true" left_axis_multi_scale="false" left_axis_auto_scale="true" left_include_units="true" right_axis_multi_scale="false" right_axis_auto_scale="true" right_include_units="true">
 						<plot color="blue" isee:keep_zero_visible="true" pen_width="1" index="0" show_y_axis="true">
-							<entity name='GDP."Real_GDP_in_2021c$"[*, World]'/>
+							<entity name='GDP."Real_GDP_in_2021c$"[*, ?]'/>
 						</plot>
 					</graph>
 				</stacked_container>
@@ -9882,52 +9884,52 @@ To control extreme policy only</doc>
 				<stacked_container uid="362" x="2599.38" y="3710.63" width="460.625" height="358.75">
 					<graph width="460.625" height="358.75" comparative="true" type="time_series" show_grid="false" isee:tick_type="none" include_units_in_legend="false" plot_numbers="false" isee:label_pie_slices="false" isee:show_pie_borders="true" num_x_grid_lines="0" num_y_grid_lines="0" num_x_labels="5" num_y_labels="3" isee:fill_intensity="0.1" isee:allow_zero_axis="true" left_axis_multi_scale="false" left_axis_auto_scale="true" left_include_units="true" right_axis_multi_scale="false" right_axis_auto_scale="true" right_include_units="true">
 						<plot color="blue" isee:keep_zero_visible="true" pen_width="1" index="0" show_y_axis="true">
-							<entity name="GDP.real_GDP_growth_rate[1, World]"/>
+							<entity name="GDP.real_GDP_growth_rate[1, ?]"/>
 						</plot>
 					</graph>
 				</stacked_container>
 				<stacked_container uid="363" x="1364.71" y="4236.54">
 					<graph width="350" height="250" comparative="true" type="time_series" show_grid="false" isee:tick_type="none" include_units_in_legend="false" plot_numbers="false" isee:label_pie_slices="false" isee:show_pie_borders="true" num_x_grid_lines="0" num_y_grid_lines="0" num_x_labels="5" num_y_labels="3" isee:fill_intensity="0.1" isee:allow_zero_axis="true" left_axis_multi_scale="false" left_axis_auto_scale="true" left_include_units="true" right_axis_multi_scale="false" right_axis_auto_scale="true" right_include_units="true">
 						<plot color="blue" isee:keep_zero_visible="true" pen_width="1" index="0" show_y_axis="true">
-							<entity name="Inflation.Inflation_Rate[1, World]"/>
+							<entity name="Inflation.Inflation_Rate[1, ?]"/>
 						</plot>
 					</graph>
 				</stacked_container>
 				<stacked_container uid="364" x="1563.5" y="4098.33" width="515" height="361.667">
 					<graph width="515" height="361.667" comparative="true" type="time_series" show_grid="false" isee:tick_type="none" include_units_in_legend="false" plot_numbers="false" isee:label_pie_slices="false" isee:show_pie_borders="true" num_x_grid_lines="0" num_y_grid_lines="0" num_x_labels="5" num_y_labels="3" isee:fill_intensity="0.1" isee:allow_zero_axis="true" left_axis_multi_scale="false" left_axis_auto_scale="true" left_include_units="true" right_axis_multi_scale="false" right_axis_auto_scale="true" right_include_units="true">
 						<plot color="blue" isee:keep_zero_visible="true" pen_width="1" index="0" show_y_axis="true">
-							<entity name="GDP.Nominal_GDP[1, World]"/>
+							<entity name="GDP.Nominal_GDP[1, ?]"/>
 						</plot>
 					</graph>
 				</stacked_container>
 				<stacked_container uid="365" x="2149.17" y="4083.33" width="478.153" height="364.167">
 					<graph width="478.153" height="364.167" comparative="true" type="time_series" show_grid="false" isee:tick_type="none" include_units_in_legend="false" plot_numbers="false" isee:label_pie_slices="false" isee:show_pie_borders="true" num_x_grid_lines="0" num_y_grid_lines="0" num_x_labels="5" num_y_labels="3" isee:fill_intensity="0.1" isee:allow_zero_axis="true" left_axis_multi_scale="false" left_axis_auto_scale="false" left_include_units="true" right_axis_multi_scale="false" right_axis_auto_scale="true" right_include_units="true">
 						<plot color="blue" isee:keep_zero_visible="true" pen_width="1" index="0" show_y_axis="true">
-							<entity name="Circular_Flow.private_consumption[1, World]"/>
+							<entity name="Circular_Flow.private_consumption[1, ?]"/>
 						</plot>
 					</graph>
 				</stacked_container>
 				<stacked_container uid="366" x="2655.17" y="4082.08" width="570.833" height="394.167">
 					<graph width="570.833" height="394.167" comparative="true" type="time_series" show_grid="false" isee:tick_type="none" include_units_in_legend="false" plot_numbers="false" isee:label_pie_slices="false" isee:show_pie_borders="true" num_x_grid_lines="0" num_y_grid_lines="0" num_x_labels="5" num_y_labels="3" isee:fill_intensity="0.1" isee:allow_zero_axis="true" left_axis_multi_scale="false" left_axis_auto_scale="false" left_include_units="true" right_axis_multi_scale="false" right_axis_auto_scale="true" right_include_units="true">
 						<plot color="blue" isee:keep_zero_visible="true" pen_width="1" index="0" show_y_axis="true">
-							<entity name="Employment.Wage_Rate[1, World]"/>
+							<entity name="Employment.Wage_Rate[1, ?]"/>
 						</plot>
 					</graph>
 				</stacked_container>
 				<stacked_container uid="367" x="3325.91" y="3921.25">
 					<graph width="350" height="250" type="time_series" show_grid="false" isee:tick_type="none" include_units_in_legend="false" plot_numbers="false" isee:label_pie_slices="false" isee:show_pie_borders="true" num_x_grid_lines="0" num_y_grid_lines="0" num_x_labels="5" num_y_labels="3" isee:fill_intensity="0.1" isee:allow_zero_axis="true" left_axis_multi_scale="false" left_axis_auto_scale="true" left_include_units="true" right_axis_multi_scale="false" right_axis_auto_scale="true" right_include_units="true">
 						<plot color="blue" isee:keep_zero_visible="true" pen_width="1" index="0" show_y_axis="true">
-							<entity name='GDP."Real_GDP_in_2021c$"[1, World]'/>
+							<entity name='GDP."Real_GDP_in_2021c$"[1, ?]'/>
 						</plot>
 						<plot color="red" isee:keep_zero_visible="true" pen_width="1" index="1" show_y_axis="true">
-							<entity name="GDP.Nominal_GDP[1, World]"/>
+							<entity name="GDP.Nominal_GDP[1, ?]"/>
 						</plot>
 					</graph>
 				</stacked_container>
 				<stacked_container uid="368" x="1576.83" y="4481.67" width="488.333" height="351.667">
 					<graph width="488.333" height="351.667" comparative="true" type="time_series" show_grid="false" isee:tick_type="none" include_units_in_legend="false" plot_numbers="false" isee:label_pie_slices="false" isee:show_pie_borders="true" num_x_grid_lines="0" num_y_grid_lines="0" num_x_labels="5" num_y_labels="3" isee:fill_intensity="0.1" isee:allow_zero_axis="true" left_axis_multi_scale="false" left_axis_auto_scale="true" left_include_units="true" right_axis_multi_scale="false" right_axis_auto_scale="true" right_include_units="true">
 						<plot color="blue" isee:keep_zero_visible="true" pen_width="1" index="0" show_y_axis="true">
-							<entity name="GDP.nominal_GDP_growth_rate[1, World]"/>
+							<entity name="GDP.nominal_GDP_growth_rate[1, ?]"/>
 						</plot>
 					</graph>
 				</stacked_container>
@@ -10271,7 +10273,7 @@ SDG 10.5.1</text_box>
 				<stacked_container uid="507" x="1056.5" y="2897" width="761" height="421">
 					<graph width="761" height="421" comparative="true" type="time_series" show_grid="false" isee:tick_type="none" include_units_in_legend="false" plot_numbers="false" isee:label_pie_slices="false" isee:show_pie_borders="true" num_x_grid_lines="0" num_y_grid_lines="0" num_x_labels="5" num_y_labels="3" isee:fill_intensity="0.1" isee:allow_zero_axis="true" left_axis_multi_scale="false" left_axis_auto_scale="true" left_include_units="true" right_axis_multi_scale="false" right_axis_auto_scale="true" right_include_units="true">
 						<plot color="blue" isee:keep_zero_visible="true" pen_width="1" index="0" show_y_axis="true">
-							<entity name="GDP.real_GDP_growth_rate[1, World]"/>
+							<entity name="GDP.real_GDP_growth_rate[1, ?]"/>
 						</plot>
 					</graph>
 				</stacked_container>
@@ -10632,7 +10634,7 @@ SDG 10.5.1</text_box>
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>(Nominal_GDP[Run,Region]-Average_GDP[Run,World])/(time_to_measure_GDP_growth_rate*Average_GDP[Run,World])</eqn>
+				<eqn>(Nominal_GDP[Run,Region]-Average_GDP[Run,Region])/(time_to_measure_GDP_growth_rate*Average_GDP[Run,Region])</eqn>
 				<units>1/year</units>
 			</aux>
 			<stock name="Average\nGDP">
@@ -10873,8 +10875,8 @@ Calculated from data</doc>
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>IF TIME &gt;= nominal_gdp_calibration_data_start_year[World] THEN
-ABS(average_nominal_gdp_growth_rate_in_the_calibration_period[World]-nominal_GDP_growth_rate[Run,Region])
+				<eqn>IF TIME &gt;= nominal_gdp_calibration_data_start_year[Region] THEN
+ABS(average_nominal_gdp_growth_rate_in_the_calibration_period[Region]-nominal_GDP_growth_rate[Run,Region])
 ELSE
 0</eqn>
 				<non_negative/>
@@ -10903,8 +10905,8 @@ Calculated from data</doc>
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>IF TIME &gt;= real_gdp_calibration_data_start_year[World] THEN
-ABS(average_real_gdp_growth_rate_in_calibration_period[World]-real_GDP_growth_rate[Run,Region])
+				<eqn>IF TIME &gt;= real_gdp_calibration_data_start_year[Region] THEN
+ABS(average_real_gdp_growth_rate_in_calibration_period[Region]-real_GDP_growth_rate[Run,Region])
 ELSE
 0</eqn>
 				<non_negative/>
@@ -10938,7 +10940,7 @@ ELSE
 					<dim name="Region"/>
 				</dimensions>
 				<eqn>PREVIOUS(SELF[Run,Region], 0) + 
-(current_recession_time_counter[Run,Region] = 0 AND PREVIOUS(current_recession_time_counter[Run,Region], 0) &gt;= recession_threshold_time[World])</eqn>
+(current_recession_time_counter[Run,Region] = 0 AND PREVIOUS(current_recession_time_counter[Run,Region], 0) &gt;= recession_threshold_time[Region])</eqn>
 				<units>dmnl</units>
 			</aux>
 			<aux name="current recession time counter">
@@ -10946,7 +10948,7 @@ ELSE
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>IF TIME &gt; start_year AND real_GDP_growth_rate[Run,Region] &lt; negative_growth_threshold[World] THEN
+				<eqn>IF TIME &gt; start_year AND real_GDP_growth_rate[Run,Region] &lt; negative_growth_threshold[Region] THEN
 PREVIOUS(SELF[Run,Region], 0) + DT
 ELSE 0</eqn>
 				<units>Year</units>
@@ -11419,7 +11421,7 @@ ELSE
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>SMTH1(total_public_tax_income[Run,Region], averaging_time_to_adjust_tax_based_on_income[Run,World], initial_smoothed_total_public_tax_income[Run,World])</eqn>
+				<eqn>SMTH1(total_public_tax_income[Run,Region], averaging_time_to_adjust_tax_based_on_income[Run,Region], initial_smoothed_total_public_tax_income[Run,Region])</eqn>
 				<isee:delay_aux/>
 				<units>b$/year</units>
 			</aux>
@@ -11428,7 +11430,7 @@ ELSE
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>SMTH1(effect_of_debt_to_GDP_ratio_on_government_spending[Run,Region], time_for_government_spending_to_change[Run,World])</eqn>
+				<eqn>SMTH1(effect_of_debt_to_GDP_ratio_on_government_spending[Run,Region], time_for_government_spending_to_change[Run,Region])</eqn>
 				<isee:delay_aux/>
 				<units>dmnl</units>
 			</aux>
@@ -11486,7 +11488,7 @@ ELSE
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>STA_driven_government_consumption[Run,World]+non_climate_driven_government_consumption[Run,World]+Paid_Total_Nominal_SLR_protection_cost[Run,World]</eqn>
+				<eqn>STA_driven_government_consumption[Run,Region]+non_climate_driven_government_consumption[Run,Region]+Paid_Total_Nominal_SLR_protection_cost[Run,Region]</eqn>
 				<units>b$/year</units>
 			</aux>
 			<aux name="measured GDP">
@@ -11494,7 +11496,7 @@ ELSE
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>SMTH1(GDP[Run,Region],  GDP_measuring_time[World],  initial_measured_GDP[Run,World])</eqn>
+				<eqn>SMTH1(GDP[Run,Region],  GDP_measuring_time[Region],  initial_measured_GDP[Run,Region])</eqn>
 				<isee:delay_aux/>
 				<units>b$/year</units>
 			</aux>
@@ -11530,7 +11532,7 @@ ELSE
 				<dimensions>
 					<dim name="Run"/>
 				</dimensions>
-				<eqn>MIN(public_expenditure_before_subsidies_and_interest_payments[Run,World]*maximum_percentage_of_government_budget_to_transfer_payments[World], (transfer_payments_for_children[Run,World]+transfer_payments_for_retirees[Run,World]+transfer_payments_for_unemployed[Run,World])/&quot;UNIT_$_per_B$&quot;[World])</eqn>
+				<eqn>MIN(public_expenditure_before_subsidies_and_interest_payments[Run,Region]*maximum_percentage_of_government_budget_to_transfer_payments[Region], (transfer_payments_for_children[Run,Region]+transfer_payments_for_retirees[Run,Region]+transfer_payments_for_unemployed[Run,Region])/&quot;UNIT_$_per_B$&quot;[Region])</eqn>
 				<units>b$/year</units>
 			</aux>
 			<aux name="public\ninvestment" access="output" isee:autocreated="true">
@@ -11570,7 +11572,7 @@ ELSE
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>rent_tax_1[Run,World] + profit_tax_1[Run,World] + wage_tax_1[Run,World]+sum_of_energy_taxes_in_nominal_terms[Run,Region]+wealth_tax[Run,World]</eqn>
+				<eqn>rent_tax_1[Run,Region] + profit_tax_1[Run,Region] + wage_tax_1[Run,Region]+sum_of_energy_taxes_in_nominal_terms[Run,Region]+wealth_tax[Run,Region]</eqn>
 				<units>b$/year</units>
 			</aux>
 			<aux name="averaging time to adjust tax based on income">
@@ -11601,7 +11603,7 @@ ELSE
 					<dim name="Region"/>
 				</dimensions>
 				<eqn>
-inflation_goal_policy[Run]</eqn>
+inflation_goal_policy[Run,Region]</eqn>
 				<units>1/year</units>
 			</aux>
 			<aux name="inflation\ntarget\ndiscrepancy">
@@ -11691,7 +11693,7 @@ inflation_goal_policy[Run]</eqn>
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn> unemployment_goal_policy[Run]</eqn>
+				<eqn> unemployment_goal_policy[Run,Region]</eqn>
 				<units>dmnl</units>
 			</aux>
 			<aux name="unemployment\nweight">
@@ -11774,6 +11776,7 @@ inflation_goal_policy[Run]</eqn>
 			<aux name="unemployment goal policy" access="input">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>.05</eqn>
 				<units>dmnl</units>
@@ -11781,6 +11784,7 @@ inflation_goal_policy[Run]</eqn>
 			<aux name="inflation goal policy" access="input">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>0.02</eqn>
 				<units>1/year</units>
@@ -11788,6 +11792,7 @@ inflation_goal_policy[Run]</eqn>
 			<aux name="Coal Investments in Fossil\nFuel Extraction Capital" access="input">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>{Enter equation for use when not hooked up to other models}</eqn>
 				<units>c$/Year</units>
@@ -11795,6 +11800,7 @@ inflation_goal_policy[Run]</eqn>
 			<aux name="Coal Investments in\nFossil Energy Capital" access="input">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>{Enter equation for use when not hooked up to other models}</eqn>
 				<units>c$/Year</units>
@@ -11802,6 +11808,7 @@ inflation_goal_policy[Run]</eqn>
 			<aux name="Oil\nInvestments in Fossil\nFuel Extraction Capital" access="input">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>{Enter equation for use when not hooked up to other models}</eqn>
 				<units>c$/Year</units>
@@ -11809,6 +11816,7 @@ inflation_goal_policy[Run]</eqn>
 			<aux name="Oil\nInvestments in\nFossil Energy Capital" access="input">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>{Enter equation for use when not hooked up to other models}</eqn>
 				<units>c$/Year</units>
@@ -11816,6 +11824,7 @@ inflation_goal_policy[Run]</eqn>
 			<aux name="Gas\nInvestments in Fossil\nFuel Extraction Capital" access="input">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>{Enter equation for use when not hooked up to other models}</eqn>
 				<units>c$/Year</units>
@@ -11823,6 +11832,7 @@ inflation_goal_policy[Run]</eqn>
 			<aux name="Gas\nInvestments in\nFossil Energy Capital" access="input">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>{Enter equation for use when not hooked up to other models}</eqn>
 				<units>c$/Year</units>
@@ -11830,6 +11840,7 @@ inflation_goal_policy[Run]</eqn>
 			<aux name="Investments in\nHydropower\nEnergy capacity" access="input">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>{Enter equation for use when not hooked up to other models}</eqn>
 				<units>c$/Year</units>
@@ -11837,6 +11848,7 @@ inflation_goal_policy[Run]</eqn>
 			<aux name="Investments in\nBiofuel Capacity" access="input">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>{Enter equation for use when not hooked up to other models}</eqn>
 				<units>c$/Year</units>
@@ -11844,6 +11856,7 @@ inflation_goal_policy[Run]</eqn>
 			<aux name="Investments in\nNuclear Capacity" access="input">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>{Enter equation for use when not hooked up to other models}</eqn>
 				<units>c$/Year</units>
@@ -11851,6 +11864,7 @@ inflation_goal_policy[Run]</eqn>
 			<aux name="fuel extraction tax rate" access="input">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>{Enter equation for use when not hooked up to other models}</eqn>
 				<units>dmnl</units>
@@ -11858,6 +11872,7 @@ inflation_goal_policy[Run]</eqn>
 			<aux name="energy conversion tax rate" access="input">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>{Enter equation for use when not hooked up to other models}</eqn>
 				<units>dmnl</units>
@@ -11867,8 +11882,8 @@ inflation_goal_policy[Run]</eqn>
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>IF fuel_extraction_tax_rate[Run] &gt; 0 THEN
-Coal_Investments_in_Fossil_Fuel_Extraction_Capital[Run] * fuel_extraction_tax_rate[Run]
+				<eqn>IF fuel_extraction_tax_rate[Run,Region] &gt; 0 THEN
+Coal_Investments_in_Fossil_Fuel_Extraction_Capital[Run,Region] * fuel_extraction_tax_rate[Run,Region]
 ELSE
 0</eqn>
 				<units>c$/Year</units>
@@ -11878,8 +11893,8 @@ ELSE
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>IF energy_conversion_tax_rate[Run] &gt; 0 THEN
-Coal_Investments_in_Fossil_Energy_Capital[Run] * energy_conversion_tax_rate[Run]
+				<eqn>IF energy_conversion_tax_rate[Run,Region] &gt; 0 THEN
+Coal_Investments_in_Fossil_Energy_Capital[Run,Region] * energy_conversion_tax_rate[Run,Region]
 ELSE
 0</eqn>
 				<units>c$/Year</units>
@@ -11887,6 +11902,7 @@ ELSE
 			<aux name="fuel extraction tax rate 1" access="input">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>{Enter equation for use when not hooked up to other models}</eqn>
 				<units>dmnl</units>
@@ -11894,6 +11910,7 @@ ELSE
 			<aux name="energy conversion tax rate 1" access="input">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>{Enter equation for use when not hooked up to other models}</eqn>
 				<units>dmnl</units>
@@ -11901,6 +11918,7 @@ ELSE
 			<aux name="fuel extraction tax rate 2" access="input">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>{Enter equation for use when not hooked up to other models}</eqn>
 				<units>dmnl</units>
@@ -11908,6 +11926,7 @@ ELSE
 			<aux name="energy conversion tax rate 2" access="input">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>{Enter equation for use when not hooked up to other models}</eqn>
 				<units>dmnl</units>
@@ -11917,8 +11936,8 @@ ELSE
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>IF fuel_extraction_tax_rate_1[Run] &gt; 0 THEN
-Oil_Investments_in_Fossil_Fuel_Extraction_Capital[Run] * fuel_extraction_tax_rate_1[Run]
+				<eqn>IF fuel_extraction_tax_rate_1[Run,Region] &gt; 0 THEN
+Oil_Investments_in_Fossil_Fuel_Extraction_Capital[Run,Region] * fuel_extraction_tax_rate_1[Run,Region]
 ELSE
 0</eqn>
 				<units>c$/Year</units>
@@ -11928,8 +11947,8 @@ ELSE
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>IF energy_conversion_tax_rate_1[Run] &gt; 0 THEN
-Oil_Investments_in_Fossil_Energy_Capital[Run] * energy_conversion_tax_rate_1[Run]
+				<eqn>IF energy_conversion_tax_rate_1[Run,Region] &gt; 0 THEN
+Oil_Investments_in_Fossil_Energy_Capital[Run,Region] * energy_conversion_tax_rate_1[Run,Region]
 ELSE
 0</eqn>
 				<units>c$/Year</units>
@@ -11939,8 +11958,8 @@ ELSE
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>IF fuel_extraction_tax_rate_2[Run] &gt; 0 THEN
-Gas_Investments_in_Fossil_Fuel_Extraction_Capital[Run] * fuel_extraction_tax_rate_2[Run]
+				<eqn>IF fuel_extraction_tax_rate_2[Run,Region] &gt; 0 THEN
+Gas_Investments_in_Fossil_Fuel_Extraction_Capital[Run,Region] * fuel_extraction_tax_rate_2[Run,Region]
 ELSE
 0</eqn>
 				<units>c$/Year</units>
@@ -11950,8 +11969,8 @@ ELSE
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>IF energy_conversion_tax_rate_2[Run] &gt; 0 THEN
-Gas_Investments_in_Fossil_Energy_Capital[Run] * energy_conversion_tax_rate_2[Run]
+				<eqn>IF energy_conversion_tax_rate_2[Run,Region] &gt; 0 THEN
+Gas_Investments_in_Fossil_Energy_Capital[Run,Region] * energy_conversion_tax_rate_2[Run,Region]
 ELSE
 0</eqn>
 				<units>c$/Year</units>
@@ -11959,6 +11978,7 @@ ELSE
 			<aux name="tax rate 1" access="input">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>{Enter equation for use when not hooked up to other models}</eqn>
 				<units>dmnl</units>
@@ -11974,6 +11994,7 @@ ELSE
 			<aux name="tax rate 4" access="input">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>{Enter equation for use when not hooked up to other models}</eqn>
 				<units>dmnl</units>
@@ -11981,6 +12002,7 @@ ELSE
 			<aux name="tax revenue on investments in\nhydropower energy capacity" access="output" isee:autocreated="true">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>IF tax_rate_1 &gt; 0 THEN
 Investments_in_Hydropower_Energy_capacity * tax_rate_1
@@ -11994,7 +12016,7 @@ ELSE
 					<dim name="Region"/>
 				</dimensions>
 				<eqn>IF tax_rate_2 &gt; 0 THEN
-Investments_in_Biofuel_Capacity[Run] * tax_rate_2
+Investments_in_Biofuel_Capacity[Run,Region] * tax_rate_2
 ELSE
 0</eqn>
 				<units>c$/Year</units>
@@ -12002,6 +12024,7 @@ ELSE
 			<aux name="tax revenue on investments in\nnuclear energy capacity" access="output" isee:autocreated="true">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>IF tax_rate_4 &gt; 0 THEN
 Investments_in_Nuclear_Capacity * tax_rate_4
@@ -12014,8 +12037,8 @@ ELSE
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>IF fuel_extraction_tax_rate[Run] &lt; 0 THEN
--Coal_Investments_in_Fossil_Fuel_Extraction_Capital[Run] * fuel_extraction_tax_rate[Run]
+				<eqn>IF fuel_extraction_tax_rate[Run,Region] &lt; 0 THEN
+-Coal_Investments_in_Fossil_Fuel_Extraction_Capital[Run,Region] * fuel_extraction_tax_rate[Run,Region]
 ELSE
 0</eqn>
 				<units>c$/Year</units>
@@ -12025,8 +12048,8 @@ ELSE
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>IF energy_conversion_tax_rate[Run] &lt; 0 THEN
--Coal_Investments_in_Fossil_Energy_Capital[Run] * energy_conversion_tax_rate[Run]
+				<eqn>IF energy_conversion_tax_rate[Run,Region] &lt; 0 THEN
+-Coal_Investments_in_Fossil_Energy_Capital[Run,Region] * energy_conversion_tax_rate[Run,Region]
 ELSE
 0</eqn>
 				<units>c$/Year</units>
@@ -12036,8 +12059,8 @@ ELSE
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>IF fuel_extraction_tax_rate_1[Run] &lt; 0 THEN
--Oil_Investments_in_Fossil_Fuel_Extraction_Capital[Run] * fuel_extraction_tax_rate_1[Run]
+				<eqn>IF fuel_extraction_tax_rate_1[Run,Region] &lt; 0 THEN
+-Oil_Investments_in_Fossil_Fuel_Extraction_Capital[Run,Region] * fuel_extraction_tax_rate_1[Run,Region]
 ELSE
 0</eqn>
 				<units>c$/Year</units>
@@ -12047,8 +12070,8 @@ ELSE
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>IF energy_conversion_tax_rate_1[Run] &lt; 0 THEN
--Oil_Investments_in_Fossil_Energy_Capital[Run] * energy_conversion_tax_rate_1[Run]
+				<eqn>IF energy_conversion_tax_rate_1[Run,Region] &lt; 0 THEN
+-Oil_Investments_in_Fossil_Energy_Capital[Run,Region] * energy_conversion_tax_rate_1[Run,Region]
 ELSE
 0</eqn>
 				<units>c$/Year</units>
@@ -12058,8 +12081,8 @@ ELSE
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>IF fuel_extraction_tax_rate_2[Run] &lt; 0 THEN
--Gas_Investments_in_Fossil_Fuel_Extraction_Capital[Run] * fuel_extraction_tax_rate_2[Run]
+				<eqn>IF fuel_extraction_tax_rate_2[Run,Region] &lt; 0 THEN
+-Gas_Investments_in_Fossil_Fuel_Extraction_Capital[Run,Region] * fuel_extraction_tax_rate_2[Run,Region]
 ELSE
 0</eqn>
 				<units>c$/Year</units>
@@ -12069,8 +12092,8 @@ ELSE
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>IF energy_conversion_tax_rate_2[Run] &lt; 0 THEN
--Gas_Investments_in_Fossil_Energy_Capital[Run] * energy_conversion_tax_rate_2[Run]
+				<eqn>IF energy_conversion_tax_rate_2[Run,Region] &lt; 0 THEN
+-Gas_Investments_in_Fossil_Energy_Capital[Run,Region] * energy_conversion_tax_rate_2[Run,Region]
 ELSE
 0</eqn>
 				<units>c$/Year</units>
@@ -12078,6 +12101,7 @@ ELSE
 			<aux name="expenditure on subsidies for investments in\nhydropower energy capacity" access="output" isee:autocreated="true">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>IF tax_rate_1 &lt; 0 THEN
 -Investments_in_Hydropower_Energy_capacity * tax_rate_1
@@ -12091,7 +12115,7 @@ ELSE
 					<dim name="Region"/>
 				</dimensions>
 				<eqn>IF tax_rate_2 &lt; 0 THEN
--Investments_in_Biofuel_Capacity[Run] * tax_rate_2
+-Investments_in_Biofuel_Capacity[Run,Region] * tax_rate_2
 ELSE
 0</eqn>
 				<units>c$/Year</units>
@@ -12099,6 +12123,7 @@ ELSE
 			<aux name="expenditure on subsidies for investments in\nnuclear energy capacity" access="output" isee:autocreated="true">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>IF tax_rate_4 &lt; 0 THEN
 -Investments_in_Nuclear_Capacity * tax_rate_4
@@ -12111,7 +12136,7 @@ ELSE
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>sum_of_energy_taxes_in_real_terms[Run,World]*&quot;inflation_adjustment_b$_per_bc$&quot;[Run,Region]</eqn>
+				<eqn>sum_of_energy_taxes_in_real_terms[Run,Region]*&quot;inflation_adjustment_b$_per_bc$&quot;[Run,Region]</eqn>
 				<units>b$/year</units>
 			</aux>
 			<aux name="sum of energy subsidies in nominal terms">
@@ -12134,7 +12159,7 @@ ELSE
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>SMTH1(sum_of_energy_subsidies_in_nominal_terms[Run,World], time_to_pay_subsidies[World], 0)</eqn>
+				<eqn>SMTH1(sum_of_energy_subsidies_in_nominal_terms[Run,Region], time_to_pay_subsidies[Region], 0)</eqn>
 				<units>b$/year</units>
 			</aux>
 			<aux name="time to pay subsidies">
@@ -12160,9 +12185,9 @@ ELSE
 					<dim name="Region"/>
 				</dimensions>
 				<eqn>(tax_revenue_on_investments_in_coal_extraction + tax_revenue_on_investments_in_coal_energy_conversion + tax_revenue_on_investments_in_oil_extraction[Run,Region] + tax_revenue_on_investments_in_oil_energy_conversion + tax_revenue_on_investments_in_gas_extraction[Run,Region] + tax_revenue_on_investments_in_gas_energy_conversion +
-tax_revenue_on_investments_in_wind_energy_capacity[Run] +
-tax_revenue_on_investments_in_solar_energy_capacity[Run] +
- tax_revenue_on_investments_in_hydropower_energy_capacity[Run] + tax_revenue_on_investments_in_bio_fuel_energy_capacity[Run,Region] +  tax_revenue_on_investments_in_nuclear_energy_capacity[Run])/&quot;UNIT_c$_per_Bc$&quot;</eqn>
+tax_revenue_on_investments_in_wind_energy_capacity[Run,Region] +
+tax_revenue_on_investments_in_solar_energy_capacity[Run,Region] +
+ tax_revenue_on_investments_in_hydropower_energy_capacity[Run,Region] + tax_revenue_on_investments_in_bio_fuel_energy_capacity[Run,Region] +  tax_revenue_on_investments_in_nuclear_energy_capacity[Run,Region])/&quot;UNIT_c$_per_Bc$&quot;</eqn>
 				<units>bc$/year</units>
 			</aux>
 			<aux name="sum of energy subsidies\nin real terms">
@@ -12170,9 +12195,9 @@ tax_revenue_on_investments_in_solar_energy_capacity[Run] +
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>(expenditure_on_subsidies_for_investments_in_nuclear_energy_capacity[Run] + expenditure_on_subsidies_for_investments_in_bio_fuel_energy_capacity[Run,Region] + expenditure_on_subsidies_for_investments_in_hydropower_energy_capacity[Run] +
-expenditure_on_subsidies_for_investments_in_solar_energy_capacity[Run] +
-expenditure_on_subsidies_for_investments_in_wind_energy_capacity[Run] +
+				<eqn>(expenditure_on_subsidies_for_investments_in_nuclear_energy_capacity[Run,Region] + expenditure_on_subsidies_for_investments_in_bio_fuel_energy_capacity[Run,Region] + expenditure_on_subsidies_for_investments_in_hydropower_energy_capacity[Run,Region] +
+expenditure_on_subsidies_for_investments_in_solar_energy_capacity[Run,Region] +
+expenditure_on_subsidies_for_investments_in_wind_energy_capacity[Run,Region] +
 expenditure_on_subsidies_for_investments_in_gas_energy_conversion[Run,Region] + expenditure_on_subsidies_for_investments_in_gas_extraction[Run,Region] + expenditure_on_subsidies_for_investments_in_oil_energy_conversion[Run,Region] + expenditure_on_subsidies_for_investments_in_oil_extraction[Run,Region] + expenditure_on_subsidies_for_investments_in_coal_energy_conversion[Run,Region] +
  expenditure_on_subsidies_for_investments_in_coal_extraction[Run,Region])/&quot;UNIT_c$_per_Bc$&quot;</eqn>
 				<init_eqn>0</init_eqn>
@@ -12219,8 +12244,8 @@ expenditure_on_subsidies_for_investments_in_gas_energy_conversion[Run,Region] + 
 					<dim name="Region"/>
 				</dimensions>
 				<eqn>IF TIME &gt; start_year THEN
-minimum_percentage_of_taxes_spent_by_government
-ELSE historical_minimum_effect_of_deb_to_GDP_ratio_on_government_spending[Run,World]</eqn>
+minimum_percentage_of_taxes_spent_by_government[Region]
+ELSE historical_minimum_effect_of_deb_to_GDP_ratio_on_government_spending[Run,Region]</eqn>
 				<units>dmnl</units>
 			</aux>
 			<aux name="curvature effect of debt to GDP\nratio on government\nspending">
@@ -12239,7 +12264,7 @@ ELSE historical_minimum_effect_of_deb_to_GDP_ratio_on_government_spending[Run,Wo
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>computed_government_debt_to_GDP_ratio_target[Run]</eqn>
+				<eqn>computed_government_debt_to_GDP_ratio_target[Run,Region]</eqn>
 				<units>year</units>
 			</aux>
 			<aux name="effect start effect of debt to GDP\nratio on government spending">
@@ -12273,6 +12298,9 @@ ELSE historical_minimum_effect_of_deb_to_GDP_ratio_on_government_spending[Run,Wo
 				<units>b$/year</units>
 			</aux>
 			<aux name="minimum percentage of taxes spent by government" access="input">
+				<dimensions>
+					<dim name="Region"/>
+				</dimensions>
 				<eqn>0.9</eqn>
 				<units>dmnl</units>
 			</aux>
@@ -12304,6 +12332,7 @@ ELSE historical_minimum_effect_of_deb_to_GDP_ratio_on_government_spending[Run,Wo
 			<aux name="computed government debt to GDP ratio target" access="input">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>{Enter equation for use when not hooked up to other models}</eqn>
 				<units>year</units>
@@ -12342,7 +12371,7 @@ ELSE historical_minimum_effect_of_deb_to_GDP_ratio_on_government_spending[Run,Wo
 				<eqn>IF (switch_government_damage=0) AND TIME &gt; today THEN PREVIOUS (
 SELF[Run,Region],1) ELSE 1
 +
-sensitivity_of_STA_on_public_consumption[Run,World]*(Surface_Temperature_Anomaly[Run])</eqn>
+sensitivity_of_STA_on_public_consumption[Run,Region]*(Surface_Temperature_Anomaly[Run])</eqn>
 				<units>dmnl</units>
 			</aux>
 			<aux name="switch government damage" access="input">
@@ -12377,7 +12406,7 @@ sensitivity_of_STA_on_public_consumption[Run,World]*(Surface_Temperature_Anomaly
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>government_transfers[Run]/transfer_payment_recipients[Run,Region]/&quot;inflation_adjustment_b$_per_bc$_1&quot;[Run,Region]*&quot;UNIT_c$_per_Bc$&quot;/UNIT_p_per_mp[World]</eqn>
+				<eqn>government_transfers[Run]/transfer_payment_recipients[Run,Region]/&quot;inflation_adjustment_b$_per_bc$_1&quot;[Run,Region]*&quot;UNIT_c$_per_Bc$&quot;/UNIT_p_per_mp[Region]</eqn>
 				<units>c$/person/year</units>
 			</aux>
 			<aux name="inflation adjustment b$ per bc$ 1" access="input">
@@ -12558,7 +12587,7 @@ effect_of_STA_on_public_consumption,today_1)ELSE effect_of_STA_on_public_consump
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>Wage_Rate[Run,Region]*fraction_of_wages_as_pension[Run,World]</eqn>
+				<eqn>Wage_Rate[Run,Region]*fraction_of_wages_as_pension[Run,Region]</eqn>
 				<units>$/(Person*Year)</units>
 			</aux>
 			<aux name="transfer payments\nfor children">
@@ -12566,7 +12595,7 @@ effect_of_STA_on_public_consumption,today_1)ELSE effect_of_STA_on_public_consump
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>child_age_dependents[Run,World]*actual_transfer_payments_per_child[Run,Region]*UNIT_p_per_mp[World]</eqn>
+				<eqn>child_age_dependents[Run,Region]*actual_transfer_payments_per_child[Run,Region]*UNIT_p_per_mp[Region]</eqn>
 				<units>$/Year</units>
 			</aux>
 			<aux name="transfer payments for\nretirees">
@@ -12574,7 +12603,7 @@ effect_of_STA_on_public_consumption,today_1)ELSE effect_of_STA_on_public_consump
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>old_age_dependents[Run,World]*UNIT_p_per_mp[World]*actual_transfer_payments_per_retiree[Run,Region]</eqn>
+				<eqn>old_age_dependents[Run,Region]*UNIT_p_per_mp[Region]*actual_transfer_payments_per_retiree[Run,Region]</eqn>
 				<units>$/Year</units>
 			</aux>
 			<stock name="Wage Rate" access="input">
@@ -12628,7 +12657,7 @@ effect_of_STA_on_public_consumption,today_1)ELSE effect_of_STA_on_public_consump
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>Unemployed[Run]*actual_transfer_payments_per_unemployed[Run,Region]*UNIT_p_per_mp[World]</eqn>
+				<eqn>Unemployed[Run]*actual_transfer_payments_per_unemployed[Run,Region]*UNIT_p_per_mp[Region]</eqn>
 				<units>$/Year</units>
 			</aux>
 			<aux name="indicated\ntransfer payments per\nunemployed">
@@ -12636,7 +12665,7 @@ effect_of_STA_on_public_consumption,today_1)ELSE effect_of_STA_on_public_consump
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>fraction_of_wages_as_unemployment_payments[Run,World]*Wage_Rate[Run,Region]</eqn>
+				<eqn>fraction_of_wages_as_unemployment_payments[Run,Region]*Wage_Rate[Run,Region]</eqn>
 				<units>$/(Person*Year)</units>
 			</aux>
 			<aux name="public expenditure\navailable for investment\nand consumption">
@@ -12663,7 +12692,7 @@ effect_of_STA_on_public_consumption,today_1)ELSE effect_of_STA_on_public_consump
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>public_expenditure_available_for_investment_and_consumption[Run,Region]*normal_share_of_public_expenditure_available_for_investment_and_consumption_to_consumption[Run,World]</eqn>
+				<eqn>public_expenditure_available_for_investment_and_consumption[Run,Region]*normal_share_of_public_expenditure_available_for_investment_and_consumption_to_consumption[Run,Region]</eqn>
 				<units>b$/year</units>
 			</aux>
 			<aux name="STA driven\ngovernment\nconsumption">
@@ -12699,7 +12728,7 @@ effect_of_STA_on_public_consumption,today_1)ELSE effect_of_STA_on_public_consump
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>SMTH1(indicated_transfer_payments_per_unemployed[Run,Region], time_for_government_to_change_transfers[Run,World]) * effect_of_additional_transfers_on_individual_sources_of_transfer_payments[Run,Region]</eqn>
+				<eqn>SMTH1(indicated_transfer_payments_per_unemployed[Run,Region], time_for_government_to_change_transfers[Run,Region]) * effect_of_additional_transfers_on_individual_sources_of_transfer_payments[Run,Region]</eqn>
 				<isee:delay_aux/>
 				<units>$/(Person*Year)</units>
 			</aux>
@@ -12708,7 +12737,7 @@ effect_of_STA_on_public_consumption,today_1)ELSE effect_of_STA_on_public_consump
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>Wage_Rate[Run,Region]*fraction_of_wages_as_child_transfer_payments[Run,World]</eqn>
+				<eqn>Wage_Rate[Run,Region]*fraction_of_wages_as_child_transfer_payments[Run,Region]</eqn>
 				<units>$/(Person*Year)</units>
 			</aux>
 			<aux name="effect of additional\ntransfers on individual\nsources of transfer payments">
@@ -12736,6 +12765,7 @@ ELSE
 			<aux name="expenditure on subsidies for investments in\nsolar\nenergy capacity" access="output" isee:autocreated="true">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>IF tax_rate_5 &lt; 0 THEN
 -Investments_in_solar_Energy_Capacity * tax_rate_5
@@ -12746,6 +12776,7 @@ ELSE
 			<aux name="Investments in\nsolar\nEnergy Capacity" access="input">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>{Enter equation for use when not hooked up to other models}</eqn>
 				<units>c$/Year</units>
@@ -12753,6 +12784,7 @@ ELSE
 			<aux name="tax revenue on investments in\nsolar energy capacity" access="output" isee:autocreated="true">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>IF tax_rate_5 &gt; 0 THEN
 Investments_in_solar_Energy_Capacity * tax_rate_5
@@ -12763,6 +12795,7 @@ ELSE
 			<aux name="tax rate 5" access="input">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>{Enter equation for use when not hooked up to other models}</eqn>
 				<units>dmnl</units>
@@ -12770,6 +12803,7 @@ ELSE
 			<aux name="expenditure on subsidies for investments in\nwind\nenergy capacity" access="output" isee:autocreated="true">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>IF tax_rate_6 &lt; 0 THEN
 -Investments_in_wind_Energy_Capacity * tax_rate_6
@@ -12780,6 +12814,7 @@ ELSE
 			<aux name="Investments in\nwind\nEnergy Capacity" access="input">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>{Enter equation for use when not hooked up to other models}</eqn>
 				<units>c$/Year</units>
@@ -12787,6 +12822,7 @@ ELSE
 			<aux name="tax revenue on investments in\nwind energy capacity" access="output" isee:autocreated="true">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>IF tax_rate_6 &gt; 0 THEN
 Investments_in_wind_Energy_Capacity * tax_rate_6
@@ -12797,6 +12833,7 @@ ELSE
 			<aux name="tax rate 6" access="input">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>{Enter equation for use when not hooked up to other models}</eqn>
 				<units>dmnl</units>
@@ -14086,7 +14123,7 @@ In massive inflation spikes prevents the government from not doing any consumpti
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>initial_inflation_index[Run,World]</eqn>
+				<eqn>initial_inflation_index[Run,Region]</eqn>
 				<inflow>change_in_inflation_index</inflow>
 				<units>dmnl</units>
 			</stock>
@@ -14121,7 +14158,7 @@ In massive inflation spikes prevents the government from not doing any consumpti
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>INFLATION_IMPACT_GROWTH_RATE(aggregate_income[Run,Region], 1, initial_income_growth_rate[Run,World])</eqn>
+				<eqn>INFLATION_IMPACT_GROWTH_RATE(aggregate_income[Run,Region], 1, initial_income_growth_rate[Run,Region])</eqn>
 				<units>1/year</units>
 			</aux>
 			<aux name="initial\nincome\ngrowth rate">
@@ -14190,7 +14227,7 @@ In massive inflation spikes prevents the government from not doing any consumpti
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>MAX(0, inflation_gap/inflation_adjustment_time[Run,World])</eqn>
+				<eqn>MAX(0, inflation_gap/inflation_adjustment_time[Run,Region])</eqn>
 				<non_negative/>
 				<units>1/year/Year</units>
 			</flow>
@@ -14235,6 +14272,7 @@ In massive inflation spikes prevents the government from not doing any consumpti
 			<aux name="crop demand" access="input">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>{Enter equation for use when not hooked up to other models}</eqn>
 				<units>PCal/year</units>
@@ -14244,7 +14282,7 @@ In massive inflation spikes prevents the government from not doing any consumpti
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>INFLATION_IMPACT_GROWTH_RATE(crop_production, 1, initial_crop_supply_growth_rate[Run,World])</eqn>
+				<eqn>INFLATION_IMPACT_GROWTH_RATE(crop_production, 1, initial_crop_supply_growth_rate[Run,Region])</eqn>
 				<units>dmnl/year</units>
 			</aux>
 			<aux name="initial crop supply\ngrowth rate">
@@ -14263,7 +14301,7 @@ In massive inflation spikes prevents the government from not doing any consumpti
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>INFLATION_IMPACT_GROWTH_RATE(crop_demand[Run], 1, initial_crop_demand_growth_rate[Run,World])</eqn>
+				<eqn>INFLATION_IMPACT_GROWTH_RATE(crop_demand[Run,Region], 1, initial_crop_demand_growth_rate[Run,Region])</eqn>
 				<units>dmnl/year</units>
 			</aux>
 			<aux name="initial crop\ndemand\ngrowth rate">
@@ -14306,7 +14344,7 @@ In massive inflation spikes prevents the government from not doing any consumpti
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>INFLATION_IMPACT_GROWTH_RATE(animal_products_production, 1, initial_animal_products_production_growth_rate[Run,World])</eqn>
+				<eqn>INFLATION_IMPACT_GROWTH_RATE(animal_products_production, 1, initial_animal_products_production_growth_rate[Run,Region])</eqn>
 				<units>dmnl/year</units>
 			</aux>
 			<aux name="initial animal\nproducts production\ngrowth rate">
@@ -14325,7 +14363,7 @@ In massive inflation spikes prevents the government from not doing any consumpti
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>INFLATION_IMPACT_GROWTH_RATE(animal_products_demand[Run,Region], 1, initial_animal_products_demand_growth_rate[Run,World])</eqn>
+				<eqn>INFLATION_IMPACT_GROWTH_RATE(animal_products_demand[Run,Region], 1, initial_animal_products_demand_growth_rate[Run,Region])</eqn>
 				<units>dmnl/year</units>
 			</aux>
 			<aux name="initial animal\nproducts demand\ngrowth rate">
@@ -14355,7 +14393,7 @@ In massive inflation spikes prevents the government from not doing any consumpti
 					<dim name="Region"/>
 				</dimensions>
 				<eqn>MAX(0, 
-agriculture_share_of_GDP_starting_point_determinant[Run,World]*EXP(agriculture_share_of_GDP_slope[Run,World]*relative_change_in_GDP_per_person[Run,Region])+Agriculture_share_of_GDP_intercept[Run,World])</eqn>
+agriculture_share_of_GDP_starting_point_determinant[Run,Region]*EXP(agriculture_share_of_GDP_slope[Run,Region]*relative_change_in_GDP_per_person[Run,Region])+Agriculture_share_of_GDP_intercept[Run,Region])</eqn>
 				<units>dmnl</units>
 			</aux>
 			<aux name="Agriculture share\nof GDP\nintercept">
@@ -14421,7 +14459,7 @@ agriculture_share_of_GDP_starting_point_determinant[Run,World]*EXP(agriculture_s
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>INFLATION_IMPACT_GROWTH_RATE(Employed[Run,Region], 1, initial_employed_growth[Run,World])</eqn>
+				<eqn>INFLATION_IMPACT_GROWTH_RATE(Employed[Run,Region], 1, initial_employed_growth[Run,Region])</eqn>
 				<units>dmnl/year</units>
 			</aux>
 			<aux name="initial employed growth">
@@ -14472,7 +14510,7 @@ agriculture_share_of_GDP_starting_point_determinant[Run,World]*EXP(agriculture_s
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>-MIN(0, inflation_gap/deflation_adjustment_time[Run,World])</eqn>
+				<eqn>-MIN(0, inflation_gap/deflation_adjustment_time[Run,Region])</eqn>
 				<non_negative/>
 				<units>dmnl/year^2</units>
 			</flow>
@@ -14526,7 +14564,7 @@ agriculture_share_of_GDP_starting_point_determinant[Run,World]*EXP(agriculture_s
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>energy_market_balance[Run,Region]*weight_of_marginal_energy_cost_inflation[Run,World]</eqn>
+				<eqn>energy_market_balance[Run,Region]*weight_of_marginal_energy_cost_inflation[Run,Region]</eqn>
 				<units>dmnl/year</units>
 			</aux>
 			<aux name="weight of marginal energy\ncost inflation">
@@ -14553,7 +14591,7 @@ agriculture_share_of_GDP_starting_point_determinant[Run,World]*EXP(agriculture_s
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>INFLATION_IMPACT_GROWTH_RATE(Cropland[Run,Region], time_to_measure_growth_rate[Run,World], initial_growth_rate_in_cropland[Run,World])</eqn>
+				<eqn>INFLATION_IMPACT_GROWTH_RATE(Cropland[Run,Region], time_to_measure_growth_rate[Run,Region], initial_growth_rate_in_cropland[Run,Region])</eqn>
 				<units>dmnl/year</units>
 			</aux>
 			<aux name="cropland inflation contribution">
@@ -14561,7 +14599,7 @@ agriculture_share_of_GDP_starting_point_determinant[Run,World]*EXP(agriculture_s
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>growth_rate_in_cropland[Run,Region]*weight_of_cropland_inflation_contribution[Run,World]</eqn>
+				<eqn>growth_rate_in_cropland[Run,Region]*weight_of_cropland_inflation_contribution[Run,Region]</eqn>
 				<units>dmnl/year</units>
 			</aux>
 			<aux name="weight of cropland inflation contribution">
@@ -14598,7 +14636,7 @@ agriculture_share_of_GDP_starting_point_determinant[Run,World]*EXP(agriculture_s
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>INFLATION_IMPACT_GROWTH_RATE(fertilizer_used_per_unit_of_crop_production[Run], time_to_measure_growth_rate[Run,World])</eqn>
+				<eqn>INFLATION_IMPACT_GROWTH_RATE(fertilizer_used_per_unit_of_crop_production[Run], time_to_measure_growth_rate[Run,Region])</eqn>
 				<units>1/year</units>
 			</aux>
 			<aux name="fertilizer used\nper unit of crop production\ninflation contribution">
@@ -14606,7 +14644,7 @@ agriculture_share_of_GDP_starting_point_determinant[Run,World]*EXP(agriculture_s
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>growth_rate_in_fertilizer_used_per_unit_of_crop_production[Run,Region]*weight_of_fertilizer_used_per_unit_of_crop_production[Run,World]</eqn>
+				<eqn>growth_rate_in_fertilizer_used_per_unit_of_crop_production[Run,Region]*weight_of_fertilizer_used_per_unit_of_crop_production[Run,Region]</eqn>
 				<units>dmnl/year</units>
 			</aux>
 			<aux name="weight of fertilizer used per unit of crop production">
@@ -14623,6 +14661,7 @@ agriculture_share_of_GDP_starting_point_determinant[Run,World]*EXP(agriculture_s
 			<aux name="grazing land" access="input">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>{Enter equation for use when not hooked up to other models}</eqn>
 				<units>Mha</units>
@@ -14632,7 +14671,7 @@ agriculture_share_of_GDP_starting_point_determinant[Run,World]*EXP(agriculture_s
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>INFLATION_IMPACT_GROWTH_RATE(grazing_land[Run], time_to_measure_growth_rate[Run,World], initial_growth_rate_in_grazing_land[Run,World])</eqn>
+				<eqn>INFLATION_IMPACT_GROWTH_RATE(grazing_land[Run,Region], time_to_measure_growth_rate[Run,Region], initial_growth_rate_in_grazing_land[Run,Region])</eqn>
 				<units>dmnl/year</units>
 			</aux>
 			<aux name="grazing land inflation contribution">
@@ -14640,7 +14679,7 @@ agriculture_share_of_GDP_starting_point_determinant[Run,World]*EXP(agriculture_s
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>growth_rate_in_grazing_land[Run,Region]*weight_of_grazing_land_inflation_contribution[Run,World]</eqn>
+				<eqn>growth_rate_in_grazing_land[Run,Region]*weight_of_grazing_land_inflation_contribution[Run,Region]</eqn>
 				<units>dmnl/year</units>
 			</aux>
 			<aux name="weight of grazing land inflation contribution">
@@ -14677,7 +14716,7 @@ agriculture_share_of_GDP_starting_point_determinant[Run,World]*EXP(agriculture_s
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>INFLATION_IMPACT_GROWTH_RATE(irrigation_water_used_per_unit_of_crop_production[Run], time_to_measure_growth_rate[Run,World])</eqn>
+				<eqn>INFLATION_IMPACT_GROWTH_RATE(irrigation_water_used_per_unit_of_crop_production[Run], time_to_measure_growth_rate[Run,Region])</eqn>
 				<units>dmnl/year</units>
 			</aux>
 			<aux name="irrigation water used per unit of crop production inflation contribution">
@@ -14685,7 +14724,7 @@ agriculture_share_of_GDP_starting_point_determinant[Run,World]*EXP(agriculture_s
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>growth_rate_in_irrigation_water_used_per_unit_of_crop_production[Run,Region]*weight_of_irrigation_water_used_per_unit_of_crop_production_inflation_contribution[Run,World]</eqn>
+				<eqn>growth_rate_in_irrigation_water_used_per_unit_of_crop_production[Run,Region]*weight_of_irrigation_water_used_per_unit_of_crop_production_inflation_contribution[Run,Region]</eqn>
 				<units>dmnl/year</units>
 			</aux>
 			<aux name="weight of irrigation water used per unit of crop production inflation contribution">
@@ -14758,7 +14797,7 @@ agriculture_share_of_GDP_starting_point_determinant[Run,World]*EXP(agriculture_s
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>Inflation_Index[Run,World]*&quot;unit_b$_per_bc$&quot;[World]</eqn>
+				<eqn>Inflation_Index[Run,Region]*&quot;unit_b$_per_bc$&quot;[Region]</eqn>
 				<units>b$/bc$</units>
 			</aux>
 			<aux name="unit b$ per bc$">
@@ -14774,7 +14813,7 @@ agriculture_share_of_GDP_starting_point_determinant[Run,World]*EXP(agriculture_s
 				<dimensions>
 					<dim name="Run"/>
 				</dimensions>
-				<eqn>&quot;unit_$_per_c$&quot;[World]*Inflation_Index[Run,World]</eqn>
+				<eqn>&quot;unit_$_per_c$&quot;[Region]*Inflation_Index[Run,Region]</eqn>
 				<units>$/c$</units>
 			</aux>
 			<aux name="unit $ per c$">
@@ -14799,7 +14838,7 @@ agriculture_share_of_GDP_starting_point_determinant[Run,World]*EXP(agriculture_s
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>Inflation_Rate[Run,Region]*UNIT_Percent[World]</eqn>
+				<eqn>Inflation_Rate[Run,Region]*UNIT_Percent[Region]</eqn>
 				<units>%/Years</units>
 			</aux>
 			<aux name="UNIT Percent" access="output" isee:autocreated="true">
@@ -14818,7 +14857,7 @@ agriculture_share_of_GDP_starting_point_determinant[Run,World]*EXP(agriculture_s
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>Nominal_GDP[Run,Region]-&quot;Real_GDP_in_2021c$&quot;[Run,Region]*unit_fixer[World]</eqn>
+				<eqn>Nominal_GDP[Run,Region]-&quot;Real_GDP_in_2021c$&quot;[Run,Region]*unit_fixer[Region]</eqn>
 				<units>b$/year</units>
 			</aux>
 			<aux name="unit fixer">
@@ -14851,7 +14890,7 @@ agriculture_share_of_GDP_starting_point_determinant[Run,World]*EXP(agriculture_s
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>INFLATION_IMPACT_GROWTH_RATE(Total_Energy_Output[Run,Region], 1, initial_energy_supply_growth_rate[Run,World])</eqn>
+				<eqn>INFLATION_IMPACT_GROWTH_RATE(Total_Energy_Output[Run,Region], 1, initial_energy_supply_growth_rate[Run,Region])</eqn>
 				<units>dmnl/year</units>
 			</aux>
 			<aux name="initial energy supply\ngrowth rate">
@@ -14870,7 +14909,7 @@ agriculture_share_of_GDP_starting_point_determinant[Run,World]*EXP(agriculture_s
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>INFLATION_IMPACT_GROWTH_RATE(demand_for_energy[Run,Region], 1, initial_energy_demand_growth_rate[Run,World])</eqn>
+				<eqn>INFLATION_IMPACT_GROWTH_RATE(demand_for_energy[Run,Region], 1, initial_energy_demand_growth_rate[Run,Region])</eqn>
 				<units>dmnl/year</units>
 			</aux>
 			<aux name="initial energy\ndemand\ngrowth rate">
@@ -15364,10 +15403,10 @@ ELSE
 				<stacked_container uid="95" x="543.773" y="1395">
 					<graph width="350" height="250" type="time_series" show_grid="false" isee:tick_type="none" include_units_in_legend="false" plot_numbers="false" isee:label_pie_slices="false" isee:show_pie_borders="true" num_x_grid_lines="0" num_y_grid_lines="0" num_x_labels="5" num_y_labels="3" isee:fill_intensity="0.1" to="2023" from="2000" isee:allow_zero_axis="true" left_axis_multi_scale="false" left_axis_auto_scale="true" left_include_units="true" right_axis_multi_scale="false" right_axis_auto_scale="true" right_include_units="true">
 						<plot color="blue" isee:keep_zero_visible="true" pen_width="1" index="0" show_y_axis="true">
-							<entity name="GDP.Nominal_GDP[1, World]"/>
+							<entity name="GDP.Nominal_GDP[1, ?]"/>
 						</plot>
 						<plot color="red" isee:keep_zero_visible="true" pen_width="1" index="1" show_y_axis="true">
-							<entity name='GDP."Real_GDP_in_2021c$"[1, World]'/>
+							<entity name='GDP."Real_GDP_in_2021c$"[1, ?]'/>
 						</plot>
 					</graph>
 				</stacked_container>
@@ -15497,7 +15536,7 @@ ELSE
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>(indicated_firms_innovation_orientation[Run,Region]-Firms_Innovation_Orientation[Run,Region])/time_for_firms_to_adjust_innovation_orientation[Run,World]</eqn>
+				<eqn>(indicated_firms_innovation_orientation[Run,Region]-Firms_Innovation_Orientation[Run,Region])/time_for_firms_to_adjust_innovation_orientation[Run,Region]</eqn>
 				<units>dmnl/year</units>
 			</flow>
 			<aux name="indicated firms innovation orientation">
@@ -15524,7 +15563,7 @@ ELSE
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>1+sensitivity_of_effect_of_cash_reserve_growth_rate_on_firms_innovation_orientation[Run,World]*(relative_cash_reserve_growth_rate[Run,Region]-1)</eqn>
+				<eqn>1+sensitivity_of_effect_of_cash_reserve_growth_rate_on_firms_innovation_orientation[Run,Region]*(relative_cash_reserve_growth_rate[Run,Region]-1)</eqn>
 				<units>dmnl</units>
 			</aux>
 			<aux name="sensitivity of effect of cash reserve\ngrowth rate on firms\ninnovation orientation">
@@ -15554,7 +15593,7 @@ ELSE
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>cash_reserve_growth_rate[Run,Region]/reference_cash_reserve_growth_rate[Run,World]</eqn>
+				<eqn>cash_reserve_growth_rate[Run,Region]/reference_cash_reserve_growth_rate[Run,Region]</eqn>
 				<units>dmnl</units>
 			</aux>
 			<aux name="cash reserve growth\nrate">
@@ -15570,7 +15609,7 @@ ELSE
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>SMTH1(Firms_Innovation_Orientation[Run,Region], firms_reference_formation_time[Run,World])</eqn>
+				<eqn>SMTH1(Firms_Innovation_Orientation[Run,Region], firms_reference_formation_time[Run,Region])</eqn>
 				<isee:delay_aux/>
 				<units>dmnl</units>
 			</aux>

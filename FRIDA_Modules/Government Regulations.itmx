@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xmile version="1.0" xmlns="http://docs.oasis-open.org/xmile/ns/XMILE/v1.0" xmlns:isee="http://iseesystems.com/XMILE">
 	<header>
-		<smile version="1.0" namespace="std, isee" uses_arrays="1"/>
+		<smile version="1.0" namespace="std, isee" uses_arrays="2"/>
 		<name>Government Regulations</name>
 		<uuid>cf8a5bb3-8c41-49fc-b752-b9a407cc4656</uuid>
 		<vendor>isee systems, inc.</vendor>
@@ -13,6 +13,10 @@
 		<dt reciprocal="true">8</dt>
 	</sim_specs>
 	<dimensions>
+		<dim name="Region">
+			<elem name="World"/>
+			<elem name="Brazil"/>
+		</dim>
 		<dim name="Run" size="1"/>
 	</dimensions>
 	<isee:prefs saved_runs="5" keep="false" show_module_prefix="true" live_update_on_drag="true" show_restore_buttons="false" layer="model" isee:design="Deluxe Prev-Next Blue Green Pastel" isee:design_custom="false" interface_secure_mode="true" interface_scale_ui="true" interface_max_page_width="10000" interface_max_page_height="10000" interface_min_page_width="0" interface_min_page_height="0" rifp="true">
@@ -563,6 +567,9 @@ https://www.nature.com/articles/s41586-024-08106-4
 			<aux name="inflation goal policy">
 				<doc>${Policy}
 </doc>
+				<dimensions>
+					<dim name="Region"/>
+				</dimensions>
 				<eqn>0.02</eqn>
 				<format precision="0.001"/>
 				<range min="0" max="0.1"/>
@@ -571,6 +578,9 @@ https://www.nature.com/articles/s41586-024-08106-4
 			<aux name="unemployment goal policy">
 				<doc>${Policy}
 </doc>
+				<dimensions>
+					<dim name="Region"/>
+				</dimensions>
 				<eqn>0.05</eqn>
 				<format precision="0.001"/>
 				<range min="0" max="0.15"/>
@@ -585,7 +595,7 @@ https://www.nature.com/articles/s41586-024-08106-4
 				<units>c$/(kWh/Years)</units>
 			</isee:placeholder>
 			<isee:placeholder name="renewable capacity placeholder" isee:derived_units="true">
-				<eqn>Government_Regulations.tax_rate_on_newly_installed_solar_energy_capacity{Solar} + Government_Regulations.tax_rate_on_newly_installed_wind_energy_capacity{Wind} + Government_Regulations.tax_rate_on_newly_installed_hydropower_capacity{Hydropower} + Government_Regulations.tax_rate_on_newly_installed_nuclear_energy_capacity{Nuclear} + Government_Regulations.tax_rate_on_newly_installed_bio_energy_capacity{Bio Energy}</eqn>
+				<eqn>Government_Regulations.tax_rate_on_newly_installed_solar_energy_capacity{Solar} + Government_Regulations.tax_rate_on_newly_installed_wind_energy_capacity[Region]{Wind} + Government_Regulations.tax_rate_on_newly_installed_hydropower_capacity{Hydropower} + Government_Regulations.tax_rate_on_newly_installed_nuclear_energy_capacity{Nuclear} + Government_Regulations.tax_rate_on_newly_installed_bio_energy_capacity{Bio Energy}</eqn>
 				<units>c$/(kWh/Years)</units>
 			</isee:placeholder>
 			<isee:placeholder name="rate of decommissioning\nextraction capital" isee:derived_units="true">
@@ -668,6 +678,9 @@ This policy lever simulates stricter/looser building standards for concrete stru
 			<aux name="government debt to\nGDP ratio target">
 				<doc>${Policy}
 </doc>
+				<dimensions>
+					<dim name="Region"/>
+				</dimensions>
 				<eqn>1.2</eqn>
 				<format precision="0.01"/>
 				<range min="0.5" max="2"/>
@@ -676,6 +689,9 @@ This policy lever simulates stricter/looser building standards for concrete stru
 			<aux name="minimum percentage of\ntaxes spent by government" access="output" isee:autocreated="true">
 				<doc>${Policy}
 </doc>
+				<dimensions>
+					<dim name="Region"/>
+				</dimensions>
 				<eqn>0.9</eqn>
 				<format precision="0.01"/>
 				<range min="0.5" max="1"/>
@@ -717,6 +733,9 @@ This policy lever simulates stricter/looser building standards for concrete stru
 			<aux name="time for government to change\nthe debt to GDP ratio target">
 				<doc>${Policy}
 </doc>
+				<dimensions>
+					<dim name="Region"/>
+				</dimensions>
 				<eqn>10</eqn>
 				<range min="5" max="50"/>
 				<units>years</units>
@@ -724,9 +743,10 @@ This policy lever simulates stricter/looser building standards for concrete stru
 			<aux name="computed government debt to GDP ratio target" access="output" isee:autocreated="true">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>calibration_period_government_debt_to_GDP_ratio_target+
-RAMP((government_debt_to_GDP_ratio_target-calibration_period_government_debt_to_GDP_ratio_target)/time_for_government_to_change_the_debt_to_GDP_ratio_target, debt_to_gdp_level_start_year, debt_to_gdp_level_start_year+time_for_government_to_change_the_debt_to_GDP_ratio_target)</eqn>
+RAMP((government_debt_to_GDP_ratio_target[Region]-calibration_period_government_debt_to_GDP_ratio_target)/time_for_government_to_change_the_debt_to_GDP_ratio_target[Region], debt_to_gdp_level_start_year[Region], debt_to_gdp_level_start_year[Region]+time_for_government_to_change_the_debt_to_GDP_ratio_target[Region])</eqn>
 				<units>year</units>
 			</aux>
 			<aux name="calibration period\ngovernment debt to GDP ratio target">
@@ -734,6 +754,7 @@ RAMP((government_debt_to_GDP_ratio_target-calibration_period_government_debt_to_
 </doc>
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>1.2</eqn>
 				<range min="1" max="1.5"/>
@@ -742,6 +763,9 @@ RAMP((government_debt_to_GDP_ratio_target-calibration_period_government_debt_to_
 			<aux name="time to start\ncentral bank inflation\npolicy">
 				<doc>${Policy}
 </doc>
+				<dimensions>
+					<dim name="Region"/>
+				</dimensions>
 				<eqn>2025</eqn>
 				<format precision="1"/>
 				<range min="2025" max="2075"/>
@@ -750,6 +774,9 @@ RAMP((government_debt_to_GDP_ratio_target-calibration_period_government_debt_to_
 			<aux name="max change per year in inflation">
 				<doc>${Policy}
 </doc>
+				<dimensions>
+					<dim name="Region"/>
+				</dimensions>
 				<eqn>.001</eqn>
 				<format precision="0.0001"/>
 				<range min="0.0001" max="0.02"/>
@@ -758,6 +785,9 @@ RAMP((government_debt_to_GDP_ratio_target-calibration_period_government_debt_to_
 			<aux name="max change per year\nin unemployment">
 				<doc>${Policy}
 </doc>
+				<dimensions>
+					<dim name="Region"/>
+				</dimensions>
 				<eqn>.001</eqn>
 				<format precision="0.0001"/>
 				<range min="0.0001" max="0.02"/>
@@ -766,8 +796,9 @@ RAMP((government_debt_to_GDP_ratio_target-calibration_period_government_debt_to_
 			<aux name="actual inflation goal" access="output">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<eqn>historical_inflation_goal+RAMP(SIGN(inflation_goal_policy-historical_inflation_goal)*max_change_per_year_in_inflation, time_to_start_central_bank_inflation_policy, time_to_start_central_bank_inflation_policy + ABS(historical_inflation_goal-inflation_goal_policy)/max_change_per_year_in_inflation )</eqn>
+				<eqn>historical_inflation_goal+RAMP(SIGN(inflation_goal_policy[Region]-historical_inflation_goal)*max_change_per_year_in_inflation[Region], time_to_start_central_bank_inflation_policy[Region], time_to_start_central_bank_inflation_policy[Region] + ABS(historical_inflation_goal-inflation_goal_policy[Region])/max_change_per_year_in_inflation[Region] )</eqn>
 				<units>1/year</units>
 			</aux>
 			<aux name="historical inflation goal">
@@ -775,6 +806,7 @@ RAMP((government_debt_to_GDP_ratio_target-calibration_period_government_debt_to_
 </doc>
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>0.02</eqn>
 				<range min="0.01" max="0.04"/>
@@ -783,8 +815,9 @@ RAMP((government_debt_to_GDP_ratio_target-calibration_period_government_debt_to_
 			<aux name="actual unemployment goal" access="output">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<eqn>historical_unemployment_goal+RAMP(SIGN(unemployment_goal_policy-historical_unemployment_goal)*max_change_per_year_in_unemployment, time_to_start_central_bank_unemployment_policy, time_to_start_central_bank_unemployment_policy + ABS(historical_unemployment_goal-unemployment_goal_policy)/max_change_per_year_in_unemployment )</eqn>
+				<eqn>historical_unemployment_goal+RAMP(SIGN(unemployment_goal_policy[Region]-historical_unemployment_goal)*max_change_per_year_in_unemployment[Region], time_to_start_central_bank_unemployment_policy[Region], time_to_start_central_bank_unemployment_policy[Region] + ABS(historical_unemployment_goal-unemployment_goal_policy[Region])/max_change_per_year_in_unemployment[Region] )</eqn>
 				<units>dmnl</units>
 			</aux>
 			<aux name="historical unemployment goal">
@@ -792,6 +825,7 @@ RAMP((government_debt_to_GDP_ratio_target-calibration_period_government_debt_to_
 </doc>
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>0.05</eqn>
 				<range min="0.02" max="0.08"/>
@@ -811,6 +845,9 @@ RAMP((government_debt_to_GDP_ratio_target-calibration_period_government_debt_to_
 			<aux name="tax rate on newly installed\nwind\nenergy capacity" access="output" isee:autocreated="true">
 				<doc>${Policy}
 </doc>
+				<dimensions>
+					<dim name="Region"/>
+				</dimensions>
 				<eqn>TIME</eqn>
 				<gf>
 					<xscale min="2020" max="2100"/>
@@ -830,6 +867,9 @@ RAMP((government_debt_to_GDP_ratio_target-calibration_period_government_debt_to_
 			<aux name="time to start\ncentral bank unemployment\npolicy">
 				<doc>${Policy}
 </doc>
+				<dimensions>
+					<dim name="Region"/>
+				</dimensions>
 				<eqn>2025</eqn>
 				<format precision="1"/>
 				<range min="2025" max="2075"/>
@@ -838,6 +878,9 @@ RAMP((government_debt_to_GDP_ratio_target-calibration_period_government_debt_to_
 			<aux name="debt to gdp level start year">
 				<doc>${Policy}
 </doc>
+				<dimensions>
+					<dim name="Region"/>
+				</dimensions>
 				<eqn>2025</eqn>
 				<format precision="1"/>
 				<range min="2025" max="2100"/>
@@ -930,7 +973,7 @@ RAMP((government_debt_to_GDP_ratio_target-calibration_period_government_debt_to_
 				<isee:iframe color="black" background="white" text_align="left" vertical_text_align="top" font_size="12pt" border_width="thin" border_style="solid"/>
 				<isee:financial_table color="black" background="#E0E0E0" text_align="right" font_size="12pt" hide_border="false" auto_fit="true" first_column_width="250" other_column_width="100" header_font_style="normal" header_font_weight="bold" header_text_decoration="none" header_text_align="center" header_vertical_text_align="center" header_font_color="black" header_font_family="Arial" header_font_size="14pt" header_text_padding="2" header_text_border_color="black" header_text_border_width="thin" header_text_border_style="none"/>
 			</style>
-			<view isee:show_pages="false" background="white" page_width="768" page_height="588" isee:page_cols="2" isee:page_rows="3" isee:scroll_y="840" isee:popup_graphs_are_comparative="true" isee:enable_non_negative_highlights="false" type="stock_flow">
+			<view isee:show_pages="false" background="white" page_width="1026" page_height="786" isee:page_cols="2" isee:page_rows="3" isee:scroll_x="165" isee:scroll_y="591.667" zoom="60" isee:popup_graphs_are_comparative="true" isee:enable_non_negative_highlights="false" type="stock_flow">
 				<style color="black" background="white" font_style="normal" font_weight="normal" text_decoration="none" text_align="center" vertical_text_align="center" font_color="black" font_family="Arial" font_size="10pt" padding="2" border_color="black" border_width="thin" border_style="none">
 					<stock color="blue" background="white" font_color="blue" font_size="11pt" label_side="top">
 						<shape type="rectangle" width="45" height="35"/>

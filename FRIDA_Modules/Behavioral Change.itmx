@@ -412,7 +412,7 @@
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>(indicated_average_desired_demand_per_capita[Run,World]-Desired_Average_Daily_Demand_Per_Capita[Run,Region])/time_to_adjust_consumption_pattern[Run,Region]</eqn>
+				<eqn>(indicated_average_desired_demand_per_capita[Run,Region]-Desired_Average_Daily_Demand_Per_Capita[Run,Region])/time_to_adjust_consumption_pattern[Run,Region]</eqn>
 				<units>kcal/person/day/Year</units>
 			</flow>
 			<stock name="Desired Average Daily\nDemand Per Capita">
@@ -436,8 +436,9 @@
 			<aux name="average yearly\ndemand per capita" access="output" isee:autocreated="true">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<eqn>average_daily_demand_per_capita[Run,World]*UNIT_days_per_year[World]*UNIT_p_per_Mp[World]/UNIT_cal_per_pcal[World]</eqn>
+				<eqn>average_daily_demand_per_capita[Run,Region]*UNIT_days_per_year[Region]*UNIT_p_per_Mp[Region]/UNIT_cal_per_pcal[Region]</eqn>
 				<units>PCal/Mp/Year</units>
 			</aux>
 			<aux name="UNIT days per year">
@@ -495,7 +496,7 @@
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>MIN(total_yearly_demand, animal_products_production_1[Run, World])</eqn>
+				<eqn>MIN(total_yearly_demand, animal_products_production_1[Run, Region])</eqn>
 				<units>PCal/Year</units>
 			</aux>
 			<aux name="average daily\nconsumption per capita">
@@ -620,7 +621,7 @@
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>Desired_Average_Daily_Demand_Per_Capita[Run,Region]*(1+ indicated_short_term_trend[Run,World]*expectation_time_horizon)</eqn>
+				<eqn>Desired_Average_Daily_Demand_Per_Capita[Run,Region]*(1+ indicated_short_term_trend[Run,Region]*expectation_time_horizon)</eqn>
 				<units>kcal/person/day</units>
 			</aux>
 			<aux name="supply demand\nbalance">
@@ -628,7 +629,7 @@
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>animal_products_production_1[Run, World]/total_yearly_demand</eqn>
+				<eqn>animal_products_production_1[Run, Region]/total_yearly_demand</eqn>
 				<units>dmnl</units>
 			</aux>
 			<aux name="scarcity of products\ncompared to alternative">
@@ -636,7 +637,7 @@
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>supply_demand_balance/crop_balance_1[Run]</eqn>
+				<eqn>supply_demand_balance/crop_balance_1[Run,Region]</eqn>
 				<units>dmnl</units>
 			</aux>
 			<aux name="time to adjust desired\ndemand from accessibility">
@@ -776,6 +777,7 @@ Calibration Parameter: fertilizer use &amp; crop production</doc>
 			<aux name="crop balance 1" access="input">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>{Enter equation for use when not hooked up to other models}</eqn>
 				<units>dmnl</units>
@@ -909,7 +911,7 @@ Calibration Parameter: fertilizer use &amp; crop production</doc>
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>(animal_products_production_1[Run,  World]-total_yearly_consumption)/animal_products_production_1[Run, World]</eqn>
+				<eqn>(animal_products_production_1[Run,  Region]-total_yearly_consumption)/animal_products_production_1[Run, Region]</eqn>
 				<units>dmnl</units>
 			</aux>
 			<aux name="indicated\naverage desired\ndemand per capita">
@@ -926,7 +928,7 @@ Calibration Parameter: fertilizer use &amp; crop production</doc>
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>Average_Daily_Demand_Per_Capita_1[Run, World]*share_of_demand_from_consumption_domain</eqn>
+				<eqn>Average_Daily_Demand_Per_Capita_1[Run, Region]*share_of_demand_from_consumption_domain</eqn>
 				<units>kcal/person/day</units>
 			</aux>
 			<stock name="Desired Demand\nfrom Accessibility">
@@ -936,7 +938,7 @@ Calibration Parameter: fertilizer use &amp; crop production</doc>
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>Average_Daily_Demand_Per_Capita_1[Run, World]*initial_share_of_demand_from_consumption_domain</eqn>
+				<eqn>Average_Daily_Demand_Per_Capita_1[Run, Region]*initial_share_of_demand_from_consumption_domain</eqn>
 				<inflow>change_in_desired_demand_from_accessibility</inflow>
 				<units>kcal/person/day</units>
 			</stock>
@@ -1013,7 +1015,7 @@ Calibration Parameter: fertilizer use &amp; crop production</doc>
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>average_yearly_demand_per_capita[Run]*Population_1[Run,Region]</eqn>
+				<eqn>average_yearly_demand_per_capita[Run,Region]*Population_1[Run,Region]</eqn>
 				<units>PCal/Year</units>
 			</aux>
 			<aux name="average daily\ndemand per capita">
@@ -1885,7 +1887,7 @@ Calibration Parameter: fertilizer use &amp; crop production</doc>
 				<eqn>IF (switch_behavioral_impact =0) AND TIME &gt; today THEN PREVIOUS (
 SELF[Run,Region],Surface_Temperature_Anomaly[Run]) ELSE SMTH3
 (
-Surface_Temperature_Anomaly[Run],time_to_report_and_perceive_climate_information[Run,World], Surface_Temperature_Anomaly[Run])</eqn>
+Surface_Temperature_Anomaly[Run],time_to_report_and_perceive_climate_information[Run,Region], Surface_Temperature_Anomaly[Run])</eqn>
 				<isee:delay_aux/>
 				<units>deg C</units>
 			</aux>
@@ -2048,7 +2050,7 @@ normal_sensitivity_to_climate_information</eqn>
 				<dimensions>
 					<dim name="Run"/>
 				</dimensions>
-				<eqn>normal_perceived_climate_change_risk*experiential_effect_of_climatic_events_on_risk_perception[Run,World]*cognitive_effect_of_climate_information_on_risk_perception[Run,World]</eqn>
+				<eqn>normal_perceived_climate_change_risk*experiential_effect_of_climatic_events_on_risk_perception[Run,Region]*cognitive_effect_of_climate_information_on_risk_perception[Run,Region]</eqn>
 				<units>dmnl</units>
 			</aux>
 			<aux name="sensitivity to\nclimatic events exposure">
@@ -2072,8 +2074,8 @@ normal_sensitivity_to_climate_information</eqn>
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>(relative_perceived_climate_extremes_exposure[Run,World] +
-relative_perceived_SLR_exposure)^sensitivity_to_climatic_events_exposure[Run,World]</eqn>
+				<eqn>(relative_perceived_climate_extremes_exposure[Run,Region] +
+relative_perceived_SLR_exposure)^sensitivity_to_climatic_events_exposure[Run,Region]</eqn>
 				<units>dmnl</units>
 			</aux>
 			<aux name="Climate indices with record breaking\nexposure per person per year" access="input">
@@ -2798,7 +2800,7 @@ Magalhães SdS, Miranda DK, Miranda DMd, Malloy-Diniz LF, Romano-Silva MA (2018)
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>average_daily_demand_per_capita[Run]*UNIT_days_per_year*UNIT_p_per_Mp/UNIT_cal_per_pcal</eqn>
+				<eqn>average_daily_demand_per_capita[Run,Region]*UNIT_days_per_year*UNIT_p_per_Mp/UNIT_cal_per_pcal</eqn>
 				<units>PCal/Mp/Year</units>
 			</aux>
 			<aux name="UNIT days per year">
@@ -2953,7 +2955,7 @@ Magalhães SdS, Miranda DK, Miranda DMd, Malloy-Diniz LF, Romano-Silva MA (2018)
 				<dimensions>
 					<dim name="Run"/>
 				</dimensions>
-				<eqn>Desired_Average_Daily_Demand_Per_Capita[Run,World]*(1+ indicated_short_term_trend[Run,World]*expectation_time_horizon)</eqn>
+				<eqn>Desired_Average_Daily_Demand_Per_Capita[Run,Region]*(1+ indicated_short_term_trend[Run,Region]*expectation_time_horizon)</eqn>
 				<units>kcal/person/day</units>
 			</aux>
 			<aux name="total food supply">
@@ -2961,7 +2963,7 @@ Magalhães SdS, Miranda DK, Miranda DMd, Malloy-Diniz LF, Romano-Silva MA (2018)
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>animal_products_production_1[Run, World]+crop_supply_for_vegetal_products_1[Run]</eqn>
+				<eqn>animal_products_production_1[Run, Region]+crop_supply_for_vegetal_products_1[Run,Region]</eqn>
 				<units>PCal/Year</units>
 			</aux>
 			<aux name="food scarcity">
@@ -3254,7 +3256,7 @@ Calibration Parameter: fertilizer use &amp; crop production</doc>
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>(indicated_demand_from_accessibility[Run,Region]-Desired_Demand_from_Accessibility[Run,Region])/time_to_adjust_desired_demand_from_accessibility[Run,World]</eqn>
+				<eqn>(indicated_demand_from_accessibility[Run,Region]-Desired_Demand_from_Accessibility[Run,Region])/time_to_adjust_desired_demand_from_accessibility[Run,Region]</eqn>
 				<units>kcal/person/day/Year</units>
 			</flow>
 			<aux name="weight of\naccessibility">
@@ -3306,8 +3308,9 @@ Calibration Parameter: fertilizer use &amp; crop production</doc>
 </doc>
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<eqn>MIN(Desired_Average_Daily_Demand_Per_Capita[Run,World], Desired_Demand_from_Accessibility[Run,World])</eqn>
+				<eqn>MIN(Desired_Average_Daily_Demand_Per_Capita[Run,Region], Desired_Demand_from_Accessibility[Run,Region])</eqn>
 				<units>kcal/person/day</units>
 			</aux>
 			<stock name="Desired Demand\nfrom Accessibility">
@@ -3324,6 +3327,7 @@ Calibration Parameter: fertilizer use &amp; crop production</doc>
 			<aux name="crop supply\nfor vegetal products 1" access="input">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>{Enter equation for use when not hooked up to other models}</eqn>
 				<units>PCal/Year</units>

@@ -408,7 +408,7 @@
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>storing_carbon_from_coal_emissions[Run,World] + storing_carbon_from_oil_emissions[Run,World] + storing_carbon_from_gas_emissions[Run,World] + storing_carbon_from_biofuel_emissions[Run,World]</eqn>
+				<eqn>storing_carbon_from_coal_emissions[Run,Region] + storing_carbon_from_oil_emissions[Run,Region] + storing_carbon_from_gas_emissions[Run,Region] + storing_carbon_from_biofuel_emissions[Run,Region]</eqn>
 				<non_negative/>
 				<units>MtCO2/Year</units>
 			</flow>
@@ -535,7 +535,7 @@ middle of power generation storing cost</doc>
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>Storing_CO2 * cost_of_storing_CO2_per_unit</eqn>
+				<eqn>Storing_CO2 * cost_of_storing_CO2_per_unit[Region]</eqn>
 				<units>c$</units>
 			</aux>
 			<aux name="UNIT GtC to tC">
@@ -573,7 +573,10 @@ middle of power generation storing cost</doc>
 				<units>GtC</units>
 			</aux>
 			<aux name="cost of storing CO2 per unit" access="output" isee:autocreated="true">
-				<eqn>UNIT_GtC_to_tC[World] / GtC_to_MtCO2 * cost_of_storing_carbon_per_unit</eqn>
+				<dimensions>
+					<dim name="Region"/>
+				</dimensions>
+				<eqn>UNIT_GtC_to_tC[Region] / GtC_to_MtCO2 * cost_of_storing_carbon_per_unit</eqn>
 				<units>c$/(MtCO2/year)</units>
 			</aux>
 		</variables>
@@ -856,8 +859,8 @@ It is computed as the gap between existing and desired infrastructure divided by
 					<dim name="Region"/>
 				</dimensions>
 				<eqn>MAX(0, 
-infrastructure_gap[Run,World]/
-GAP_ADJUSTMENT_TIME_FOR_INFRASTRUCTURE[Run,World])</eqn>
+infrastructure_gap[Run,Region]/
+GAP_ADJUSTMENT_TIME_FOR_INFRASTRUCTURE[Run,Region])</eqn>
 				<units>Mtonne/year</units>
 			</flow>
 			<flow name="RS\naging">
@@ -867,7 +870,7 @@ The flow is computed as the stock value of New RS buildings  divided by the aver
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>Concrete_Stock_in_New_Residential_and_Service_Buildings[Run,Region]/(AVERAGE_LIFETIME_OF_BUILDINGS[Run,World])*AGE_CUTPOINT_FOR_CONCRETE_STRUCTURES[World]</eqn>
+				<eqn>Concrete_Stock_in_New_Residential_and_Service_Buildings[Run,Region]/(AVERAGE_LIFETIME_OF_BUILDINGS[Run,Region])*AGE_CUTPOINT_FOR_CONCRETE_STRUCTURES[Region]</eqn>
 				<units>Mtonne/year</units>
 			</flow>
 			<flow name="infrastructure\naging">
@@ -877,8 +880,8 @@ The flow is computed as the stock value of New infrastructure divided by the ave
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>Concrete_Stock_in_new_Infrastructure[Run,Region]/(AVERAGE_LIFETIME_OF_INFRASTRUCTURE[Run,World])*
-AGE_CUTPOINT_FOR_CONCRETE_STRUCTURES[World]</eqn>
+				<eqn>Concrete_Stock_in_new_Infrastructure[Run,Region]/(AVERAGE_LIFETIME_OF_INFRASTRUCTURE[Run,Region])*
+AGE_CUTPOINT_FOR_CONCRETE_STRUCTURES[Region]</eqn>
 				<units>Mtonne/year</units>
 			</flow>
 			<flow name="decommissioning\nRS buildings">
@@ -888,7 +891,7 @@ AGE_CUTPOINT_FOR_CONCRETE_STRUCTURES[World]</eqn>
 					<dim name="Region"/>
 				</dimensions>
 				<eqn>Concrete_Stock_in_Old_Residential_and_Service_Buildings/
-(AVERAGE_LIFETIME_OF_BUILDINGS)*AGE_CUTPOINT_FOR_CONCRETE_STRUCTURES[World]</eqn>
+(AVERAGE_LIFETIME_OF_BUILDINGS)*AGE_CUTPOINT_FOR_CONCRETE_STRUCTURES[Region]</eqn>
 				<units>Mtonne/year</units>
 			</flow>
 			<flow name="decommissioning\ninfrastructure">
@@ -898,7 +901,7 @@ AGE_CUTPOINT_FOR_CONCRETE_STRUCTURES[World]</eqn>
 					<dim name="Region"/>
 				</dimensions>
 				<eqn>Concrete_Stock_in_old_Infrastructure/
-(AVERAGE_LIFETIME_OF_INFRASTRUCTURE[Run,World])*AGE_CUTPOINT_FOR_CONCRETE_STRUCTURES[World]</eqn>
+(AVERAGE_LIFETIME_OF_INFRASTRUCTURE[Run,Region])*AGE_CUTPOINT_FOR_CONCRETE_STRUCTURES[Region]</eqn>
 				<units>Mtonne/year</units>
 			</flow>
 			<aux name="desired useful\nfloor area">
@@ -926,7 +929,7 @@ TIME_TO_ADJUST_DESIRED_FLOOR_AREA)</eqn>
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>(Concrete_Stock_in_Old_Residential_and_Service_Buildings[Run,World]+Concrete_Stock_in_New_Residential_and_Service_Buildings[Run,Region])/CONCRETE_PER_m2_UFA[Run]</eqn>
+				<eqn>(Concrete_Stock_in_Old_Residential_and_Service_Buildings[Run,Region]+Concrete_Stock_in_New_Residential_and_Service_Buildings[Run,Region])/CONCRETE_PER_m2_UFA[Run]</eqn>
 				<units>Mm2</units>
 			</aux>
 			<aux name="gap in useful\nfloor area">
@@ -1014,7 +1017,7 @@ This is the average lifetime of residential and service buildings when accountin
 					<dim name="Region"/>
 				</dimensions>
 				<eqn>BASE_AVERAGE_LIFETIME_OF_BUILDINGS *
-actual_concrete_residential_longevity_policy[World] *
+actual_concrete_residential_longevity_policy[Region] *
 effect_of_STA_on_average_lifetime_of_concrete</eqn>
 				<units>Year</units>
 			</aux>
@@ -1263,7 +1266,7 @@ The flow is computed as the deterioration rate multiplied by the maintenance eff
 					<dim name="Region"/>
 				</dimensions>
 				<eqn>Old_RS_deterioration*
-RS_MAINTENANCE_EFFICIENCY[World]</eqn>
+RS_MAINTENANCE_EFFICIENCY[Region]</eqn>
 				<units>Mtonne/year</units>
 			</flow>
 			<flow name="old infrastructure\nmaintenance">
@@ -1292,7 +1295,7 @@ actual_maintenance_policy</eqn>
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>NORMAL_INFRASTRUCTURE_MAINTENANCE_EFFICIENCY[World] *
+				<eqn>NORMAL_INFRASTRUCTURE_MAINTENANCE_EFFICIENCY[Region] *
 infrastructure_maintenance_policy</eqn>
 				<units>dmnl</units>
 			</aux>
@@ -1336,7 +1339,7 @@ The flow is computed as the existing stock multiplied by the NORMAL CONCRETE DET
 					<dim name="Region"/>
 				</dimensions>
 				<eqn>Concrete_Stock_in_New_Residential_and_Service_Buildings[Run,Region]*
-NORMAL_CONCRETE_DETERIORATION_RATE[Run,World]</eqn>
+NORMAL_CONCRETE_DETERIORATION_RATE[Run,Region]</eqn>
 				<units>Mtonne/year</units>
 			</flow>
 			<flow name="new infrastructure\ndeterioration">
@@ -1347,7 +1350,7 @@ The flow is computed as the existing stock multiplied by the NORMAL CONCRETE DET
 					<dim name="Region"/>
 				</dimensions>
 				<eqn>Concrete_Stock_in_new_Infrastructure[Run,Region]*
-NORMAL_CONCRETE_DETERIORATION_RATE[Run,World]</eqn>
+NORMAL_CONCRETE_DETERIORATION_RATE[Run,Region]</eqn>
 				<units>Mtonne/year</units>
 			</flow>
 			<flow name="New RS maintenance">
@@ -1444,7 +1447,7 @@ If set to 1.0, this means perfect maintenance.</doc>
 				<eqn>CO2_INTENSITY_OF_RS_BUILDINGS_CONCRETE[Run]* 
 (new_RS_construction[Run,Region]+
 New_RS_maintenance[Run,Region]+
-Old_RS_maintenance[Run,World])</eqn>
+Old_RS_maintenance[Run,Region])</eqn>
 				<units>MtCO2/Year</units>
 			</aux>
 			<aux name="CO2 emissions from concrete for Infrastructure">
@@ -1456,7 +1459,7 @@ Old_RS_maintenance[Run,World])</eqn>
 				<eqn>CO2_INTENSITY_OF_INFRASTRUCTURE_CONCRETE[Run]*
 (new_infrastructure_construction[Run,Region]+
 new_infrastructure_maintenance[Run,Region]+
-old_infrastructure_maintenance[Run,World])</eqn>
+old_infrastructure_maintenance[Run,Region])</eqn>
 				<units>MtCO2/Year</units>
 			</aux>
 			<aux name="CO2 INTENSITY OF\nRS BUILDINGS CONCRETE">
@@ -1507,7 +1510,7 @@ CO2_emissions_from_concrete_for_Infrastructure</eqn>
 				<dimensions>
 					<dim name="Run"/>
 				</dimensions>
-				<eqn>SMTH3(indicated_desired_infrastructure[Run,World], 
+				<eqn>SMTH3(indicated_desired_infrastructure[Run,Region], 
 TIME_TO_ADJUST_DESIRED_INFRASTRUCTURE_AREA)</eqn>
 				<isee:delay_aux/>
 				<units>Mtonne</units>
@@ -1681,7 +1684,7 @@ Storm damages to concrete structures are estimated taking the monetary damages t
 					<dim name="Region"/>
 				</dimensions>
 				<eqn>IF (switch_concrete_impact = 0) AND TIME &gt; today THEN PREVIOUS
-(SELF[Run,World],0 )ELSE
+(SELF[Run,Region],0 )ELSE
 SUM
 (All_storm_damage[Run,*,Region])/&quot;UNIT_bc$/Mtonne_concrete&quot;</eqn>
 				<units>Mtonne/year</units>
@@ -1726,7 +1729,7 @@ Asset dollars = Bank Assets minus Government debt.</doc>
 					<dim name="Region"/>
 				</dimensions>
 				<eqn>IF (switch_concrete_impact = 0) AND TIME &gt; today THEN PREVIOUS
-(SELF[Run,World],1 )ELSE
+(SELF[Run,Region],1 )ELSE
 1
 +CLIMATE_IMPACT_ON_CONCRETE_LIFETIME*(
 Absolute_Surface_Temperature[Run]- INIT (Absolute_Surface_Temperature[Run]))</eqn>
@@ -1738,7 +1741,7 @@ This is used to estimate the proportion of climate damages from extreme weather 
 				<dimensions>
 					<dim name="Run"/>
 				</dimensions>
-				<eqn>Concrete_Stock_in_old_Infrastructure[Run,World]/(Concrete_Stock_in_old_Infrastructure[Run,World]+Concrete_Stock_in_Old_Residential_and_Service_Buildings[Run,World])</eqn>
+				<eqn>Concrete_Stock_in_old_Infrastructure[Run,Region]/(Concrete_Stock_in_old_Infrastructure[Run,Region]+Concrete_Stock_in_Old_Residential_and_Service_Buildings[Run,Region])</eqn>
 				<units>dmnl</units>
 			</aux>
 			<aux name="Absolute Surface Temperature" access="input">
@@ -2041,14 +2044,14 @@ Structure are considered old when they have passed half of their estimated avera
 				<stacked_container uid="21" x="28.92" y="281.286" width="351.667" height="250">
 					<graph background="#FFFBC5" isee:graph_area_color="white" width="351.667" height="250" comparative="true" type="time_series" show_grid="false" isee:tick_type="none" include_units_in_legend="false" plot_numbers="false" isee:label_pie_slices="false" isee:show_pie_borders="true" num_x_grid_lines="0" num_y_grid_lines="0" num_x_labels="5" num_y_labels="3" isee:fill_intensity="0.1" isee:allow_zero_axis="true" left_axis_multi_scale="false" left_axis_auto_scale="true" left_include_units="true" right_axis_multi_scale="false" right_axis_auto_scale="true" right_include_units="true">
 						<plot color="blue" isee:keep_zero_visible="true" pen_width="1" index="0" show_y_axis="true">
-							<entity name="total_yearly_concrete_use[MEAN, World]"/>
+							<entity name="total_yearly_concrete_use[MEAN, ?]"/>
 						</plot>
 					</graph>
 				</stacked_container>
 				<stacked_container uid="22" x="29.753" y="25.4575" width="350" height="247.501">
 					<graph width="350" height="247.501" comparative="true" type="time_series" show_grid="false" isee:tick_type="none" include_units_in_legend="false" plot_numbers="false" isee:label_pie_slices="false" isee:show_pie_borders="true" num_x_grid_lines="0" num_y_grid_lines="0" num_x_labels="5" num_y_labels="3" isee:fill_intensity="0.1" isee:allow_zero_axis="true" left_axis_multi_scale="false" left_axis_auto_scale="true" left_include_units="true" right_axis_multi_scale="false" right_axis_auto_scale="true" right_include_units="true">
 						<plot color="blue" isee:keep_zero_visible="true" pen_width="1" index="0" show_y_axis="true">
-							<entity name="In_use_concrete_stock[MEAN, World]"/>
+							<entity name="In_use_concrete_stock[MEAN, ?]"/>
 						</plot>
 					</graph>
 				</stacked_container>
@@ -2103,21 +2106,21 @@ Structure are considered old when they have passed half of their estimated avera
 				<stacked_container uid="36" x="28.92" y="541.286" width="351.667" height="250">
 					<graph width="351.667" height="250" comparative="true" type="time_series" show_grid="false" isee:tick_type="none" include_units_in_legend="false" plot_numbers="false" isee:label_pie_slices="false" isee:show_pie_borders="true" num_x_grid_lines="0" num_y_grid_lines="0" num_x_labels="5" num_y_labels="3" isee:fill_intensity="0.1" isee:allow_zero_axis="true" left_axis_multi_scale="false" left_axis_auto_scale="true" left_include_units="true" right_axis_multi_scale="false" right_axis_auto_scale="true" right_include_units="true">
 						<plot color="blue" isee:keep_zero_visible="true" pen_width="1" index="0" show_y_axis="true">
-							<entity name="concrete_waste_generation[MEAN, World]"/>
+							<entity name="concrete_waste_generation[MEAN, ?]"/>
 						</plot>
 					</graph>
 				</stacked_container>
 				<stacked_container uid="38" x="559.753" y="25.4575" width="350" height="247.501">
 					<graph width="350" height="247.501" comparative="true" type="time_series" show_grid="false" isee:tick_type="none" include_units_in_legend="false" plot_numbers="false" isee:label_pie_slices="false" isee:show_pie_borders="true" num_x_grid_lines="0" num_y_grid_lines="0" num_x_labels="5" num_y_labels="3" isee:fill_intensity="0.1" isee:allow_zero_axis="true" left_axis_multi_scale="false" left_axis_auto_scale="true" left_include_units="true" right_axis_multi_scale="false" right_axis_auto_scale="true" right_include_units="true">
 						<plot color="blue" isee:keep_zero_visible="true" pen_width="1" index="0" show_y_axis="true">
-							<entity name="residential_concrete_stock_in_use[MEAN, World]"/>
+							<entity name="residential_concrete_stock_in_use[MEAN, ?]"/>
 						</plot>
 					</graph>
 				</stacked_container>
 				<stacked_container uid="39" x="1027" y="34.285" width="350" height="247.501">
 					<graph width="350" height="247.501" comparative="true" type="time_series" show_grid="false" isee:tick_type="none" include_units_in_legend="false" plot_numbers="false" isee:label_pie_slices="false" isee:show_pie_borders="true" num_x_grid_lines="0" num_y_grid_lines="0" num_x_labels="5" num_y_labels="3" isee:fill_intensity="0.1" isee:allow_zero_axis="true" left_axis_multi_scale="false" left_axis_auto_scale="true" left_include_units="true" right_axis_multi_scale="false" right_axis_auto_scale="true" right_include_units="true">
 						<plot color="blue" isee:keep_zero_visible="true" pen_width="1" index="0" show_y_axis="true">
-							<entity name="Infrastructure_concrete_stock_in_use[MEAN, World]"/>
+							<entity name="Infrastructure_concrete_stock_in_use[MEAN, ?]"/>
 						</plot>
 					</graph>
 				</stacked_container>
@@ -2309,7 +2312,7 @@ Structure are considered old when they have passed half of their estimated avera
 				<stacked_container uid="91" x="204.753" y="926.84">
 					<graph width="350" height="250" type="time_series" show_grid="false" isee:tick_type="none" include_units_in_legend="false" plot_numbers="false" isee:label_pie_slices="false" isee:show_pie_borders="true" num_x_grid_lines="0" num_y_grid_lines="0" num_x_labels="5" num_y_labels="3" isee:fill_intensity="0.1" isee:allow_zero_axis="true" left_axis_multi_scale="false" left_axis_auto_scale="true" left_include_units="true" right_axis_multi_scale="false" right_axis_auto_scale="true" right_include_units="true">
 						<plot color="blue" isee:keep_zero_visible="true" pen_width="1" index="0" show_y_axis="true">
-							<entity name="Infrastructure_concrete_stock_in_use[MEAN, World]"/>
+							<entity name="Infrastructure_concrete_stock_in_use[MEAN, ?]"/>
 						</plot>
 						<plot color="red" pen_style="dot_dashed" isee:keep_zero_visible="true" pen_width="1" index="1" show_y_axis="true"/>
 					</graph>

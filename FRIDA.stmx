@@ -135,17 +135,6 @@
 			<isee:payoff name="Energy Demand" action="min"/>
 		</isee:optimizer_specs>
 		<isee:optimizer_specs name="Carbon Balance Calibration" method="Powell" use_additional_starts_file="false" additional_starts="0" report_interval="1" confidence_range="0" maxiter="0">
-			<isee:parameter name="forest_soil_carbon.forest_soil_carbon_initialisation[1]" scaling="0.1"/>
-			<isee:parameter name="cropland_soil_carbon.cropland_soil_carbon_1980[1]"/>
-			<isee:parameter name="grassland_soil_carbon.grassland_soil_carbon_1980[1]" scaling="0.1"/>
-			<isee:parameter name="soil_carbon_decay.grassland_litter_input_share_slow_soil_carbon[1]" scaling="1000"/>
-			<isee:parameter name="soil_carbon_decay.grassland_slow_soil_carbon_historic_share[1]" scaling="100"/>
-			<isee:parameter name="soil_carbon_decay.cropland_litter_input_share_slow_soil_carbon[1]" scaling="1000"/>
-			<isee:parameter name="soil_carbon_decay.cropland_slow_soil_carbon_historic_share[1]" scaling="100"/>
-			<isee:parameter name="soil_carbon_decay.young_forest_litter_input_share_slow_soil_carbon[1]" scaling="1000"/>
-			<isee:parameter name="soil_carbon_decay.young_forest_slow_soil_carbon_historic_share[1]" scaling="100"/>
-			<isee:parameter name="soil_carbon_decay.mature_forest_litter_input_share_slow_soil_carbon[1]" scaling="1000"/>
-			<isee:parameter name="soil_carbon_decay.mature_forest_slow_soil_carbon_historic_share[1]" scaling="100"/>
 			<isee:parameter name="Terrestrial_Carbon_Balance.Global_peatland_carbon_uptake_rate[1]" scaling="100"/>
 			<isee:payoff name="Carbon Balance Payoff" action="min"/>
 			<isee:payoff name="Land Use and Agriculture Payoff" action="min" inactive="true"/>
@@ -179,7 +168,6 @@
 			<isee:parameter name="bio_fuel_energy.bio_fuel_primary_energy_content[1]" scaling="1000000"/>
 			<isee:parameter name="fossil_energy_coal.initial_fossil_extraction_knowledge[1]"/>
 			<isee:parameter name="fossil_energy_oil.initial_fossil_extraction_knowledge[1]"/>
-			<isee:parameter name="fossil_energy_gas.initial_fossil_extraction_knowledge[1]"/>
 			<isee:parameter name="fossil_energy_coal.carbon_intensity_in_btu[1]" scaling="1000"/>
 			<isee:parameter name="fossil_energy_oil.carbon_intensity_in_btu[1]" scaling="1000"/>
 			<isee:parameter name="fossil_energy_gas.carbon_intensity_in_btu[1]" scaling="1000"/>
@@ -196,7 +184,6 @@
 			<isee:parameter name="bio_fuel_energy.bio_fuel_primary_energy_content[1]" scaling="1000000"/>
 			<isee:parameter name="fossil_energy_coal.initial_fossil_extraction_knowledge[1]"/>
 			<isee:parameter name="fossil_energy_oil.initial_fossil_extraction_knowledge[1]"/>
-			<isee:parameter name="fossil_energy_gas.initial_fossil_extraction_knowledge[1]"/>
 			<isee:parameter name="fossil_energy_coal.carbon_intensity_in_btu[1]" scaling="1000"/>
 			<isee:parameter name="fossil_energy_oil.carbon_intensity_in_btu[1]" scaling="1000"/>
 			<isee:parameter name="fossil_energy_gas.carbon_intensity_in_btu[1]" scaling="1000"/>
@@ -216,34 +203,13 @@
 	<isee:payoff_specs_list>
 		<isee:payoff_specs name="Population Payoff" calibration="true" recompute_weights="true" compare_tolerance="0" compare_type="ls" compare_run="Calibration Data"/>
 		<isee:payoff_specs name="Land Use and Agriculture Payoff" calibration="true" recompute_weights="true" compare_tolerance="0" compare_type="ls" compare_run="Calibration Data">
-			<isee:payoff_element name="Freshwater.fraction_of_water_withdrawal_for_agriculture[1]" weight="67135781.402348">
-				<isee:time_range type="terminal_value"/>
-			</isee:payoff_element>
-			<isee:payoff_element name="Land_Nutrients.man_made_fertilizer_use[1]" weight="0.0826399196547697">
-				<isee:time_range type="terminal_value"/>
-			</isee:payoff_element>
-			<isee:payoff_element name="Land_Nutrients.manure_fertilizer_use[1]" weight="1.6584043811679">
-				<isee:time_range type="terminal_value"/>
-			</isee:payoff_element>
-			<isee:payoff_element name="Sea_Level.Land_water_storage_from_water_impoundment[1]" weight="8.52684424347111e-24">
-				<isee:time_range type="terminal_value"/>
-			</isee:payoff_element>
-			<isee:payoff_element name="Food_Demand.feed_production[1]" weight="0.000232087884459429">
-				<isee:time_range type="terminal_value"/>
-			</isee:payoff_element>
 			<isee:payoff_element name="Emissions.land_carbon_sink[1]" weight="1.72694808671457">
-				<isee:time_range type="terminal_value"/>
-			</isee:payoff_element>
-			<isee:payoff_element name="Terrestrial_Carbon_Balance.deforestation_carbon_loss[1]" weight="46.2062423729076">
 				<isee:time_range type="terminal_value"/>
 			</isee:payoff_element>
 			<isee:payoff_element name="Terrestrial_Carbon_Balance.forest_regrowth_carbon_uptake[1]" weight="4788.27378633009">
 				<isee:time_range type="terminal_value"/>
 			</isee:payoff_element>
 			<isee:payoff_element name="Terrestrial_Carbon_Balance.Terrestrial_carbon_balance[1]" weight="1.60785867762538">
-				<isee:time_range type="terminal_value"/>
-			</isee:payoff_element>
-			<isee:payoff_element name="Crop.cropland_net_primary_production[1]" weight="61.134795895592">
 				<isee:time_range type="terminal_value"/>
 			</isee:payoff_element>
 			<isee:payoff_element name="Terrestrial_Carbon_Balance.Terrestrial_net_primary_production[1]" weight="22881.563232534">
@@ -258,9 +224,6 @@
 				<isee:time_range type="terminal_value"/>
 			</isee:payoff_element>
 			<isee:payoff_element name="Emissions.N2O_Emissions_from_Other[1]" weight="0.00161206">
-				<isee:time_range type="terminal_value"/>
-			</isee:payoff_element>
-			<isee:payoff_element name="Emissions.N2O_Emissions_from_Energy[1]" weight="0.0000333832">
 				<isee:time_range type="terminal_value"/>
 			</isee:payoff_element>
 			<isee:payoff_element name="Emissions.CH4_Emissions_from_Energy[1]" weight="0.0339945">
@@ -312,13 +275,7 @@
 			<isee:payoff_element name="Terrestrial_Carbon_Balance.forest_regrowth_carbon_uptake[1]" weight="1526.11">
 				<isee:time_range type="terminal_value"/>
 			</isee:payoff_element>
-			<isee:payoff_element name="Terrestrial_Carbon_Balance.deforestation_carbon_loss[1]" weight="43.6201">
-				<isee:time_range type="terminal_value"/>
-			</isee:payoff_element>
 			<isee:payoff_element name="Emissions.land_carbon_sink[1]" weight="1.75776">
-				<isee:time_range type="terminal_value"/>
-			</isee:payoff_element>
-			<isee:payoff_element name="Crop.cropland_net_primary_production[1]" weight="61.0315">
 				<isee:time_range type="terminal_value"/>
 			</isee:payoff_element>
 			<isee:payoff_element name="Terrestrial_Carbon_Balance.Terrestrial_net_primary_production[1]" weight="66.048">
@@ -336,247 +293,12 @@
 		</isee:payoff_specs>
 		<isee:payoff_specs name="Employment Sector Shares" calibration="true" recompute_weights="true" compare_tolerance="0" compare_type="ls" compare_run="Calibration Data"/>
 		<isee:payoff_specs name="Real GDP" calibration="true" recompute_weights="true" compare_tolerance="0" compare_type="ls" compare_run="Calibration Data"/>
-		<isee:payoff_specs name="Energy Payoff" calibration="true" recompute_weights="true" compare_tolerance="0" compare_type="ls" compare_run="Calibration Data">
-			<isee:payoff_element name="fossil_energy.Secondary_Fossil_Energy_Output[1]" weight="5.93123783953822e-7">
-				<isee:time_range type="terminal_value"/>
-			</isee:payoff_element>
-			<isee:payoff_element name="fossil_energy_coal.Secondary_Fossil_Energy_Output[1]" weight="0.00000237813966042235">
-				<isee:time_range type="terminal_value"/>
-			</isee:payoff_element>
-			<isee:payoff_element name="fossil_energy_oil.Secondary_Fossil_Energy_Output[1]" weight="0.00000256574790970751">
-				<isee:time_range type="terminal_value"/>
-			</isee:payoff_element>
-			<isee:payoff_element name="fossil_energy_gas.Secondary_Fossil_Energy_Output[1]" weight="0.0000115365648994085">
-				<isee:time_range type="terminal_value"/>
-			</isee:payoff_element>
-			<isee:payoff_element name="renewable_energy.Renewable_Energy_Output[1]" weight="0.00000948226308512633">
-				<isee:time_range type="terminal_value"/>
-			</isee:payoff_element>
-			<isee:payoff_element name="wind_energy.Wind_Energy_Output[1]" weight="0.000159708475476811">
-				<isee:time_range type="terminal_value"/>
-			</isee:payoff_element>
-			<isee:payoff_element name="solar_energy.Solar_Energy_Output[1]" weight="0.0000207293727767836">
-				<isee:time_range type="terminal_value"/>
-			</isee:payoff_element>
-			<isee:payoff_element name="hydropower_energy.Hydropower_Energy_Output[1]" weight="0.000130912628598398">
-				<isee:time_range type="terminal_value"/>
-			</isee:payoff_element>
-			<isee:payoff_element name="nuclear_energy.Nuclear_Energy_Output[1]" weight="0.0000590961886168241">
-				<isee:time_range type="terminal_value"/>
-			</isee:payoff_element>
-			<isee:payoff_element name="bio_fuel_energy.bio_fuel_primary_energy[1]" weight="15353643.135233">
-				<isee:time_range type="terminal_value"/>
-			</isee:payoff_element>
-			<isee:payoff_element name="bio_fuel_energy.bio_fuel_secondary_energy_output[1]" weight="0.00145045384870976">
-				<isee:time_range type="terminal_value"/>
-			</isee:payoff_element>
-			<isee:payoff_element name="solar_energy.Solar_Energy_Capacity[1]" weight="0.000107571664019812">
-				<isee:time_range type="terminal_value"/>
-			</isee:payoff_element>
-			<isee:payoff_element name="wind_energy.Wind_Energy_Capacity[1]" weight="0.000106511721135456">
-				<isee:time_range type="terminal_value"/>
-			</isee:payoff_element>
-			<isee:payoff_element name="fossil_energy.Primary_Fossil_Energy_FUEL[1]" weight="6350.38890221125">
-				<isee:time_range type="terminal_value"/>
-			</isee:payoff_element>
-			<isee:payoff_element name="fossil_energy_coal.Primary_Fossil_Energy_FUEL[1]" weight="18827.1993279295">
-				<isee:time_range type="terminal_value"/>
-			</isee:payoff_element>
-			<isee:payoff_element name="fossil_energy_oil.Primary_Fossil_Energy_FUEL[1]" weight="48141.1750988519">
-				<isee:time_range type="terminal_value"/>
-			</isee:payoff_element>
-			<isee:payoff_element name="fossil_energy_gas.Primary_Fossil_Energy_FUEL[1]" weight="120053.031498506">
-				<isee:time_range type="terminal_value"/>
-			</isee:payoff_element>
-			<isee:payoff_element name="energy_investments.Gross_Investments_in_Fossil_Fuel_Extraction_Capital[1]" weight="2.78754619355004e-23">
-				<isee:time_range type="terminal_value"/>
-			</isee:payoff_element>
-			<isee:payoff_element name="energy_investments.Coal_Gross_Investments_in_Fossil_Fuel_Extraction_Capital[1]" weight="1.27644733613913e-21">
-				<isee:time_range type="terminal_value"/>
-			</isee:payoff_element>
-			<isee:payoff_element name="energy_investments.Oil_Gross_Investments_in_Fossil_Fuel_Extraction_Capital[1]" weight="8.26785972426893e-23">
-				<isee:time_range type="terminal_value"/>
-			</isee:payoff_element>
-			<isee:payoff_element name="energy_investments.Gas_Gross_Investments_in_Fossil_Fuel_Extraction_Capital[1]" weight="2.42725571043805e-22">
-				<isee:time_range type="terminal_value"/>
-			</isee:payoff_element>
-			<isee:payoff_element name="energy_investments.Gross_Investments_in_Fossil_Energy_Capital[1]" weight="1.21604110671325e-20">
-				<isee:time_range type="terminal_value"/>
-			</isee:payoff_element>
-			<isee:payoff_element name="energy_investments.Coal_Gross_Investments_in_Fossil_Energy_Capital[1]" weight="4.13286184688474e-21">
-				<isee:time_range type="terminal_value"/>
-			</isee:payoff_element>
-			<isee:payoff_element name="energy_investments.Gross_Investments_in_Fossil_Energy_Capital_oil_and_gas[1]" weight="8.29085871213174e-21">
-				<isee:time_range type="terminal_value"/>
-			</isee:payoff_element>
-			<isee:payoff_element name="energy_investments.Gross_Investments_in_Renewables[1]" weight="3.21049747821188e-22">
-				<isee:time_range type="terminal_value"/>
-			</isee:payoff_element>
-			<isee:payoff_element name="energy_investments.Investments_in_Nuclear_Capacity[1]" weight="1.30016829813589e-20">
-				<isee:time_range type="terminal_value"/>
-			</isee:payoff_element>
-			<isee:payoff_element name="energy_investments.Gross_Investments_in_Hydropower_Energy_capacity[1]" weight="5.81036154577472e-21">
-				<isee:time_range type="terminal_value"/>
-			</isee:payoff_element>
-			<isee:payoff_element name="energy_investments.Gross_Investments_in_Solar_Energy_Capacity[1]" weight="1.56350425473676e-21">
-				<isee:time_range type="terminal_value"/>
-			</isee:payoff_element>
-			<isee:payoff_element name="energy_investments.Gross_Investments_in_wind_Energy_Capacity[1]" weight="5.64565899309947e-22">
-				<isee:time_range type="terminal_value"/>
-			</isee:payoff_element>
-			<isee:payoff_element name="energy_investments.Gross_Investments_in_Biofuel_Capacity[1]" weight="8.76012136738472e-21">
-				<isee:time_range type="terminal_value"/>
-			</isee:payoff_element>
-			<isee:payoff_element name="energy_investments.share_of_GDP_invested_in_fuel_extraction[1]" weight="148296.822326275">
-				<isee:time_range type="terminal_value"/>
-			</isee:payoff_element>
-			<isee:payoff_element name="energy_investments.share_of_GDP_invested_in_Energy_without_fuel[1]" weight="5516180.78569367">
-				<isee:time_range type="terminal_value"/>
-			</isee:payoff_element>
-			<isee:payoff_element name="fossil_energy_coal.Fossil_Fuel_Extraction_Carbon[1]" weight="32.5966490501903">
-				<isee:time_range type="terminal_value"/>
-			</isee:payoff_element>
-			<isee:payoff_element name="fossil_energy_oil.Fossil_Fuel_Extraction_Carbon[1]" weight="138.973848285972">
-				<isee:time_range type="terminal_value"/>
-			</isee:payoff_element>
-			<isee:payoff_element name="fossil_energy_gas.Fossil_Fuel_Extraction_Carbon[1]" weight="766.830371643833">
-				<isee:time_range type="terminal_value"/>
-			</isee:payoff_element>
-			<isee:payoff_element name="fossil_energy.conversion_efficiency_of_fossil_fuels_to_secondary_fossil_energy[1]" weight="68129.9823506854">
-				<isee:time_range type="terminal_value"/>
-			</isee:payoff_element>
-			<isee:payoff_element name="fossil_energy_coal.conversion_efficiency_of_fossil_fuels_to_secondary_fossil_energy[1]" weight="13984.0185471805">
-				<isee:time_range type="terminal_value"/>
-			</isee:payoff_element>
-			<isee:payoff_element name="fossil_energy_oil.conversion_efficiency_of_fossil_fuels_to_secondary_fossil_energy[1]" weight="45242.7945577853">
-				<isee:time_range type="terminal_value"/>
-			</isee:payoff_element>
-			<isee:payoff_element name="fossil_energy_gas.conversion_efficiency_of_fossil_fuels_to_secondary_fossil_energy[1]" weight="84777.531929099">
-				<isee:time_range type="terminal_value"/>
-			</isee:payoff_element>
-		</isee:payoff_specs>
+		<isee:payoff_specs name="Energy Payoff" calibration="true" recompute_weights="true" compare_tolerance="0" compare_type="ls" compare_run="Calibration Data"/>
 		<isee:payoff_specs name="Econ &amp; Energy Payoff" calibration="true" recompute_weights="true" compare_tolerance="0" compare_type="ls" compare_run="Calibration Data">
 			<isee:payoff_element name="Employment.Unemployed[1]" weight="0.0112695">
 				<isee:time_range type="terminal_value"/>
 			</isee:payoff_element>
 			<isee:payoff_element name="Finance.total_investment[1]" weight="2.5121e-7">
-				<isee:time_range type="terminal_value"/>
-			</isee:payoff_element>
-			<isee:payoff_element name="fossil_energy.Secondary_Fossil_Energy_Output[1]" weight="3.68595e-7">
-				<isee:time_range type="terminal_value"/>
-			</isee:payoff_element>
-			<isee:payoff_element name="fossil_energy_coal.Secondary_Fossil_Energy_Output[1]" weight="0.00000190058">
-				<isee:time_range type="terminal_value"/>
-			</isee:payoff_element>
-			<isee:payoff_element name="fossil_energy_oil.Secondary_Fossil_Energy_Output[1]" weight="0.00000179839">
-				<isee:time_range type="terminal_value"/>
-			</isee:payoff_element>
-			<isee:payoff_element name="fossil_energy_gas.Secondary_Fossil_Energy_Output[1]" weight="0.00000617939">
-				<isee:time_range type="terminal_value"/>
-			</isee:payoff_element>
-			<isee:payoff_element name="renewable_energy.Renewable_Energy_Output[1]" weight="0.00000260675">
-				<isee:time_range type="terminal_value"/>
-			</isee:payoff_element>
-			<isee:payoff_element name="wind_energy.Wind_Energy_Output[1]" weight="0.000179019">
-				<isee:time_range type="terminal_value"/>
-			</isee:payoff_element>
-			<isee:payoff_element name="solar_energy.Solar_Energy_Output[1]" weight="0.00000971064">
-				<isee:time_range type="terminal_value"/>
-			</isee:payoff_element>
-			<isee:payoff_element name="hydropower_energy.Hydropower_Energy_Output[1]" weight="0.000139089">
-				<isee:time_range type="terminal_value"/>
-			</isee:payoff_element>
-			<isee:payoff_element name="nuclear_energy.Nuclear_Energy_Output[1]" weight="0.000028163">
-				<isee:time_range type="terminal_value"/>
-			</isee:payoff_element>
-			<isee:payoff_element name="bio_fuel_energy.bio_fuel_primary_energy[1]" weight="21286400">
-				<isee:time_range type="terminal_value"/>
-			</isee:payoff_element>
-			<isee:payoff_element name="bio_fuel_energy.bio_fuel_secondary_energy_output[1]" weight="0.00131789">
-				<isee:time_range type="terminal_value"/>
-			</isee:payoff_element>
-			<isee:payoff_element name="solar_energy.Solar_Energy_Capacity[1]" weight="0.0000134435">
-				<isee:time_range type="terminal_value"/>
-			</isee:payoff_element>
-			<isee:payoff_element name="wind_energy.Wind_Energy_Capacity[1]" weight="0.000123616">
-				<isee:time_range type="terminal_value"/>
-			</isee:payoff_element>
-			<isee:payoff_element name="fossil_energy.Primary_Fossil_Energy_FUEL[1]" weight="3932.1">
-				<isee:time_range type="terminal_value"/>
-			</isee:payoff_element>
-			<isee:payoff_element name="fossil_energy_coal.Primary_Fossil_Energy_FUEL[1]" weight="15950">
-				<isee:time_range type="terminal_value"/>
-			</isee:payoff_element>
-			<isee:payoff_element name="fossil_energy_oil.Primary_Fossil_Energy_FUEL[1]" weight="30192.5">
-				<isee:time_range type="terminal_value"/>
-			</isee:payoff_element>
-			<isee:payoff_element name="fossil_energy_gas.Primary_Fossil_Energy_FUEL[1]" weight="62684.3">
-				<isee:time_range type="terminal_value"/>
-			</isee:payoff_element>
-			<isee:payoff_element name="energy_investments.Gross_Investments_in_Fossil_Fuel_Extraction_Capital[1]" weight="2.067e-23">
-				<isee:time_range type="terminal_value"/>
-			</isee:payoff_element>
-			<isee:payoff_element name="energy_investments.Coal_Gross_Investments_in_Fossil_Fuel_Extraction_Capital[1]" weight="9.6902e-22">
-				<isee:time_range type="terminal_value"/>
-			</isee:payoff_element>
-			<isee:payoff_element name="energy_investments.Oil_Gross_Investments_in_Fossil_Fuel_Extraction_Capital[1]" weight="6.58816e-23">
-				<isee:time_range type="terminal_value"/>
-			</isee:payoff_element>
-			<isee:payoff_element name="energy_investments.Gas_Gross_Investments_in_Fossil_Fuel_Extraction_Capital[1]" weight="1.73852e-22">
-				<isee:time_range type="terminal_value"/>
-			</isee:payoff_element>
-			<isee:payoff_element name="energy_investments.Gross_Investments_in_Fossil_Energy_Capital[1]" weight="2.40642e-21">
-				<isee:time_range type="terminal_value"/>
-			</isee:payoff_element>
-			<isee:payoff_element name="energy_investments.Coal_Gross_Investments_in_Fossil_Energy_Capital[1]" weight="2.72319e-21">
-				<isee:time_range type="terminal_value"/>
-			</isee:payoff_element>
-			<isee:payoff_element name="energy_investments.Gross_Investments_in_Fossil_Energy_Capital_oil_and_gas[1]" weight="9.93283e-21">
-				<isee:time_range type="terminal_value"/>
-			</isee:payoff_element>
-			<isee:payoff_element name="energy_investments.Gross_Investments_in_Renewables[1]" weight="5.73938e-22">
-				<isee:time_range type="terminal_value"/>
-			</isee:payoff_element>
-			<isee:payoff_element name="energy_investments.Investments_in_Nuclear_Capacity[1]" weight="1.44222e-20">
-				<isee:time_range type="terminal_value"/>
-			</isee:payoff_element>
-			<isee:payoff_element name="energy_investments.Gross_Investments_in_Hydropower_Energy_capacity[1]" weight="4.05814e-21">
-				<isee:time_range type="terminal_value"/>
-			</isee:payoff_element>
-			<isee:payoff_element name="energy_investments.Gross_Investments_in_Solar_Energy_Capacity[1]" weight="9.38172e-22">
-				<isee:time_range type="terminal_value"/>
-			</isee:payoff_element>
-			<isee:payoff_element name="energy_investments.Gross_Investments_in_wind_Energy_Capacity[1]" weight="4.20192e-22">
-				<isee:time_range type="terminal_value"/>
-			</isee:payoff_element>
-			<isee:payoff_element name="energy_investments.Gross_Investments_in_Biofuel_Capacity[1]" weight="4.82588e-21">
-				<isee:time_range type="terminal_value"/>
-			</isee:payoff_element>
-			<isee:payoff_element name="energy_investments.share_of_GDP_invested_in_fuel_extraction[1]" weight="127585">
-				<isee:time_range type="terminal_value"/>
-			</isee:payoff_element>
-			<isee:payoff_element name="energy_investments.share_of_GDP_invested_in_Energy_without_fuel[1]" weight="1980860">
-				<isee:time_range type="terminal_value"/>
-			</isee:payoff_element>
-			<isee:payoff_element name="fossil_energy_coal.Fossil_Fuel_Extraction_Carbon[1]" weight="28.4464">
-				<isee:time_range type="terminal_value"/>
-			</isee:payoff_element>
-			<isee:payoff_element name="fossil_energy_oil.Fossil_Fuel_Extraction_Carbon[1]" weight="131.217">
-				<isee:time_range type="terminal_value"/>
-			</isee:payoff_element>
-			<isee:payoff_element name="fossil_energy_gas.Fossil_Fuel_Extraction_Carbon[1]" weight="334.001">
-				<isee:time_range type="terminal_value"/>
-			</isee:payoff_element>
-			<isee:payoff_element name="fossil_energy.conversion_efficiency_of_fossil_fuels_to_secondary_fossil_energy[1]" weight="62396.6">
-				<isee:time_range type="terminal_value"/>
-			</isee:payoff_element>
-			<isee:payoff_element name="fossil_energy_coal.conversion_efficiency_of_fossil_fuels_to_secondary_fossil_energy[1]" weight="13650.6">
-				<isee:time_range type="terminal_value"/>
-			</isee:payoff_element>
-			<isee:payoff_element name="fossil_energy_oil.conversion_efficiency_of_fossil_fuels_to_secondary_fossil_energy[1]" weight="44053.3">
-				<isee:time_range type="terminal_value"/>
-			</isee:payoff_element>
-			<isee:payoff_element name="fossil_energy_gas.conversion_efficiency_of_fossil_fuels_to_secondary_fossil_energy[1]" weight="77770.8">
 				<isee:time_range type="terminal_value"/>
 			</isee:payoff_element>
 		</isee:payoff_specs>
@@ -2800,20 +2522,10 @@ This is what determines when the model stops calculating</doc>
 					</graph>
 				</stacked_container>
 				<stacked_container uid="97" x="1183.25" y="3485.5" width="568" height="300">
-					<graph font_size="24pt" legend_position="none" isee:hide_border="true" axis_title_font_size="18pt" axis_label_font_size="14pt" width="568" height="300" comparative="true" type="time_series" show_grid="true" isee:tick_type="none" include_units_in_legend="false" plot_numbers="false" isee:label_pie_slices="false" isee:show_pie_borders="true" num_x_grid_lines="9" num_y_grid_lines="5" num_x_labels="5" num_y_labels="5" title="i) Non-fossil Energy Production (TWh/Year)" isee:fill_intensity="0.1" to="2020" isee:allow_zero_axis="true" left_axis_multi_scale="false" left_axis_auto_scale="true" left_include_units="true" right_axis_multi_scale="false" right_axis_auto_scale="true" right_include_units="true">
-						<plot color="blue" isee:keep_zero_visible="true" pen_width="1" index="0" show_y_axis="true">
-							<format scale_by="1" delimit_000s="true"/>
-							<entity name="renewable_energy.Renewable_Energy_Output[1]"/>
-						</plot>
-					</graph>
+					<graph font_size="24pt" legend_position="none" isee:hide_border="true" axis_title_font_size="18pt" axis_label_font_size="14pt" width="568" height="300" comparative="true" type="time_series" isee:points_only="true" show_grid="true" isee:tick_type="none" include_units_in_legend="false" plot_numbers="false" isee:label_pie_slices="false" isee:show_pie_borders="true" num_x_grid_lines="9" num_y_grid_lines="5" num_x_labels="5" num_y_labels="5" title="i) Non-fossil Energy Production (TWh/Year)" isee:fill_intensity="0.1" to="2020" isee:allow_zero_axis="true" left_axis_multi_scale="false" left_axis_auto_scale="true" left_include_units="true" right_axis_multi_scale="false" right_axis_auto_scale="true" right_include_units="true"/>
 				</stacked_container>
 				<stacked_container uid="98" x="321.583" y="3773.83" width="568" height="300">
-					<graph font_size="24pt" legend_position="none" isee:hide_border="true" axis_title_font_size="18pt" axis_label_font_size="14pt" width="568" height="300" comparative="true" type="time_series" show_grid="true" isee:tick_type="none" include_units_in_legend="false" plot_numbers="false" isee:label_pie_slices="false" isee:show_pie_borders="true" num_x_grid_lines="9" num_y_grid_lines="5" num_x_labels="5" num_y_labels="5" title="j) Fossil Energy Production (TWh/Year)" isee:fill_intensity="0.1" to="2020" isee:allow_zero_axis="true" left_axis_multi_scale="false" left_axis_auto_scale="true" left_include_units="true" right_axis_multi_scale="false" right_axis_auto_scale="true" right_include_units="true">
-						<plot color="blue" isee:keep_zero_visible="true" pen_width="1" index="0" show_y_axis="true">
-							<format scale_by="1" delimit_000s="true"/>
-							<entity name="fossil_energy.Secondary_Fossil_Energy_Output[1]"/>
-						</plot>
-					</graph>
+					<graph font_size="24pt" legend_position="none" isee:hide_border="true" axis_title_font_size="18pt" axis_label_font_size="14pt" width="568" height="300" comparative="true" type="time_series" isee:points_only="true" show_grid="true" isee:tick_type="none" include_units_in_legend="false" plot_numbers="false" isee:label_pie_slices="false" isee:show_pie_borders="true" num_x_grid_lines="9" num_y_grid_lines="5" num_x_labels="5" num_y_labels="5" title="j) Fossil Energy Production (TWh/Year)" isee:fill_intensity="0.1" to="2020" isee:allow_zero_axis="true" left_axis_multi_scale="false" left_axis_auto_scale="true" left_include_units="true" right_axis_multi_scale="false" right_axis_auto_scale="true" right_include_units="true"/>
 				</stacked_container>
 				<stacked_container uid="99" x="889.583" y="3773.83" width="568" height="300">
 					<graph font_size="24pt" legend_position="none" isee:hide_border="true" axis_title_font_size="18pt" axis_label_font_size="14pt" width="568" height="300" comparative="true" type="time_series" isee:points_only="true" show_grid="true" isee:tick_type="none" include_units_in_legend="false" plot_numbers="false" isee:label_pie_slices="false" isee:show_pie_borders="true" num_x_grid_lines="9" num_y_grid_lines="5" num_x_labels="5" num_y_labels="5" title="k) Surface Temperature Anomaly (deg C)" isee:fill_intensity="0.1" to="2020" isee:allow_zero_axis="true" left_axis_multi_scale="false" left_axis_auto_scale="true" left_include_units="true" right_axis_multi_scale="false" right_axis_auto_scale="true" right_include_units="true"/>
@@ -3037,60 +2749,21 @@ This is what determines when the model stops calculating</doc>
 							<format scale_by="1" delimit_000s="true" display_as="currency"/>
 						</plot>
 					</graph>
-					<graph width="570" height="470" type="area" isee:sum_stacked_legend="true" isee:stacked_show_hover_values="true" show_grid="true" isee:tick_type="none" include_units_in_legend="false" plot_numbers="false" isee:label_pie_slices="false" isee:show_pie_borders="true" num_x_grid_lines="13" num_y_grid_lines="7" num_x_labels="13" num_y_labels="7" title="Net Primary Production" isee:fill_intensity="1" isee:stacked_area_max="150" to="2100" isee:allow_zero_axis="true" left_axis_multi_scale="false" left_axis_auto_scale="true" left_include_units="true" right_axis_multi_scale="false" right_axis_auto_scale="true" right_include_units="true">
-						<plot color="#307739" title="Mature Forest" isee:keep_zero_visible="true" pen_width="1" index="0" show_y_axis="true">
-							<entity name="Forest.mature_forest_net_primary_production[1]"/>
-						</plot>
-						<plot color="#67CB64" title="Young Forest" isee:keep_zero_visible="true" pen_width="1" index="1" show_y_axis="true">
-							<entity name="Forest.young_forest_net_primary_production[1]"/>
-						</plot>
-						<plot color="#FBED00" title="Cropland" isee:keep_zero_visible="true" pen_width="1" index="2" show_y_axis="true">
-							<entity name="Crop.cropland_net_primary_production[1]"/>
-						</plot>
-						<plot color="#88FE00" title="Grassland" isee:keep_zero_visible="true" pen_width="1" index="3" show_y_axis="true">
-							<entity name="Grass.grassland_net_primary_production[1]"/>
-						</plot>
-						<plot color="#FF0021" title="Degraded Land" isee:keep_zero_visible="true" pen_width="1" index="4" show_y_axis="true">
-							<entity name="degraded_land_soil_carbon.degraded_land_litter[1]"/>
-						</plot>
-					</graph>
+					<graph width="570" height="470" type="area" isee:sum_stacked_legend="true" isee:stacked_show_hover_values="true" show_grid="true" isee:tick_type="none" include_units_in_legend="false" plot_numbers="false" isee:label_pie_slices="false" isee:show_pie_borders="true" num_x_grid_lines="13" num_y_grid_lines="7" num_x_labels="13" num_y_labels="7" title="Net Primary Production" isee:fill_intensity="1" isee:stacked_area_max="150" to="2100" isee:allow_zero_axis="true" left_axis_multi_scale="false" left_axis_auto_scale="true" left_include_units="true" right_axis_multi_scale="false" right_axis_auto_scale="true" right_include_units="true"/>
 					<graph width="570" height="470" type="area" isee:sum_stacked_legend="true" isee:stacked_show_hover_values="true" show_grid="true" isee:tick_type="none" include_units_in_legend="false" plot_numbers="false" isee:label_pie_slices="false" isee:show_pie_borders="true" num_x_grid_lines="13" num_y_grid_lines="9" num_x_labels="13" num_y_labels="9" title="Human Food Production" isee:fill_intensity="1" to="2150" isee:allow_zero_axis="true" left_axis_title="PCal/Year" left_axis_multi_scale="false" left_axis_auto_scale="true" left_include_units="true" right_axis_multi_scale="false" right_axis_auto_scale="true" right_include_units="true"/>
-					<graph width="570" height="470" type="area" isee:sum_stacked_legend="true" isee:stacked_show_hover_values="true" show_grid="true" isee:tick_type="none" include_units_in_legend="false" plot_numbers="false" isee:label_pie_slices="false" isee:show_pie_borders="true" num_x_grid_lines="13" num_y_grid_lines="7" num_x_labels="13" num_y_labels="7" title="Crop Demand" isee:fill_intensity="1" to="2100" isee:allow_zero_axis="true" left_axis_multi_scale="false" left_axis_auto_scale="true" left_include_units="true" right_axis_multi_scale="false" right_axis_auto_scale="true" right_include_units="true">
-						<plot color="fuchsia" title="Bio Fuel" isee:keep_zero_visible="true" pen_width="1" index="0" show_y_axis="true">
-							<entity name="bio_fuel_energy.crops_demanded_for_bio_fuel[1]"/>
-						</plot>
-					</graph>
-					<graph width="570" height="470" type="area" isee:sum_stacked_legend="true" isee:stacked_show_hover_values="true" show_grid="true" isee:tick_type="none" include_units_in_legend="false" plot_numbers="false" isee:label_pie_slices="false" isee:show_pie_borders="true" num_x_grid_lines="13" num_y_grid_lines="9" num_x_labels="13" num_y_labels="9" title="Crop Production" isee:fill_intensity="1" to="2100" isee:allow_zero_axis="true" left_axis_multi_scale="false" left_axis_auto_scale="true" left_include_units="true" right_axis_multi_scale="false" right_axis_auto_scale="true" right_include_units="true">
-						<plot color="fuchsia" title="Biofuel Feedstock" isee:keep_zero_visible="true" pen_width="1" index="0" show_y_axis="true">
-							<entity name="Food_Demand.crops_for_energy[1]"/>
-						</plot>
-					</graph>
-					<graph width="570" height="470" type="area" isee:sum_stacked_legend="true" isee:stacked_show_hover_values="true" show_grid="true" isee:tick_type="none" include_units_in_legend="false" plot_numbers="false" isee:label_pie_slices="false" isee:show_pie_borders="true" num_x_grid_lines="13" num_y_grid_lines="9" num_x_labels="13" num_y_labels="9" title="Crop Production by Use" isee:fill_intensity="1" to="2100" isee:allow_zero_axis="true" left_axis_title="PCal/Year" left_axis_multi_scale="false" left_axis_auto_scale="true" left_include_units="true" right_axis_multi_scale="false" right_axis_auto_scale="true" right_include_units="true">
-						<plot color="#F612FF" title="Biofuel Feedstock" isee:keep_zero_visible="true" pen_width="1" index="0" show_y_axis="true">
-							<entity name="Food_Demand.crops_for_energy[1]"/>
-						</plot>
-					</graph>
-					<graph width="570" height="470" type="area" isee:sum_stacked_legend="true" isee:stacked_show_hover_values="true" show_grid="true" isee:tick_type="none" include_units_in_legend="false" plot_numbers="false" isee:label_pie_slices="false" isee:show_pie_borders="true" num_x_grid_lines="13" num_y_grid_lines="9" num_x_labels="13" num_y_labels="9" title="Water Use" isee:fill_intensity="1" to="2100" isee:allow_zero_axis="true" left_axis_multi_scale="false" left_axis_auto_scale="true" left_include_units="true" right_axis_multi_scale="false" right_axis_auto_scale="true" right_include_units="true">
-						<plot color="blue" title="Agricultural" isee:keep_zero_visible="true" pen_width="1" index="0" show_y_axis="true">
-							<entity name="Freshwater.agricultural_water_withdrawal[1]"/>
-						</plot>
-					</graph>
+					<graph width="570" height="470" type="area" isee:sum_stacked_legend="true" isee:stacked_show_hover_values="true" show_grid="true" isee:tick_type="none" include_units_in_legend="false" plot_numbers="false" isee:label_pie_slices="false" isee:show_pie_borders="true" num_x_grid_lines="13" num_y_grid_lines="7" num_x_labels="13" num_y_labels="7" title="Crop Demand" isee:fill_intensity="1" to="2100" isee:allow_zero_axis="true" left_axis_multi_scale="false" left_axis_auto_scale="true" left_include_units="true" right_axis_multi_scale="false" right_axis_auto_scale="true" right_include_units="true"/>
+					<graph width="570" height="470" type="area" isee:sum_stacked_legend="true" isee:stacked_show_hover_values="true" show_grid="true" isee:tick_type="none" include_units_in_legend="false" plot_numbers="false" isee:label_pie_slices="false" isee:show_pie_borders="true" num_x_grid_lines="13" num_y_grid_lines="9" num_x_labels="13" num_y_labels="9" title="Crop Production" isee:fill_intensity="1" to="2100" isee:allow_zero_axis="true" left_axis_multi_scale="false" left_axis_auto_scale="true" left_include_units="true" right_axis_multi_scale="false" right_axis_auto_scale="true" right_include_units="true"/>
+					<graph width="570" height="470" type="area" isee:sum_stacked_legend="true" isee:stacked_show_hover_values="true" show_grid="true" isee:tick_type="none" include_units_in_legend="false" plot_numbers="false" isee:label_pie_slices="false" isee:show_pie_borders="true" num_x_grid_lines="13" num_y_grid_lines="9" num_x_labels="13" num_y_labels="9" title="Crop Production by Use" isee:fill_intensity="1" to="2100" isee:allow_zero_axis="true" left_axis_title="PCal/Year" left_axis_multi_scale="false" left_axis_auto_scale="true" left_include_units="true" right_axis_multi_scale="false" right_axis_auto_scale="true" right_include_units="true"/>
+					<graph width="570" height="470" type="area" isee:sum_stacked_legend="true" isee:stacked_show_hover_values="true" show_grid="true" isee:tick_type="none" include_units_in_legend="false" plot_numbers="false" isee:label_pie_slices="false" isee:show_pie_borders="true" num_x_grid_lines="13" num_y_grid_lines="9" num_x_labels="13" num_y_labels="9" title="Water Use" isee:fill_intensity="1" to="2100" isee:allow_zero_axis="true" left_axis_multi_scale="false" left_axis_auto_scale="true" left_include_units="true" right_axis_multi_scale="false" right_axis_auto_scale="true" right_include_units="true"/>
 					<graph width="570" height="470" type="time_series" show_grid="true" isee:tick_type="none" include_units_in_legend="false" plot_numbers="false" isee:label_pie_slices="false" isee:show_pie_borders="true" num_x_grid_lines="13" num_y_grid_lines="9" num_x_labels="13" num_y_labels="9" title="Water Sustainability (to be combined with Water Use)" isee:fill_intensity="1" to="2100" isee:allow_zero_axis="true" left_axis_multi_scale="false" left_axis_auto_scale="true" left_include_units="true" right_axis_multi_scale="false" right_axis_auto_scale="true" right_include_units="true">
 						<plot color="blue" title="Total Water Use" isee:keep_zero_visible="true" pen_width="1" index="0" show_y_axis="true">
-							<entity name="Freshwater.total_water_withdrawal[1, World]"/>
+							<entity name="Freshwater.total_water_withdrawal[1, ?]"/>
 						</plot>
 						<plot color="red" title="Unsustainable Water Use" isee:keep_zero_visible="true" pen_width="1" index="1" show_y_axis="true">
-							<entity name="Freshwater.unsustainable_groundwater_withdrawal[1]"/>
+							<entity name="Freshwater.unsustainable_groundwater_withdrawal[1, World]"/>
 						</plot>
 					</graph>
-					<graph width="570" height="470" type="area" isee:sum_stacked_legend="true" isee:stacked_show_hover_values="true" show_grid="true" isee:tick_type="none" include_units_in_legend="false" plot_numbers="false" isee:label_pie_slices="false" isee:show_pie_borders="true" num_x_grid_lines="13" num_y_grid_lines="9" num_x_labels="13" num_y_labels="9" title="Fertilizer by Type" isee:fill_intensity="1" to="2100" isee:allow_zero_axis="true" left_axis_multi_scale="false" left_axis_auto_scale="true" left_include_units="true" right_axis_multi_scale="false" right_axis_auto_scale="true" right_include_units="true">
-						<plot color="blue" title="Man Made" isee:keep_zero_visible="true" pen_width="1" index="0" show_y_axis="true">
-							<entity name="Land_Nutrients.man_made_fertilizer_use[1]"/>
-						</plot>
-						<plot color="red" title="Manure" isee:keep_zero_visible="true" pen_width="1" index="1" show_y_axis="true">
-							<entity name="Land_Nutrients.manure_fertilizer_use[1]"/>
-						</plot>
-					</graph>
+					<graph width="570" height="470" type="area" isee:sum_stacked_legend="true" isee:stacked_show_hover_values="true" show_grid="true" isee:tick_type="none" include_units_in_legend="false" plot_numbers="false" isee:label_pie_slices="false" isee:show_pie_borders="true" num_x_grid_lines="13" num_y_grid_lines="9" num_x_labels="13" num_y_labels="9" title="Fertilizer by Type" isee:fill_intensity="1" to="2100" isee:allow_zero_axis="true" left_axis_multi_scale="false" left_axis_auto_scale="true" left_include_units="true" right_axis_multi_scale="false" right_axis_auto_scale="true" right_include_units="true"/>
 					<graph width="570" height="470" comparative="true" type="time_series" isee:points_only="true" show_grid="true" isee:tick_type="none" include_units_in_legend="false" plot_numbers="false" isee:label_pie_slices="false" isee:show_pie_borders="true" num_x_grid_lines="13" num_y_grid_lines="9" num_x_labels="13" num_y_labels="9" isee:fill_intensity="1" to="2100" isee:allow_zero_axis="true" left_axis_multi_scale="false" left_axis_auto_scale="true" left_include_units="true" right_axis_multi_scale="false" right_axis_auto_scale="true" right_include_units="true"/>
 					<graph width="570" height="470" comparative="true" type="time_series" show_grid="true" isee:tick_type="none" include_units_in_legend="false" plot_numbers="false" isee:label_pie_slices="false" isee:show_pie_borders="true" num_x_grid_lines="13" num_y_grid_lines="9" num_x_labels="13" num_y_labels="9" isee:fill_intensity="1" to="2100" isee:allow_zero_axis="true" left_axis_multi_scale="false" left_axis_auto_scale="true" left_include_units="true" right_axis_multi_scale="false" right_axis_auto_scale="true" right_include_units="true">
 						<plot color="blue" isee:keep_zero_visible="true" pen_width="1" index="0" show_y_axis="true">
@@ -3157,72 +2830,10 @@ This is what determines when the model stops calculating</doc>
 					</graph>
 				</stacked_container>
 				<stacked_container uid="157" x="1155.17" y="1181.35" width="567.66" height="457.667" minimized="true">
-					<graph width="567.66" height="457.667" type="area" isee:sum_stacked_legend="true" isee:stacked_show_hover_values="true" show_grid="true" isee:tick_type="none" include_units_in_legend="false" plot_numbers="false" isee:label_pie_slices="false" isee:show_pie_borders="true" num_x_grid_lines="13" num_y_grid_lines="6" num_x_labels="13" num_y_labels="6" title="Energy Output by Type" isee:fill_intensity="0.5" isee:stacked_area_max="150000" to="2100" isee:allow_zero_axis="true" left_axis_title="TWh/Year" left_axis_multi_scale="false" left_axis_auto_scale="true" left_include_units="true" right_axis_multi_scale="false" right_axis_auto_scale="true" right_include_units="true">
-						<plot color="black" title="Coal" isee:keep_zero_visible="true" pen_width="1" index="0" show_y_axis="true">
-							<format scale_by="1" delimit_000s="true"/>
-							<entity name="fossil_energy_coal.Secondary_Fossil_Energy_Output[1]"/>
-						</plot>
-						<plot color="#552B00" title="Oil" isee:keep_zero_visible="true" pen_width="1" index="1" show_y_axis="true">
-							<format scale_by="1" delimit_000s="true"/>
-							<entity name="fossil_energy_oil.Secondary_Fossil_Energy_Output[1]"/>
-						</plot>
-						<plot color="#9C4E00" title="Gas" isee:keep_zero_visible="true" pen_width="1" index="2" show_y_axis="true">
-							<format scale_by="1" delimit_000s="true"/>
-							<entity name="fossil_energy_gas.Secondary_Fossil_Energy_Output[1]"/>
-						</plot>
-						<plot color="#00AAFF" title="Hydro" isee:keep_zero_visible="true" pen_width="1" index="3" show_y_axis="true">
-							<format scale_by="1" delimit_000s="true"/>
-							<entity name="hydropower_energy.Hydropower_Energy_Output[1]"/>
-						</plot>
-						<plot color="#FF55FF" title="Nuclear" isee:keep_zero_visible="true" pen_width="1" index="4" show_y_axis="true">
-							<format scale_by="1" delimit_000s="true"/>
-							<entity name="nuclear_energy.Nuclear_Energy_Output[1]"/>
-						</plot>
-						<plot color="#00D900" title="Biofuel" isee:keep_zero_visible="true" pen_width="1" index="5" show_y_axis="true">
-							<format scale_by="1" delimit_000s="true"/>
-							<entity name="bio_fuel_energy.bio_fuel_primary_energy[1]"/>
-						</plot>
-					</graph>
+					<graph width="567.66" height="457.667" type="area" isee:sum_stacked_legend="true" isee:stacked_show_hover_values="true" show_grid="true" isee:tick_type="none" include_units_in_legend="false" plot_numbers="false" isee:label_pie_slices="false" isee:show_pie_borders="true" num_x_grid_lines="13" num_y_grid_lines="6" num_x_labels="13" num_y_labels="6" title="Energy Output by Type" isee:fill_intensity="0.5" isee:stacked_area_max="150000" to="2100" isee:allow_zero_axis="true" left_axis_title="TWh/Year" left_axis_multi_scale="false" left_axis_auto_scale="true" left_include_units="true" right_axis_multi_scale="false" right_axis_auto_scale="true" right_include_units="true"/>
 				</stacked_container>
 				<stacked_container uid="158" x="1743.67" y="1183.02" width="567" height="457">
-					<graph width="567" height="457" type="area" isee:sum_stacked_legend="true" isee:stacked_show_hover_values="true" show_grid="true" isee:tick_type="none" include_units_in_legend="false" plot_numbers="false" isee:label_pie_slices="false" isee:show_pie_borders="true" num_x_grid_lines="13" num_y_grid_lines="5" num_x_labels="13" num_y_labels="5" title="Energy Investments by Type" isee:fill_intensity="0.5" isee:stacked_area_max="2000000000000" to="2100" isee:allow_zero_axis="true" left_axis_title="$(Constant 2021)/Year" left_axis_multi_scale="false" left_axis_auto_scale="true" left_include_units="true" right_axis_multi_scale="false" right_axis_auto_scale="true" right_include_units="true">
-						<plot color="black" pen_style="dashed" title="Coal Extraction" isee:keep_zero_visible="true" pen_width="1" index="0" show_y_axis="true">
-							<format display_as="currency"/>
-							<entity name="energy_investments.Coal_Gross_Investments_in_Fossil_Fuel_Extraction_Capital[1]"/>
-						</plot>
-						<plot color="black" title="Coal Conversion to Energy" isee:keep_zero_visible="true" pen_width="1" index="1" show_y_axis="true">
-							<format display_as="currency"/>
-							<entity name="energy_investments.Coal_Gross_Investments_in_Fossil_Energy_Capital[1]"/>
-						</plot>
-						<plot color="#552B00" pen_style="dashed" title="Oil Extraction" isee:keep_zero_visible="true" pen_width="1" index="2" show_y_axis="true">
-							<format display_as="currency"/>
-							<entity name="energy_investments.Oil_Gross_Investments_in_Fossil_Fuel_Extraction_Capital[1]"/>
-						</plot>
-						<plot color="#552B00" title="Oil Conversion to Energy" isee:keep_zero_visible="true" pen_width="1" index="3" show_y_axis="true">
-							<format display_as="currency"/>
-							<entity name="energy_investments.Oil_Gross_Investments_in_Fossil_Energy_Capital[1]"/>
-						</plot>
-						<plot color="#9C4E00" pen_style="dashed" title="Gas Extraction" isee:keep_zero_visible="true" pen_width="1" index="4" show_y_axis="true">
-							<format display_as="currency"/>
-							<entity name="energy_investments.Gas_Gross_Investments_in_Fossil_Fuel_Extraction_Capital[1]"/>
-						</plot>
-						<plot color="#9C4E00" title="Gas Conversion to Energy" isee:keep_zero_visible="true" pen_width="1" index="5" show_y_axis="true">
-							<format display_as="currency"/>
-							<entity name="energy_investments.Gas_Gross_Investments_in_Fossil_Energy_Capital[1]"/>
-						</plot>
-						<plot color="#00AAFF" title="Hydro" isee:keep_zero_visible="true" pen_width="1" index="6" show_y_axis="true">
-							<format display_as="currency"/>
-							<entity name="energy_investments.Gross_Investments_in_Hydropower_Energy_capacity[1]"/>
-						</plot>
-						<plot color="#FF55FF" title="Nuclear" isee:keep_zero_visible="true" pen_width="1" index="7" show_y_axis="true">
-							<format display_as="currency"/>
-							<entity name="energy_investments.Investments_in_Nuclear_Capacity[1]"/>
-						</plot>
-						<plot color="#00D900" title="Biofuel" isee:keep_zero_visible="true" pen_width="1" index="8" show_y_axis="true">
-							<format display_as="currency"/>
-							<entity name="energy_investments.Gross_Investments_in_Biofuel_Capacity[1]"/>
-						</plot>
-					</graph>
+					<graph width="567" height="457" type="area" isee:sum_stacked_legend="true" isee:stacked_show_hover_values="true" show_grid="true" isee:tick_type="none" include_units_in_legend="false" plot_numbers="false" isee:label_pie_slices="false" isee:show_pie_borders="true" num_x_grid_lines="13" num_y_grid_lines="5" num_x_labels="13" num_y_labels="5" title="Energy Investments by Type" isee:fill_intensity="0.5" isee:stacked_area_max="2000000000000" to="2100" isee:allow_zero_axis="true" left_axis_title="$(Constant 2021)/Year" left_axis_multi_scale="false" left_axis_auto_scale="true" left_include_units="true" right_axis_multi_scale="false" right_axis_auto_scale="true" right_include_units="true"/>
 				</stacked_container>
 				<text_box uid="159" x="1873" y="1649" width="260" height="58">We want to separate the oil conversion to energy capital from the biofuel conversion to energy capital so there is a second green section</text_box>
 				<stacked_container uid="160" x="2163.96" y="-140.512" width="567" height="473.666">
