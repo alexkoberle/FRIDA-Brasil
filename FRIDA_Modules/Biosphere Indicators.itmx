@@ -315,6 +315,7 @@
 			<aux name="timber" access="input">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>{Enter equation for use when not hooked up to other models}</eqn>
 				<units>GtC/Year</units>
@@ -322,6 +323,7 @@
 			<aux name="cropland net primary production" access="input">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>{Enter equation for use when not hooked up to other models}</eqn>
 				<units>GtC/Year</units>
@@ -329,6 +331,7 @@
 			<aux name="grass net primary production" access="input">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>{Enter equation for use when not hooked up to other models}</eqn>
 				<units>GtC/(Mha*year)</units>
@@ -336,6 +339,7 @@
 			<aux name="grazing land 2" access="input">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>{Enter equation for use when not hooked up to other models}</eqn>
 				<units>Mha</units>
@@ -344,6 +348,7 @@
 				<doc>Total actual net primary production of grazing lands.</doc>
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>grazing_land_2 * grass_net_primary_production</eqn>
 				<units>GtC/Year</units>
@@ -354,6 +359,7 @@
 Source: Haberl et al., 2007 (https://www.pnas.org/doi/full/10.1073/pnas.0704243104) and Stenzel et al., 2024 (https://gmd.copernicus.org/articles/17/3235/2024)</doc>
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>HANPP_from_harvest_or_destruction + HANPP_from_land_use_change + HANPP_from_fires</eqn>
 				<units>GtC/Year</units>
@@ -364,6 +370,9 @@ Total actual net primary production in the Holocene.
 
 Value: 55.9
 Source: Richardson et al., 2023 (https://www.science.org/doi/10.1126/sciadv.adh2458)</doc>
+				<dimensions>
+					<dim name="Region"/>
+				</dimensions>
 				<eqn>55.9</eqn>
 				<units>GtC/Year</units>
 			</aux>
@@ -374,8 +383,9 @@ Control variable for the functional Biosphere Integrity planetary boundary, defi
 Source: Richardson et al., 2023 (https://www.science.org/doi/10.1126/sciadv.adh2458)</doc>
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<eqn>Human_appropriation_of_net_primary_production / Holocene_net_primary_production * UNIT_Percent_to_decimal</eqn>
+				<eqn>Human_appropriation_of_net_primary_production / Holocene_net_primary_production[Region] * UNIT_Percent_to_decimal</eqn>
 				<units>%</units>
 			</aux>
 			<stock name="Mature Forest" access="input">
@@ -399,6 +409,7 @@ Source: Richardson et al., 2023 (https://www.science.org/doi/10.1126/sciadv.adh2
 				<doc>Habitable area covered by forests.</doc>
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>Mature_Forest[Run,Region] + Young_Forest[Run,Region]</eqn>
 				<units>Mha</units>
@@ -410,6 +421,9 @@ Area covered by forests during the Holocene. Steffen et al. specify that 75 % of
 Value: 6387
 Source: Steffen et al., 2015 (https://www.science.org/doi/10.1126/science.1259855)
 </doc>
+				<dimensions>
+					<dim name="Region"/>
+				</dimensions>
 				<eqn>6387</eqn>
 				<units>Mha</units>
 			</aux>
@@ -419,8 +433,9 @@ Source: Steffen et al., 2015 (https://www.science.org/doi/10.1126/science.125985
 Source: Richardson et al., 2023 (https://www.science.org/doi/10.1126/sciadv.adh2458)</doc>
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<eqn>(Holocene_forested_area - Forested_area) / Holocene_forested_area * UNIT_Percent_to_decimal</eqn>
+				<eqn>(Holocene_forested_area[Region] - Forested_area) / Holocene_forested_area[Region] * UNIT_Percent_to_decimal</eqn>
 				<units>%</units>
 			</aux>
 			<aux name="HANPP as fraction of\nHolocene net primary\nproduction Boundary value">
@@ -429,6 +444,9 @@ Boundary value of the control variable for the functional Biosphere Integrity pl
 
 Value: 10
 Source: Richardson et al., 2023 (https://www.science.org/doi/10.1126/sciadv.adh2458)</doc>
+				<dimensions>
+					<dim name="Region"/>
+				</dimensions>
 				<eqn>10</eqn>
 				<units>%</units>
 			</aux>
@@ -438,6 +456,9 @@ High risk boundary value of the control variable for the functional Biosphere In
 
 Value: 20
 Source: Richardson et al., 2023 (https://www.science.org/doi/10.1126/sciadv.adh2458)</doc>
+				<dimensions>
+					<dim name="Region"/>
+				</dimensions>
 				<eqn>20</eqn>
 				<units>%</units>
 			</aux>
@@ -447,11 +468,17 @@ Boundary value of the control variable for the global Land System Change planeta
 
 Value: 25
 Source: Richardson et al., 2023 (https://www.science.org/doi/10.1126/sciadv.adh2458)</doc>
+				<dimensions>
+					<dim name="Region"/>
+				</dimensions>
 				<eqn>25</eqn>
 				<units>%</units>
 			</aux>
 			<aux name="Fraction of NPP consumed\nby human-induced fires">
 				<doc>Fraction of total actual net primary production which is consumed by human-induced fires. It is assumed that this fraction is constant over time, and equals the ratio between the net primary production consumed by human-induced fires in year 2000 and the total actual net primary production in year 2000.</doc>
+				<dimensions>
+					<dim name="Region"/>
+				</dimensions>
 				<eqn>&quot;Total_NPP_consumed_by_human-induced_fires_2000&quot; / Total_actual_NPP_2000</eqn>
 				<units>dmnl</units>
 			</aux>
@@ -461,6 +488,9 @@ High risk boundary value of the control variable for the global Land System Chan
 
 Value: 46
 Source: Richardson et al., 2023 (https://www.science.org/doi/10.1126/sciadv.adh2458)</doc>
+				<dimensions>
+					<dim name="Region"/>
+				</dimensions>
 				<eqn>46</eqn>
 				<units>%</units>
 			</aux>
@@ -476,6 +506,9 @@ Source: Richardson et al., 2023 (https://www.science.org/doi/10.1126/sciadv.adh2
 				<doc>Fraction of total blue water withdrawal that is consumed.
 
 Assumptions: This fraction is constant over time.</doc>
+				<dimensions>
+					<dim name="Region"/>
+				</dimensions>
 				<eqn>&quot;Total_consumptive_blue_water_use_2000-2020&quot; / &quot;Total_blue_water_extraction_2000-2020&quot;</eqn>
 				<units>dmnl</units>
 			</aux>
@@ -486,8 +519,9 @@ Control variable for the Freshwater Use planetary boundary (2015 definition by S
 Source: Steffen et al., 2015 (https://www.science.org/doi/10.1126/science.1259855)</doc>
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<eqn>Fraction_of_total_water_withdrawal_for_consumption * total_water_withdrawal[Run,Region] * UNIT_km3_to_m3</eqn>
+				<eqn>Fraction_of_total_water_withdrawal_for_consumption[Region] * total_water_withdrawal[Run,Region] * UNIT_km3_to_m3</eqn>
 				<units>km^3/Year</units>
 			</aux>
 			<aux name="Maximum amount of\nconsumptive blue water use Boundary value">
@@ -496,6 +530,9 @@ Boundary value of the control variable for the Freshwater Use planetary boundary
 
 Value: 4000
 Source: Steffen et al., 2015 (https://www.science.org/doi/10.1126/science.1259855)</doc>
+				<dimensions>
+					<dim name="Region"/>
+				</dimensions>
 				<eqn>4000</eqn>
 				<units>km^3/Year</units>
 			</aux>
@@ -505,6 +542,9 @@ High risk boundary value of the control variable for the Freshwater Use planetar
 
 Value: 6000
 Source: Steffen et al., 2015 (https://www.science.org/doi/10.1126/science.1259855)</doc>
+				<dimensions>
+					<dim name="Region"/>
+				</dimensions>
 				<eqn>6000</eqn>
 				<units>km^3/Year</units>
 			</aux>
@@ -522,6 +562,9 @@ Boundary value of the control variable for the nitrogen Biogeochemical Flows pla
 
 Value: 62
 Source: Richardson et al., 2023 (https://www.science.org/doi/10.1126/sciadv.adh2458)</doc>
+				<dimensions>
+					<dim name="Region"/>
+				</dimensions>
 				<eqn>62</eqn>
 				<units>MtN/year</units>
 			</aux>
@@ -531,6 +574,9 @@ High risk boundary value of the control variable for the nitrogen Biogeochemical
 
 Value: 82
 Source: Richardson et al., 2023 (https://www.science.org/doi/10.1126/sciadv.adh2458)</doc>
+				<dimensions>
+					<dim name="Region"/>
+				</dimensions>
 				<eqn>82</eqn>
 				<units>MtN/year</units>
 			</aux>
@@ -540,6 +586,9 @@ Boundary value of the control variable for the regional phosphorus Biogeochemica
 
 Value: 6.2
 Source: Richardson et al., 2023 (https://www.science.org/doi/10.1126/sciadv.adh2458)</doc>
+				<dimensions>
+					<dim name="Region"/>
+				</dimensions>
 				<eqn>6.2</eqn>
 				<units>MtP/year</units>
 			</aux>
@@ -549,12 +598,16 @@ High risk boundary value of the control variable for the regional phosphorus Bio
 
 Value: 11.2
 Source: Richardson et al., 2023 (https://www.science.org/doi/10.1126/sciadv.adh2458)</doc>
+				<dimensions>
+					<dim name="Region"/>
+				</dimensions>
 				<eqn>11.2</eqn>
 				<units>MtP/year</units>
 			</aux>
 			<aux name="man made fertilizer use" access="input">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>{Enter equation for use when not hooked up to other models}</eqn>
 				<units>MtN/year</units>
@@ -566,6 +619,7 @@ Control variable for the nitrogen Biogeochemical Flows planetary boundary, defin
 Source: Richardson et al., 2023 (https://www.science.org/doi/10.1126/sciadv.adh2458)</doc>
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>Intended_biological_nitrogen_fixation + man_made_fertilizer_use</eqn>
 				<units>MtN/year</units>
@@ -580,6 +634,9 @@ P fertilizer: 14 TgP/yr
 
 Value: 8.6
 Source: Bouwman et al., 2011 (https://www.pnas.org/doi/full/10.1073/pnas.1012878108) and Steffen et al., 2015 (https://www.science.org/doi/10.1126/science.1259855)</doc>
+				<dimensions>
+					<dim name="Region"/>
+				</dimensions>
 				<eqn>8.6</eqn>
 				<range min="8.6" max="8.6"/>
 				<units>MtN/MtP</units>
@@ -593,8 +650,9 @@ Assumptions: All agricultural soils are erodible with respect to P flow to fresh
 Source: Richardson et al., 2023 (https://www.science.org/doi/10.1126/sciadv.adh2458) and Steffen et al., 2015 (https://www.science.org/doi/10.1126/science.1259855)</doc>
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<eqn>(man_made_fertilizer_use + Intended_biological_nitrogen_fixation) / &quot;Ratio_N:P_in_man_made_fertilizer_2000&quot;</eqn>
+				<eqn>(man_made_fertilizer_use + Intended_biological_nitrogen_fixation) / &quot;Ratio_N:P_in_man_made_fertilizer_2000&quot;[Region]</eqn>
 				<units>MtP/year</units>
 			</aux>
 			<group name="Climate Change" run="false">
@@ -687,6 +745,7 @@ Source: Richardson et al., 2023 (https://www.science.org/doi/10.1126/sciadv.adh2
 			<aux name="tree net primary production" access="input">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>{Enter equation for use when not hooked up to other models}</eqn>
 				<units>GtC/(Mha*year)</units>
@@ -710,6 +769,7 @@ Source: Richardson et al., 2023 (https://www.science.org/doi/10.1126/sciadv.adh2
 				<doc>Grassland net primary production for current climatic conditions with the same forest area as in the Holocene. It is assumed that the net primary production per unit area of grass is the same as for the actual grassland cover. </doc>
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>Holocene_grassland_area * grass_net_primary_production</eqn>
 				<units>GtC/Year</units>
@@ -718,16 +778,18 @@ Source: Richardson et al., 2023 (https://www.science.org/doi/10.1126/sciadv.adh2
 				<doc>Forest net primary production for current climatic conditions with the same forest area as in the Holocene. It is assumed that the net primary production per unit area of forest is the same as for the actual forest cover. </doc>
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<eqn>Holocene_forested_area * tree_net_primary_production</eqn>
+				<eqn>Holocene_forested_area[Region] * tree_net_primary_production</eqn>
 				<units>GtC/Year</units>
 			</aux>
 			<aux name="Holocene grassland area">
 				<doc>Grassland area in the Holocene. It is assumed that this area equals the habitable land in 1980 minus the Holocene forest cover.</doc>
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<eqn>INIT(Habitable_Land_Area[Run,Region]) - Holocene_forested_area</eqn>
+				<eqn>INIT(Habitable_Land_Area[Run,Region]) - Holocene_forested_area[Region]</eqn>
 				<units>Mha</units>
 			</aux>
 			<aux name="Potential net primary production">
@@ -736,6 +798,7 @@ Source: Richardson et al., 2023 (https://www.science.org/doi/10.1126/sciadv.adh2
 Source: Haberl et al., 2007 (https://www.pnas.org/doi/full/10.1073/pnas.0704243104) and Stenzel et al., 2024 (https://gmd.copernicus.org/articles/17/3235/2024)</doc>
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>Potential_net_primary_production_Forest + Potential_net_primary_production_Grassland</eqn>
 				<units>GtC/Year</units>
@@ -746,8 +809,9 @@ Source: Haberl et al., 2007 (https://www.pnas.org/doi/full/10.1073/pnas.07042431
 Source: Haberl et al., 2007 (https://www.pnas.org/doi/full/10.1073/pnas.0704243104) and Stenzel et al., 2024 (https://gmd.copernicus.org/articles/17/3235/2024)</doc>
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<eqn>Potential_net_primary_production - Terrestrial_net_primary_production</eqn>
+				<eqn>Potential_net_primary_production - Terrestrial_net_primary_production[Run]</eqn>
 				<units>GtC/Year</units>
 			</aux>
 			<aux name="HANPP as fraction of\nHolocene net primary\nproduction Holocene value">
@@ -756,6 +820,9 @@ Holocene value of the control variable for the functional Biosphere Integrity pl
 
 Value: 1.9
 Source: Richardson et al., 2023 (https://www.science.org/doi/10.1126/sciadv.adh2458)</doc>
+				<dimensions>
+					<dim name="Region"/>
+				</dimensions>
 				<eqn>1.9</eqn>
 				<units>%</units>
 			</aux>
@@ -766,8 +833,9 @@ Normalised control variable for the functional Biosphere Integrity planetary bou
 Source: Lade et al., 2019 (https://www.nature.com/articles/s41893-019-0454-4)</doc>
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<eqn>(HANPP_as_fraction_of_Holocene_net_primary_production - HANPP_as_fraction_of_Holocene_net_primary_production_Holocene_value)/(HANPP_as_fraction_of_Holocene_net_primary_production_Boundary_value - HANPP_as_fraction_of_Holocene_net_primary_production_Holocene_value)</eqn>
+				<eqn>(HANPP_as_fraction_of_Holocene_net_primary_production - HANPP_as_fraction_of_Holocene_net_primary_production_Holocene_value[Region])/(HANPP_as_fraction_of_Holocene_net_primary_production_Boundary_value[Region] - HANPP_as_fraction_of_Holocene_net_primary_production_Holocene_value[Region])</eqn>
 				<units>dmnl</units>
 			</aux>
 			<aux name="Fraction\nforest removed Holocene value">
@@ -776,6 +844,9 @@ Holocene value of the control variable for the global Land System Change planeta
 
 Value: 0
 Source: Richardson et al., 2023 (https://www.science.org/doi/10.1126/sciadv.adh2458)</doc>
+				<dimensions>
+					<dim name="Region"/>
+				</dimensions>
 				<eqn>0</eqn>
 				<units>%</units>
 			</aux>
@@ -786,8 +857,9 @@ Normalised control variable for the global Land System Change planetary boundary
 Source: Lade et al., 2019 (https://www.nature.com/articles/s41893-019-0454-4)</doc>
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<eqn>(Fraction_forest_removed - Fraction_forest_removed_Holocene_value)/(Fraction_forest_removed_Boundary_value - Fraction_forest_removed_Holocene_value)</eqn>
+				<eqn>(Fraction_forest_removed - Fraction_forest_removed_Holocene_value[Region])/(Fraction_forest_removed_Boundary_value[Region] - Fraction_forest_removed_Holocene_value[Region])</eqn>
 				<units>dmnl</units>
 			</aux>
 			<aux name="Maximum amount of\nconsumptive blue water use Holocene value">
@@ -796,18 +868,22 @@ Holocene value of the control variable for the Freshwater Use planetary boundary
 
 Value: 415
 Source: Rockström et al., 2009 (https://www.jstor.org/stable/26268316)</doc>
+				<dimensions>
+					<dim name="Region"/>
+				</dimensions>
 				<eqn>415</eqn>
 				<units>km^3/Year</units>
 			</aux>
-			<aux name="Maximum amount of\nconsumptive blue water use Normalised control variable">
+			<aux name="Maximum amount of\nconsumptive blue water use\nNormalised control variable">
 				<doc>${Explanatory Variable}
 Normalised control variable for the Freshwater Use planetary boundary, defined following Lade et al.
 
 Source: Lade et al., 2019 (https://www.nature.com/articles/s41893-019-0454-4)</doc>
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<eqn>(Maximum_amount_of_consumptive_blue_water_use - Maximum_amount_of_consumptive_blue_water_use_Holocene_value)/(Maximum_amount_of_consumptive_blue_water_use_Boundary_value - Maximum_amount_of_consumptive_blue_water_use_Holocene_value)</eqn>
+				<eqn>(Maximum_amount_of_consumptive_blue_water_use - Maximum_amount_of_consumptive_blue_water_use_Holocene_value[Region])/(Maximum_amount_of_consumptive_blue_water_use_Boundary_value[Region] - Maximum_amount_of_consumptive_blue_water_use_Holocene_value[Region])</eqn>
 				<units>dmnl</units>
 			</aux>
 			<aux name="Intentionally fixed N\napplied to the\nagricultural system Holocene value">
@@ -816,6 +892,9 @@ Holocene value of the control variable for the nitrogen Biogeochemical Flows pla
 
 Value: 0
 Source: Richardson et al., 2023 (https://www.science.org/doi/10.1126/sciadv.adh2458)</doc>
+				<dimensions>
+					<dim name="Region"/>
+				</dimensions>
 				<eqn>0</eqn>
 				<units>MtN/year</units>
 			</aux>
@@ -825,8 +904,9 @@ Source: Richardson et al., 2023 (https://www.science.org/doi/10.1126/sciadv.adh2
 Source: Lade et al., 2019 (https://www.nature.com/articles/s41893-019-0454-4)</doc>
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<eqn>(Intentionally_fixed_N_applied_to_the_agricultural_system - Intentionally_fixed_N_applied_to_the_agricultural_system_Holocene_value)/(Intentionally_fixed_N_applied_to_the_agricultural_system_Boundary_value - Intentionally_fixed_N_applied_to_the_agricultural_system_Holocene_value)</eqn>
+				<eqn>(Intentionally_fixed_N_applied_to_the_agricultural_system - Intentionally_fixed_N_applied_to_the_agricultural_system_Holocene_value[Region])/(Intentionally_fixed_N_applied_to_the_agricultural_system_Boundary_value[Region] - Intentionally_fixed_N_applied_to_the_agricultural_system_Holocene_value[Region])</eqn>
 				<units>dmnl</units>
 			</aux>
 			<aux name="P flow from\nfertilizers to erodible soils Holocene value">
@@ -835,6 +915,9 @@ Holocene value of the control variable for the regional phosphorus Biogeochemica
 
 Value: 0
 Source: Richardson et al., 2023 (https://www.science.org/doi/10.1126/sciadv.adh2458)</doc>
+				<dimensions>
+					<dim name="Region"/>
+				</dimensions>
 				<eqn>0</eqn>
 				<units>MtP/year</units>
 			</aux>
@@ -845,8 +928,9 @@ Normalised control variable for the regional phosphorus Biogeochemical Flows pla
 Source: Lade et al., 2019 (https://www.nature.com/articles/s41893-019-0454-4)</doc>
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<eqn>(P_flow_from_fertilizers_to_erodible_soils - P_flow_from_fertilizers_to_erodible_soils_Holocene_value)/(P_flow_from_fertilizers_to_erodible_soils_Boundary_value - P_flow_from_fertilizers_to_erodible_soils_Holocene_value)</eqn>
+				<eqn>(P_flow_from_fertilizers_to_erodible_soils - P_flow_from_fertilizers_to_erodible_soils_Holocene_value[Region])/(P_flow_from_fertilizers_to_erodible_soils_Boundary_value[Region] - P_flow_from_fertilizers_to_erodible_soils_Holocene_value[Region])</eqn>
 				<units>dmnl</units>
 			</aux>
 			<aux name="Atmospheric\nCO2 concentration Holocene value">
@@ -896,6 +980,9 @@ Source: Lade et al., 2019 (https://www.nature.com/articles/s41893-019-0454-4)</d
 			</aux>
 			<aux name="Fraction of grazing land NPP\nharvested or destroyed">
 				<doc>Fraction of grazing land net primary production which is harvested or destroyed. It is assumed that this fraction is constant over time, and equals the ratio between the net primary production harvested or destroyed in year 2000 and the total actual net primary production in year 2000.</doc>
+				<dimensions>
+					<dim name="Region"/>
+				</dimensions>
 				<eqn>Grazing_land_NPP_harvested_or_destroyed_per_unit_area_2000 / Grazing_land_actual_NPP_per_unit_area_2000</eqn>
 				<units>dmnl</units>
 			</aux>
@@ -903,6 +990,7 @@ Source: Lade et al., 2019 (https://www.nature.com/articles/s41893-019-0454-4)</d
 				<doc>Cropland net primary production harvested or destroyed by humans. It is expressed as a fraction of the total actual net primary production.</doc>
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>Fraction_of_cropland_NPP_harvested_or_destroyed * cropland_net_primary_production</eqn>
 				<units>GtC/Year</units>
@@ -911,8 +999,9 @@ Source: Lade et al., 2019 (https://www.nature.com/articles/s41893-019-0454-4)</d
 				<doc>Grazing land net primary production harvested or destroyed by humans. It is expressed as a fraction of the total actual net primary production.</doc>
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<eqn>Fraction_of_grazing_land_NPP_harvested_or_destroyed * grazing_land_net_primary_production</eqn>
+				<eqn>Fraction_of_grazing_land_NPP_harvested_or_destroyed[Region] * grazing_land_net_primary_production</eqn>
 				<units>GtC/Year</units>
 			</aux>
 			<aux name="Cropland NPP harvested\nor destroyed\nper unit area 2000">
@@ -939,6 +1028,9 @@ Source: Haberl et al., 2007 (https://www.pnas.org/doi/full/10.1073/pnas.07042431
 
 Value: 41
 Source: Haberl et al., 2007 (https://www.pnas.org/doi/full/10.1073/pnas.0704243104)</doc>
+				<dimensions>
+					<dim name="Region"/>
+				</dimensions>
 				<eqn>41</eqn>
 				<units>gC/m^2/year</units>
 			</aux>
@@ -948,6 +1040,9 @@ Total actual net primary production of grazing lands per unit area for the year 
 
 Value: 433
 Source: Haberl et al., 2007 (https://www.pnas.org/doi/full/10.1073/pnas.0704243104)</doc>
+				<dimensions>
+					<dim name="Region"/>
+				</dimensions>
 				<eqn>433</eqn>
 				<units>gC/m^2/year</units>
 			</aux>
@@ -957,6 +1052,9 @@ Sum of total actual net primary production of croplands, grazing lands, infrastr
 
 Value: 59.22
 Source: Haberl et al., 2007 (https://www.pnas.org/doi/full/10.1073/pnas.0704243104)</doc>
+				<dimensions>
+					<dim name="Region"/>
+				</dimensions>
 				<eqn>59.22</eqn>
 				<units>GtC/year</units>
 			</aux>
@@ -966,6 +1064,9 @@ Total actual net primary production consumed by &quot;vegetation fires induced b
 
 Value: 1.14
 Source: Haberl et al., 2007 (https://www.pnas.org/doi/full/10.1073/pnas.0704243104)</doc>
+				<dimensions>
+					<dim name="Region"/>
+				</dimensions>
 				<eqn>1.14</eqn>
 				<units>GtC/year</units>
 			</aux>
@@ -975,8 +1076,9 @@ Source: Haberl et al., 2007 (https://www.pnas.org/doi/full/10.1073/pnas.07042431
 Source: Haberl et al., 2007 (https://www.pnas.org/doi/full/10.1073/pnas.0704243104) and Stenzel et al., 2024 (https://gmd.copernicus.org/articles/17/3235/2024)</doc>
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<eqn>Terrestrial_net_primary_production * &quot;Fraction_of_NPP_consumed_by_human-induced_fires&quot;</eqn>
+				<eqn>Terrestrial_net_primary_production[Run] * &quot;Fraction_of_NPP_consumed_by_human-induced_fires&quot;[Region]</eqn>
 				<units>GtC/year</units>
 			</aux>
 			<aux name="Forest NPP harvested or destroyed">
@@ -985,6 +1087,7 @@ Source: Haberl et al., 2007 (https://www.pnas.org/doi/full/10.1073/pnas.07042431
 Source: Haberl et al., 2007 (https://www.pnas.org/doi/full/10.1073/pnas.0704243104) and Stenzel et al., 2024 (https://gmd.copernicus.org/articles/17/3235/2024)</doc>
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>timber</eqn>
 				<units>GtC/year</units>
@@ -995,6 +1098,7 @@ Source: Haberl et al., 2007 (https://www.pnas.org/doi/full/10.1073/pnas.07042431
 Source: Haberl et al., 2007 (https://www.pnas.org/doi/full/10.1073/pnas.0704243104) and Stenzel et al., 2024 (https://gmd.copernicus.org/articles/17/3235/2024)</doc>
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>Forest_NPP_harvested_or_destroyed + Cropland_NPP_harvested_or_destroyed + Grazing_land_NPP_harvested_or_destroyed</eqn>
 				<units>GtC/year</units>
@@ -1007,6 +1111,9 @@ Assumptions: The range given is applicable for the period 2000-2020
 
 Range: 4.79-5.71
 Source: Wolf et al., 2015 (https://agupubs.onlinelibrary.wiley.com/doi/full/10.1002/2015GB005119)</doc>
+				<dimensions>
+					<dim name="Region"/>
+				</dimensions>
 				<eqn>5.25</eqn>
 				<range min="4.79" max="5.71"/>
 				<units>GtC/year</units>
@@ -1019,6 +1126,9 @@ Assumptions: The range given is applicable for the period 2000-2020.
 
 Range: 30-70
 Source: Richardson et al., 2023 (https://www.science.org/doi/10.1126/sciadv.adh2458)</doc>
+				<dimensions>
+					<dim name="Region"/>
+				</dimensions>
 				<eqn>50</eqn>
 				<range min="30" max="70"/>
 				<units>MtN/year</units>
@@ -1027,6 +1137,9 @@ Source: Richardson et al., 2023 (https://www.science.org/doi/10.1126/sciadv.adh2
 				<doc>Intended biological nitrogen fixation per unit of cropland net primary production.
 
 Assumptions: This fraction is constant over time, meaning that a constant fraction of crop net primary production leads to biological nitrogen fixation. This is based on the assumption that net primary production and biological nitrogen fixation are both proportional to the metabolic processes of the crops.</doc>
+				<dimensions>
+					<dim name="Region"/>
+				</dimensions>
 				<eqn>&quot;Intended_biological_nitrogen_fixation_2000-2020&quot; / &quot;Cropland_net_primary_production_2000-2020&quot;</eqn>
 				<units>MtN/GtC</units>
 			</aux>
@@ -1034,8 +1147,9 @@ Assumptions: This fraction is constant over time, meaning that a constant fracti
 				<doc>Intended biological nitrogen fixation, defined as the change in biological nitrogen fixation induced by human-grown crops and -plants.</doc>
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<eqn>Intended_BNF_per_unit_cropland_NPP * cropland_net_primary_production</eqn>
+				<eqn>Intended_BNF_per_unit_cropland_NPP[Region] * cropland_net_primary_production</eqn>
 				<units>MtN/year</units>
 			</aux>
 			<aux name="Total blue water\nextraction 2000-2020">
@@ -1044,6 +1158,9 @@ Total extraction of blue water (surface- and groundwater). Lower estimate from J
 
 Range: 3480-4000
 Source: Jägermeyr et al., 2017 (https://www.nature.com/articles/ncomms15900) and Rockström et al., 2009 (https://www.jstor.org/stable/26268316)</doc>
+				<dimensions>
+					<dim name="Region"/>
+				</dimensions>
 				<eqn>3740</eqn>
 				<range min="3480" max="4000"/>
 				<units>km^3/year</units>
@@ -1054,6 +1171,9 @@ Total consumptive use of blue water (surface- and groundwater), defined as the d
 
 Range: 1831-2600
 Source: Wada et al., 2011 (https://hess.copernicus.org/articles/15/3785/2011) and Rockström et al., 2009 (https://www.jstor.org/stable/26268316)</doc>
+				<dimensions>
+					<dim name="Region"/>
+				</dimensions>
 				<eqn>2215.5</eqn>
 				<range min="1831" max="2600"/>
 				<units>km^3/year</units>
@@ -1115,7 +1235,7 @@ Value: 100</doc>
 				<isee:iframe color="black" background="white" text_align="left" vertical_text_align="top" font_size="12pt" border_width="thin" border_style="solid"/>
 				<isee:financial_table color="black" background="#E0E0E0" text_align="right" font_size="12pt" hide_border="false" auto_fit="true" first_column_width="250" other_column_width="100" header_font_style="normal" header_font_weight="bold" header_text_decoration="none" header_text_align="center" header_vertical_text_align="center" header_font_color="black" header_font_family="Arial" header_font_size="14pt" header_text_padding="2" header_text_border_color="black" header_text_border_width="thin" header_text_border_style="none"/>
 			</style>
-			<view isee:show_pages="false" background="white" page_width="1122" page_height="793" isee:page_cols="6" isee:page_rows="2" isee:popup_graphs_are_comparative="true" isee:enable_non_negative_highlights="false" type="stock_flow">
+			<view isee:show_pages="false" background="white" page_width="1027" page_height="787" isee:page_cols="6" isee:page_rows="2" isee:scroll_x="1954" isee:popup_graphs_are_comparative="true" isee:enable_non_negative_highlights="false" type="stock_flow">
 				<style color="black" background="white" font_style="normal" font_weight="normal" text_decoration="none" text_align="center" vertical_text_align="center" font_color="black" font_family="Arial" font_size="10pt" padding="2" border_color="black" border_width="thin" border_style="none">
 					<stock color="black" background="white" label_side="top">
 						<shape type="rectangle" width="45" height="35"/>
@@ -1339,7 +1459,7 @@ Value: 100</doc>
 					<to>Fraction_forest_removed_Normalized_control_variable</to>
 				</connector>
 				<aux x="1729.08" y="190.98" name="Maximum amount of\nconsumptive blue water use Holocene value"/>
-				<aux x="1920.64" y="290.167" name="Maximum amount of\nconsumptive blue water use Normalised control variable"/>
+				<aux x="1920.64" y="290.167" name="Maximum amount of\nconsumptive blue water use\nNormalised control variable"/>
 				<connector uid="34" angle="13.9517">
 					<from>Maximum_amount_of_consumptive_blue_water_use_Holocene_value</from>
 					<to>Maximum_amount_of_consumptive_blue_water_use_Normalised_control_variable</to>
@@ -1533,10 +1653,6 @@ Value: 100</doc>
 					<from>Intended_BNF_per_unit_cropland_NPP</from>
 					<to>Intended_biological_nitrogen_fixation</to>
 				</connector>
-				<connector uid="75" angle="3.38538">
-					<from>Intended_biological_nitrogen_fixation</from>
-					<to>Intentionally_fixed_N_applied_to_the_agricultural_system</to>
-				</connector>
 				<connector uid="76" angle="292.63">
 					<from>Intended_biological_nitrogen_fixation</from>
 					<to>P_flow_from_fertilizers_to_erodible_soils</to>
@@ -1566,21 +1682,6 @@ Value: 100</doc>
 					<table width="350" height="250" isee:export_name="PB values" isee:mark_for_export="true" title="PB values">
 						<item type="time"/>
 						<item>
-							<entity name="HANPP_as_fraction_of_Holocene_net_primary_production[1]"/>
-						</item>
-						<item>
-							<entity name="Fraction_forest_removed[1]"/>
-						</item>
-						<item>
-							<entity name="Maximum_amount_of_consumptive_blue_water_use[1]"/>
-						</item>
-						<item>
-							<entity name="Intentionally_fixed_N_applied_to_the_agricultural_system[1]"/>
-						</item>
-						<item>
-							<entity name="P_flow_from_fertilizers_to_erodible_soils[1]"/>
-						</item>
-						<item>
 							<entity name="Atmospheric_CO2_concentration[1]"/>
 						</item>
 						<item>
@@ -1589,6 +1690,10 @@ Value: 100</doc>
 					</table>
 				</stacked_container>
 				<text_box uid="81" x="10.5273" y="7.80469" width="550" height="108.924">This module contains quantifications of planetary boundaries (PBs). The PB framework emphasises the many different components of the Earth system that are strongly influenced by human activities. To quantify each PB, one or more control variables are selected, for which a safe operating space, a zone of increasing risk and a high risk zone are defined, delimited by the boundary value (transition from safe operating space to zone of increasing risk) and the high risk value (transition from zone of increasing risk to high risk zone), as defined in the module. Each PB is quantified in a separate sector within the module. For more details, consult the documentation of variables within the module.</text_box>
+				<connector uid="75" angle="3.38538">
+					<from>Intended_biological_nitrogen_fixation</from>
+					<to>Intentionally_fixed_N_applied_to_the_agricultural_system</to>
+				</connector>
 				<alias font_style="italic" uid="1" x="101.833" y="731.334" width="18" height="18">
 					<of>Holocene_forested_area</of>
 				</alias>

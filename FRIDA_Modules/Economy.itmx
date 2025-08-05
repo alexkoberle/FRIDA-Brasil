@@ -1428,9 +1428,9 @@ SMTH1((net_worker_income[Run,Region]*desired_savings_as_multiple_of_wages[Run,Re
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>(risky_bank_assets[Run]*risky_interest_1[Run,Region])
-+ (safe_bank_assets[Run]*average_private_debt_interest[Run,Region])
-+(exploratory_bank_assets[Run]*exploratory_interest[Run,Region])</eqn>
+				<eqn>(risky_bank_assets[Run,Region]*risky_interest_1[Run,Region])
++ (safe_bank_assets[Run,Region]*average_private_debt_interest[Run,Region])
++(exploratory_bank_assets[Run,Region]*exploratory_interest[Run,Region])</eqn>
 				<units>B$/year</units>
 			</flow>
 			<flow name="worker savings\ninterest">
@@ -1534,7 +1534,7 @@ SMTH1((net_worker_income[Run,Region]*desired_savings_as_multiple_of_wages[Run,Re
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>private_investment_1[Run]</eqn>
+				<eqn>private_investment_1[Run,Region]</eqn>
 				<non_negative/>
 				<units>b$/year</units>
 			</flow>
@@ -1596,7 +1596,7 @@ SMTH1((net_worker_income[Run,Region]*desired_savings_as_multiple_of_wages[Run,Re
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>government_transfers_1[Run]</eqn>
+				<eqn>government_transfers_1[Run,Region]</eqn>
 				<non_negative/>
 				<units>b$/year</units>
 			</flow>
@@ -1628,6 +1628,7 @@ SMTH1((net_worker_income[Run,Region]*desired_savings_as_multiple_of_wages[Run,Re
 			<aux name="government\ntransfers 1" access="input">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>{Enter equation for use when not hooked up to other models}</eqn>
 				<units>b$/year</units>
@@ -1635,6 +1636,7 @@ SMTH1((net_worker_income[Run,Region]*desired_savings_as_multiple_of_wages[Run,Re
 			<aux name="safe bank assets" access="input">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>{Enter equation for use when not hooked up to other models}</eqn>
 				<units>b$</units>
@@ -1642,6 +1644,7 @@ SMTH1((net_worker_income[Run,Region]*desired_savings_as_multiple_of_wages[Run,Re
 			<aux name="risky bank assets" access="input">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>{Enter equation for use when not hooked up to other models}</eqn>
 				<units>b$</units>
@@ -1766,6 +1769,7 @@ net_worker_income*fraction_of_income_to_consumption[Run,Region]-annual_worker_sa
 			<aux name="exploratory\nbank assets" access="input">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>{Enter equation for use when not hooked up to other models}</eqn>
 				<units>b$</units>
@@ -1816,6 +1820,7 @@ net_worker_income*fraction_of_income_to_consumption[Run,Region]-annual_worker_sa
 			<aux name="firms cash net flow" access="output" isee:autocreated="true">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>Firms_cash_inflow[Run,Region]-firms_cash_outflow[Run,Region]</eqn>
 				<units>b$/year</units>
@@ -2209,6 +2214,7 @@ Assuming no one is migrating in 1980 b/c of SLR</doc>
 			<aux name="net income">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>net_owner_income[Run,Region]+net_worker_income[Run,Region]</eqn>
 				<units>b$/year</units>
@@ -2218,7 +2224,7 @@ Assuming no one is migrating in 1980 b/c of SLR</doc>
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>net_worker_income[Run,Region]/net_income[Run]*UNIT_Percent[Region]</eqn>
+				<eqn>net_worker_income[Run,Region]/net_income[Run,Region]*UNIT_Percent[Region]</eqn>
 				<units>%</units>
 			</aux>
 			<aux name="UNIT Percent" access="input">
@@ -2247,6 +2253,7 @@ Assuming no one is migrating in 1980 b/c of SLR</doc>
 			<aux name="private investment 1" access="input">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>{Enter equation for use when not hooked up to other models}</eqn>
 				<units>b$/year</units>
@@ -2568,7 +2575,7 @@ Assuming no one is migrating in 1980 b/c of SLR</doc>
 				<isee:iframe color="black" background="white" text_align="left" vertical_text_align="top" font_size="12pt" border_width="thin" border_style="solid"/>
 				<isee:financial_table color="black" background="#E0E0E0" text_align="right" font_size="12pt" hide_border="false" auto_fit="true" first_column_width="250" other_column_width="100" header_font_style="normal" header_font_weight="bold" header_text_decoration="none" header_text_align="center" header_vertical_text_align="center" header_font_color="black" header_font_family="Arial" header_font_size="14pt" header_text_padding="2" header_text_border_color="black" header_text_border_width="thin" header_text_border_style="none"/>
 			</style>
-			<view isee:show_pages="false" background="white" page_width="1027" page_height="787" isee:page_cols="4" isee:page_rows="4" isee:scroll_x="873.333" isee:scroll_y="812.5" zoom="120" isee:popup_graphs_are_comparative="true" isee:enable_non_negative_highlights="false" type="stock_flow">
+			<view isee:show_pages="false" background="white" page_width="1027" page_height="787" isee:page_cols="4" isee:page_rows="4" isee:scroll_x="705" isee:scroll_y="1818.33" zoom="120" isee:popup_graphs_are_comparative="true" isee:enable_non_negative_highlights="false" type="stock_flow">
 				<style color="black" background="white" font_style="normal" font_weight="normal" text_decoration="none" text_align="center" vertical_text_align="center" font_color="black" font_family="Arial" font_size="10pt" padding="2" border_color="black" border_width="thin" border_style="none">
 					<stock color="blue" background="white" font_color="blue" font_size="11pt" label_side="top">
 						<shape type="rectangle" width="45" height="35"/>
@@ -4055,6 +4062,7 @@ Assuming no one is migrating in 1980 b/c of SLR</doc>
 			<flow name="unemployed\ndeaths">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>working_age_deaths[Run,Region]*percentage_of_working_age_that_are_unemployed[Run,Region]</eqn>
 				<non_negative/>
@@ -4090,7 +4098,7 @@ https://rshiny.ilo.org/dataexplorer15/?id=EMP_2EMP_SEX_AGE_NB_A&amp;ref_area=X01
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>private_safe_bank_assets[Run]*average_private_debt_safe_interest[Run,Region]*profit_threshold_multiplier[Run,Region]</eqn>
+				<eqn>private_safe_bank_assets[Run,Region]*average_private_debt_safe_interest[Run,Region]*profit_threshold_multiplier[Run,Region]</eqn>
 				<units>b$/year</units>
 			</aux>
 			<aux name="missed\nprofits">
@@ -4169,6 +4177,7 @@ https://rshiny.ilo.org/dataexplorer15/?id=EMP_2EMP_SEX_AGE_NB_A&amp;ref_area=X01
 			<flow name="aging out of\nunemployed">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>aging_out[Run,Region]*percentage_of_working_age_that_are_unemployed[Run,Region]/UNIT_one_year</eqn>
 				<non_negative/>
@@ -4177,8 +4186,9 @@ https://rshiny.ilo.org/dataexplorer15/?id=EMP_2EMP_SEX_AGE_NB_A&amp;ref_area=X01
 			<flow name="new labour\nforce entrants">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
-				<eqn>aging_in[Run,Region]*labour_force_participation_rate[Run]/UNIT_one_year</eqn>
+				<eqn>aging_in[Run,Region]*labour_force_participation_rate[Run,Region]/UNIT_one_year</eqn>
 				<non_negative/>
 				<units>Mp/year</units>
 			</flow>
@@ -4187,6 +4197,7 @@ https://rshiny.ilo.org/dataexplorer15/?id=EMP_2EMP_SEX_AGE_NB_A&amp;ref_area=X01
 https://rshiny.ilo.org/dataexplorer16/?id=UNE_2UNE_SEX_AGE_NB_A&amp;ref_area=X01&amp;sex=SEX_T&amp;classif1=AGE_YTHADULT_YGE15&amp;timefrom=1991</doc>
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>(working_age_population[Run,Region]-non_active_working_age[Run,Region])*initial_unemployment_rate[Run,Region]</eqn>
 				<inflow>employment_decline</inflow>
@@ -4214,7 +4225,7 @@ https://rshiny.ilo.org/dataexplorer32/?id=UNE_2EAP_SEX_AGE_RT_A&amp;ref_area=X01
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>Unemployed[Run]/(Unemployed[Run]+Employed)</eqn>
+				<eqn>Unemployed[Run,Region]/(Unemployed[Run,Region]+Employed)</eqn>
 				<units>dmnl</units>
 			</aux>
 			<aux name="profit threshold\nmultiplier">
@@ -4265,7 +4276,7 @@ https://rshiny.ilo.org/dataexplorer32/?id=UNE_2EAP_SEX_AGE_RT_A&amp;ref_area=X01
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>(Employed[Run,Region]+Unemployed[Run]+non_active_working_age)
+				<eqn>(Employed[Run,Region]+Unemployed[Run,Region]+non_active_working_age)
 /(working_age_population)</eqn>
 				<units>dmnl</units>
 			</aux>
@@ -4274,7 +4285,7 @@ https://rshiny.ilo.org/dataexplorer32/?id=UNE_2EAP_SEX_AGE_RT_A&amp;ref_area=X01
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>Employed[Run,Region]+Unemployed[Run]</eqn>
+				<eqn>Employed[Run,Region]+Unemployed[Run,Region]</eqn>
 				<units>Mp</units>
 			</aux>
 			<aux name="percentage\nof working age that\nare employed">
@@ -4290,7 +4301,7 @@ https://rshiny.ilo.org/dataexplorer32/?id=UNE_2EAP_SEX_AGE_RT_A&amp;ref_area=X01
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>Unemployed[Run]/working_age_population</eqn>
+				<eqn>Unemployed[Run,Region]/working_age_population</eqn>
 				<units>dmnl</units>
 			</aux>
 			<aux name="working\nage population">
@@ -4313,6 +4324,7 @@ https://rshiny.ilo.org/dataexplorer32/?id=UNE_2EAP_SEX_AGE_RT_A&amp;ref_area=X01
 				<doc>https://rshiny.ilo.org/dataexplorer20/?id=EAP_2WAP_SEX_AGE_RT_A&amp;ref_area=X01&amp;sex=SEX_T&amp;classif1=AGE_AGGREGATE_TOTAL&amp;timefrom=1991</doc>
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>labour_force_participation_fixed[Run,Region]/100</eqn>
 				<units>dmnl</units>
@@ -4322,7 +4334,7 @@ https://rshiny.ilo.org/dataexplorer32/?id=UNE_2EAP_SEX_AGE_RT_A&amp;ref_area=X01
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>working_age_population*(1-labour_force_participation_rate[Run])</eqn>
+				<eqn>working_age_population*(1-labour_force_participation_rate[Run,Region])</eqn>
 				<inflow>new_potential_labour_force_entrants</inflow>
 				<outflow>aging_out_of_potential</outflow>
 				<outflow>potential_labour_deaths</outflow>
@@ -4334,7 +4346,7 @@ https://rshiny.ilo.org/dataexplorer32/?id=UNE_2EAP_SEX_AGE_RT_A&amp;ref_area=X01
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>aging_in[Run,Region]*(1-labour_force_participation_rate[Run])/UNIT_one_year</eqn>
+				<eqn>aging_in[Run,Region]*(1-labour_force_participation_rate[Run,Region])/UNIT_one_year</eqn>
 				<non_negative/>
 				<units>Mp/year</units>
 			</flow>
@@ -4387,7 +4399,7 @@ https://rshiny.ilo.org/dataexplorer32/?id=UNE_2EAP_SEX_AGE_RT_A&amp;ref_area=X01
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>working_age_population*labour_force_participation_rate[Run]</eqn>
+				<eqn>working_age_population*labour_force_participation_rate[Run,Region]</eqn>
 				<units>Mp</units>
 			</aux>
 			<aux name="participation\ngap">
@@ -4403,7 +4415,7 @@ https://rshiny.ilo.org/dataexplorer32/?id=UNE_2EAP_SEX_AGE_RT_A&amp;ref_area=X01
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>Unemployed[Run]+Employed[Run,Region]</eqn>
+				<eqn>Unemployed[Run,Region]+Employed[Run,Region]</eqn>
 				<units>Mp</units>
 			</aux>
 			<aux name="rent to\ninvestment ratio">
@@ -4430,7 +4442,7 @@ https://rshiny.ilo.org/dataexplorer32/?id=UNE_2EAP_SEX_AGE_RT_A&amp;ref_area=X01
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>Unemployed[Run]/desired_additional_hires[Run,Region]/time_seeking_employees[Run,Region]</eqn>
+				<eqn>Unemployed[Run,Region]/desired_additional_hires[Run,Region]/time_seeking_employees[Run,Region]</eqn>
 				<units>dmnl</units>
 			</aux>
 			<aux name="time seeking\nemployees">
@@ -4527,7 +4539,7 @@ https://rshiny.ilo.org/dataexplorer20/?id=EAP_2WAP_SEX_AGE_RT_A&amp;ref_area=X01
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>SMTH1(total_investment_1[Run], 1)</eqn>
+				<eqn>SMTH1(total_investment_1[Run,Region], 1)</eqn>
 				<isee:delay_aux/>
 				<units>b$/year</units>
 			</aux>
@@ -4680,6 +4692,7 @@ https://rshiny.ilo.org/dataexplorer20/?id=EAP_2WAP_SEX_AGE_RT_A&amp;ref_area=X01
 			<aux name="total investment 1" access="input">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>{Enter equation for use when not hooked up to other models}</eqn>
 				<units>b$/year</units>
@@ -5403,7 +5416,7 @@ Fractional exposure levels to temperature for service related labour. Assumption
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>MIN(Unemployed[Run]*max_fraction_hireable[Region]+firing, desired_additional_hires*effect_of_labour_supply_on_hiring^sensitivity_of_hiring_to_unemployment_rate)</eqn>
+				<eqn>MIN(Unemployed[Run,Region]*max_fraction_hireable[Region]+firing, desired_additional_hires*effect_of_labour_supply_on_hiring^sensitivity_of_hiring_to_unemployment_rate)</eqn>
 				<units>Mp/year</units>
 			</aux>
 			<aux name="firing">
@@ -5594,6 +5607,7 @@ Interface explosion stopper</doc>
 			<aux name="private\nsafe bank assets" access="input">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>{Enter equation for use when not hooked up to other models}</eqn>
 				<units>b$</units>
@@ -5669,7 +5683,7 @@ Interface explosion stopper</doc>
 				<isee:iframe color="black" background="white" text_align="left" vertical_text_align="top" font_size="12pt" border_width="thin" border_style="solid"/>
 				<isee:financial_table color="black" background="#E0E0E0" text_align="right" font_size="12pt" hide_border="false" auto_fit="true" first_column_width="250" other_column_width="100" header_font_style="normal" header_font_weight="bold" header_text_decoration="none" header_text_align="center" header_vertical_text_align="center" header_font_color="black" header_font_family="Arial" header_font_size="14pt" header_text_padding="2" header_text_border_color="black" header_text_border_width="thin" header_text_border_style="none"/>
 			</style>
-			<view isee:show_pages="false" background="white" page_width="1027" page_height="787" isee:page_cols="6" isee:page_rows="6" isee:scroll_x="1018.33" isee:scroll_y="1941.67" zoom="120" isee:popup_graphs_are_comparative="true" isee:enable_non_negative_highlights="false" type="stock_flow">
+			<view isee:show_pages="false" background="white" page_width="1027" page_height="787" isee:page_cols="6" isee:page_rows="6" isee:scroll_x="1184.17" isee:scroll_y="451.667" zoom="120" isee:popup_graphs_are_comparative="true" isee:enable_non_negative_highlights="false" type="stock_flow">
 				<style color="black" background="white" font_style="normal" font_weight="normal" text_decoration="none" text_align="center" vertical_text_align="center" font_color="black" font_family="Arial" font_size="10pt" padding="2" border_color="black" border_width="thin" border_style="none">
 					<stock color="blue" background="white" font_color="blue" font_size="11pt" label_side="top">
 						<shape type="rectangle" width="45" height="35"/>
@@ -6793,7 +6807,7 @@ furthermore. The structure that was previously decided on had the productivity g
 					<from>firing_from_missed_profits</from>
 					<to>firing</to>
 				</connector>
-				<connector uid="243" angle="0.862705">
+				<connector uid="243" angle="0.863816">
 					<from>firing</from>
 					<to>employment_decline</to>
 				</connector>
@@ -7343,7 +7357,7 @@ furthermore. The structure that was previously decided on had the productivity g
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>(perceived_defaults_of_risky_assets/risky_bank_assets[Run])</eqn>
+				<eqn>(perceived_defaults_of_risky_assets/risky_bank_assets[Run,Region])</eqn>
 				<units>Per Year</units>
 			</aux>
 			<aux name="failure rate">
@@ -7496,6 +7510,7 @@ furthermore. The structure that was previously decided on had the productivity g
 			<aux name="risky bank assets" access="output">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>Good_Loans[Run,Region]+Bad_Loans[Run,Region]</eqn>
 				<units>b$</units>
@@ -7503,6 +7518,7 @@ furthermore. The structure that was previously decided on had the productivity g
 			<aux name="private\nsafe bank assets" access="output">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>Safe_Loans[Run,Region]+safe_loans_for_financing_innovation[Run,Region]</eqn>
 				<units>b$</units>
@@ -7549,6 +7565,7 @@ furthermore. The structure that was previously decided on had the productivity g
 </doc>
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>private_investment_1[Run,Region]+public_investment[Run,Region]</eqn>
 				<units>b$/year</units>
@@ -7737,6 +7754,7 @@ sensitivity_of_effect_of_sta_on_failure_rate[Run,Region]*(Surface_Temperature_An
 			<aux name="exploratory\nbank assets" access="output" isee:autocreated="true">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>Exploratory_Loans[Run,Region]</eqn>
 				<units>b$</units>
@@ -8448,6 +8466,7 @@ MAX(0,-1*extra_risky_interest_above_interest_at_origination[Run,Region]*time_to_
 			<aux name="private investment" access="output" isee:autocreated="true">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>SMTH1(Bank_Investment[Run,Region], 1, initial_non_energy_bank_investment[Run,Region])</eqn>
 				<isee:delay_aux/>
@@ -8897,7 +8916,7 @@ To control extreme policy only</doc>
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>perceived_defaults_of_safe_assets_not_caused_by_energy_transition/private_safe_bank_assets[Run]</eqn>
+				<eqn>perceived_defaults_of_safe_assets_not_caused_by_energy_transition/private_safe_bank_assets[Run,Region]</eqn>
 				<units>dmnl/year</units>
 			</aux>
 			<aux name="effect of safe default rate\non lending standards">
@@ -9031,7 +9050,7 @@ To control extreme policy only</doc>
 				<isee:iframe color="black" background="white" text_align="left" vertical_text_align="top" font_size="12pt" border_width="thin" border_style="solid"/>
 				<isee:financial_table color="black" background="#E0E0E0" text_align="right" font_size="12pt" hide_border="false" auto_fit="true" first_column_width="250" other_column_width="100" header_font_style="normal" header_font_weight="bold" header_text_decoration="none" header_text_align="center" header_vertical_text_align="center" header_font_color="black" header_font_family="Arial" header_font_size="14pt" header_text_padding="2" header_text_border_color="black" header_text_border_width="thin" header_text_border_style="none"/>
 			</style>
-			<view isee:show_pages="false" background="white" page_width="1027" page_height="787" isee:page_cols="6" isee:page_rows="9" isee:scroll_x="2420" isee:scroll_y="1670" zoom="140" isee:popup_graphs_are_comparative="true" isee:enable_non_negative_highlights="false" type="stock_flow">
+			<view isee:show_pages="false" background="white" page_width="1027" page_height="787" isee:page_cols="6" isee:page_rows="9" isee:scroll_x="1024.29" isee:scroll_y="1373.57" zoom="140" isee:popup_graphs_are_comparative="true" isee:enable_non_negative_highlights="false" type="stock_flow">
 				<style color="black" background="white" font_style="normal" font_weight="normal" text_decoration="none" text_align="center" vertical_text_align="center" font_color="black" font_family="Arial" font_size="10pt" padding="2" border_color="black" border_width="thin" border_style="none">
 					<stock color="blue" background="white" font_color="blue" font_size="11pt" label_side="top">
 						<shape type="rectangle" width="45" height="35"/>
@@ -10619,7 +10638,7 @@ SDG 10.5.1</text_box>
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>private_consumption_1 + Investment_1[Run] + Government_Spending_1</eqn>
+				<eqn>private_consumption_1 + Investment_1[Run,Region] + Government_Spending_1</eqn>
 				<format scale_by="auto"/>
 				<units>b$/year</units>
 			</aux>
@@ -10674,6 +10693,7 @@ SDG 10.5.1</text_box>
 			<aux name="Investment 1" access="input">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>{Enter equation for use when not hooked up to other models}</eqn>
 				<units>b$/year</units>
@@ -10741,12 +10761,13 @@ SDG 10.5.1</text_box>
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>Government_Spending_1[Run,Region]+public_investment+government_transfers_1[Run]</eqn>
+				<eqn>Government_Spending_1[Run,Region]+public_investment+government_transfers_1[Run,Region]</eqn>
 				<units>b$/year</units>
 			</aux>
 			<aux name="government transfers 1" access="input">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>{Enter equation for use when not hooked up to other models}</eqn>
 				<units>b$/year</units>
@@ -10756,7 +10777,7 @@ SDG 10.5.1</text_box>
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>private_consumption_1[Run,Region]-government_transfers_1[Run]</eqn>
+				<eqn>private_consumption_1[Run,Region]-government_transfers_1[Run,Region]</eqn>
 				<units>b$/year</units>
 			</aux>
 			<aux name="owner consumption" access="input">
@@ -10796,7 +10817,7 @@ SDG 10.5.1</text_box>
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>government_transfers_1[Run]/&quot;inflation_adjustment_b$_per_bc$&quot;[Run,Region]</eqn>
+				<eqn>government_transfers_1[Run,Region]/&quot;inflation_adjustment_b$_per_bc$&quot;[Run,Region]</eqn>
 				<units>bc$/year</units>
 			</aux>
 			<aux name="public investment\nin 2021c$">
@@ -11531,6 +11552,7 @@ ELSE
 			<aux name="government\ntransfers" access="output">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>MIN(public_expenditure_before_subsidies_and_interest_payments[Run,Region]*maximum_percentage_of_government_budget_to_transfer_payments[Region], (transfer_payments_for_children[Run,Region]+transfer_payments_for_retirees[Run,Region]+transfer_payments_for_unemployed[Run,Region])/&quot;UNIT_$_per_B$&quot;[Region])</eqn>
 				<units>b$/year</units>
@@ -12406,7 +12428,7 @@ sensitivity_of_STA_on_public_consumption[Run,Region]*(Surface_Temperature_Anomal
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>government_transfers[Run]/transfer_payment_recipients[Run,Region]/&quot;inflation_adjustment_b$_per_bc$_1&quot;[Run,Region]*&quot;UNIT_c$_per_Bc$&quot;/UNIT_p_per_mp[Region]</eqn>
+				<eqn>government_transfers[Run,Region]/transfer_payment_recipients[Run,Region]/&quot;inflation_adjustment_b$_per_bc$_1&quot;[Run,Region]*&quot;UNIT_c$_per_Bc$&quot;/UNIT_p_per_mp[Region]</eqn>
 				<units>c$/person/year</units>
 			</aux>
 			<aux name="inflation adjustment b$ per bc$ 1" access="input">
@@ -12648,6 +12670,7 @@ effect_of_STA_on_public_consumption,today_1)ELSE effect_of_STA_on_public_consump
 			<stock name="Unemployed" access="input">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>{Enter equation for use when not hooked up to other models}</eqn>
 				<units>Mp</units>
@@ -12657,7 +12680,7 @@ effect_of_STA_on_public_consumption,today_1)ELSE effect_of_STA_on_public_consump
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>Unemployed[Run]*actual_transfer_payments_per_unemployed[Run,Region]*UNIT_p_per_mp[Region]</eqn>
+				<eqn>Unemployed[Run,Region]*actual_transfer_payments_per_unemployed[Run,Region]*UNIT_p_per_mp[Region]</eqn>
 				<units>$/Year</units>
 			</aux>
 			<aux name="indicated\ntransfer payments per\nunemployed">
@@ -12673,7 +12696,7 @@ effect_of_STA_on_public_consumption,today_1)ELSE effect_of_STA_on_public_consump
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>public_expenditure_before_subsidies_and_interest_payments-government_transfers[Run]</eqn>
+				<eqn>public_expenditure_before_subsidies_and_interest_payments-government_transfers[Run,Region]</eqn>
 				<units>b$/year</units>
 			</aux>
 			<aux name="normal share of public expenditure\navailable for investment and consumption\nto consumption">
@@ -12951,7 +12974,7 @@ In massive inflation spikes prevents the government from not doing any consumpti
 				<isee:iframe color="black" background="white" text_align="left" vertical_text_align="top" font_size="12pt" border_width="thin" border_style="solid"/>
 				<isee:financial_table color="black" background="#E0E0E0" text_align="right" font_size="12pt" hide_border="false" auto_fit="true" first_column_width="250" other_column_width="100" header_font_style="normal" header_font_weight="bold" header_text_decoration="none" header_text_align="center" header_vertical_text_align="center" header_font_color="black" header_font_family="Arial" header_font_size="14pt" header_text_padding="2" header_text_border_color="black" header_text_border_width="thin" header_text_border_style="none"/>
 			</style>
-			<view isee:show_pages="false" background="white" page_width="1027" page_height="787" isee:page_cols="7" isee:page_rows="7" isee:scroll_x="627.5" isee:scroll_y="1000" zoom="80" isee:popup_graphs_are_comparative="true" isee:enable_non_negative_highlights="false" type="stock_flow">
+			<view isee:show_pages="false" background="white" page_width="1027" page_height="787" isee:page_cols="7" isee:page_rows="7" isee:scroll_x="513.75" isee:scroll_y="590" zoom="80" isee:popup_graphs_are_comparative="true" isee:enable_non_negative_highlights="false" type="stock_flow">
 				<style color="black" background="white" font_style="normal" font_weight="normal" text_decoration="none" text_align="center" vertical_text_align="center" font_color="black" font_family="Arial" font_size="10pt" padding="2" border_color="black" border_width="thin" border_style="none">
 					<stock color="blue" background="white" font_color="blue" font_size="11pt" label_side="top">
 						<shape type="rectangle" width="45" height="35"/>
@@ -14627,6 +14650,7 @@ agriculture_share_of_GDP_starting_point_determinant[Run,Region]*EXP(agriculture_
 			<aux name="fertilizer used per\nunit of crop production" access="input">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>{Enter equation for use when not hooked up to other models}</eqn>
 				<units>Million*tN/PCal</units>
@@ -14636,7 +14660,7 @@ agriculture_share_of_GDP_starting_point_determinant[Run,Region]*EXP(agriculture_
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>INFLATION_IMPACT_GROWTH_RATE(fertilizer_used_per_unit_of_crop_production[Run], time_to_measure_growth_rate[Run,Region])</eqn>
+				<eqn>INFLATION_IMPACT_GROWTH_RATE(fertilizer_used_per_unit_of_crop_production[Run,Region], time_to_measure_growth_rate[Run,Region])</eqn>
 				<units>1/year</units>
 			</aux>
 			<aux name="fertilizer used\nper unit of crop production\ninflation contribution">
@@ -14707,6 +14731,7 @@ agriculture_share_of_GDP_starting_point_determinant[Run,Region]*EXP(agriculture_
 			<aux name="irrigation water used\nper unit of crop production" access="input">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>{Enter equation for use when not hooked up to other models}</eqn>
 				<units>Million^3/PCal</units>
@@ -14716,7 +14741,7 @@ agriculture_share_of_GDP_starting_point_determinant[Run,Region]*EXP(agriculture_
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>INFLATION_IMPACT_GROWTH_RATE(irrigation_water_used_per_unit_of_crop_production[Run], time_to_measure_growth_rate[Run,Region])</eqn>
+				<eqn>INFLATION_IMPACT_GROWTH_RATE(irrigation_water_used_per_unit_of_crop_production[Run,Region], time_to_measure_growth_rate[Run,Region])</eqn>
 				<units>dmnl/year</units>
 			</aux>
 			<aux name="irrigation water used per unit of crop production inflation contribution">
@@ -14812,6 +14837,7 @@ agriculture_share_of_GDP_starting_point_determinant[Run,Region]*EXP(agriculture_
 			<aux name="inflation adjustment $ per c$" access="output" isee:autocreated="true">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>&quot;unit_$_per_c$&quot;[Region]*Inflation_Index[Run,Region]</eqn>
 				<units>$/c$</units>
@@ -14991,7 +15017,7 @@ ELSE
 				<isee:iframe color="black" background="white" text_align="left" vertical_text_align="top" font_size="12pt" border_width="thin" border_style="solid"/>
 				<isee:financial_table color="black" background="#E0E0E0" text_align="right" font_size="12pt" hide_border="false" auto_fit="true" first_column_width="250" other_column_width="100" header_font_style="normal" header_font_weight="bold" header_text_decoration="none" header_text_align="center" header_vertical_text_align="center" header_font_color="black" header_font_family="Arial" header_font_size="14pt" header_text_padding="2" header_text_border_color="black" header_text_border_width="thin" header_text_border_style="none"/>
 			</style>
-			<view isee:show_pages="false" background="white" page_width="1026" page_height="786" isee:page_cols="3" isee:page_rows="3" isee:scroll_y="283" isee:popup_graphs_are_comparative="true" isee:enable_non_negative_highlights="false" type="stock_flow">
+			<view isee:show_pages="false" background="white" page_width="1027" page_height="787" isee:page_cols="3" isee:page_rows="3" isee:scroll_x="650" isee:scroll_y="832" isee:popup_graphs_are_comparative="true" isee:enable_non_negative_highlights="false" type="stock_flow">
 				<style color="black" background="white" font_style="normal" font_weight="normal" text_decoration="none" text_align="center" vertical_text_align="center" font_color="black" font_family="Arial" font_size="10pt" padding="2" border_color="black" border_width="thin" border_style="none">
 					<stock color="blue" background="white" font_color="blue" font_size="11pt" label_side="top">
 						<shape type="rectangle" width="45" height="35"/>

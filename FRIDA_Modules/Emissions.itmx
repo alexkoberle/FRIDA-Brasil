@@ -358,7 +358,7 @@
 					<dim name="Run"/>
 					<dim name="Region"/>
 				</dimensions>
-				<eqn>(deforestation_carbon_loss[Run]-forest_regrowth_carbon_uptake[Run]  + CO2_emissions_from_degraded_land_1[Run,Region] + Annual_realized_CO2_emissions_from_land_use_transitions[Run])*GtC_to_MtCO2</eqn>
+				<eqn>(deforestation_carbon_loss[Run]-forest_regrowth_carbon_uptake[Run]  + CO2_emissions_from_degraded_land_1[Run,World] + Annual_realized_CO2_emissions_from_land_use_transitions[Run])*GtC_to_MtCO2</eqn>
 				<units>MtCO2/Year</units>
 			</aux>
 			<aux name="MtCH4 emission\nper PCal animal products">

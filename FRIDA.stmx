@@ -283,25 +283,11 @@
 			</isee:payoff_element>
 		</isee:payoff_specs>
 		<isee:payoff_specs name="Concrete Payoff" calibration="true" recompute_weights="true" compare_tolerance="0" compare_type="ls" compare_run="Calibration Data"/>
-		<isee:payoff_specs name="Economic Payoff" calibration="true" recompute_weights="true" compare_tolerance="0" compare_type="ls" compare_run="Calibration Data">
-			<isee:payoff_element name="Employment.Unemployed[1]" weight="0.00600650394685531">
-				<isee:time_range type="terminal_value"/>
-			</isee:payoff_element>
-			<isee:payoff_element name="Finance.total_investment[1]" weight="4.08358026129085e-8">
-				<isee:time_range type="terminal_value"/>
-			</isee:payoff_element>
-		</isee:payoff_specs>
+		<isee:payoff_specs name="Economic Payoff" calibration="true" recompute_weights="true" compare_tolerance="0" compare_type="ls" compare_run="Calibration Data"/>
 		<isee:payoff_specs name="Employment Sector Shares" calibration="true" recompute_weights="true" compare_tolerance="0" compare_type="ls" compare_run="Calibration Data"/>
 		<isee:payoff_specs name="Real GDP" calibration="true" recompute_weights="true" compare_tolerance="0" compare_type="ls" compare_run="Calibration Data"/>
 		<isee:payoff_specs name="Energy Payoff" calibration="true" recompute_weights="true" compare_tolerance="0" compare_type="ls" compare_run="Calibration Data"/>
-		<isee:payoff_specs name="Econ &amp; Energy Payoff" calibration="true" recompute_weights="true" compare_tolerance="0" compare_type="ls" compare_run="Calibration Data">
-			<isee:payoff_element name="Employment.Unemployed[1]" weight="0.0112695">
-				<isee:time_range type="terminal_value"/>
-			</isee:payoff_element>
-			<isee:payoff_element name="Finance.total_investment[1]" weight="2.5121e-7">
-				<isee:time_range type="terminal_value"/>
-			</isee:payoff_element>
-		</isee:payoff_specs>
+		<isee:payoff_specs name="Econ &amp; Energy Payoff" calibration="true" recompute_weights="true" compare_tolerance="0" compare_type="ls" compare_run="Calibration Data"/>
 		<isee:payoff_specs name="SDG 10.1.1" calibration="true" recompute_weights="true" compare_tolerance="0" compare_type="ls" compare_run="Calibration Data"/>
 	</isee:payoff_specs_list>
 	<model_units>
@@ -2904,7 +2890,6 @@ Lorem ipsum dolor sit amet</text_box>
 		<ent name="Simulation End" preserve="true"/>
 		<ent name="Government Regulations.tax on CO2e emissions" preserve="true"/>
 		<ent name="Government Regulations.tax rate on newly installed solar energy capacity" preserve="true"/>
-		<ent name="Government Regulations.tax rate on newly installed wind energy capacity" preserve="true"/>
 		<ent name="Climate.switch sea level rise protection cost damage" preserve="true"/>
 		<ent name="Climate.switch sea level rise fatalities damage" preserve="true"/>
 		<ent name="Climate.switch sea level rise relocation cost damage" preserve="true"/>

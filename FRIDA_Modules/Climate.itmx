@@ -1187,7 +1187,7 @@ Forcing" url="C:/Users/cy/OneDrive/Documents/GitHub/FRIDA-Brasil/FRIDA_Modules/F
 				<isee:iframe color="black" background="white" text_align="left" vertical_text_align="top" font_size="12pt" border_width="thin" border_style="solid"/>
 				<isee:financial_table color="black" background="#E0E0E0" text_align="right" font_size="12pt" hide_border="false" auto_fit="true" first_column_width="250" other_column_width="100" header_font_style="normal" header_font_weight="bold" header_text_decoration="none" header_text_align="center" header_vertical_text_align="center" header_font_color="black" header_font_family="Arial" header_font_size="14pt" header_text_padding="2" header_text_border_color="black" header_text_border_width="thin" header_text_border_style="none"/>
 			</style>
-			<view isee:show_pages="false" background="white" page_width="1026" page_height="786" isee:page_cols="2" isee:page_rows="3" zoom="80" isee:popup_graphs_are_comparative="true" isee:enable_non_negative_highlights="false" type="stock_flow">
+			<view isee:show_pages="false" background="white" page_width="1027" page_height="787" isee:page_cols="2" isee:page_rows="3" zoom="80" isee:popup_graphs_are_comparative="true" isee:enable_non_negative_highlights="false" type="stock_flow">
 				<style color="black" background="white" font_style="normal" font_weight="normal" text_decoration="none" text_align="center" vertical_text_align="center" font_color="black" font_family="Arial" font_size="10pt" padding="2" border_color="black" border_width="thin" border_style="none">
 					<stock color="blue" background="white" font_color="blue" font_size="9pt" label_side="top">
 						<shape type="rectangle" width="45" height="35"/>
@@ -6598,7 +6598,7 @@ Should only ever be varied with Initial Committed Soil Carbon Emissions from Lan
 				<dimensions>
 					<dim name="Run"/>
 				</dimensions>
-				<eqn>soil_carbon_mature_forest[Run,Region]+soil_carbon_grassland[Run,Region]+soil_carbon_cropland[Run,Region]+soil_carbon_young_forest[Run,Region]+soil_carbon_degraded_land[Run,Region]</eqn>
+				<eqn>soil_carbon_mature_forest[Run,World]+soil_carbon_grassland[Run,World]+soil_carbon_cropland[Run,World]+soil_carbon_young_forest[Run,World]+soil_carbon_degraded_land[Run,World]</eqn>
 				<units>GtC</units>
 			</aux>
 			<aux name="forest aboveground biomass" access="input">
@@ -6613,7 +6613,7 @@ Should only ever be varied with Initial Committed Soil Carbon Emissions from Lan
 				<dimensions>
 					<dim name="Run"/>
 				</dimensions>
-				<eqn>Total_soil_carbon+forest_aboveground_biomass[Run,Region]</eqn>
+				<eqn>Total_soil_carbon+forest_aboveground_biomass[Run,World]</eqn>
 				<units>GtC</units>
 			</aux>
 			<aux name="land carbon sink" access="input">
@@ -6706,7 +6706,7 @@ Should only ever be varied with Initial Committed Soil Carbon Emissions from Lan
 				<isee:iframe color="black" background="white" text_align="left" vertical_text_align="top" font_size="12pt" border_width="thin" border_style="solid"/>
 				<isee:financial_table color="black" background="#E0E0E0" text_align="right" font_size="12pt" hide_border="false" auto_fit="true" first_column_width="250" other_column_width="100" header_font_style="normal" header_font_weight="bold" header_text_decoration="none" header_text_align="center" header_vertical_text_align="center" header_font_color="black" header_font_family="Arial" header_font_size="14pt" header_text_padding="2" header_text_border_color="black" header_text_border_width="thin" header_text_border_style="none"/>
 			</style>
-			<view isee:show_pages="false" background="white" page_width="1027" page_height="787" isee:page_cols="5" isee:page_rows="3" isee:scroll_x="1790" isee:scroll_y="429" isee:popup_graphs_are_comparative="true" isee:enable_non_negative_highlights="false" type="stock_flow">
+			<view isee:show_pages="false" background="white" page_width="1027" page_height="787" isee:page_cols="5" isee:page_rows="3" isee:scroll_x="1135" zoom="40" isee:popup_graphs_are_comparative="true" isee:enable_non_negative_highlights="false" type="stock_flow">
 				<style color="black" background="white" font_style="normal" font_weight="normal" text_decoration="none" text_align="center" vertical_text_align="center" font_color="black" font_family="Arial" font_size="10pt" padding="2" border_color="black" border_width="thin" border_style="none">
 					<stock color="blue" background="white" font_color="blue" font_size="11pt" label_side="top">
 						<shape type="rectangle" width="45" height="35"/>
@@ -7215,7 +7215,7 @@ FUTURE: peatland carbon sink should maybe depend on global mean temperature and 
 				<dimensions>
 					<dim name="Run"/>
 				</dimensions>
-				<eqn>cropland_net_primary_production_1[Run,World]+cropland_landuse_fast_soil_carbon_input+cropland_landuse_slow_soil_carbon_input</eqn>
+				<eqn>cropland_net_primary_production_1[Run,World]+cropland_landuse_fast_soil_carbon_input[Run,World]+cropland_landuse_slow_soil_carbon_input[Run,World]</eqn>
 				<units>GtC/Year</units>
 			</aux>
 			<aux name="cropland output">
@@ -7275,6 +7275,7 @@ FUTURE: peatland carbon sink should maybe depend on global mean temperature and 
 			<aux name="cropland landuse\nfast soil carbon input" access="input">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>{Enter equation for use when not hooked up to other models}</eqn>
 				<units>GtC/Year</units>
@@ -7282,6 +7283,7 @@ FUTURE: peatland carbon sink should maybe depend on global mean temperature and 
 			<aux name="cropland landuse\nslow soil carbon input" access="input">
 				<dimensions>
 					<dim name="Run"/>
+					<dim name="Region"/>
 				</dimensions>
 				<eqn>{Enter equation for use when not hooked up to other models}</eqn>
 				<units>GtC/Year</units>
@@ -7383,7 +7385,7 @@ FUTURE: peatland carbon sink should maybe depend on global mean temperature and 
 				<isee:iframe color="black" background="white" text_align="left" vertical_text_align="top" font_size="12pt" border_width="thin" border_style="solid"/>
 				<isee:financial_table color="black" background="#E0E0E0" text_align="right" font_size="12pt" hide_border="false" auto_fit="true" first_column_width="250" other_column_width="100" header_font_style="normal" header_font_weight="bold" header_text_decoration="none" header_text_align="center" header_vertical_text_align="center" header_font_color="black" header_font_family="Arial" header_font_size="14pt" header_text_padding="2" header_text_border_color="black" header_text_border_width="thin" header_text_border_style="none"/>
 			</style>
-			<view isee:show_pages="false" background="white" page_width="1027" page_height="787" isee:page_cols="2" isee:page_rows="2" isee:scroll_x="138" isee:popup_graphs_are_comparative="true" isee:enable_non_negative_highlights="false" type="stock_flow">
+			<view isee:show_pages="false" background="white" page_width="1027" page_height="787" isee:page_cols="2" isee:page_rows="2" isee:scroll_y="46" isee:popup_graphs_are_comparative="true" isee:enable_non_negative_highlights="false" type="stock_flow">
 				<style color="black" background="white" font_style="normal" font_weight="normal" text_decoration="none" text_align="center" vertical_text_align="center" font_color="black" font_family="Arial" font_size="10pt" padding="2" border_color="black" border_width="thin" border_style="none">
 					<stock color="blue" background="white" font_color="blue" font_size="11pt" label_side="top">
 						<shape type="rectangle" width="45" height="35"/>
@@ -7737,7 +7739,7 @@ FUTURE: peatland carbon sink should maybe depend on global mean temperature and 
 				<isee:iframe color="black" background="white" text_align="left" vertical_text_align="top" font_size="12pt" border_width="thin" border_style="solid"/>
 				<isee:financial_table color="black" background="#E0E0E0" text_align="right" font_size="12pt" hide_border="false" auto_fit="true" first_column_width="250" other_column_width="100" header_font_style="normal" header_font_weight="bold" header_text_decoration="none" header_text_align="center" header_vertical_text_align="center" header_font_color="black" header_font_family="Arial" header_font_size="14pt" header_text_padding="2" header_text_border_color="black" header_text_border_width="thin" header_text_border_style="none"/>
 			</style>
-			<view isee:show_pages="false" background="white" page_width="1027" page_height="787" isee:page_cols="2" isee:page_rows="2" isee:scroll_y="110" isee:popup_graphs_are_comparative="true" isee:enable_non_negative_highlights="false" type="stock_flow">
+			<view isee:show_pages="false" background="white" page_width="1027" page_height="787" isee:page_cols="2" isee:page_rows="2" isee:scroll_x="218" isee:scroll_y="427" isee:popup_graphs_are_comparative="true" isee:enable_non_negative_highlights="false" type="stock_flow">
 				<style color="black" background="white" font_style="normal" font_weight="normal" text_decoration="none" text_align="center" vertical_text_align="center" font_color="black" font_family="Arial" font_size="10pt" padding="2" border_color="black" border_width="thin" border_style="none">
 					<stock color="blue" background="white" font_color="blue" font_size="11pt" label_side="top">
 						<shape type="rectangle" width="45" height="35"/>
